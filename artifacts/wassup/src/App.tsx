@@ -33,7 +33,7 @@ import CommerceDemo from '@/components/hero/CommerceDemo';
 import ChatbotInquiryDemo from '@/components/chatbot/ChatbotInquiryDemo';
 import ClinicAppointmentDemo from '@/components/flows/ClinicAppointmentDemo';
 import NotFound from '@/pages/not-found';
-import logoPath from '@assets/HFULL_NOBG_1787132077361.png';
+import logoPath from './assets/brand-logo.png';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
 const queryClient = new QueryClient();
