@@ -24,19 +24,19 @@
 .caf-chat .demo-message { text-align: left; }
 .caf-chat .message-appear { animation: caf-message-in .22s ease both; will-change: opacity; }
 .caf-chat .demo-message-copy { display: block; white-space: normal; overflow-wrap: anywhere; }
-.caf-chat:focus-visible { outline: 2px solid #25d366; outline-offset: -2px; }
-.caf-sender { display: block; margin-bottom: 2px; color: #258361; font-size: 8px; font-weight: 600; }
+.caf-chat:focus-visible { outline: 2px solid #3acd32; outline-offset: -2px; }
+.caf-sender { display: block; margin-bottom: 2px; color: #3acd32; font-size: 8px; font-weight: 600; }
 .caf-cta-msg { width: 78%; padding-bottom: 0; overflow: hidden; }
 .caf-cta-msg .demo-incoming-meta { margin-bottom: 4px; }
 .caf-cta {
   position: relative; z-index: 2; display: flex; width: calc(100% + 14px); min-height: 26px; margin: 0 -7px;
   align-items: center; justify-content: center; gap: 4px; border: 0; border-top: 1px solid #edf0ee;
-  background: #fff; color: #258361; font: inherit; font-size: 9.5px; font-weight: 600; cursor: pointer;
+  background: #fff; color: #3acd32; font: inherit; font-size: 9.5px; font-weight: 600; cursor: pointer;
   transition: background-color .2s ease;
 }
 .caf-cta:disabled { cursor: default; }
 .caf-cta:hover:not(:disabled), .caf-cta.is-pressed { background: #e5f5e8; }
-.caf-cta:focus-visible { outline: 2px solid #258361; outline-offset: -2px; }
+.caf-cta:focus-visible { outline: 2px solid #3acd32; outline-offset: -2px; }
 .caf-response-title { display: flex; align-items: center; gap: 3px; margin-bottom: 2px; color: #1a7a47; font-size: 8px; font-weight: 700; }
 .caf-typing { padding: 7px 9px; }
 .caf-dots { display: inline-flex; gap: 3px; }
@@ -56,13 +56,13 @@
 .caf-sheet-head { display: grid; grid-template-columns: 22px 1fr 22px; align-items: center; gap: 4px; padding: 8px 10px 7px; }
 .caf-sheet-head button { display: grid; place-items: center; width: 20px; height: 20px; border: 0; border-radius: 50%; background: transparent; color: #54656f; cursor: pointer; }
 .caf-sheet-head button:hover { background: #f0f2f1; }
-.caf-sheet-head button:focus-visible { outline: 2px solid #258361; }
+.caf-sheet-head button:focus-visible { outline: 2px solid #3acd32; }
 .caf-sheet-title { display: flex; flex-direction: column; align-items: center; line-height: 1.2; }
 .caf-sheet-title strong { font-size: 10.5px; font-weight: 600; }
 .caf-sheet-title small { color: #667781; font-size: 7.5px; }
 .caf-step { color: #667781; font-size: 8px; font-weight: 600; text-align: right; }
 .caf-progress { height: 2px; background: #edf0ee; }
-.caf-progress i { display: block; height: 100%; background: #1fa855; transform-origin: left; transition: transform .45s ease; }
+.caf-progress i { display: block; height: 100%; background: #3acd32; transform-origin: left; transition: transform .45s ease; }
 .caf-screens { position: relative; flex: 1; min-height: 0; overflow: hidden; }
 .caf-screen {
   position: absolute; inset: 0; display: grid; align-content: start; gap: 10px; padding: 10px 12px;
@@ -82,15 +82,15 @@
 .caf-text.has-value > span:first-child { animation: caf-type .45s ease both; }
 .caf-text.is-locked { background: #f5f6f6; color: #3b4a54; }
 .caf-text.is-locked svg { color: #8696a0; }
-.caf-q.is-active .caf-text { border-color: #1fa855; box-shadow: 0 0 0 2px rgba(31, 168, 85, .16); }
-.caf-caret { width: 1px; height: 11px; margin-left: -4px; margin-right: auto; background: #1fa855; animation: caf-blink .9s steps(2) infinite; }
+.caf-q.is-active .caf-text { border-color: #3acd32; box-shadow: 0 0 0 2px rgba(58, 205, 50, .16); }
+.caf-caret { width: 1px; height: 11px; margin-left: -4px; margin-right: auto; background: #3acd32; animation: caf-blink .9s steps(2) infinite; }
 .caf-note { color: #667781; font-size: 8.5px; }
 .caf-options { display: grid; gap: 4px; }
 .caf-option { display: flex; align-items: center; gap: 7px; min-height: 30px; padding: 5px 8px; border: 1px solid #d5dbd8; border-radius: 6px; color: #111b21; font-size: 10px; transition: border-color .25s ease, background-color .25s ease; }
-.caf-option.is-on { border-color: #1fa855; background: #eef8f0; }
+.caf-option.is-on { border-color: #3acd32; background: #eef8f0; }
 .caf-radio { position: relative; width: 10px; height: 10px; flex: 0 0 10px; border: 1.2px solid #8696a0; border-radius: 50%; }
-.caf-option.is-on .caf-radio { border-color: #1fa855; }
-.caf-option.is-on .caf-radio::after { content: ''; position: absolute; inset: 1.5px; border-radius: 50%; background: #1fa855; }
+.caf-option.is-on .caf-radio { border-color: #3acd32; }
+.caf-option.is-on .caf-radio::after { content: ''; position: absolute; inset: 1.5px; border-radius: 50%; background: #3acd32; }
 .caf-doctor span { display: flex; flex-direction: column; line-height: 1.2; }
 .caf-doctor b { font-weight: 600; }
 .caf-doctor small { color: #667781; font-size: 9px; }
@@ -104,22 +104,22 @@
 .caf-chip small { color: #8696a0; font-size: 6.5px; }
 .caf-chip.is-full { border-style: dashed; color: #a3adb2; text-decoration: line-through; }
 .caf-chip.is-full small { text-decoration: none; }
-.caf-chip.is-on { border-color: #1fa855; background: #1fa855; color: #fff; font-weight: 600; }
+.caf-chip.is-on { border-color: #3acd32; background: #3acd32; color: #fff; font-weight: 600; }
 .caf-sheet-foot { display: grid; gap: 4px; padding: 8px 12px 10px; border-top: 1px solid #edf0ee; text-align: center; }
 .caf-submit {
-  min-height: 28px; border: 0; border-radius: 999px; background: #1fa855; color: #fff;
+  min-height: 28px; border: 0; border-radius: 999px; background: #3acd32; color: #fff;
   font: inherit; font-size: 10px; font-weight: 600; cursor: pointer; transition: background-color .2s ease, transform .2s ease;
 }
 .caf-submit:disabled { background: #b9cfc0; cursor: default; }
-.caf-submit.is-pressed { background: #168a44; transform: scale(.97); }
+.caf-submit.is-pressed { background: #3acd32; transform: scale(.97); }
 .caf-submit:focus-visible { outline: 2px solid #0f5f30; outline-offset: 2px; }
 .caf-sheet-foot small { color: #8696a0; font-size: 7px; }
 
 /* Right content */
 .caf-eyebrow { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; color: #8be8a9; font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
-.caf-eyebrow span { width: 18px; height: 2px; background: #25d366; }
+.caf-eyebrow span { width: 18px; height: 2px; background: #3acd32; }
 .caf-title { color: #f4fbef; font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 800; line-height: 1; letter-spacing: -.045em; }
-.caf-title em { display: block; font-style: normal; color: #25d366; }
+.caf-title em { display: block; font-style: normal; color: #3acd32; }
 .caf-lede { margin-top: 14px; color: rgba(238, 248, 234, .74); font-size: 15px; line-height: 1.55; }
 
 .caf-outcomes { display: grid; gap: 2px; margin: 26px 0 0; padding: 0; list-style: none; }
@@ -129,17 +129,17 @@
   transition: color .35s ease;
 }
 .caf-outcomes li.is-on { color: #eef8ea; }
-.caf-outcomes li.is-current { color: #25d366; }
+.caf-outcomes li.is-current { color: #3acd32; }
 .caf-tick {
   display: grid; place-items: center; width: 20px; height: 20px; flex: 0 0 20px; border-radius: 50%;
   border: 1.5px solid rgba(238, 248, 234, .22); color: transparent; transition: background-color .3s ease, border-color .3s ease, color .3s ease;
 }
-.caf-outcomes li.is-on .caf-tick { border-color: #25d366; background: #25d366; color: #10301d; }
+.caf-outcomes li.is-on .caf-tick { border-color: #3acd32; background: #3acd32; color: #10301d; }
 
 .caf-inbox { min-height: 200px; margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(238, 248, 234, .16); }
 .caf-waiting { display: flex; align-items: center; gap: 10px; color: rgba(238, 248, 234, .62); font-size: 14px; animation: caf-in .35s ease both; }
 .caf-waiting-dots { display: inline-flex; gap: 3px; }
-.caf-waiting-dots i { width: 5px; height: 5px; border-radius: 50%; background: #25d366; animation: caf-dot 1.1s ease-in-out infinite; }
+.caf-waiting-dots i { width: 5px; height: 5px; border-radius: 50%; background: #3acd32; animation: caf-dot 1.1s ease-in-out infinite; }
 .caf-waiting-dots i:nth-child(2) { animation-delay: .15s; }
 .caf-waiting-dots i:nth-child(3) { animation-delay: .3s; }
 .caf-receipt { animation: caf-in .45s ease both; }
@@ -147,7 +147,7 @@
 .caf-receipt-kicker { color: #8be8a9; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
 .caf-ref { color: rgba(238, 248, 234, .6); font-family: var(--app-font-mono); font-size: 12px; }
 .caf-receipt-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; margin: 0; }
-.caf-cell { min-width: 0; padding-left: 12px; border-left: 2px solid rgba(37, 211, 102, .5); }
+.caf-cell { min-width: 0; padding-left: 12px; border-left: 2px solid rgba(58, 205, 50, .5); }
 .caf-cell dt { color: rgba(238, 248, 234, .5); font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .caf-cell dd { display: flex; flex-direction: column; margin: 2px 0 0; color: #f4fbef; font-size: 15px; font-weight: 600; line-height: 1.3; overflow-wrap: anywhere; }
 .caf-cell dd small { color: rgba(238, 248, 234, .55); font-size: 12px; font-weight: 500; }

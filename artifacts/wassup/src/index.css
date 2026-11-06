@@ -41,20 +41,20 @@
   --foreground: 0 0% 6%;
   --border: 0 0% 6% / 0.12;
   --input: 0 0% 6% / 0.18;
-  --ring: 142 69% 49%;
+  --ring: 118 61% 50%;
   --card: 0 0% 100%;
   --card-foreground: 0 0% 6%;
   --card-border: 0 0% 6% / 0.10;
   --popover: 0 0% 100%;
   --popover-foreground: 0 0% 6%;
   --popover-border: 0 0% 6% / 0.1;
-  --primary: 142 69% 49%;
+  --primary: 118 61% 50%;
   --primary-foreground: 0 0% 6%;
   --secondary: 45 33% 93%;
   --secondary-foreground: 0 0% 6%;
   --muted: 45 20% 92%;
   --muted-foreground: 0 0% 38%;
-  --accent: 72 100% 73%;
+  --accent: 118 61% 50%;
   --accent-foreground: 0 0% 6%;
   --destructive: 0 72% 51%;
   --destructive-foreground: 0 0% 100%;
@@ -64,8 +64,8 @@
   --radius: 1.25rem;
   --shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.08);
   --shadow-card: 0 8px 0 rgba(0, 0, 0, 0.06);
-  --elevate-1: rgba(37, 211, 102, 0.08);
-  --elevate-2: rgba(37, 211, 102, 0.14);
+  --elevate-1: rgba(58, 205, 50, 0.08);
+  --elevate-2: rgba(58, 205, 50, 0.14);
 }
 
 .dark {
@@ -85,7 +85,7 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
-  ::selection { background: #25D366; color: #050505; }
+  ::selection { background: #3acd32; color: #050505; }
 }
 
 @layer utilities {
@@ -105,7 +105,7 @@
     left: -.05em;
     height: 2px;
     border-radius: 999px;
-    background: #19b956;
+    background: #3acd32;
     opacity: 0;
     transform: scaleX(0);
     transform-origin: left center;
@@ -167,9 +167,9 @@ h3.font-display {
   animation: bookPageTurn .9s both cubic-bezier(.2,.75,.2,1);
 }
 .flow-builder-section {
-  border-block: 1px solid rgba(37, 211, 102, .22);
+  border-block: 1px solid rgba(58, 205, 50, .22);
   background-color: #252a27;
-  background-image: radial-gradient(rgba(37, 211, 102, .14) .75px, transparent .75px);
+  background-image: radial-gradient(rgba(58, 205, 50, .14) .75px, transparent .75px);
   background-size: 16px 16px;
 }
 .trust-card-0 { --trust-delay: 0s; }
@@ -266,7 +266,7 @@ h3.font-display {
   width: 2px;
   height: .78em;
   margin: 0 -4px 0 2px;
-  background: #b8f24c;
+  background: #3acd32;
   opacity: 0;
   transform: translateY(.08em);
   vertical-align: -.05em;
@@ -313,7 +313,7 @@ h3.font-display {
   z-index: 0;
   inset: -3px -5px;
   border-radius: 2px;
-  background: rgba(184, 242, 76, .2);
+  background: rgba(58, 205, 50, .2);
   opacity: 0;
   pointer-events: none;
   transform: scaleX(.72);
@@ -330,7 +330,7 @@ h3.font-display {
   right: 0;
   left: 0;
   height: 1px;
-  background: #b8f24c;
+  background: #3acd32;
   content: '';
   opacity: 0;
   pointer-events: none;
@@ -378,7 +378,7 @@ h3.font-display {
   bottom: -3px;
   left: 0;
   height: 1px;
-  background: #b8f24c;
+  background: #3acd32;
   pointer-events: none;
   transform: scaleX(0);
   transform-origin: left center;
@@ -407,7 +407,7 @@ h3.font-display {
 }
 .feature-connector path {
   fill: none;
-  stroke: #25d366;
+  stroke: #3acd32;
   stroke-width: 1.2;
   stroke-linecap: round;
   vector-effect: non-scaling-stroke;
@@ -424,7 +424,7 @@ h3.font-display {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #b8f24c;
+  background: #3acd32;
   opacity: 0;
   pointer-events: none;
   transform: translate(-50%, -50%);
@@ -602,13 +602,13 @@ h3.font-display {
 
 @keyframes trust-card-scan {
   0%, 5%, 20%, 100% {
-    border-color: rgba(37, 211, 102, .2);
-    box-shadow: 0 0 0 rgba(184, 242, 76, 0);
+    border-color: rgba(58, 205, 50, .2);
+    box-shadow: 0 0 0 rgba(58, 205, 50, 0);
     transform: translateY(0);
   }
   8%, 16% {
-    border-color: rgba(184, 242, 76, .48);
-    box-shadow: 0 0 22px rgba(184, 242, 76, .1);
+    border-color: rgba(58, 205, 50, .48);
+    box-shadow: 0 0 22px rgba(58, 205, 50, .1);
     transform: translateY(-2px);
   }
 }

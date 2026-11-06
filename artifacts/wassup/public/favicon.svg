@@ -1,3 +1,8 @@
-<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="180" height="180" rx="36" fill="#FF3C00"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="18" fill="#3acd32"/>
+  <path d="M14 24c0-8 7-13 17-13s19 5 19 13-7 13-19 13c-3 0-6-.4-8.5-1.2L14 40l2.8-7.7C15 30 14 27.2 14 24Z" fill="#fff"/>
+  <text x="31" y="29" fill="#3acd32" font-family="Georgia,serif" font-size="16" font-style="italic" font-weight="700" text-anchor="middle">at</text>
+  <circle cx="26" cy="33" r="1.1" fill="#fff"/>
+  <circle cx="31" cy="33" r="1.1" fill="#fff"/>
+  <circle cx="36" cy="33" r="1.1" fill="#fff"/>
 </svg>

@@ -33,7 +33,7 @@ import CommerceDemo from '@/components/hero/CommerceDemo';
 import ChatbotInquiryDemo from '@/components/chatbot/ChatbotInquiryDemo';
 import ClinicAppointmentDemo from '@/components/flows/ClinicAppointmentDemo';
 import NotFound from '@/pages/not-found';
-import logoPath from './assets/brand-logo.png';
+import logoPath from './assets/airavata-technologies-logo.svg';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
 const queryClient = new QueryClient();
@@ -148,8 +148,8 @@ function useSectionInView<T extends HTMLElement = HTMLDivElement>() {
 
 function SectionLabel({ children, tone = 'green' }: { children: ReactNode; tone?: 'green' | 'dark' }) {
   return (
-    <div className={`mb-5 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.18em] ${tone === 'dark' ? 'border-white/20 text-[#b8f24c]' : 'border-black/10 bg-white text-black/60'}`}>
-      <span className={`h-1.5 w-1.5 rounded-full ${tone === 'dark' ? 'bg-[#b8f24c]' : 'bg-[#25D366]'}`} />
+    <div className={`mb-5 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.18em] ${tone === 'dark' ? 'border-white/20 text-[#3acd32]' : 'border-black/10 bg-white text-black/60'}`}>
+      <span className={`h-1.5 w-1.5 rounded-full ${tone === 'dark' ? 'bg-[#3acd32]' : 'bg-[#3acd32]'}`} />
       {children}
     </div>
   );
@@ -162,7 +162,7 @@ function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capability
     <div className="feature-group" data-group-index={groupIndex} data-testid={`capability-group-${group.id}`}>
       <div className="feature-group-intro">
         <div className="feature-group-label-wrap" style={{ '--feature-label-delay': `${labelDelay}ms` } as CSSProperties}>
-          <p className="feature-group-label font-mono text-[10px] font-bold uppercase tracking-[.18em] text-[#b8f24c]">{group.label}</p>
+          <p className="feature-group-label font-mono text-[10px] font-bold uppercase tracking-[.18em] text-[#3acd32]">{group.label}</p>
           <span className="feature-group-label-flash" aria-hidden="true" />
         </div>
         <h3 className="mt-2 font-display text-xl font-bold leading-tight tracking-[-.04em]">{group.title}</h3>
@@ -182,8 +182,8 @@ function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capability
             >
               <div className="feature-row-title-line">
                 <span className="feature-row-icon" aria-hidden="true">
-                  <Icon size={14} className="feature-icon-underlay text-[#b8f24c]" />
-                  <Icon size={14} className="feature-icon-draw text-[#b8f24c]" />
+                  <Icon size={14} className="feature-icon-underlay text-[#3acd32]" />
+                  <Icon size={14} className="feature-icon-draw text-[#3acd32]" />
                 </span>
                 <span className="feature-row-title-wrap">
                   <h4 className="feature-row-title text-xs font-bold leading-snug text-white/90">{title}</h4>
@@ -201,7 +201,7 @@ function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capability
 
 function PrimaryButton({ children, onClick, testId, dark = false }: { children: ReactNode; onClick: () => void; testId: string; dark?: boolean }) {
   return (
-    <button data-testid={testId} onClick={onClick} className={`group inline-flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold transition duration-200 hover:-translate-y-1 hover:shadow-[0_8px_0_rgba(0,0,0,.18)] active:translate-y-0 ${dark ? 'bg-[#25D366] text-[#050505]' : 'bg-[#050505] text-white hover:bg-[#25D366] hover:text-[#050505]'}`}>
+    <button data-testid={testId} onClick={onClick} className={`group inline-flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold transition duration-200 hover:-translate-y-1 hover:shadow-[0_8px_0_rgba(0,0,0,.18)] active:translate-y-0 ${dark ? 'bg-[#3acd32] text-[#050505]' : 'bg-[#050505] text-white hover:bg-[#3acd32] hover:text-[#050505]'}`}>
       {children}<ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
     </button>
   );
@@ -244,7 +244,7 @@ function InteractivePhone() {
           <div className="flex items-center gap-1.5"><Wifi size={12} /><span className="h-2.5 w-4 rounded-[3px] border border-white/60" /></div>
         </div>
           <div className="flex items-center justify-between bg-[#101110] px-4 pb-4 text-white">
-          <div className="flex items-center gap-2.5"><div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#25D366] text-xs font-bold text-black">A</div><div><p className="text-xs font-bold">AtWassup Chatbot</p><p className="text-[9px] text-[#25D366]">10-message sample · scroll up</p></div></div>
+          <div className="flex items-center gap-2.5"><div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#3acd32] text-xs font-bold text-black">A</div><div><p className="text-xs font-bold">AtWassup Chatbot</p><p className="text-[9px] text-[#3acd32]">10-message sample · scroll up</p></div></div>
           <span className="rounded-full bg-white/10 px-2 py-1 text-[9px] font-bold text-white/60">INTERACTIVE DEMO</span>
         </div>
         <div className="flex h-[395px] flex-col p-3">
@@ -252,19 +252,19 @@ function InteractivePhone() {
           <div ref={messagesContainerRef} className="min-h-0 flex-1 space-y-2.5 overflow-x-hidden overflow-y-auto pr-1" aria-label="AtWassup demo conversation" data-testid="chat-demo-messages">
             {messages.map((message, index) => (
               <div key={`${message.time}-${index}`} className={`chat-tail relative max-w-[88%] rounded-[15px] px-3.5 py-2.5 text-[11px] leading-relaxed shadow-sm ${message.from === 'bot' ? 'chat-tail-right ml-auto rounded-br-[4px] bg-[#c9f8d5] text-black/80' : 'chat-tail-left rounded-bl-[4px] bg-white text-black/75'}`}>
-                {message.from === 'bot' && <span className="mb-1 flex items-center gap-1 text-[8px] font-bold uppercase tracking-wider text-[#128c45]"><Bot size={9} /> AtWassup Chatbot</span>}
-                {message.text}<span className="mt-1 block text-right text-[8px] text-black/35">{message.time}{message.from === 'bot' && <> · <Check size={9} className="inline text-[#128c45]" /></>}</span>
+                {message.from === 'bot' && <span className="mb-1 flex items-center gap-1 text-[8px] font-bold uppercase tracking-wider text-[#3acd32]"><Bot size={9} /> AtWassup Chatbot</span>}
+                {message.text}<span className="mt-1 block text-right text-[8px] text-black/35">{message.time}{message.from === 'bot' && <> · <Check size={9} className="inline text-[#3acd32]" /></>}</span>
               </div>
             ))}
             {isReplying && <div className="chat-tail chat-tail-right flex w-fit items-center gap-1 rounded-[15px] rounded-bl-[4px] bg-white px-3.5 py-3 shadow-sm"><span className="blinking-dot h-1.5 w-1.5 rounded-full bg-black/40" /><span className="blinking-dot h-1.5 w-1.5 rounded-full bg-black/40 [animation-delay:150ms]" /><span className="blinking-dot h-1.5 w-1.5 rounded-full bg-black/40 [animation-delay:300ms]" /></div>}
           </div>
           <div className="mt-3 flex items-center gap-2 border-t border-black/[.08] pt-3">
-            <input value={draft} onChange={(event) => setDraft(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter') sendMessage(); }} placeholder="Try a customer question" aria-label="Message the AtWassup chatbot demo" className="min-w-0 flex-1 rounded-full bg-white px-3.5 py-2.5 text-[11px] outline-none placeholder:text-black/30 focus:ring-2 focus:ring-[#25D366]/40" />
-            <button onClick={sendMessage} aria-label="Send chatbot demo message" data-testid="button-send-demo-message" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-black transition hover:scale-105 disabled:opacity-50" disabled={!draft.trim() || isReplying}><Send size={13} /></button>
+            <input value={draft} onChange={(event) => setDraft(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter') sendMessage(); }} placeholder="Try a customer question" aria-label="Message the AtWassup chatbot demo" className="min-w-0 flex-1 rounded-full bg-white px-3.5 py-2.5 text-[11px] outline-none placeholder:text-black/30 focus:ring-2 focus:ring-[#3acd32]/40" />
+            <button onClick={sendMessage} aria-label="Send chatbot demo message" data-testid="button-send-demo-message" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#3acd32] text-black transition hover:scale-105 disabled:opacity-50" disabled={!draft.trim() || isReplying}><Send size={13} /></button>
           </div>
         </div>
       </div>
-      <div className="absolute -bottom-5 -left-5 hidden items-center gap-2 rounded-2xl border border-black/10 bg-white px-3 py-2.5 shadow-lg sm:flex"><span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#b8f24c] text-black"><Smartphone size={14} /></span><div><p className="text-[8px] font-bold uppercase tracking-widest text-black/35">Try it yourself</p><p className="text-[11px] font-bold">Sample replies · not live.</p></div></div>
+      <div className="absolute -bottom-5 -left-5 hidden items-center gap-2 rounded-2xl border border-black/10 bg-white px-3 py-2.5 shadow-lg sm:flex"><span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#3acd32] text-black"><Smartphone size={14} /></span><div><p className="text-[8px] font-bold uppercase tracking-widest text-black/35">Try it yourself</p><p className="text-[11px] font-bold">Sample replies · not live.</p></div></div>
     </div>
   );
 }
@@ -310,21 +310,21 @@ function LeadModal({ onClose }: { onClose: () => void }) {
         <button data-testid="button-close-modal" onClick={onClose} className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-black/5 text-black/60 transition hover:bg-black hover:text-white"><X size={17} /></button>
         {!sent ? (
           <div className="p-7 sm:p-10">
-            <div className="mb-7 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#25D366] text-black"><Sparkles size={22} /></div>
+            <div className="mb-7 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#3acd32] text-black"><Sparkles size={22} /></div>
             <p className="mb-2 text-[10px] font-bold uppercase tracking-[.18em] text-black/45">DEMO REQUEST</p>
             <h2 className="font-display text-3xl font-bold tracking-[-.05em]">See AtWassup in action.</h2>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-black/55">Share your details and the AtWassup team will follow up about a demo.</p>
             <form className="mt-7 space-y-3" onSubmit={handleSubmit}>
-              <input name="name" data-testid="input-lead-name" required maxLength={120} placeholder="Your name" className="w-full rounded-xl border border-black/10 bg-white px-4 py-3.5 text-sm outline-none transition placeholder:text-black/30 focus:border-[#25D366] focus:ring-2 focus:ring-[#25D366]/20" />
-              <input name="email" data-testid="input-lead-work-email" required type="email" maxLength={254} placeholder="Work email" className="w-full rounded-xl border border-black/10 bg-white px-4 py-3.5 text-sm outline-none transition placeholder:text-black/30 focus:border-[#25D366] focus:ring-2 focus:ring-[#25D366]/20" />
-              <input name="whatsapp" data-testid="input-lead-whatsapp" maxLength={40} placeholder="WhatsApp number (optional)" className="w-full rounded-xl border border-black/10 bg-white px-4 py-3.5 text-sm outline-none transition placeholder:text-black/30 focus:border-[#25D366] focus:ring-2 focus:ring-[#25D366]/20" />
+              <input name="name" data-testid="input-lead-name" required maxLength={120} placeholder="Your name" className="w-full rounded-xl border border-black/10 bg-white px-4 py-3.5 text-sm outline-none transition placeholder:text-black/30 focus:border-[#3acd32] focus:ring-2 focus:ring-[#3acd32]/20" />
+              <input name="email" data-testid="input-lead-work-email" required type="email" maxLength={254} placeholder="Work email" className="w-full rounded-xl border border-black/10 bg-white px-4 py-3.5 text-sm outline-none transition placeholder:text-black/30 focus:border-[#3acd32] focus:ring-2 focus:ring-[#3acd32]/20" />
+              <input name="whatsapp" data-testid="input-lead-whatsapp" maxLength={40} placeholder="WhatsApp number (optional)" className="w-full rounded-xl border border-black/10 bg-white px-4 py-3.5 text-sm outline-none transition placeholder:text-black/30 focus:border-[#3acd32] focus:ring-2 focus:ring-[#3acd32]/20" />
               {errorMessage && <p role="alert" data-testid="demo-form-error" className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{errorMessage}</p>}
-              <button data-testid="button-submit-lead" type="submit" disabled={isSubmitting} className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-black py-4 text-sm font-bold text-white transition hover:bg-[#25D366] hover:text-black disabled:cursor-wait disabled:opacity-60">{isSubmitting ? 'Sending request…' : 'Continue demo request'} {!isSubmitting && <ArrowRight size={16} />}</button>
+              <button data-testid="button-submit-lead" type="submit" disabled={isSubmitting} className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-black py-4 text-sm font-bold text-white transition hover:bg-[#3acd32] hover:text-black disabled:cursor-wait disabled:opacity-60">{isSubmitting ? 'Sending request…' : 'Continue demo request'} {!isSubmitting && <ArrowRight size={16} />}</button>
             </form>
           </div>
         ) : (
           <div className="flex min-h-[390px] flex-col items-center justify-center p-10 text-center">
-            <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] text-black"><Check size={29} /></div>
+            <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#3acd32] text-black"><Check size={29} /></div>
             <h2 className="font-display text-3xl font-bold tracking-[-.05em]">Thanks for your interest.</h2>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-black/55">Your demo request has been sent to the AtWassup team. We’ll be in touch soon.</p>
             <button data-testid="button-done-modal" onClick={onClose} className="mt-7 rounded-full border border-black/15 px-5 py-3 text-sm font-bold transition hover:bg-black hover:text-white">Done</button>
@@ -339,13 +339,13 @@ function DemoModal({ onClose }: { onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm" role="presentation" onClick={onClose}>
       <div className="relative max-h-[calc(100dvh-2rem)] w-full max-w-[760px] overflow-y-auto rounded-[28px] bg-[#101110] p-5 text-white shadow-2xl sm:p-8" role="dialog" aria-modal="true" aria-labelledby="interactive-demo-title" data-testid="modal-ai-demo" onClick={(event) => event.stopPropagation()}>
-        <button data-testid="button-close-demo" onClick={onClose} className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-[#25D366] hover:text-black"><X size={17} /></button>
-        <div className="mb-6 max-w-lg"><p className="mb-2 text-[10px] font-bold uppercase tracking-[.18em] text-[#b8f24c]">Interactive chatbot preview</p><h2 id="interactive-demo-title" className="font-display text-3xl font-bold tracking-[-.05em] sm:text-5xl">Try a conversation.</h2><p className="mt-3 text-sm leading-relaxed text-white/55">Type a customer question and send it to see a sample reply. This preview is interactive, but it is not connected to a live WhatsApp account.</p></div>
+        <button data-testid="button-close-demo" onClick={onClose} className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-[#3acd32] hover:text-black"><X size={17} /></button>
+        <div className="mb-6 max-w-lg"><p className="mb-2 text-[10px] font-bold uppercase tracking-[.18em] text-[#3acd32]">Interactive chatbot preview</p><h2 id="interactive-demo-title" className="font-display text-3xl font-bold tracking-[-.05em] sm:text-5xl">Try a conversation.</h2><p className="mt-3 text-sm leading-relaxed text-white/55">Type a customer question and send it to see a sample reply. This preview is interactive, but it is not connected to a live WhatsApp account.</p></div>
         <div className="grid gap-4 sm:grid-cols-[1fr_210px]">
           <div className="flex justify-center rounded-2xl bg-[#f1eee7] p-4"><InteractivePhone /></div>
           <div className="space-y-3">
             {['Understands Marathi', 'Handles price objection', 'Shares the right catalog', 'Keeps human in the loop'].map((item, index) => (
-              <div key={item} className="node-in flex items-center gap-3 rounded-xl border border-white/10 bg-white/[.05] p-3 text-xs" style={{ animationDelay: `${index * 180 + 300}ms` }}><span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#25D366] text-black"><Check size={13} /></span>{item}</div>
+              <div key={item} className="node-in flex items-center gap-3 rounded-xl border border-white/10 bg-white/[.05] p-3 text-xs" style={{ animationDelay: `${index * 180 + 300}ms` }}><span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#3acd32] text-black"><Check size={13} /></span>{item}</div>
             ))}
           </div>
         </div>
@@ -358,9 +358,11 @@ function Nav({ onLead }: { onLead: () => void }) {
   const [open, setOpen] = useState(false);
   const closeMenu = () => setOpen(false);
   return (
-    <header className="absolute inset-x-0 top-0 z-40 border-b border-[#25D366]/15 bg-[#e8f8dc]/95 shadow-[0_4px_20px_rgba(22,139,66,.06)] backdrop-blur-sm">
+    <header className="absolute inset-x-0 top-0 z-40 border-b border-[#3acd32]/15 bg-white shadow-[0_4px_20px_rgba(58,205,50,.06)] backdrop-blur-sm">
       <div className="section-shell flex h-[78px] items-center justify-between">
-        <a href="#top" data-testid="link-logo" className="flex items-center"><img src={logoPath} alt="AtWassup" className="h-11 w-[165px] object-cover object-center" /></a>
+        <a href="#top" data-testid="link-logo" className="flex shrink-0 items-center">
+          <img src={logoPath} alt="AtWassup — AI WhatsApp Marketing Automation" className="h-[68px] w-[240px] object-cover object-[center_52%]" />
+        </a>
         <nav className="hidden items-center gap-8 md:flex">
           <a data-testid="link-ai-features" href="#features" className="text-sm font-semibold text-black/60 transition hover:text-black">Features</a>
           <a data-testid="link-how-it-works" href="#how-it-works" className="text-sm font-semibold text-black/60 transition hover:text-black">How It Works</a>
@@ -370,7 +372,7 @@ function Nav({ onLead }: { onLead: () => void }) {
         <div className="hidden md:block"><PrimaryButton onClick={onLead} testId="button-book-demo">Book a demo</PrimaryButton></div>
         <button data-testid="button-mobile-menu" onClick={() => setOpen(!open)} aria-label="Toggle menu" className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white/70 md:hidden">{open ? <X size={20} /> : <Menu size={20} />}</button>
       </div>
-      {open && <div className="section-shell md:hidden"><nav className="mb-3 rounded-2xl border border-black/10 bg-[#fcfbf8] p-3 shadow-xl"><a data-testid="mobile-link-ai-features" href="#features" onClick={closeMenu} className="block rounded-xl px-4 py-3 text-sm font-bold hover:bg-[#25D366]">Features</a><a data-testid="mobile-link-how-it-works" href="#how-it-works" onClick={closeMenu} className="block rounded-xl px-4 py-3 text-sm font-bold hover:bg-[#25D366]">How It Works</a><a data-testid="mobile-link-pricing" href="#pricing" onClick={closeMenu} className="block rounded-xl px-4 py-3 text-sm font-bold hover:bg-[#25D366]">Pricing</a><a data-testid="mobile-link-contact" href="#contact" onClick={closeMenu} className="block rounded-xl px-4 py-3 text-sm font-bold hover:bg-[#25D366]">Contact</a><button data-testid="mobile-button-book-demo" onClick={() => { closeMenu(); onLead(); }} className="mt-2 flex w-full items-center justify-center rounded-xl bg-black px-4 py-3 text-sm font-bold text-white">Book a demo</button></nav></div>}
+      {open && <div className="section-shell md:hidden"><nav className="mb-3 rounded-2xl border border-black/10 bg-[#fcfbf8] p-3 shadow-xl"><a data-testid="mobile-link-ai-features" href="#features" onClick={closeMenu} className="block rounded-xl px-4 py-3 text-sm font-bold hover:bg-[#3acd32]">Features</a><a data-testid="mobile-link-how-it-works" href="#how-it-works" onClick={closeMenu} className="block rounded-xl px-4 py-3 text-sm font-bold hover:bg-[#3acd32]">How It Works</a><a data-testid="mobile-link-pricing" href="#pricing" onClick={closeMenu} className="block rounded-xl px-4 py-3 text-sm font-bold hover:bg-[#3acd32]">Pricing</a><a data-testid="mobile-link-contact" href="#contact" onClick={closeMenu} className="block rounded-xl px-4 py-3 text-sm font-bold hover:bg-[#3acd32]">Contact</a><button data-testid="mobile-button-book-demo" onClick={() => { closeMenu(); onLead(); }} className="mt-2 flex w-full items-center justify-center rounded-xl bg-black px-4 py-3 text-sm font-bold text-white">Book a demo</button></nav></div>}
     </header>
   );
 }
@@ -503,17 +505,17 @@ function Home() {
     <main className="noise min-h-[100dvh] bg-[#fcfbf8]" id="top">
       <Nav onLead={() => setLeadOpen(true)} />
       <section className="relative overflow-hidden pb-8 pt-24 sm:pb-10 sm:pt-28 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pb-[14px] lg:pt-[72px]">
-        <div className="absolute -right-32 top-20 h-[420px] w-[420px] rounded-full bg-[#25D366]/20 blur-3xl" />
-        <div className="absolute left-[-100px] top-[450px] h-[220px] w-[220px] rounded-full bg-[#b8f24c]/20 blur-3xl" />
+        <div className="absolute -right-32 top-20 h-[420px] w-[420px] rounded-full bg-[#3acd32]/20 blur-3xl" />
+        <div className="absolute left-[-100px] top-[450px] h-[220px] w-[220px] rounded-full bg-[#3acd32]/20 blur-3xl" />
         <div className="section-shell relative grid items-center gap-10 lg:grid-cols-[1.08fr_.92fr] lg:gap-8">
           <div ref={heroReveal} className="reveal">
-            <h1 className="mt-6 max-w-[720px] font-display text-[clamp(2.5rem,10.2vw,5.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:text-[clamp(3.25rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(3rem,4.5vw,4.5rem)]">Turn WhatsApp into your <span className="text-[#19b956]">sales &amp; support engine.</span></h1>
+            <h1 className="mt-6 max-w-[720px] font-display text-[clamp(2.5rem,10.2vw,5.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:text-[clamp(3.25rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(3rem,4.5vw,4.5rem)]">Turn WhatsApp into your <span className="text-[#3acd32]">sales &amp; support engine.</span></h1>
             <p className="mt-8 max-w-[540px] text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-base">AtWassup helps you onboard to WhatsApp Business API, connect the tools you already use, and bring customer conversations, campaigns, and support into one channel.</p>
             <div className="mt-8 flex flex-wrap items-center gap-3 lg:mt-5"><PrimaryButton onClick={() => setLeadOpen(true)} testId="hero-button-book-demo">Book a demo</PrimaryButton><a data-testid="hero-link-explore-features" href="#features" className="group inline-flex items-center gap-2 rounded-full border border-black/15 bg-white/60 px-5 py-3.5 text-sm font-bold transition hover:-translate-y-1 hover:border-black hover:bg-white">Explore features <ArrowDownRight size={15} className="transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" /></a></div>
-            <div className="mt-10 flex items-center gap-3 text-xs font-semibold text-black/45 lg:mt-6"><span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#25D366] text-black"><Zap size={14} /></span>Setup support, automation, and live chat in one WhatsApp channel</div>
+            <div className="mt-10 flex items-center gap-3 text-xs font-semibold text-black/45 lg:mt-6"><span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#3acd32] text-black"><Zap size={14} /></span>Setup support, automation, and live chat in one WhatsApp channel</div>
           </div>
           <div className="relative flex justify-center lg:translate-y-6 lg:justify-end">
-            <div className="absolute right-[10%] top-[-12%] h-44 w-44 rounded-full border border-[#25D366]/30" /><div className="absolute right-[16%] top-[-5%] h-32 w-32 rounded-full border border-dashed border-black/10" />
+            <div className="absolute right-[10%] top-[-12%] h-44 w-44 rounded-full border border-[#3acd32]/30" /><div className="absolute right-[16%] top-[-5%] h-32 w-32 rounded-full border border-dashed border-black/10" />
             <div className="hero-airavata-demo relative z-10 w-full">
               <CommerceDemo />
             </div>
@@ -526,7 +528,7 @@ function Home() {
         className={`feature-motion-section relative overflow-hidden bg-[#101110] py-9 text-white sm:py-11${capabilitiesInView ? ' is-in-view' : ''}`}
         id="features"
       >
-        <div className="feature-orbit pointer-events-none absolute -right-40 top-10 h-96 w-96 rounded-full border border-[#25D366]/15" />
+        <div className="feature-orbit pointer-events-none absolute -right-40 top-10 h-96 w-96 rounded-full border border-[#3acd32]/15" />
         <div ref={capabilitiesReveal} className="section-shell reveal relative">
           <div className="feature-heading-row">
             <div className="max-w-[720px]">
@@ -541,7 +543,7 @@ function Home() {
                     <span className="feature-heading-cursor feature-heading-cursor-first" />
                   </span>
                   <br />
-                  <span className="feature-heading-line text-[#b8f24c]">
+                  <span className="feature-heading-line text-[#3acd32]">
                     {'So much more.'.split('').map((character, index) => (
                       <span key={`second-${index}`} className="feature-heading-character" style={{ animationDelay: `${340 + index * 18}ms` }}>{character === ' ' ? '\u00a0' : character}</span>
                     ))}
@@ -552,7 +554,7 @@ function Home() {
               <p className="mt-4 max-w-[720px] text-sm leading-relaxed text-white/55">AtWassup brings onboarding, automation, support, campaigns, commerce, and analytics together on WhatsApp.</p>
             </div>
             <div className="feature-stat">
-              <span className="feature-counter font-display text-8xl font-bold leading-[.78] tracking-[-.1em] text-[#b8f24c]" aria-label="10">
+              <span className="feature-counter font-display text-8xl font-bold leading-[.78] tracking-[-.1em] text-[#3acd32]" aria-label="10">
                 <span className="sr-only">10</span>
                 <span className="feature-counter-window" aria-hidden="true">
                   <span className="feature-counter-stack feature-counter-tens">
@@ -587,7 +589,7 @@ function Home() {
 
       <section className="bg-[#fcfbf8] pb-24 pt-20 sm:pb-32 sm:pt-24" id="how-it-works">
         <div ref={stepsReveal} className="section-shell reveal">
-          <div className="max-w-[680px]"><SectionLabel>Simple to get started</SectionLabel><h2 className="font-display text-5xl font-bold leading-[.94] tracking-[-.07em] sm:text-7xl">From first setup to <span className="text-[#19b956]">better conversations.</span></h2><p className="mt-6 max-w-[520px] text-base leading-relaxed text-black/55">A clear path from connecting your number to growing the way you use WhatsApp.</p></div>
+          <div className="max-w-[680px]"><SectionLabel>Simple to get started</SectionLabel><h2 className="font-display text-5xl font-bold leading-[.94] tracking-[-.07em] sm:text-7xl">From first setup to <span className="text-[#3acd32]">better conversations.</span></h2><p className="mt-6 max-w-[520px] text-base leading-relaxed text-black/55">A clear path from connecting your number to growing the way you use WhatsApp.</p></div>
           <div
             ref={stepsCarouselRef}
             onScroll={handleStepsCarouselScroll}
@@ -596,12 +598,12 @@ function Home() {
             className="steps-book mt-14 -mx-5 flex snap-x snap-mandatory items-stretch gap-4 overflow-x-auto px-[8vw] pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4"
           >
             {processSteps.map(({ title, text }, index) => (
-              <article ref={(node) => { stepCardRefs.current[index] = node; }} key={title} className="steps-page group relative w-[84vw] shrink-0 snap-center overflow-hidden rounded-[22px] border border-black/10 bg-white p-6 transition duration-300 hover:border-[#25D366]/60 hover:shadow-[0_14px_32px_rgba(37,211,102,.12)] sm:w-auto sm:min-w-0 sm:shrink sm:snap-none sm:p-7" style={{ animationDelay: `${index * 200}ms` }} data-testid={`step-card-${index + 1}`}>
+              <article ref={(node) => { stepCardRefs.current[index] = node; }} key={title} className="steps-page group relative w-[84vw] shrink-0 snap-center overflow-hidden rounded-[22px] border border-black/10 bg-white p-6 transition duration-300 hover:border-[#3acd32]/60 hover:shadow-[0_14px_32px_rgba(58,205,50,.12)] sm:w-auto sm:min-w-0 sm:shrink sm:snap-none sm:p-7" style={{ animationDelay: `${index * 200}ms` }} data-testid={`step-card-${index + 1}`}>
                 <div className="mb-7 flex items-start justify-between">
-                  <span className="font-display text-6xl font-bold tracking-[-.08em] text-[#25D366] drop-shadow-[0_0_14px_rgba(37,211,102,.25)]">0{index + 1}</span>
-                  <span aria-hidden="true" className="mt-3 h-3 w-3 rounded-full bg-[#25D366] shadow-[0_0_18px_rgba(37,211,102,.9)] transition duration-300 group-hover:scale-125" />
+                  <span className="font-display text-6xl font-bold tracking-[-.08em] text-[#3acd32] drop-shadow-[0_0_14px_rgba(58,205,50,.25)]">0{index + 1}</span>
+                  <span aria-hidden="true" className="mt-3 h-3 w-3 rounded-full bg-[#3acd32] shadow-[0_0_18px_rgba(58,205,50,.9)] transition duration-300 group-hover:scale-125" />
                 </div>
-                <div className="mb-5 h-px w-14 bg-[#25D366] shadow-[0_0_12px_rgba(37,211,102,.55)] transition-all duration-300 group-hover:w-24" />
+                <div className="mb-5 h-px w-14 bg-[#3acd32] shadow-[0_0_12px_rgba(58,205,50,.55)] transition-all duration-300 group-hover:w-24" />
                 <h3 className="font-display text-2xl font-bold tracking-[-.04em]">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-black/50">{text}</p>
               </article>
@@ -616,7 +618,7 @@ function Home() {
                   onClick={() => scrollToStep(index)}
                   aria-label={`Show step ${index + 1}: ${title}`}
                   aria-current={activeStepIndex === index ? 'step' : undefined}
-                  className={`h-2 rounded-full transition-all ${activeStepIndex === index ? 'w-7 bg-[#168b42]' : 'w-2 bg-black/20 hover:bg-[#25D366]'}`}
+                  className={`h-2 rounded-full transition-all ${activeStepIndex === index ? 'w-7 bg-[#3acd32]' : 'w-2 bg-black/20 hover:bg-[#3acd32]'}`}
                   data-testid={`step-dot-${index + 1}`}
                 />
               ))}
@@ -631,7 +633,7 @@ function Home() {
           <div className="mx-auto max-w-6xl">
             <SectionLabel>Simple pricing</SectionLabel>
             <h2 className="font-display text-3xl font-bold leading-tight tracking-[-.055em] sm:text-[2.5rem]">
-              One plan. <span className="text-[#19b956]">Clear costs.</span>
+              One plan. <span className="text-[#3acd32]">Clear costs.</span>
             </h2>
             <p className="mt-1 text-sm text-black/60">
               ₹15,000/year + applicable GST + Meta message charges = your total.
@@ -639,25 +641,25 @@ function Home() {
           </div>
           <div className="mx-auto mt-5 grid max-w-6xl gap-6 lg:grid-cols-[.78fr_1.22fr] lg:gap-9">
             <div className="border-b border-black/15 pb-5 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-8">
-              <p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#168b42]">You pay AtWassup</p>
+              <p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#3acd32]">You pay AtWassup</p>
               <p className="mt-2 font-display text-4xl font-bold leading-none tracking-[-.07em] sm:text-[2.75rem]">
                 <span className="pricing-price-reveal">₹15,000</span><span className="ml-2 align-baseline font-sans text-xs font-semibold tracking-normal text-black/50">/ year</span>
               </p>
               <p className="mt-1 text-[11px] text-black/50">GST, if applicable</p>
               <p className="mt-4 text-xs font-medium leading-relaxed text-black/65">
-                Every feature included <span className="px-1 text-[#19b956]">·</span> No tiers <span className="px-1 text-[#19b956]">·</span> No hidden fees
+                Every feature included <span className="px-1 text-[#3acd32]">·</span> No tiers <span className="px-1 text-[#3acd32]">·</span> No hidden fees
               </p>
               <button
                 onClick={() => setLeadOpen(true)}
                 data-testid="button-annual-plan-demo"
-                className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 text-xs font-bold text-black transition hover:-translate-y-0.5"
+                className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-[#3acd32] px-4 py-2.5 text-xs font-bold text-black transition hover:-translate-y-0.5"
               >
                 Book a demo <ArrowRight size={14} />
               </button>
             </div>
             <div>
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#168b42]">You pay Meta</p>
+                <p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#3acd32]">You pay Meta</p>
                 <p className="text-[11px] text-black/50">Per message · Meta’s rates · no AtWassup markup</p>
               </div>
               <div className="mt-2 grid grid-cols-[1fr_auto] items-center gap-x-4 text-xs sm:text-sm">
@@ -672,9 +674,9 @@ function Home() {
             </div>
           </div>
           <div className="mx-auto mt-4 flex max-w-6xl flex-wrap items-center gap-x-2 border-t border-black/15 pt-3 text-xs">
-            <span className="font-bold text-[#168b42]">Others:</span>
+            <span className="font-bold text-[#3acd32]">Others:</span>
             <span className="text-black/55">packages + possible markups</span>
-            <span className="mx-1 text-[#19b956]">→</span>
+            <span className="mx-1 text-[#3acd32]">→</span>
             <span className="font-bold text-[#252a27]">AtWassup:</span>
             <span className="text-black/65">one plan, Meta rate only</span>
           </div>
@@ -683,19 +685,19 @@ function Home() {
 
       <section className="bg-[#252a27] py-24 text-white sm:py-32">
         <div ref={trustReveal} className="section-shell reveal grid items-start gap-12 lg:grid-cols-[.8fr_1.2fr]">
-          <div><SectionLabel tone="dark">The right foundations</SectionLabel><h2 className="max-w-[470px] font-display text-5xl font-bold leading-[.94] tracking-[-.07em] sm:text-6xl">Built around how your team <span className="text-[#b8f24c]">really works.</span></h2><p className="mt-6 max-w-[390px] text-sm leading-relaxed text-white/55">Work with the official WhatsApp Business Platform, connect the systems your team already relies on, and bring people into the conversation when needed.</p></div>
+          <div><SectionLabel tone="dark">The right foundations</SectionLabel><h2 className="max-w-[470px] font-display text-5xl font-bold leading-[.94] tracking-[-.07em] sm:text-6xl">Built around how your team <span className="text-[#3acd32]">really works.</span></h2><p className="mt-6 max-w-[390px] text-sm leading-relaxed text-white/55">Work with the official WhatsApp Business Platform, connect the systems your team already relies on, and bring people into the conversation when needed.</p></div>
             <div className="grid gap-3 sm:grid-cols-3">
               {[
                 { title: 'Guided setup', text: 'Support for API onboarding, Meta verification, and Green Tick assistance.' },
                 { title: 'Your tools stay connected', text: 'Integrate with your website, CRM, software, or customer database.' },
                 { title: 'People stay in control', text: 'Give agents a shared live-chat workspace and a clear handoff from automation.' },
               ].map(({ title, text }, index) => (
-                <article key={title} className={`trust-card trust-card-${index} group relative overflow-hidden rounded-[22px] border border-[#25D366]/20 bg-[#25D366]/[.035] p-5 transition duration-300 hover:border-[#25D366]/65 hover:bg-[#25D366]/[.07] sm:p-6`} data-testid={`card-trust-${index}`}>
-                  <span aria-hidden="true" className="pointer-events-none absolute -right-1 top-3 font-display text-8xl font-bold leading-none text-[#25D366]/[.09]">0{index + 1}</span>
+                <article key={title} className={`trust-card trust-card-${index} group relative overflow-hidden rounded-[22px] border border-[#3acd32]/20 bg-[#3acd32]/[.035] p-5 transition duration-300 hover:border-[#3acd32]/65 hover:bg-[#3acd32]/[.07] sm:p-6`} data-testid={`card-trust-${index}`}>
+                  <span aria-hidden="true" className="pointer-events-none absolute -right-1 top-3 font-display text-8xl font-bold leading-none text-[#3acd32]/[.09]">0{index + 1}</span>
                   <div className="relative flex items-center justify-between">
-                    <span className="font-mono text-[10px] font-bold uppercase tracking-[.16em] text-[#b8f24c]">0{index + 1} / ATWASSUP</span>
+                    <span className="font-mono text-[10px] font-bold uppercase tracking-[.16em] text-[#3acd32]">0{index + 1} / ATWASSUP</span>
                   </div>
-                  <div className="my-7 h-px w-14 bg-[#25D366] shadow-[0_0_12px_rgba(37,211,102,.65)] transition-all duration-300 group-hover:w-24" />
+                  <div className="my-7 h-px w-14 bg-[#3acd32] shadow-[0_0_12px_rgba(58,205,50,.65)] transition-all duration-300 group-hover:w-24" />
                   <h3 className="relative font-display text-lg font-bold tracking-[-.03em]">{title}</h3>
                   <p className="relative mt-2 text-sm leading-relaxed text-white/60">{text}</p>
                   <svg className="trust-card-cursor" viewBox="0 0 20 24" aria-hidden="true">
@@ -707,7 +709,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="home-cta-section relative overflow-hidden bg-[#25D366] py-12 sm:py-[4.5rem]" id="contact">
+      <section className="home-cta-section relative overflow-hidden bg-[#3acd32] py-12 sm:py-[4.5rem]" id="contact">
         <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full border-[32px] border-black/10" />
         <div className="absolute bottom-[-100px] left-[-30px] h-72 w-72 rounded-full border-[32px] border-black/10" />
         <div ref={contactReveal} className="home-cta-content section-shell relative reveal text-center">
@@ -729,7 +731,7 @@ function Home() {
         </div>
       </section>
 
-      <footer className="bg-[#101110] py-12 text-white" data-testid="footer"><div className="section-shell flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-10"><div className="order-2 md:order-none"><img src={logoPath} alt="AtWassup" className="h-10 w-[150px] object-cover object-center brightness-0 invert" /><p className="mt-4 max-w-[300px] text-xs leading-relaxed text-white/45">AtWassup — WhatsApp Business solutions by Airavata Technologies.</p></div><nav aria-label="Footer" className="order-1 flex flex-wrap gap-x-7 gap-y-3 text-xs font-semibold text-white/70 md:order-none"><a data-testid="footer-link-domain" href="#top" className="transition hover:text-[#25D366]">atwassup.com</a><a data-testid="footer-link-features" href="#features" className="transition hover:text-[#25D366]">Features</a><a data-testid="footer-link-pricing" href="#pricing" className="transition hover:text-[#25D366]">Pricing</a><a data-testid="footer-link-contact" href="#contact" className="transition hover:text-[#25D366]">Contact</a></nav><p className="order-3 text-xs text-white/30 md:order-none">© {new Date().getFullYear()} Airavata Technologies</p></div></footer>
+      <footer className="bg-[#101110] py-12 text-white" data-testid="footer"><div className="section-shell flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-10"><div className="order-2 md:order-none"><img src={logoPath} alt="AtWassup — AI WhatsApp Marketing Automation" className="h-[52px] w-[150px] object-cover object-center brightness-0 invert" /><p className="mt-4 max-w-[300px] text-xs leading-relaxed text-white/45">AtWassup — WhatsApp Business solutions by Airavata Technologies.</p></div><nav aria-label="Footer" className="order-1 flex flex-wrap gap-x-7 gap-y-3 text-xs font-semibold text-white/70 md:order-none"><a data-testid="footer-link-domain" href="#top" className="transition hover:text-[#3acd32]">atwassup.com</a><a data-testid="footer-link-features" href="#features" className="transition hover:text-[#3acd32]">Features</a><a data-testid="footer-link-pricing" href="#pricing" className="transition hover:text-[#3acd32]">Pricing</a><a data-testid="footer-link-contact" href="#contact" className="transition hover:text-[#3acd32]">Contact</a></nav><p className="order-3 text-xs text-white/30 md:order-none">© {new Date().getFullYear()} Airavata Technologies</p></div></footer>
       {(showBackToTop || footerInView) && (
         <button
           type="button"
@@ -737,7 +739,7 @@ function Home() {
           aria-label="Back to top"
           title="Back to top"
           data-testid="button-back-to-top"
-          className="fixed bottom-5 right-5 z-[70] flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#b8f24c] bg-[#101110] text-[#b8f24c] shadow-[0_12px_30px_rgba(0,0,0,.24)] transition hover:-translate-y-1 hover:border-[#25D366] hover:bg-[#25D366] hover:text-black focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/50"
+          className="fixed bottom-5 right-5 z-[70] flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#3acd32] bg-[#101110] text-[#3acd32] shadow-[0_12px_30px_rgba(0,0,0,.24)] transition hover:-translate-y-1 hover:border-[#3acd32] hover:bg-[#3acd32] hover:text-black focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#3acd32]/50"
         >
           <ArrowUp size={20} />
         </button>

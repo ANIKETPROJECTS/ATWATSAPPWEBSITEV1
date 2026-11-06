@@ -5,9 +5,9 @@
   overflow: hidden;
   overflow-anchor: none;
   padding-block: 64px;
-  border-block: 1px solid rgba(22, 139, 66, .14);
+  border-block: 1px solid rgba(58, 205, 50, .14);
   background:
-    radial-gradient(circle at 78% 45%, rgba(37, 211, 102, .22), transparent 46%),
+    radial-gradient(circle at 78% 45%, rgba(58, 205, 50, .22), transparent 46%),
     #e2f3d5;
 }
 .cid-grid { display: grid; gap: 36px; align-items: center; grid-template-columns: minmax(0, 1fr); }
@@ -17,7 +17,7 @@
 }
 .cid-copy { max-width: 480px; min-width: 0; }
 .cid-eyebrow { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; color: var(--cid-deep); font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
-.cid-eyebrow span { width: 18px; height: 2px; background: #25d366; }
+.cid-eyebrow span { width: 18px; height: 2px; background: #3acd32; }
 .cid-title { color: var(--cid-ink); font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 800; line-height: 1; letter-spacing: -.045em; }
 .cid-title em { display: block; font-style: normal; color: var(--cid-deep); }
 .cid-lede { margin-top: 14px; max-width: 440px; color: rgba(15,31,21,.76); font-size: 15px; line-height: 1.55; }
@@ -33,7 +33,7 @@
   display: grid; place-items: center; width: 19px; height: 19px; flex: 0 0 19px; border-radius: 50%;
   border: 1.5px solid rgba(18,105,58,.24); color: transparent; transition: background-color .3s ease, border-color .3s ease, color .3s ease;
 }
-.cid-outcomes li.is-on .cid-tick { border-color: #168b45; background: #168b45; color: #f1fbe9; }
+.cid-outcomes li.is-on .cid-tick { border-color: #3acd32; background: #3acd32; color: #f1fbe9; }
 
 .cid-capture { margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(238,248,234,.16); }
 .cid-capture-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
@@ -41,7 +41,7 @@
 .cid-record-count { flex: 0 0 auto; color: rgba(15,31,21,.56); font-family: var(--app-font-mono); font-size: 11px; }
 .cid-attrs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; margin: 0; }
 .cid-attr { min-width: 0; padding-left: 11px; border-left: 2px solid rgba(37,184,95,.48); transition: border-color .3s ease; }
-.cid-attr.is-latest { border-left-color: #168b45; }
+.cid-attr.is-latest { border-left-color: #3acd32; }
 .cid-attr-address, .cid-attr-audience { min-height: 82px; }
 .cid-attr dt { display: flex; align-items: center; gap: 6px; color: rgba(15,31,21,.58); font-size: 10px; font-weight: 700; letter-spacing: .12em; line-height: 1.4; text-transform: uppercase; }
 .cid-attr dd { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-width: 0; margin: 3px 0 0; color: var(--cid-ink); font-size: 14px; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; }
@@ -66,8 +66,8 @@
 .cid-chat .demo-message { text-align: left; }
 .cid-chat .message-appear { animation: cid-message-in .22s ease both; will-change: opacity; }
 .cid-chat .demo-message-copy { display: block; white-space: normal; overflow-wrap: anywhere; }
-.cid-chat:focus-visible { outline: 2px solid #25d366; outline-offset: -2px; }
-.cid-sender { display: block; margin-bottom: 2px; color: #258361; font-size: 8px; font-weight: 600; }
+.cid-chat:focus-visible { outline: 2px solid #3acd32; outline-offset: -2px; }
+.cid-sender { display: block; margin-bottom: 2px; color: #3acd32; font-size: 8px; font-weight: 600; }
 .cid-typing { padding: 7px 9px; }
 .cid-dots { display: inline-flex; gap: 3px; }
 .cid-dots i { width: 4px; height: 4px; border-radius: 50%; background: #8696a0; animation: cid-dot 1.1s ease-in-out infinite; }
