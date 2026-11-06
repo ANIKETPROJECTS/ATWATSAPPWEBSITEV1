@@ -160,9 +160,6 @@ importers:
       '@workspace/api-zod':
         specifier: '*'
         version: link:../../lib/api-zod
-      '@workspace/db':
-        specifier: '*'
-        version: link:../../lib/db
       cookie-parser:
         specifier: ^1.4.7
         version: 1.4.7

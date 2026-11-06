@@ -9,9 +9,7 @@
     "artifacts/api-server",
     "artifacts/wassup",
     "lib/api-client-react",
-    "lib/api-spec",
-    "lib/api-zod",
-    "lib/db"
+    "lib/api-zod"
   ],
   "scripts": {
     "build": "npm run typecheck && npm run build --workspace=@workspace/api-server && PORT=3025 BASE_PATH=/ npm run build --workspace=@workspace/wassup",
