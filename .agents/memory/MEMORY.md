@@ -1,0 +1,8 @@
+- [Orval and Zod email validation](orval-zod-email-validation.md) — OpenAPI `format: email` can generate Zod 4 calls in a Zod 3 workspace; use a pattern or align versions.
+- [AtWassup homepage styling](atwassup-homepage-readability.md) — use Poppins with readable heading spacing, charcoal dark sections, centered Flow Builder benefits, and legible Chatbot text.
+- [Mobile footer arrow spacing](mobile-footer-arrow-spacing.md) — reserve safe-area-aware space so the fixed mobile control stays clear of footer text.
+- [AtWassup pricing](atwassup-pricing.md) — one ₹15,000 annual plan, Meta fees at cost, and short, plain-language pricing copy.
+- [Device preview sizing](device-preview-sizing.md) — library safe areas reduce usable content height; flex chat content to avoid hiding the composer.
+- [Chatbot product behavior](chatbot-product-behavior.md) — automatic sender-number capture and conversation attributes saved for later marketing.
+- [WhatsApp Flows showcase](whatsapp-flows-showcase.md) — clinic appointment forms, submission-to-platform sync, AI patient support; phone left with a light frame.
+- [VPS and package managers](vps-package-managers.md) — npm and pnpm use different release-age units; preserve both safeguards when supporting both.

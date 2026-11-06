@@ -1,0 +1,864 @@
+import { lazy, Suspense, useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import {
+  ArrowRight,
+  Building2,
+  Check,
+  ChevronLeft,
+  ChevronDown,
+  CreditCard,
+  Download,
+  ExternalLink,
+  LockKeyhole,
+  RotateCcw,
+  ShieldCheck,
+  Smartphone,
+} from 'lucide-react';
+import { DevicePreviewFrame } from './DevicePreview';
+import {
+  createDemoInvoicePdf,
+  formatDemoInvoiceMoney,
+  getDemoInvoiceAmounts,
+  getDemoInvoiceDate,
+  getPaymentReference,
+} from './createDemoInvoicePdf';
+import { FigmaReadReceipt, FigmaSvgCrop } from './FigmaChrome';
+import sareeImage from '../../assets/airavata/atw-banarasi-saree-product.jpg';
+import pdfFileIcon from '../../assets/airavata/pdf_1791198174982.png';
+import razorpayLogo from '../../assets/airavata/razorpay-merchant-logo.svg';
+import paymentSuccessAnimation from '../../assets/airavata/payment-success-check.json';
+import './airavata-demo.css';
+
+type DemoStep =
+  | 'template'
+  | 'customerReply'
+  | 'details'
+  | 'flow'
+  | 'confirmed'
+  | 'razorpay'
+  | 'paymentSuccess'
+  | 'paid';
+
+type CheckoutDetails = {
+  name: string;
+  phone: string;
+  address: string;
+  city: string;
+  pinCode: string;
+};
+
+type Receipt = CheckoutDetails & { orderId: string };
+
+const emptyCheckout: CheckoutDetails = {
+  name: '',
+  phone: '',
+  address: '',
+  city: '',
+  pinCode: '',
+};
+
+const checkoutProfile: CheckoutDetails = {
+  name: 'Priya Sharma',
+  phone: '+91 90000 00000',
+  address: '14 Silk Market Road',
+  city: 'Varanasi',
+  pinCode: '221001',
+};
+
+const productPrice = '₹6,490';
+const DEMO_MOTION_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const DEMO_MOTION_DURATION = 0.56;
+const LazyLottie = lazy(() => import('lottie-react').then(({ Lottie }) => ({ default: Lottie })));
+
+function formatFileSize(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`;
+  return `${(bytes / 1024).toFixed(1)} KB`;
+}
+
+function GooglePayMark() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="razorpay-brand-mark">
+      <path fill="#4285F4" d="M21.35 12.25c0-.72-.06-1.42-.18-2.1H12v3.97h5.23a4.5 4.5 0 0 1-1.96 2.96v2.47h3.17c1.85-1.7 2.91-4.2 2.91-7.3z" />
+      <path fill="#34A853" d="M12 21.6c2.64 0 4.85-.87 6.46-2.36l-3.17-2.47c-.88.59-2 .94-3.29.94-2.53 0-4.68-1.71-5.45-4.01H3.28v2.55A9.75 9.75 0 0 0 12 21.6z" />
+      <path fill="#FBBC05" d="M6.55 13.7a5.86 5.86 0 0 1 0-3.4V7.75H3.28a9.75 9.75 0 0 0 0 8.5z" />
+      <path fill="#EA4335" d="M12 6.29c1.44 0 2.73.49 3.75 1.46l2.82-2.82C16.84 3.35 14.64 2.4 12 2.4a9.75 9.75 0 0 0-8.72 5.35l3.27 2.55C7.32 8 9.47 6.29 12 6.29z" />
+    </svg>
+  );
+}
+
+function PaytmMark() {
+  return (
+    <span aria-hidden="true" className="razorpay-paytm-mark">
+      <span>pay</span><strong>tm</strong>
+    </span>
+  );
+}
+
+function PhonePeMark() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="razorpay-brand-mark">
+      <circle cx="12" cy="12" r="11" fill="#5F259F" />
+      <path d="M8 5.5h5.25a4 4 0 0 1 0 8H11v5H8zm3 3v2h2.25a1 1 0 0 0 0-2z" fill="#fff" />
+    </svg>
+  );
+}
+
+function InvoiceDocumentPage({
+  receipt,
+  paymentMethod,
+  thumbnail = false,
+}: {
+  receipt: Receipt;
+  paymentMethod: string;
+  thumbnail?: boolean;
+}) {
+  const tax = getDemoInvoiceAmounts();
+  const paymentId = getPaymentReference(receipt.orderId);
+
+  return (
+    <article className={`invoice-page-preview ${thumbnail ? 'invoice-page-preview--thumbnail' : ''}`}>
+      <div className="invoice-page-brand">
+        <span className="invoice-page-brand-copy">
+          <strong>RANGREZ STUDIO</strong>
+          <small>HANDWOVEN BANARASI TEXTILES</small>
+        </span>
+      </div>
+      <div className="invoice-page-heading">
+        <span><h2>Invoice</h2><small>{receipt.orderId}</small></span>
+        <span className="invoice-page-validity">Not valid for tax claim</span>
+      </div>
+      <div className="invoice-page-summary">
+        <div><small>INVOICE DATE</small><strong>{getDemoInvoiceDate()}</strong></div>
+        <div><small>ORDER NUMBER</small><strong>{receipt.orderId}</strong></div>
+        <div><small>PAYMENT</small><strong className="invoice-paid-label">UPI · {paymentMethod}</strong></div>
+      </div>
+      <div className="invoice-page-parties">
+        <section>
+          <small>SOLD BY</small>
+          <strong>Rangrez Studio</strong>
+          <span>Varanasi, Uttar Pradesh 221001</span>
+        </section>
+        <section>
+          <small>BILL TO / SHIP TO</small>
+          <strong>{receipt.name}</strong>
+          <span>{receipt.phone}</span>
+          <span>{receipt.address}, {receipt.city} {receipt.pinCode}</span>
+        </section>
+      </div>
+      <p className="invoice-page-supply">Place of supply: Uttar Pradesh</p>
+      <div className="invoice-page-table">
+        <div className="invoice-page-table-head"><span>DESCRIPTION</span><span>HSN</span><span>QTY</span><span>BASE PRICE</span></div>
+        <div className="invoice-page-item">
+          <span>Banarasi Silk Saree</span>
+          <span>5007</span><span>1</span><strong>{formatDemoInvoiceMoney(tax.taxablePaise)}</strong>
+        </div>
+      </div>
+      <div className="invoice-page-accounting">
+        <div className="invoice-page-tax-list">
+          <strong>TAX SUMMARY</strong>
+          <span><small>Taxable value</small><b>{formatDemoInvoiceMoney(tax.taxablePaise)}</b></span>
+          <span><small>CGST @ 2.5%</small><b>{formatDemoInvoiceMoney(tax.cgstPaise)}</b></span>
+          <span><small>SGST @ 2.5%</small><b>{formatDemoInvoiceMoney(tax.sgstPaise)}</b></span>
+          <span><small>Delivery charge</small><b>{formatDemoInvoiceMoney(tax.deliveryChargePaise)}</b></span>
+          <span className="invoice-page-gst-total"><small>Total GST · 5%</small><b>{formatDemoInvoiceMoney(tax.gstPaise)}</b></span>
+        </div>
+        <div className="invoice-page-grand-total">
+          <small>TOTAL PAID</small>
+          <strong>{formatDemoInvoiceMoney(tax.totalPaise)}</strong>
+          <span>GST + delivery</span>
+        </div>
+      </div>
+      <div className="invoice-page-payment-ref">
+        <span>Payment reference <strong>{paymentId}</strong></span>
+        <span>Order status <strong>Processing</strong></span>
+      </div>
+      <p className="invoice-page-amount-words">Amount in words: Indian Rupees Six Thousand Nine Hundred Thirteen and Fifty Paise Only</p>
+      <small className="invoice-page-disclaimer">Illustrative preview only. GSTIN is not configured; no valid tax invoice, payment or order was created.</small>
+    </article>
+  );
+}
+
+export default function CommerceDemo() {
+  const prefersReducedMotion = useReducedMotion() === true;
+  const motionTransition = {
+    duration: prefersReducedMotion ? 0.01 : DEMO_MOTION_DURATION,
+    ease: DEMO_MOTION_EASE,
+  };
+  const [step, setStep] = useState<DemoStep>('template');
+  const [showTemplateMessage, setShowTemplateMessage] = useState(false);
+  const [confirmedStage, setConfirmedStage] = useState<'summary' | 'paymentLink'>('summary');
+  const [checkout, setCheckout] = useState<CheckoutDetails>(emptyCheckout);
+  const [receipt, setReceipt] = useState<Receipt | null>(null);
+  const [invoicePdfUrl, setInvoicePdfUrl] = useState<string | null>(null);
+  const [invoiceFileSize, setInvoiceFileSize] = useState('');
+  const [invoiceViewerOpen, setInvoiceViewerOpen] = useState(false);
+  const [postPaymentStage, setPostPaymentStage] = useState<'payment' | 'invoice' | 'replay'>('payment');
+  const [razorpayStage, setRazorpayStage] = useState<'upi' | 'processing'>('upi');
+  const [selectedUpiApp, setSelectedUpiApp] = useState<'Google Pay' | 'Paytm' | 'PhonePe'>('Google Pay');
+  const startRazorpayPreview = useCallback(() => setRazorpayStage('processing'), []);
+  const [flowTypingField, setFlowTypingField] = useState<keyof CheckoutDetails | null>(null);
+  const [screenWidth, setScreenWidth] = useState(252);
+  const [showScrollButton, setShowScrollButton] = useState(false);
+  const demoStageRef = useRef<HTMLDivElement>(null);
+  const chatBodyRef = useRef<HTMLDivElement>(null);
+  const invoiceViewerShownRef = useRef(false);
+  const nextOrderNumber = useRef(15);
+
+  useEffect(() => {
+    const stage = demoStageRef.current;
+    if (!stage) return;
+
+    const updateScreenWidth = () => {
+      const heightLimit = Math.floor(stage.clientHeight / 2.35);
+      const widthLimit = stage.clientWidth - 24;
+      if (heightLimit <= 0 || widthLimit <= 0) return;
+      setScreenWidth(Math.max(160, Math.min(heightLimit, widthLimit)));
+    };
+
+    const observer = new ResizeObserver(updateScreenWidth);
+    observer.observe(stage);
+    updateScreenWidth();
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const chatBody = chatBodyRef.current;
+    if (!chatBody) return;
+
+    const isInitialTemplate = step === 'template';
+    const shouldJumpToLatest = step === 'confirmed' || step === 'paid';
+    chatBody.scrollTo({
+      top: isInitialTemplate ? 0 : chatBody.scrollHeight,
+      behavior: isInitialTemplate || prefersReducedMotion ? 'auto' : 'smooth',
+    });
+    if (shouldJumpToLatest) setShowScrollButton(false);
+  }, [step, confirmedStage, postPaymentStage, prefersReducedMotion]);
+
+  useEffect(() => {
+    const timeouts: number[] = [];
+    if (step === 'template') {
+      timeouts.push(window.setTimeout(() => setShowTemplateMessage(true), 220));
+      timeouts.push(window.setTimeout(() => setStep('customerReply'), 3300));
+    } else if (step === 'customerReply') {
+      timeouts.push(window.setTimeout(() => setStep('details'), 3200));
+    } else if (step === 'details') {
+      timeouts.push(window.setTimeout(() => setStep('flow'), 4700));
+    } else if (step === 'confirmed' && confirmedStage === 'paymentLink') {
+      timeouts.push(window.setTimeout(() => setStep('razorpay'), 4700));
+    } else if (step === 'paymentSuccess') {
+      timeouts.push(window.setTimeout(() => {
+        setPostPaymentStage('payment');
+        setStep('paid');
+      }, 2000));
+    } else if (step === 'paid') {
+      timeouts.push(window.setTimeout(() => setPostPaymentStage('invoice'), 5000));
+      timeouts.push(window.setTimeout(() => setPostPaymentStage('replay'), 9000));
+      timeouts.push(window.setTimeout(() => {
+        if (invoiceViewerShownRef.current) return;
+        invoiceViewerShownRef.current = true;
+        setInvoiceViewerOpen(true);
+      }, 14000));
+    }
+    return () => timeouts.forEach(timeout => window.clearTimeout(timeout));
+  }, [step, confirmedStage]);
+
+  useEffect(() => {
+    if (step !== 'confirmed') return;
+    setConfirmedStage('summary');
+    const timeout = window.setTimeout(() => setConfirmedStage('paymentLink'), 4500);
+    return () => window.clearTimeout(timeout);
+  }, [step]);
+
+  useEffect(() => {
+    if (step !== 'razorpay' || razorpayStage !== 'upi') return;
+    const timeout = window.setTimeout(startRazorpayPreview, 3500);
+    return () => window.clearTimeout(timeout);
+  }, [step, razorpayStage, startRazorpayPreview]);
+
+  useEffect(() => {
+    if (!prefersReducedMotion || step !== 'razorpay' || razorpayStage !== 'processing') return;
+    setStep('paymentSuccess');
+  }, [prefersReducedMotion, razorpayStage, step]);
+
+  const completeCheckout = useCallback((details: CheckoutDetails) => {
+    const orderId = `INV20260901${String(nextOrderNumber.current).padStart(2, '0')}`;
+    nextOrderNumber.current += 1;
+    setReceipt({ ...details, orderId });
+    setConfirmedStage('summary');
+    setFlowTypingField(null);
+    setStep('confirmed');
+  }, []);
+
+  useEffect(() => {
+    if (!receipt || step !== 'paid') {
+      setInvoicePdfUrl(null);
+      setInvoiceFileSize('');
+      return;
+    }
+
+    const invoicePdf = createDemoInvoicePdf(receipt, selectedUpiApp);
+    const invoiceUrl = URL.createObjectURL(invoicePdf);
+    setInvoiceFileSize(formatFileSize(invoicePdf.size));
+    setInvoicePdfUrl(invoiceUrl);
+    return () => URL.revokeObjectURL(invoiceUrl);
+  }, [receipt, selectedUpiApp, step]);
+
+  useEffect(() => {
+    if (step !== 'flow') return;
+    setCheckout({ ...emptyCheckout });
+    setFlowTypingField(null);
+
+    const timers: number[] = [];
+    const fields = Object.entries(checkoutProfile) as Array<[keyof CheckoutDetails, string]>;
+    let cursor = 400;
+    for (const [field, value] of fields) {
+      const fieldStart = cursor;
+      timers.push(window.setTimeout(() => setFlowTypingField(field), fieldStart));
+      for (let length = 1; length <= value.length; length += 1) {
+        timers.push(window.setTimeout(
+          () => setCheckout(current => ({ ...current, [field]: value.slice(0, length) })),
+          fieldStart + length * 50,
+        ));
+      }
+      cursor += value.length * 50 + 300;
+    }
+    timers.push(window.setTimeout(() => setFlowTypingField(null), cursor));
+    timers.push(window.setTimeout(() => completeCheckout(checkoutProfile), cursor + 900));
+
+    return () => timers.forEach(timer => window.clearTimeout(timer));
+  }, [step, completeCheckout]);
+
+  const openCheckoutFlow = () => {
+    setStep('flow');
+  };
+
+  const openInvoiceViewer = () => {
+    if (!invoicePdfUrl) return;
+    invoiceViewerShownRef.current = true;
+    setInvoiceViewerOpen(true);
+  };
+
+  const closeInvoiceViewer = () => {
+    setInvoiceViewerOpen(false);
+  };
+
+  const submitCheckout = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    completeCheckout(checkout);
+  };
+
+  const replayDemo = () => {
+    setStep('template');
+    setCheckout({ ...emptyCheckout });
+    setReceipt(null);
+    setInvoiceFileSize('');
+    setInvoiceViewerOpen(false);
+    setShowTemplateMessage(false);
+    setConfirmedStage('summary');
+    setPostPaymentStage('payment');
+    setRazorpayStage('upi');
+    setSelectedUpiApp('Google Pay');
+    invoiceViewerShownRef.current = false;
+    setFlowTypingField(null);
+  };
+
+  const screenScale = screenWidth / 252;
+  const screenHeight = Math.round(524 * screenScale);
+  const amountBreakdown = getDemoInvoiceAmounts();
+  const orderTotal = formatDemoInvoiceMoney(amountBreakdown.totalPaise);
+  const checkoutReady = Object.values(checkout).every(Boolean);
+
+  return (
+    <div className="demo-stage" ref={demoStageRef}>
+      <div className="demo-phone-wrap">
+        <DevicePreviewFrame screenWidth={screenWidth} hideStatusBar>
+          <div className="demo-phone-screen" style={{ height: screenHeight }}>
+            <div className="demo-screen-content" style={{ transform: `scale(${screenScale})` }}>
+              <div className="demo-status-bar" aria-label="iPhone status bar, 23:59, battery 100 percent">
+                <FigmaSvgCrop x={0} y={0} width={393} height={42} className="demo-status-art" />
+              </div>
+              <div className="demo-chat-header">
+                <FigmaSvgCrop x={3} y={58} width={22} height={36} className="demo-back-art" />
+                <div className="demo-shop-avatar">R</div>
+                <div className="demo-shop-name"><strong>Rangrez Studio</strong><small>tap here for contact info</small></div>
+                <FigmaSvgCrop x={288} y={58} width={88} height={36} className="demo-header-actions-art" />
+              </div>
+              <div
+                ref={chatBodyRef}
+                className="demo-chat-body"
+                aria-live="polite"
+                  aria-label="WhatsApp conversation preview on a customer's phone"
+                onScroll={event => {
+                  const body = event.currentTarget;
+                  setShowScrollButton(body.scrollHeight - body.scrollTop - body.clientHeight > 24);
+                }}
+              >
+                <FigmaSvgCrop x={146} y={280} width={101} height={21} className="demo-date-art" />
+                {showTemplateMessage && (
+                  <div className="demo-product-bubble message-appear" data-testid="card-demo-product-template">
+                    <div className="demo-product-card">
+                      <img
+                        className="demo-product-image"
+                        src={sareeImage}
+                        alt="Deep crimson Banarasi silk saree with a gold zari border"
+                      />
+                      <div className="demo-product-info">
+                        <span className="demo-template-label">Hello {checkoutProfile.name.split(' ')[0]} 👋 NEW ARRIVAL ✨ BANARASI COLLECTION 💛</span>
+                        <strong>Banarasi Silk Saree 🪷</strong>
+                        <p>A festive new arrival, handwoven in rich crimson Katan silk with intricate gold zari detailing. ✨</p>
+                        <div className="demo-product-meta"><b>{productPrice}</b></div>
+                      </div>
+                      <div className="demo-template-meta">
+                        <time>10:40 AM</time>
+                      </div>
+                      <button
+                        type="button"
+                        className="demo-template-cta"
+                        onClick={openCheckoutFlow}
+                        aria-label={`Buy Banarasi Silk Saree for ${productPrice}`}
+                        data-testid="button-demo-template-buy-now"
+                      >
+                        <ExternalLink size={10} aria-hidden="true" /> Buy Now
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {step !== 'template' && (
+                  <div className="demo-message from-customer message-appear" data-testid="message-demo-customer-question">
+                    <span className="demo-message-copy">I love this saree! 😍 Could you share a few more details about it?</span>
+                    <span className="demo-outgoing-meta"><time>10:41 AM</time><FigmaReadReceipt /></span>
+                  </div>
+                )}
+
+                {(step === 'details' || step === 'flow' || step === 'confirmed' || step === 'razorpay' || step === 'paymentSuccess' || step === 'paid') && (
+                  <div className="demo-message from-business demo-detail-message message-appear" data-testid="message-demo-product-details">
+                    <div className="demo-detail-content">
+                      <p>Absolutely! This Banarasi saree is handwoven in Varanasi from pure Katan silk.</p>
+                      <div className="demo-spec-list">
+                        <div className="demo-spec-row"><span>Fabric</span><b>Pure Katan silk</b></div>
+                        <div className="demo-spec-row"><span>Saree length</span><b>6.3 metres</b></div>
+                        <div className="demo-spec-row"><span>Blouse</span><b>Matching unstitched piece</b></div>
+                        <div className="demo-spec-row"><span>Work & care</span><b>Gold zari · dry clean</b></div>
+                        <div className="demo-spec-row"><span>Delivery time</span><b>Ships in 2–4 days</b></div>
+                        <div className="demo-spec-row"><span>Price</span><b>{productPrice}</b></div>
+                      </div>
+                    </div>
+                    <span className="demo-incoming-meta demo-detail-meta"><time>10:42 AM</time></span>
+                    <button
+                      type="button"
+                      className={`demo-template-cta details-buy-button ${step === 'details' ? 'demo-auto-press' : ''}`}
+                      onClick={openCheckoutFlow}
+                      disabled={step !== 'details'}
+                      aria-label={`Buy Banarasi Silk Saree for ${productPrice}`}
+                      data-testid="button-demo-details-buy-now"
+                    >
+                      <ExternalLink size={10} aria-hidden="true" /> Buy Now
+                    </button>
+                  </div>
+                )}
+
+                {(step === 'flow' || step === 'confirmed' || step === 'razorpay' || step === 'paymentSuccess' || step === 'paid') && (
+                  <div className="demo-message from-customer message-appear" data-testid="message-demo-buy-now">
+                    <span className="demo-message-copy">Buy Now</span>
+                    <span className="demo-outgoing-meta"><time>10:43 AM</time><FigmaReadReceipt /></span>
+                  </div>
+                )}
+
+                {(step === 'confirmed' || step === 'razorpay' || step === 'paymentSuccess' || step === 'paid') && receipt && (
+                  <>
+                    <div className="demo-message from-business demo-receipt message-appear" data-testid="message-demo-receipt">
+                      <span className="receipt-heading">ORDER SUMMARY</span>
+                      <strong className="receipt-thanks">Thanks, {receipt.name}! Your saree is reserved.</strong>
+                      <div className="receipt-line"><span>Order number</span><b>{receipt.orderId}</b></div>
+                      <div className="receipt-line"><span>Banarasi Silk Saree</span><b>{productPrice}</b></div>
+                      <div className="receipt-line"><span>CGST @ 2.5%</span><b>{formatDemoInvoiceMoney(amountBreakdown.cgstPaise)}</b></div>
+                      <div className="receipt-line"><span>SGST @ 2.5%</span><b>{formatDemoInvoiceMoney(amountBreakdown.sgstPaise)}</b></div>
+                      <div className="receipt-line"><span>Delivery charges</span><b>{formatDemoInvoiceMoney(amountBreakdown.deliveryChargePaise)}</b></div>
+                      <div className="receipt-line receipt-total"><span>Total</span><b>{orderTotal}</b></div>
+                      <div className="receipt-customer-details" aria-label="Customer delivery details">
+                        <strong>Customer details</strong>
+                        <div className="receipt-customer-row"><span>Name</span><b>{receipt.name}</b></div>
+                        <div className="receipt-customer-row"><span>Number</span><b>{receipt.phone}</b></div>
+                        <div className="receipt-customer-row"><span>Address</span><b>{receipt.address}, {receipt.city}, {receipt.pinCode}</b></div>
+                      </div>
+                      <span className="receipt-pending">Payment pending · order is reserved</span>
+                      <time>10:44 AM</time>
+                    </div>
+                    {(step !== 'confirmed' || confirmedStage === 'paymentLink') && (
+                      <div className="demo-message from-business demo-payment message-appear" data-testid="message-demo-payment">
+                        <span className="payment-label">RAZORPAY PAYMENT LINK</span>
+                        <p>Hi {receipt.name}, here’s the final amount for your Banarasi saree:</p>
+                        <div className="receipt-line"><span>Order number</span><b>{receipt.orderId}</b></div>
+                        <div className="receipt-line"><span>Banarasi Silk Saree</span><b>{productPrice}</b></div>
+                        <div className="receipt-line"><span>CGST @ 2.5%</span><b>{formatDemoInvoiceMoney(amountBreakdown.cgstPaise)}</b></div>
+                        <div className="receipt-line"><span>SGST @ 2.5%</span><b>{formatDemoInvoiceMoney(amountBreakdown.sgstPaise)}</b></div>
+                        <div className="receipt-line"><span>Delivery charges</span><b>{formatDemoInvoiceMoney(amountBreakdown.deliveryChargePaise)}</b></div>
+                        <div className="receipt-line receipt-total"><span>Amount due</span><b>{orderTotal}</b></div>
+                        <time>10:44 AM</time>
+                        <button
+                          type="button"
+                          className="demo-template-cta payment-link"
+                          onClick={() => setStep('razorpay')}
+                          disabled={step !== 'confirmed'}
+                          aria-label={`Pay ${orderTotal} using Razorpay`}
+                          data-testid="button-demo-payment-link"
+                        >
+                          <ExternalLink size={10} aria-hidden="true" /> Pay now · {orderTotal}
+                        </button>
+                      </div>
+                    )}
+                  </>
+                )}
+                {step === 'paid' && receipt && (
+                  <>
+                    <div className="demo-message from-business demo-payment-confirmation message-appear" data-testid="message-demo-payment-success">
+                      <div className="payment-confirmation-note">
+                        <p><strong>Payment Confirmed, {receipt.name}! ✨</strong></p>
+                        <p>Your beautiful <strong>Banarasi Saree</strong> is now being prepared with love and care. 🥰🪷</p>
+                        <p>Thank you for choosing <strong>Rangrez Studio</strong> we’re so happy to be a part of your <strong>special style journey.</strong> 💛</p>
+                        <p>
+                          <strong>What’s next?</strong><br />
+                          Your saree will be carefully packed and dispatched soon. We’ll share your <strong>tracking details</strong> as soon as it’s on its way to you. 🚚✨
+                        </p>
+                        <p><strong>Can’t wait for you to unwrap the magic!</strong></p>
+                        <p>Team Rangrez Studio 🤍💫</p>
+                      </div>
+                      <div className="receipt-line"><span>Payment ID</span><b>{getPaymentReference(receipt.orderId)}</b></div>
+                      <div className="receipt-line"><span>Method</span><b>UPI</b></div>
+                      <time>10:45 AM</time>
+                      <div className="payment-confirmation-links" aria-label="Follow and review Rangrez Studio">
+                        <a
+                          className="demo-template-cta payment-confirmation-cta"
+                          href="https://www.instagram.com/raneaniketai23/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          data-testid="link-demo-instagram"
+                        >
+                          <ExternalLink size={10} aria-hidden="true" /> Follow us on Instagram
+                        </a>
+                        <a
+                          className="demo-template-cta payment-confirmation-cta"
+                          href="https://example.com/rangrez-studio-review"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="Sample review destination"
+                          data-testid="link-demo-review"
+                        >
+                          <ExternalLink size={10} aria-hidden="true" /> Leave us a Google review
+                        </a>
+                      </div>
+                    </div>
+                    {postPaymentStage !== 'payment' && (
+                      <div className="demo-message from-business demo-invoice message-appear" data-testid="message-demo-invoice-pdf">
+                        {invoicePdfUrl ? (
+                          <div className="invoice-document">
+                            <div className="invoice-document-thumbnail" role="img" aria-label={`First-page preview of Invoice-${receipt.orderId}.pdf`}>
+                              <InvoiceDocumentPage receipt={receipt} paymentMethod={selectedUpiApp} thumbnail />
+                            </div>
+                            <button
+                              type="button"
+                              className="invoice-file-row"
+                              onClick={openInvoiceViewer}
+                              aria-label={`Open Invoice-${receipt.orderId}.pdf`}
+                              data-testid="button-demo-invoice-preview"
+                            >
+                              <img className="invoice-file-icon" src={pdfFileIcon} alt="" aria-hidden="true" />
+                              <span className="invoice-file-copy">
+                                <strong>Invoice-{receipt.orderId}.pdf</strong>
+                                <small>1 page · {invoiceFileSize} · PDF</small>
+                              </span>
+                            </button>
+                          </div>
+                        ) : (
+                          <span className="invoice-preparing">Preparing invoice PDF…</span>
+                        )}
+                        <time>10:46 AM</time>
+                      </div>
+                    )}
+                    {postPaymentStage === 'replay' && (
+                      <div className="demo-message from-business demo-replay-message message-appear" data-testid="message-demo-replay">
+                        <button
+                          type="button"
+                          className="demo-replay-button"
+                          onClick={replayDemo}
+                          data-testid="button-demo-replay"
+                        >
+                          <RotateCcw size={10} /> Replay conversation
+                        </button>
+                        <time>10:47 AM</time>
+                      </div>
+                    )}
+                  </>
+                )}
+                {showScrollButton && (
+                  <button
+                    type="button"
+                    className="demo-scroll-bottom"
+                    aria-label="Scroll to latest messages"
+                    onClick={() => chatBodyRef.current?.scrollTo({ top: chatBodyRef.current.scrollHeight, behavior: 'smooth' })}
+                  >
+                    <ChevronDown size={15} strokeWidth={2.2} />
+                  </button>
+                )}
+              </div>
+              <div className="demo-chat-footer">
+                <div role="group" aria-label="WhatsApp message composer">
+                  <FigmaSvgCrop x={0} y={1625} width={393} height={45} className="demo-composer-art" />
+                </div>
+              </div>
+              <AnimatePresence mode="wait" initial={false}>
+              {step === 'flow' && (
+                <motion.div
+                  key="flow"
+                  className="demo-flow-screen"
+                  initial={prefersReducedMotion ? false : { opacity: 0, y: 28, scale: 0.99 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -18, scale: 0.99 }}
+                  transition={motionTransition}
+                  role="region"
+                  aria-label="WhatsApp Flow delivery form"
+                  data-testid="card-demo-flow"
+                >
+                  <div className="flow-screen-topbar">
+                    <span className="flow-screen-mark">R</span>
+                    <span className="flow-screen-brand">
+                      <strong>Rangrez Studio</strong>
+                      <small>WhatsApp Flow · Customer details</small>
+                    </span>
+                    <span className="flow-screen-page">1 OF 1</span>
+                  </div>
+                  <div className="flow-screen-content">
+                    <div className="flow-screen-intro">
+                      <span className="flow-screen-kicker">CUSTOMER DETAILS</span>
+                      <h2>Delivery details</h2>
+                      <p>Add your contact and delivery address for this saree.</p>
+                    </div>
+                    <div className="flow-product-card">
+                      <div className="flow-product-heading">
+                        <img src={sareeImage} alt="Banarasi Silk Saree" />
+                        <div className="flow-product-copy">
+                          <div className="flow-product-title-row">
+                            <strong>Banarasi Silk Saree</strong>
+                            <b className="flow-product-price">{productPrice}</b>
+                          </div>
+                          <p>Handwoven Banarasi silk in a rich crimson finish for festive occasions.</p>
+                        </div>
+                      </div>
+                      <dl className="flow-product-details" aria-label="Product specifications">
+                        <div className="flow-product-detail"><dt>Fabric</dt><dd>Pure Katan silk</dd></div>
+                        <div className="flow-product-detail"><dt>Length</dt><dd>6.3 metres</dd></div>
+                        <div className="flow-product-detail"><dt>Blouse</dt><dd>Matching unstitched piece</dd></div>
+                        <div className="flow-product-detail"><dt>Work &amp; care</dt><dd>Gold zari · dry clean</dd></div>
+                        <div className="flow-product-detail"><dt>Delivery</dt><dd>Ships in 2–4 days</dd></div>
+                      </dl>
+                    </div>
+                    <form className="flow-screen-form" onSubmit={submitCheckout}>
+                      <div className={`flow-screen-field ${flowTypingField === 'name' ? 'is-typing' : ''}`}>
+                        <label htmlFor="demo-checkout-name">Full name</label>
+                        <input id="demo-checkout-name" name="name" autoComplete="name" required maxLength={60} value={checkout.name} readOnly data-testid="input-demo-name" />
+                      </div>
+                      <div className={`flow-screen-field ${flowTypingField === 'phone' ? 'is-typing' : ''}`}>
+                        <label htmlFor="demo-checkout-phone">Mobile number</label>
+                        <input id="demo-checkout-phone" name="phone" type="tel" autoComplete="tel" required pattern="[0-9+() -]{10,16}" maxLength={16} value={checkout.phone} readOnly data-testid="input-demo-phone" />
+                      </div>
+                      <div className={`flow-screen-field ${flowTypingField === 'address' ? 'is-typing' : ''}`}>
+                        <label htmlFor="demo-checkout-address">Delivery address</label>
+                        <textarea id="demo-checkout-address" name="address" autoComplete="street-address" required maxLength={140} rows={2} value={checkout.address} readOnly data-testid="input-demo-address" />
+                      </div>
+                      <div className="flow-screen-fields-row">
+                        <div className={`flow-screen-field ${flowTypingField === 'city' ? 'is-typing' : ''}`}>
+                          <label htmlFor="demo-checkout-city">City</label>
+                          <input id="demo-checkout-city" name="city" autoComplete="address-level2" required maxLength={40} value={checkout.city} readOnly data-testid="input-demo-city" />
+                        </div>
+                        <div className={`flow-screen-field ${flowTypingField === 'pinCode' ? 'is-typing' : ''}`}>
+                          <label htmlFor="demo-checkout-pin">PIN code</label>
+                          <input id="demo-checkout-pin" name="pinCode" autoComplete="postal-code" required pattern="[0-9]{6}" maxLength={6} value={checkout.pinCode} readOnly data-testid="input-demo-pin" />
+                        </div>
+                      </div>
+                      <button className="flow-screen-submit" type="submit" disabled={!checkoutReady} data-testid="button-demo-submit-order">
+                        Save Details
+                      </button>
+                    </form>
+                  </div>
+                </motion.div>
+              )}
+              {(step === 'razorpay' || step === 'paymentSuccess') && receipt && (
+                <motion.div
+                  key="razorpay"
+                  className="demo-razorpay-screen"
+                  initial={prefersReducedMotion ? false : { opacity: 0, x: 32 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: 24 }}
+                  transition={motionTransition}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-live="polite"
+                  aria-label="Razorpay checkout preview"
+                  data-testid="card-demo-razorpay"
+                >
+                  <div className="razorpay-topbar">
+                    <img src={razorpayLogo} alt="Razorpay" className="razorpay-logo" />
+                    <span className="razorpay-secure-label"><LockKeyhole size={14} /> Secured</span>
+                  </div>
+                  <AnimatePresence mode="wait" initial={false}>
+                    {razorpayStage === 'processing' ? (
+                      <motion.div
+                        key="processing"
+                        className="razorpay-processing-content"
+                        initial={prefersReducedMotion ? false : { opacity: 0, y: 16, scale: 0.985 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -12, scale: 0.99 }}
+                        transition={motionTransition}
+                        role="status"
+                        aria-live="polite"
+                        data-testid="message-demo-razorpay-processing"
+                      >
+                        {prefersReducedMotion ? (
+                          <div className="razorpay-success-animation razorpay-success-static" aria-hidden="true">
+                            <Check size={40} strokeWidth={3} />
+                          </div>
+                        ) : (
+                          <Suspense fallback={<span className="razorpay-success-animation razorpay-animation-loading" aria-hidden="true" />}>
+                            <LazyLottie
+                              src={paymentSuccessAnimation}
+                              loop={false}
+                              autoplay
+                              className="razorpay-success-animation"
+                              aria-hidden="true"
+                              subscriptions={{ complete: () => setStep('paymentSuccess') }}
+                            />
+                          </Suspense>
+                        )}
+                        <strong>Payment successful</strong>
+                        <span>Completing your payment</span>
+                        <h2>{orderTotal}</h2>
+                        <p>Paid to <strong>Rangrez Studio</strong></p>
+                        <div className="razorpay-success-details" data-testid="message-demo-razorpay-success">
+                          <span><small>Payment ID</small><strong>{getPaymentReference(receipt.orderId)}</strong></span>
+                          <span><small>Method</small><strong>UPI · {selectedUpiApp}</strong></span>
+                        </div>
+                        <small className="razorpay-preview-note"><ShieldCheck size={9} /> Preview only · no payment was processed</small>
+                      </motion.div>
+                    ) : step === 'razorpay' ? (
+                      <motion.div
+                        key="checkout"
+                        className="razorpay-checkout-state"
+                        initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -10 }}
+                        transition={motionTransition}
+                      >
+                      <div className="razorpay-order-summary">
+                        <div className="razorpay-merchant">
+                          <span className="razorpay-merchant-mark">R</span>
+                          <span><small>Paying to</small><strong>Rangrez Studio</strong><small>Order #{receipt.orderId}</small></span>
+                        </div>
+                        <div className="razorpay-total">
+                          <span>Total</span>
+                          <strong>{orderTotal}</strong>
+                        </div>
+                      </div>
+                      <div className="razorpay-checkout-content">
+                        <div className="razorpay-section-heading">
+                          <strong>Choose a payment method</strong>
+                          <small>All transactions are secure and encrypted</small>
+                        </div>
+                        <div className="razorpay-method is-selected" role="group" aria-label="UPI payment method">
+                          <span className="razorpay-method-icon"><Smartphone size={13} /></span>
+                          <span className="razorpay-method-copy"><strong>UPI</strong><small>Google Pay, PhonePe, Paytm and more</small></span>
+                          <ChevronDown size={11} className="razorpay-method-chevron" />
+                        </div>
+                        <div className="razorpay-upi-panel message-appear">
+                          <span className="razorpay-upi-title">Select a UPI app</span>
+                          <div className="razorpay-upi-apps">
+                            <button type="button" className={selectedUpiApp === 'Google Pay' ? 'is-active' : ''} aria-pressed={selectedUpiApp === 'Google Pay'} onClick={() => setSelectedUpiApp('Google Pay')}>
+                              <GooglePayMark /><span>Google Pay</span>
+                            </button>
+                            <button type="button" className={selectedUpiApp === 'Paytm' ? 'is-active' : ''} aria-pressed={selectedUpiApp === 'Paytm'} onClick={() => setSelectedUpiApp('Paytm')}>
+                              <PaytmMark /><span>Paytm</span>
+                            </button>
+                            <button type="button" className={selectedUpiApp === 'PhonePe' ? 'is-active' : ''} aria-pressed={selectedUpiApp === 'PhonePe'} onClick={() => setSelectedUpiApp('PhonePe')}>
+                              <PhonePeMark /><span>PhonePe</span>
+                            </button>
+                          </div>
+                          <span className="razorpay-upi-divider">OR</span>
+                          <div className="razorpay-upi-id">
+                            <span><small>UPI ID</small><strong>priya@okaxis</strong></span>
+                            <Check size={15} />
+                          </div>
+                        </div>
+                        <div className="razorpay-method is-muted">
+                          <span className="razorpay-method-icon"><CreditCard size={13} /></span>
+                          <span className="razorpay-method-copy"><strong>Cards</strong><small>Visa, Mastercard, RuPay</small></span>
+                          <ArrowRight size={10} />
+                        </div>
+                        <div className="razorpay-method is-muted">
+                          <span className="razorpay-method-icon"><Building2 size={13} /></span>
+                          <span className="razorpay-method-copy"><strong>Netbanking</strong><small>All Indian banks</small></span>
+                          <ArrowRight size={10} />
+                        </div>
+                        <button
+                          type="button"
+                          className="razorpay-pay-button"
+                          onClick={startRazorpayPreview}
+                          data-testid="button-demo-razorpay-pay"
+                        >
+                          <span>Pay {orderTotal}</span><span>Continue <ArrowRight size={14} /></span>
+                        </button>
+                        <p className="razorpay-preview-note"><ShieldCheck size={9} /> Preview only · no payment is processed</p>
+                      </div>
+                      </motion.div>
+                    ) : null}
+                  </AnimatePresence>
+                </motion.div>
+              )}
+              {invoiceViewerOpen && step === 'paid' && receipt && invoicePdfUrl && (
+                <motion.div
+                  key="invoice"
+                  className="demo-invoice-viewer"
+                  initial={prefersReducedMotion ? false : { opacity: 0, y: 28, scale: 0.99 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 20, scale: 0.99 }}
+                  transition={motionTransition}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label={`Invoice PDF preview for order ${receipt.orderId}`}
+                  data-testid="card-demo-invoice-viewer"
+                >
+                  <div className="invoice-viewer-topbar">
+                    <button type="button" aria-label="Back to WhatsApp chat" onClick={closeInvoiceViewer}>
+                      <ChevronLeft size={16} />
+                    </button>
+                    <span className="invoice-viewer-title">
+                      <strong>Invoice-{receipt.orderId}.pdf</strong>
+                       <small>PDF document · 1 page · {invoiceFileSize}</small>
+                    </span>
+                    <a
+                      href={invoicePdfUrl}
+                      download={`Invoice-${receipt.orderId}.pdf`}
+                      aria-label="Download invoice PDF"
+                      data-testid="link-demo-invoice-download"
+                    >
+                      <Download size={14} />
+                    </a>
+                  </div>
+                  <div className="invoice-viewer-canvas">
+                    <InvoiceDocumentPage receipt={receipt} paymentMethod={selectedUpiApp} />
+                  </div>
+                  <div className="invoice-viewer-footer">
+                    <span>Shared in your WhatsApp chat</span>
+                    <a href={invoicePdfUrl} download={`Invoice-${receipt.orderId}.pdf`}>
+                      <Download size={11} /> Download PDF
+                    </a>
+                  </div>
+                </motion.div>
+              )}
+              </AnimatePresence>
+            </div>
+          </div>
+        </DevicePreviewFrame>
+      </div>
+    </div>
+  );
+}
