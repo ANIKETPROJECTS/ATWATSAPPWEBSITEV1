@@ -361,7 +361,7 @@ function Nav({ onLead }: { onLead: () => void }) {
     <header className="absolute inset-x-0 top-0 z-40 border-b border-[#3acd32]/15 bg-white shadow-[0_4px_20px_rgba(58,205,50,.06)] backdrop-blur-sm">
       <div className="section-shell flex h-[78px] items-center justify-between">
         <a href="#top" data-testid="link-logo" className="flex shrink-0 items-center">
-          <img src={logoPath} alt="AtWassup — AI WhatsApp Marketing Automation" className="h-[68px] w-[240px] object-cover object-[center_52%]" />
+          <img src={logoPath} alt="AtWassup — AI WhatsApp Marketing Automation" className="h-[74px] w-[min(320px,calc(100vw_-_104px))] object-cover object-[center_52%]" />
         </a>
         <nav className="hidden items-center gap-8 md:flex">
           <a data-testid="link-ai-features" href="#features" className="text-sm font-semibold text-black/60 transition hover:text-black">Features</a>
