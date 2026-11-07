@@ -24,16 +24,18 @@
 }
 
 .contact-wa-avatar {
-  overflow: hidden;
-  background: #e4f5e0;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .contact-wa-avatar-image {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   max-width: none;
   object-fit: contain;
   transform: translate(-50%, -50%);
