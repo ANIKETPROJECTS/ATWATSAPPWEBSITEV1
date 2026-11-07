@@ -744,108 +744,95 @@ function Home() {
       </section>
 
       <section className="relative overflow-hidden border-t border-black/5 bg-[#f7f8f3] py-16 sm:py-24" id="contact">
-        <div className="absolute -right-24 top-10 h-64 w-64 rounded-full border-[28px] border-[#3acd32]/10" aria-hidden="true" />
-        <div ref={contactReveal} className="section-shell relative reveal grid items-center gap-10 lg:grid-cols-[.95fr_1.05fr] lg:gap-14">
-          <div className="order-2 lg:order-1">
-            <ContactWhatsAppForm />
-          </div>
-          <div className="order-1 max-w-[590px] lg:order-2">
-            <SectionLabel>Contact AtWassup</SectionLabel>
-            <h2 className="font-display text-4xl font-bold leading-[.96] tracking-[-.07em] sm:text-6xl">
-              Find us in <span className="text-[#237b2a]">Thane.</span>
-            </h2>
-            <p className="mt-5 max-w-[480px] text-sm leading-relaxed text-black/65 sm:text-base">
-              Visit our office or get in touch with the AtWassup team.
-            </p>
+        <div ref={contactReveal} className="section-shell relative reveal">
+          <h2 className="mb-8 text-center font-display text-4xl font-bold tracking-[-.045em] text-black sm:text-5xl">
+            Contact Us
+          </h2>
+          <div className="grid items-stretch gap-10 lg:grid-cols-[.95fr_1.05fr] lg:gap-14">
+            <div className="order-2 lg:order-1">
+              <ContactWhatsAppForm />
+            </div>
+            <div className="order-1 flex w-full max-w-[640px] flex-col lg:order-2">
+              <div className="rounded-[22px] border border-black/10 bg-white p-5 shadow-[0_12px_32px_rgba(15,23,42,.05)] sm:p-6">
+                <div className="flex items-start gap-3">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/12 text-[#237b2a]">
+                    <MapPin size={19} aria-hidden="true" />
+                  </span>
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-[.12em] text-black/45">Office address</p>
+                    <address className="mt-2 not-italic text-sm font-medium leading-relaxed text-black">
+                      Hubtown Greenwood CHS,<br />
+                      Flat no. 805/A Wing, 8th Floor,<br />
+                      Pokhran Road No. 1, Vartak Nagar,<br />
+                      Thane (W), 400606
+                    </address>
+                  </div>
+                </div>
 
-            <div className="mt-7 grid gap-3 sm:grid-cols-2">
-              <div className="flex items-start gap-3 rounded-2xl border border-black/8 bg-white/85 p-4">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/15 text-[#237b2a]">
-                  <MapPin size={19} aria-hidden="true" />
-                </span>
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[.12em] text-black/45">Office</p>
-                  <address className="mt-1 not-italic text-sm font-semibold leading-relaxed text-black">
-                    Hubtown Greenwood CHS,<br />
-                    Flat no. 805/A Wing, 8th Floor,<br />
-                    Pokhran Road No. 1, Vartak Nagar,<br />
-                    Thane (W), 400606
-                  </address>
+                <div className="mt-5 grid gap-3 border-t border-black/8 pt-4 sm:grid-cols-2">
+                  <a href="tel:+919167959756" className="flex min-w-0 items-center gap-3 rounded-xl bg-[#f7f8f3] px-3 py-3 text-sm font-semibold text-black transition hover:bg-[#3acd32]/10">
+                    <Phone size={16} className="shrink-0 text-[#237b2a]" aria-hidden="true" />
+                    <span>+91 91679 59756</span>
+                  </a>
+                  <a href="mailto:info@atwassup.com" className="flex min-w-0 items-center gap-3 rounded-xl bg-[#f7f8f3] px-3 py-3 text-sm font-semibold text-black transition hover:bg-[#3acd32]/10">
+                    <Mail size={16} className="shrink-0 text-[#237b2a]" aria-hidden="true" />
+                    <span className="break-all">info@atwassup.com</span>
+                  </a>
                 </div>
               </div>
-              <div className="grid gap-3">
-                <a
-                  href="tel:+919167959756"
-                  className="flex items-center gap-3 rounded-2xl border border-black/8 bg-white/85 p-4 transition hover:border-[#3acd32] hover:bg-white"
-                >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/15 text-[#237b2a]">
-                    <Phone size={18} aria-hidden="true" />
-                  </span>
-                  <span>
-                    <span className="block text-xs font-bold uppercase tracking-[.12em] text-black/45">Call us</span>
-                    <span className="mt-1 block text-sm font-semibold text-black">+91 91679 59756</span>
-                  </span>
-                </a>
-                <a
-                  href="mailto:info@atwassup.com"
-                  className="flex items-center gap-3 rounded-2xl border border-black/8 bg-white/85 p-4 transition hover:border-[#3acd32] hover:bg-white"
-                >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/15 text-[#237b2a]">
-                    <Mail size={18} aria-hidden="true" />
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block text-xs font-bold uppercase tracking-[.12em] text-black/45">Email</span>
-                    <span className="mt-1 block break-all text-sm font-semibold text-black">info@atwassup.com</span>
-                  </span>
-                </a>
-              </div>
-            </div>
 
-            <div className="mt-4 overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
-              <iframe
-                title="Map to the AtWassup office in Thane"
-                src={officeMapEmbedUrl}
-                className="h-[220px] w-full border-0 sm:h-[250px]"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                allowFullScreen
-              />
-              <div className="flex flex-wrap items-center justify-between gap-3 border-t border-black/5 px-4 py-3">
-                <p className="text-sm font-semibold text-black">AtWassup · Thane, Maharashtra</p>
+              <div className="relative mt-4 min-h-[220px] flex-1 overflow-hidden rounded-[22px] border border-black/10 bg-white shadow-[0_12px_32px_rgba(15,23,42,.05)]">
+                <iframe
+                  title="Map to the AtWassup office in Thane"
+                  src={officeMapEmbedUrl}
+                  className="absolute inset-0 h-full w-full border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
                 <a
                   href={officeMapUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-[#237b2a] transition hover:text-black"
+                  className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2.5 text-xs font-bold text-black shadow-md transition hover:bg-[#3acd32]"
                 >
-                  <MapPin size={15} aria-hidden="true" />
-                  Open in Maps
+                  <MapPin size={14} aria-hidden="true" />
+                  Open in Google Maps
                 </a>
               </div>
-            </div>
 
-            <div className="mt-5 flex flex-wrap items-center gap-3">
-              <span className="mr-1 text-xs font-bold uppercase tracking-[.12em] text-black/45">Follow AtWassup</span>
-              <a
-                href="https://www.instagram.com/at.wassup/?hl=en"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="AtWassup on Instagram"
-                className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2.5 text-sm font-semibold text-black transition hover:border-[#3acd32] hover:bg-[#3acd32]/10"
-              >
-                <Instagram size={17} aria-hidden="true" />
-                Instagram
-              </a>
-              <a
-                href="https://www.linkedin.com/in/atwassup"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="AtWassup on LinkedIn"
-                className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2.5 text-sm font-semibold text-black transition hover:border-[#3acd32] hover:bg-[#3acd32]/10"
-              >
-                <Linkedin size={17} aria-hidden="true" />
-                LinkedIn
-              </a>
+              <div className="mt-4 grid grid-cols-2 gap-3">
+                <a
+                  href="https://www.instagram.com/at.wassup/?hl=en"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="AtWassup on Instagram"
+                  className="flex min-w-0 items-center gap-3 rounded-2xl border border-black/10 bg-white p-3.5 shadow-[0_8px_24px_rgba(15,23,42,.04)] transition hover:border-[#3acd32] hover:bg-[#3acd32]/5 sm:p-4"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/12 text-[#237b2a]">
+                    <Instagram size={19} aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-sm font-bold text-black">Instagram</span>
+                    <span className="block truncate text-xs text-black/55">@at.wassup</span>
+                  </span>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/atwassup"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="AtWassup on LinkedIn"
+                  className="flex min-w-0 items-center gap-3 rounded-2xl border border-black/10 bg-white p-3.5 shadow-[0_8px_24px_rgba(15,23,42,.04)] transition hover:border-[#3acd32] hover:bg-[#3acd32]/5 sm:p-4"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/12 text-[#237b2a]">
+                    <Linkedin size={19} aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-sm font-bold text-black">LinkedIn</span>
+                    <span className="block truncate text-xs text-black/55">AtWassup</span>
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
