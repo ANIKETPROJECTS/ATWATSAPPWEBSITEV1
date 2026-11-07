@@ -24,8 +24,19 @@
 }
 
 .contact-wa-avatar {
+  overflow: hidden;
   background: #e4f5e0;
-  color: #25813a;
+}
+
+.contact-wa-avatar-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  max-width: none;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
 }
 
 .contact-wa-chat {
@@ -35,8 +46,8 @@
 
 .contact-wa-message {
   max-width: 86%;
-  font-size: 9px;
-  line-height: 1.24;
+  font-size: 10px;
+  line-height: 1.28;
 }
 
 .contact-wa-sender {
@@ -45,7 +56,7 @@
   display: block;
   margin: 0 0 3px;
   color: #658b6c;
-  font-size: 7px;
+  font-size: 8.5px;
   font-weight: 600;
 }
 
@@ -53,12 +64,12 @@
   position: relative;
   display: grid;
   flex: 0 0 auto;
-  gap: 5px;
+  gap: 6px;
   align-self: stretch;
   border: 1px solid #e3e8e4;
   border-radius: 9px;
   background: #fff;
-  padding: 8px;
+  padding: 9px;
   color: #17201b;
   font: inherit;
 }
@@ -68,54 +79,45 @@
   align-items: center;
   justify-content: space-between;
   gap: 4px;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .contact-wa-card-heading strong {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
 }
 
-.contact-wa-card-heading span {
-  border-radius: 999px;
-  background: #e8f5e7;
-  padding: 2px 5px;
-  color: #29783a;
-  font-size: 7px;
-  font-weight: 600;
-}
-
 .contact-wa-card-note {
-  margin: -2px 0 2px;
+  margin: -1px 0 3px;
   color: #778078;
-  font-size: 7.5px;
-  line-height: 1.25;
+  font-size: 9px;
+  line-height: 1.3;
 }
 
 .contact-wa-field {
   display: grid;
-  gap: 2px;
+  gap: 3px;
 }
 
 .contact-wa-label {
   color: #536057;
-  font-size: 7.5px;
+  font-size: 9px;
   font-weight: 600;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 .contact-wa-input {
   display: block;
   width: 100%;
   min-width: 0;
-  height: 25px;
+  height: 29px;
   border: 1px solid #dfe5e0;
   border-radius: 5px;
   background: #fbfcfb;
-  padding: 3px 6px;
+  padding: 4px 7px;
   color: #17201b;
   font-family: inherit;
-  font-size: 8px;
+  font-size: 10px;
   line-height: 1.2;
   outline: none;
   box-shadow: none;
@@ -132,8 +134,8 @@
 }
 
 .contact-wa-textarea {
-  height: 39px;
-  min-height: 39px;
+  height: 47px;
+  min-height: 47px;
   resize: vertical;
 }
 
@@ -141,13 +143,13 @@
 .contact-wa-submit-error {
   margin: 1px 0 0;
   color: #b42318;
-  font-size: 7px;
+  font-size: 8px;
   line-height: 1.2;
 }
 
 .contact-wa-submit {
   display: flex;
-  min-height: 27px;
+  min-height: 32px;
   align-items: center;
   justify-content: center;
   gap: 5px;
@@ -157,7 +159,7 @@
   background: #138c54;
   color: #fff;
   font-family: inherit;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
   cursor: pointer;
   transition: background-color 160ms ease, transform 160ms ease;
@@ -197,9 +199,9 @@
 
 .contact-wa-success-check {
   display: flex;
-  width: 23px;
-  height: 23px;
-  flex: 0 0 23px;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
@@ -215,12 +217,12 @@
 
 .contact-wa-success-card strong {
   color: #1c4225;
-  font-size: 8px;
+  font-size: 9px;
 }
 
 .contact-wa-success-card small {
   color: #6b7f70;
-  font-size: 7px;
+  font-size: 8px;
 }
 
 .contact-wa-reset {
@@ -230,7 +232,7 @@
   padding: 3px 6px;
   color: #138c54;
   font: inherit;
-  font-size: 8px;
+  font-size: 9px;
   cursor: pointer;
 }
 

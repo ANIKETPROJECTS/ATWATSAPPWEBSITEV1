@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Check, MessageCircle, Send } from 'lucide-react';
+import { Check, Send } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useSubmitDemoRequest } from '@workspace/api-client-react';
@@ -16,6 +16,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { DevicePreviewFrame } from '@/components/hero/DevicePreview';
 import { FigmaSvgCrop } from '@/components/hero/FigmaChrome';
+import avatarLogoPath from '../assets/airavata-technologies-mark.svg';
 import '@/components/hero/airavata-demo.css';
 import './contact-whatsapp-form.css';
 
@@ -123,10 +124,10 @@ export default function ContactWhatsAppForm() {
               <div className="demo-chat-header">
                 <FigmaSvgCrop x={3} y={58} width={22} height={36} className="demo-back-art" />
                 <div className="demo-shop-avatar contact-wa-avatar">
-                  <MessageCircle size={13} aria-hidden="true" />
+                  <img src={avatarLogoPath} alt="" className="contact-wa-avatar-image" />
                 </div>
                 <div className="demo-shop-name">
-                  <strong>AtWassup Team</strong>
+                  <strong>AtWassup</strong>
                   <small>business account</small>
                 </div>
                 <FigmaSvgCrop x={288} y={58} width={88} height={36} className="demo-header-actions-art" />
@@ -139,12 +140,8 @@ export default function ContactWhatsAppForm() {
                 data-testid="contact-whatsapp-chat"
               >
                 <FigmaSvgCrop x={146} y={280} width={101} height={21} className="demo-date-art" />
-                <div className="demo-message from-customer contact-wa-message">
-                  <span className="demo-message-copy">Hi! I’d like to know how WhatsApp can help my business.</span>
-                  <span className="demo-outgoing-meta"><time>10:41 AM</time></span>
-                </div>
                 <div className="demo-message from-business contact-wa-message">
-                  <span className="contact-wa-sender">AtWassup Team</span>
+                  <span className="contact-wa-sender">AtWassup</span>
                   <span className="demo-message-copy">Happy to help. Share a few details and our team will follow up with you.</span>
                   <span className="demo-incoming-meta"><time>10:41 AM</time></span>
                 </div>
@@ -156,7 +153,7 @@ export default function ContactWhatsAppForm() {
                       <span className="demo-outgoing-meta"><time>10:42 AM</time></span>
                     </div>
                     <div className="demo-message from-business contact-wa-message">
-                      <span className="contact-wa-sender">AtWassup Team</span>
+                      <span className="contact-wa-sender">AtWassup</span>
                       <span className="demo-message-copy">
                         Thanks, {sentName.split(/\s+/)[0]}! Your inquiry is with our team. We’ll reach out soon.
                       </span>
@@ -185,7 +182,6 @@ export default function ContactWhatsAppForm() {
                     >
                       <div className="contact-wa-card-heading">
                         <strong>Quick contact form</strong>
-                        <span>AtWassup</span>
                       </div>
                       <p className="contact-wa-card-note">Fill this in and we’ll continue here.</p>
 
