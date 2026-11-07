@@ -26,9 +26,16 @@ const contactFormSchema = z.object({
     .string()
     .trim()
     .min(8, 'Enter your WhatsApp number.')
-    .max(40)
-    .regex(/^[0-9+()\s-]+$/, 'Use a valid phone number.'),
-  email: z.string().trim().email('Enter a valid email address.').max(254),
+    .max(40, 'Enter a valid mobile number.')
+    .refine((value) => {
+      const normalized = value.replace(/[\s()-]/g, '');
+      return /^\+?[1-9]\d{7,14}$/.test(normalized);
+    }, 'Enter a valid mobile number with 8–15 digits.'),
+  email: z
+    .string()
+    .trim()
+    .email('Enter a valid email address, such as name@example.com.')
+    .max(254, 'Email must be 254 characters or fewer.'),
   message: z.string().trim().min(10, 'Add a little more detail.').max(1000),
 });
 
@@ -49,6 +56,8 @@ export default function ContactWhatsAppForm() {
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues,
+    mode: 'onBlur',
+    reValidateMode: 'onChange',
   });
 
   useEffect(() => {
@@ -181,9 +190,8 @@ export default function ContactWhatsAppForm() {
                       data-testid="form-contact-whatsapp"
                     >
                       <div className="contact-wa-card-heading">
-                        <strong>Quick contact form</strong>
+                        <strong>Contact Form</strong>
                       </div>
-                      <p className="contact-wa-card-note">Fill this in and we’ll continue here.</p>
 
                       <FormField
                         control={form.control}
@@ -192,7 +200,7 @@ export default function ContactWhatsAppForm() {
                           <FormItem className="contact-wa-field">
                             <FormLabel className="contact-wa-label">Name</FormLabel>
                             <FormControl>
-                              <Input {...field} autoComplete="name" placeholder="Your full name" maxLength={120} className="contact-wa-input" data-testid="input-contact-name" />
+                              <Input {...field} required autoComplete="name" placeholder="Your full name" maxLength={120} className="contact-wa-input" data-testid="input-contact-name" />
                             </FormControl>
                             <FormMessage className="contact-wa-error" />
                           </FormItem>
@@ -205,7 +213,7 @@ export default function ContactWhatsAppForm() {
                           <FormItem className="contact-wa-field">
                             <FormLabel className="contact-wa-label">Number</FormLabel>
                             <FormControl>
-                              <Input {...field} type="tel" autoComplete="tel" placeholder="+91 90000 00000" maxLength={40} className="contact-wa-input" data-testid="input-contact-number" />
+                              <Input {...field} required type="tel" inputMode="tel" autoComplete="tel" placeholder="+91 90000 00000" maxLength={40} className="contact-wa-input" data-testid="input-contact-number" />
                             </FormControl>
                             <FormMessage className="contact-wa-error" />
                           </FormItem>
@@ -218,7 +226,7 @@ export default function ContactWhatsAppForm() {
                           <FormItem className="contact-wa-field">
                             <FormLabel className="contact-wa-label">Email</FormLabel>
                             <FormControl>
-                              <Input {...field} type="email" autoComplete="email" placeholder="you@company.com" maxLength={254} className="contact-wa-input" data-testid="input-contact-email" />
+                              <Input {...field} required type="email" autoComplete="email" placeholder="you@company.com" maxLength={254} className="contact-wa-input" data-testid="input-contact-email" />
                             </FormControl>
                             <FormMessage className="contact-wa-error" />
                           </FormItem>
@@ -231,7 +239,7 @@ export default function ContactWhatsAppForm() {
                           <FormItem className="contact-wa-field">
                             <FormLabel className="contact-wa-label">What can we help with?</FormLabel>
                             <FormControl>
-                              <Textarea {...field} rows={2} maxLength={1000} placeholder="Tell us what you need…" className="contact-wa-input contact-wa-textarea" data-testid="input-contact-custom" />
+                              <Textarea {...field} required rows={2} maxLength={1000} placeholder="Tell us what you need…" className="contact-wa-input contact-wa-textarea" data-testid="input-contact-custom" />
                             </FormControl>
                             <FormMessage className="contact-wa-error" />
                           </FormItem>
