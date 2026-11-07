@@ -750,17 +750,37 @@ function Home() {
               <ContactWhatsAppForm />
             </div>
             <div className="order-1 flex w-full max-w-[640px] flex-col lg:order-2">
-              <h2 className="mb-5 text-center font-display text-4xl font-bold tracking-[-.045em] text-black sm:text-5xl">
-                Contact Us
-              </h2>
-              <div className="rounded-[22px] border border-black/10 bg-white p-5 shadow-[0_12px_32px_rgba(15,23,42,.05)] sm:p-6">
+              <div className="mb-4">
+                <h2 className="max-w-[560px] font-display text-3xl font-bold leading-[1.02] tracking-[-.045em] text-black sm:text-[34px]">
+                  Turn WhatsApp chats into <span className="text-[#237b2a]">business growth.</span>
+                </h2>
+                <p className="mt-2 max-w-[550px] text-sm leading-5 text-black/65">
+                  Capture new numbers, answer questions with AI, and keep customer details ready for follow-up.
+                </p>
+                <div className="mt-3 grid gap-1.5">
+                  {[
+                    'Customer numbers saved from the first message',
+                    'AI answers common questions automatically',
+                    'Names and custom details captured in chat',
+                    'Opted-in contacts ready for targeted campaigns',
+                  ].map((benefit) => (
+                    <div key={benefit} className="flex items-center gap-2.5 text-[13px] font-semibold leading-5 text-black/80">
+                      <span className="flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[#3acd32] text-black">
+                        <Check size={11} strokeWidth={3} aria-hidden="true" />
+                      </span>
+                      <span>{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-[20px] border border-black/10 bg-white p-4 shadow-[0_12px_32px_rgba(15,23,42,.05)]">
                 <div className="flex items-start gap-3">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/12 text-[#237b2a]">
-                    <MapPin size={19} aria-hidden="true" />
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/12 text-[#237b2a]">
+                    <MapPin size={17} aria-hidden="true" />
                   </span>
                   <div>
                     <p className="text-[11px] font-bold uppercase tracking-[.12em] text-black/45">Office address</p>
-                    <address className="mt-2 not-italic text-sm font-medium leading-relaxed text-black">
+                    <address className="mt-1.5 not-italic text-[13px] font-medium leading-5 text-black">
                       Hubtown Greenwood CHS,<br />
                       Flat no. 805/A Wing, 8th Floor,<br />
                       Pokhran Road No. 1, Vartak Nagar,<br />
@@ -769,19 +789,19 @@ function Home() {
                   </div>
                 </div>
 
-                <div className="mt-5 grid gap-3 border-t border-black/8 pt-4 sm:grid-cols-2">
-                  <a href="tel:+919167959756" className="flex min-w-0 items-center gap-3 rounded-xl bg-[#f7f8f3] px-3 py-3 text-sm font-semibold text-black transition hover:bg-[#3acd32]/10">
-                    <Phone size={16} className="shrink-0 text-[#237b2a]" aria-hidden="true" />
+                <div className="mt-3 grid gap-2 border-t border-black/8 pt-3 sm:grid-cols-2">
+                  <a href="tel:+919167959756" className="flex min-w-0 items-center gap-2.5 rounded-xl bg-[#f7f8f3] px-3 py-2.5 text-[13px] font-semibold text-black transition hover:bg-[#3acd32]/10">
+                    <Phone size={15} className="shrink-0 text-[#237b2a]" aria-hidden="true" />
                     <span>+91 91679 59756</span>
                   </a>
-                  <a href="mailto:info@atwassup.com" className="flex min-w-0 items-center gap-3 rounded-xl bg-[#f7f8f3] px-3 py-3 text-sm font-semibold text-black transition hover:bg-[#3acd32]/10">
-                    <Mail size={16} className="shrink-0 text-[#237b2a]" aria-hidden="true" />
+                  <a href="mailto:info@atwassup.com" className="flex min-w-0 items-center gap-2.5 rounded-xl bg-[#f7f8f3] px-3 py-2.5 text-[13px] font-semibold text-black transition hover:bg-[#3acd32]/10">
+                    <Mail size={15} className="shrink-0 text-[#237b2a]" aria-hidden="true" />
                     <span className="break-all">info@atwassup.com</span>
                   </a>
                 </div>
               </div>
 
-              <div className="relative mt-4 min-h-[220px] flex-1 overflow-hidden rounded-[22px] border border-black/10 bg-white shadow-[0_12px_32px_rgba(15,23,42,.05)]">
+              <div className="relative mt-3 min-h-[150px] flex-1 overflow-hidden rounded-[20px] border border-black/10 bg-white shadow-[0_12px_32px_rgba(15,23,42,.05)]">
                 <iframe
                   title="Map to the AtWassup office in Thane"
                   src={officeMapEmbedUrl}
@@ -794,26 +814,26 @@ function Home() {
                   href={officeMapUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2.5 text-xs font-bold text-black shadow-md transition hover:bg-[#3acd32]"
+                  className="absolute bottom-3 right-3 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3.5 py-2 text-xs font-bold text-black shadow-md transition hover:bg-[#3acd32]"
                 >
                   <MapPin size={14} aria-hidden="true" />
                   Open in Google Maps
                 </a>
               </div>
 
-              <div className="mt-4 grid grid-cols-2 gap-3">
+              <div className="mt-3 grid grid-cols-2 gap-2.5">
                 <a
                   href="https://www.instagram.com/at.wassup/?hl=en"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="AtWassup on Instagram"
-                  className="flex min-w-0 items-center gap-3 rounded-2xl border border-black/10 bg-white p-3.5 shadow-[0_8px_24px_rgba(15,23,42,.04)] transition hover:border-[#3acd32] hover:bg-[#3acd32]/5 sm:p-4"
+                  className="flex min-w-0 items-center gap-2.5 rounded-2xl border border-black/10 bg-white p-3 shadow-[0_8px_24px_rgba(15,23,42,.04)] transition hover:border-[#3acd32] hover:bg-[#3acd32]/5"
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/12 text-[#237b2a]">
-                    <Instagram size={19} aria-hidden="true" />
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/12 text-[#237b2a]">
+                    <Instagram size={17} aria-hidden="true" />
                   </span>
                   <span className="min-w-0">
-                    <span className="block text-sm font-bold text-black">Instagram</span>
+                    <span className="block text-[13px] font-bold text-black">Instagram</span>
                     <span className="block truncate text-xs text-black/55">@at.wassup</span>
                   </span>
                 </a>
@@ -822,13 +842,13 @@ function Home() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="AtWassup on LinkedIn"
-                  className="flex min-w-0 items-center gap-3 rounded-2xl border border-black/10 bg-white p-3.5 shadow-[0_8px_24px_rgba(15,23,42,.04)] transition hover:border-[#3acd32] hover:bg-[#3acd32]/5 sm:p-4"
+                  className="flex min-w-0 items-center gap-2.5 rounded-2xl border border-black/10 bg-white p-3 shadow-[0_8px_24px_rgba(15,23,42,.04)] transition hover:border-[#3acd32] hover:bg-[#3acd32]/5"
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/12 text-[#237b2a]">
-                    <Linkedin size={19} aria-hidden="true" />
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/12 text-[#237b2a]">
+                    <Linkedin size={17} aria-hidden="true" />
                   </span>
                   <span className="min-w-0">
-                    <span className="block text-sm font-bold text-black">LinkedIn</span>
+                    <span className="block text-[13px] font-bold text-black">LinkedIn</span>
                     <span className="block truncate text-xs text-black/55">AtWassup</span>
                   </span>
                 </a>
