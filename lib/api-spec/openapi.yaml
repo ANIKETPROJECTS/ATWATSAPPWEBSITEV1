@@ -83,13 +83,6 @@ components:
         whatsapp:
           type: string
           maxLength: 40
-        company:
-          type: string
-          maxLength: 160
-        interest:
-          type: string
-          minLength: 1
-          maxLength: 100
         message:
           type: string
           minLength: 10

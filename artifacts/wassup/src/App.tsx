@@ -32,7 +32,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import CommerceDemo from '@/components/hero/CommerceDemo';
 import ChatbotInquiryDemo from '@/components/chatbot/ChatbotInquiryDemo';
 import ClinicAppointmentDemo from '@/components/flows/ClinicAppointmentDemo';
-import ContactForm from '@/components/ContactForm';
+import ContactWhatsAppForm from '@/components/ContactWhatsAppForm';
 import NotFound from '@/pages/not-found';
 import logoPath from './assets/airavata-technologies-logo.svg';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
@@ -759,7 +759,7 @@ function Home() {
               ))}
             </div>
           </div>
-          <ContactForm />
+          <ContactWhatsAppForm />
         </div>
       </section>
 

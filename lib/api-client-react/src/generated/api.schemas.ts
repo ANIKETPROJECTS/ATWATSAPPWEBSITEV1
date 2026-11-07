@@ -22,13 +22,6 @@ export interface DemoRequestInput {
   email: string;
   /** @maxLength 40 */
   whatsapp?: string;
-  /** @maxLength 160 */
-  company?: string;
-  /**
-     * @minLength 1
-     * @maxLength 100
-     */
-  interest?: string;
   /**
      * @minLength 10
      * @maxLength 1000
