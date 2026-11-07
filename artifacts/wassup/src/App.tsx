@@ -32,6 +32,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import CommerceDemo from '@/components/hero/CommerceDemo';
 import ChatbotInquiryDemo from '@/components/chatbot/ChatbotInquiryDemo';
 import ClinicAppointmentDemo from '@/components/flows/ClinicAppointmentDemo';
+import ContactForm from '@/components/ContactForm';
 import NotFound from '@/pages/not-found';
 import logoPath from './assets/airavata-technologies-logo.svg';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
@@ -391,6 +392,7 @@ function Home() {
   const stepsReveal = useReveal();
   const pricingReveal = useReveal();
   const trustReveal = useReveal();
+  const contactCtaReveal = useReveal();
   const contactReveal = useReveal();
 
   useEffect(() => {
@@ -709,10 +711,10 @@ function Home() {
         </div>
       </section>
 
-      <section className="home-cta-section relative overflow-hidden bg-[#3acd32] py-12 sm:py-[4.5rem]" id="contact">
+      <section className="home-cta-section relative overflow-hidden bg-[#3acd32] py-12 sm:py-[4.5rem]" id="contact-cta">
         <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full border-[32px] border-black/10" />
         <div className="absolute bottom-[-100px] left-[-30px] h-72 w-72 rounded-full border-[32px] border-black/10" />
-        <div ref={contactReveal} className="home-cta-content section-shell relative reveal text-center">
+        <div ref={contactCtaReveal} className="home-cta-content section-shell relative reveal text-center">
           <SectionLabel>Talk with the AtWassup team</SectionLabel>
           <h2 className="home-cta-heading mx-auto font-display font-bold tracking-[-.08em]">
             Make WhatsApp work harder for your <span className="underline decoration-[5px] underline-offset-[10px]">business.</span>
@@ -728,6 +730,36 @@ function Home() {
               Explore plans <ChevronRight size={16} />
             </a>
           </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden border-t border-black/5 bg-[#f7f8f3] py-16 sm:py-24" id="contact">
+        <div className="absolute -right-24 top-10 h-64 w-64 rounded-full border-[28px] border-[#3acd32]/10" aria-hidden="true" />
+        <div ref={contactReveal} className="section-shell relative reveal grid items-center gap-10 lg:grid-cols-[.82fr_1.18fr] lg:gap-14">
+          <div className="max-w-[490px]">
+            <SectionLabel>Contact AtWassup</SectionLabel>
+            <h2 className="font-display text-4xl font-bold leading-[.96] tracking-[-.07em] sm:text-6xl">
+              Let’s make WhatsApp work better for your <span className="text-[#237b2a]">business.</span>
+            </h2>
+            <p className="mt-5 max-w-[420px] text-sm leading-relaxed text-black/65 sm:text-base">
+              Share a few details about your business and what you need. Our team will follow up to discuss the right next step.
+            </p>
+            <div className="mt-8 space-y-3.5">
+              {[
+                { icon: Bot, text: 'AI chatbots for customer questions' },
+                { icon: Workflow, text: 'WhatsApp Flows and in-chat forms' },
+                { icon: Link2, text: 'Business API setup and integrations' },
+              ].map(({ icon: Icon, text }) => (
+                <div key={text} className="flex items-center gap-3 text-sm font-semibold text-black/80">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-black text-[#3acd32]">
+                    <Icon size={14} />
+                  </span>
+                  {text}
+                </div>
+              ))}
+            </div>
+          </div>
+          <ContactForm />
         </div>
       </section>
 

@@ -30,8 +30,8 @@ paths:
     post:
       operationId: submitDemoRequest
       tags: [leads]
-      summary: Submit a demo request
-      description: Sends a demo request to the configured lead inbox.
+      summary: Submit a demo or contact request
+      description: Sends a website inquiry to the configured lead inbox.
       requestBody:
         required: true
         content:
@@ -83,6 +83,17 @@ components:
         whatsapp:
           type: string
           maxLength: 40
+        company:
+          type: string
+          maxLength: 160
+        interest:
+          type: string
+          minLength: 1
+          maxLength: 100
+        message:
+          type: string
+          minLength: 10
+          maxLength: 1000
     DemoRequestResponse:
       type: object
       required:

@@ -18,6 +18,9 @@ router.post("/leads/demo", async (req, res): Promise<void> => {
   const name = parsed.data.name.trim();
   const email = parsed.data.email.trim();
   const whatsapp = parsed.data.whatsapp?.trim();
+  const company = parsed.data.company?.trim();
+  const interest = parsed.data.interest?.trim();
+  const message = parsed.data.message?.trim();
   if (!name || !email) {
     res.status(400).json({ error: "Enter a valid name and email address." });
     return;
@@ -28,6 +31,9 @@ router.post("/leads/demo", async (req, res): Promise<void> => {
       name,
       email,
       ...(whatsapp ? { whatsapp } : {}),
+      ...(company ? { company } : {}),
+      ...(interest ? { interest } : {}),
+      ...(message ? { message } : {}),
     });
   } catch (error) {
     if (error instanceof MailConfigurationError) {
@@ -46,7 +52,7 @@ router.post("/leads/demo", async (req, res): Promise<void> => {
 
   res.json(SubmitDemoRequestResponse.parse({
     success: true,
-    message: "Your demo request has been sent.",
+    message: "Your request has been sent.",
   }));
 });
 

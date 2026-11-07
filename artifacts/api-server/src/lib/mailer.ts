@@ -44,24 +44,45 @@ export async function sendDemoRequestEmail(input: DemoRequestInput): Promise<voi
   const name = input.name.trim();
   const email = input.email.trim();
   const whatsapp = input.whatsapp?.trim() || "Not provided";
+  const company = input.company?.trim();
+  const interest = input.interest?.trim();
+  const message = input.message?.trim();
+  const isContactRequest = Boolean(company || interest || message);
+  const requestTitle = isContactRequest
+    ? "New AtWassup contact inquiry"
+    : "New AtWassup demo request";
+  const requestLabel = isContactRequest
+    ? "New contact inquiry"
+    : "New demo request";
+  const detailLines = [
+    `Name: ${name}`,
+    `Work email: ${email}`,
+    `WhatsApp: ${whatsapp}`,
+    ...(company ? [`Company: ${company}`] : []),
+    ...(interest ? [`Interested in: ${interest}`] : []),
+    ...(message ? [`Message: ${message}`] : []),
+  ];
+  const detailHtml = [
+    `<p><strong>Name:</strong> ${escapeHtml(name)}</p>`,
+    `<p><strong>Work email:</strong> ${escapeHtml(email)}</p>`,
+    `<p><strong>WhatsApp:</strong> ${escapeHtml(whatsapp)}</p>`,
+    ...(company ? [`<p><strong>Company:</strong> ${escapeHtml(company)}</p>`] : []),
+    ...(interest ? [`<p><strong>Interested in:</strong> ${escapeHtml(interest)}</p>`] : []),
+    ...(message
+      ? [`<p><strong>Message:</strong><br>${escapeHtml(message).replace(/\n/g, "<br>")}</p>`]
+      : []),
+  ];
 
   try {
     await transporter.sendMail({
       from: { name: "AtWassup Website", address: user },
       to: recipient,
       replyTo: email,
-      subject: "New AtWassup demo request",
-      text: [
-        "New demo request",
-        `Name: ${name}`,
-        `Work email: ${email}`,
-        `WhatsApp: ${whatsapp}`,
-      ].join("\n"),
+      subject: requestTitle,
+      text: [requestLabel, ...detailLines].join("\n"),
       html: [
-        "<h2>New AtWassup demo request</h2>",
-        `<p><strong>Name:</strong> ${escapeHtml(name)}</p>`,
-        `<p><strong>Work email:</strong> ${escapeHtml(email)}</p>`,
-        `<p><strong>WhatsApp:</strong> ${escapeHtml(whatsapp)}</p>`,
+        `<h2>${requestLabel}</h2>`,
+        ...detailHtml,
       ].join(""),
     });
   } finally {

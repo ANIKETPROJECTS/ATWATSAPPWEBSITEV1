@@ -140,8 +140,8 @@ export const getSubmitDemoRequestUrl = () => {
 }
 
 /**
- * Sends a demo request to the configured lead inbox.
- * @summary Submit a demo request
+ * Sends a website inquiry to the configured lead inbox.
+ * @summary Submit a demo or contact request
  */
 export const submitDemoRequest = async (demoRequestInput: DemoRequestInput, options?: Parameters<typeof customFetch>[1]): Promise<DemoRequestResponse> => {
 
@@ -190,7 +190,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type SubmitDemoRequestMutationError = ErrorType<ApiError>
 
     /**
- * @summary Submit a demo request
+ * @summary Submit a demo or contact request
  */
 export const useSubmitDemoRequest = <TError = ErrorType<ApiError>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof submitDemoRequest>>, TError,{data: BodyType<DemoRequestInput>}, TContext>, request?: SecondParameter<typeof customFetch>}

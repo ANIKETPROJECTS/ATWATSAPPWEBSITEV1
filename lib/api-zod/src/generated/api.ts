@@ -18,8 +18,8 @@ export const HealthCheckResponse = zod.object({
 
 
 /**
- * Sends a demo request to the configured lead inbox.
- * @summary Submit a demo request
+ * Sends a website inquiry to the configured lead inbox.
+ * @summary Submit a demo or contact request
  */
 export const submitDemoRequestBodyNameMax = 120;
 
@@ -29,12 +29,22 @@ export const submitDemoRequestBodyEmailMax = 254;
 export const submitDemoRequestBodyEmailRegExp = new RegExp('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$');
 export const submitDemoRequestBodyWhatsappMax = 40;
 
+export const submitDemoRequestBodyCompanyMax = 160;
+
+export const submitDemoRequestBodyInterestMax = 100;
+
+export const submitDemoRequestBodyMessageMin = 10;
+export const submitDemoRequestBodyMessageMax = 1000;
+
 
 
 export const SubmitDemoRequestBody = zod.object({
   "name": zod.string().min(1).max(submitDemoRequestBodyNameMax),
   "email": zod.string().max(submitDemoRequestBodyEmailMax).regex(submitDemoRequestBodyEmailRegExp),
-  "whatsapp": zod.string().max(submitDemoRequestBodyWhatsappMax).optional()
+  "whatsapp": zod.string().max(submitDemoRequestBodyWhatsappMax).optional(),
+  "company": zod.string().max(submitDemoRequestBodyCompanyMax).optional(),
+  "interest": zod.string().min(1).max(submitDemoRequestBodyInterestMax).optional(),
+  "message": zod.string().min(submitDemoRequestBodyMessageMin).max(submitDemoRequestBodyMessageMax).optional()
 })
 
 export const SubmitDemoRequestResponse = zod.object({
