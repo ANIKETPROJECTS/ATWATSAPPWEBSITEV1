@@ -745,14 +745,14 @@ function Home() {
 
       <section className="relative overflow-hidden border-t border-black/5 bg-[#f7f8f3] py-16 sm:py-24" id="contact">
         <div ref={contactReveal} className="section-shell relative reveal">
-          <h2 className="mb-8 text-center font-display text-4xl font-bold tracking-[-.045em] text-black sm:text-5xl">
-            Contact Us
-          </h2>
           <div className="grid items-stretch gap-10 lg:grid-cols-[.95fr_1.05fr] lg:gap-14">
             <div className="order-2 lg:order-1">
               <ContactWhatsAppForm />
             </div>
             <div className="order-1 flex w-full max-w-[640px] flex-col lg:order-2">
+              <h2 className="mb-5 text-center font-display text-4xl font-bold tracking-[-.045em] text-black sm:text-5xl">
+                Contact Us
+              </h2>
               <div className="rounded-[22px] border border-black/10 bg-white p-5 shadow-[0_12px_32px_rgba(15,23,42,.05)] sm:p-6">
                 <div className="flex items-start gap-3">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/12 text-[#237b2a]">
