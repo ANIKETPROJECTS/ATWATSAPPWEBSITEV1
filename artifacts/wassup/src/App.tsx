@@ -13,9 +13,14 @@ import {
   FileText,
   Globe,
   Headphones,
+  Instagram,
+  Linkedin,
   Link2,
+  Mail,
+  MapPin,
   Megaphone,
   Menu,
+  Phone,
   Send,
   ShoppingBag,
   Sparkles,
@@ -38,6 +43,11 @@ import logoPath from './assets/airavata-technologies-logo.svg';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
 const queryClient = new QueryClient();
+const officeAddress =
+  'Hubtown Greenwood CHS, Flat no. 805/A Wing, 8th Floor, Pokhran Road No. 1, Vartak Nagar, Thane (W), 400606';
+const officeMapUrl =
+  'https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=in&sa=X&geocode=Kff7Yb0Guec7MT7HvCMLyFxF&daddr=Pokhran+Road+No.+1,+next+to+Apana+Bhandar,+Jay+Jaywanti+Society,+Vartak+Naka,+Thane+West,+Thane,+Maharashtra+400606';
+const officeMapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(officeAddress)}&output=embed`;
 
 const capabilities = [
   { group: 'connect', icon: BadgeCheck, motion: 'badge', title: 'WhatsApp Business API onboarding', text: 'Get guided setup for Meta verification and Green Tick assistance.' },
@@ -735,31 +745,109 @@ function Home() {
 
       <section className="relative overflow-hidden border-t border-black/5 bg-[#f7f8f3] py-16 sm:py-24" id="contact">
         <div className="absolute -right-24 top-10 h-64 w-64 rounded-full border-[28px] border-[#3acd32]/10" aria-hidden="true" />
-        <div ref={contactReveal} className="section-shell relative reveal grid items-center gap-10 lg:grid-cols-[.82fr_1.18fr] lg:gap-14">
-          <div className="max-w-[490px]">
+        <div ref={contactReveal} className="section-shell relative reveal grid items-center gap-10 lg:grid-cols-[.95fr_1.05fr] lg:gap-14">
+          <div className="order-2 lg:order-1">
+            <ContactWhatsAppForm />
+          </div>
+          <div className="order-1 max-w-[590px] lg:order-2">
             <SectionLabel>Contact AtWassup</SectionLabel>
             <h2 className="font-display text-4xl font-bold leading-[.96] tracking-[-.07em] sm:text-6xl">
-              Let’s make WhatsApp work better for your <span className="text-[#237b2a]">business.</span>
+              Find us in <span className="text-[#237b2a]">Thane.</span>
             </h2>
-            <p className="mt-5 max-w-[420px] text-sm leading-relaxed text-black/65 sm:text-base">
-              Share a few details about your business and what you need. Our team will follow up to discuss the right next step.
+            <p className="mt-5 max-w-[480px] text-sm leading-relaxed text-black/65 sm:text-base">
+              Visit our office or get in touch with the AtWassup team.
             </p>
-            <div className="mt-8 space-y-3.5">
-              {[
-                { icon: Bot, text: 'AI chatbots for customer questions' },
-                { icon: Workflow, text: 'WhatsApp Flows and in-chat forms' },
-                { icon: Link2, text: 'Business API setup and integrations' },
-              ].map(({ icon: Icon, text }) => (
-                <div key={text} className="flex items-center gap-3 text-sm font-semibold text-black/80">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-black text-[#3acd32]">
-                    <Icon size={14} />
-                  </span>
-                  {text}
+
+            <div className="mt-7 grid gap-3 sm:grid-cols-2">
+              <div className="flex items-start gap-3 rounded-2xl border border-black/8 bg-white/85 p-4">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/15 text-[#237b2a]">
+                  <MapPin size={19} aria-hidden="true" />
+                </span>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[.12em] text-black/45">Office</p>
+                  <address className="mt-1 not-italic text-sm font-semibold leading-relaxed text-black">
+                    Hubtown Greenwood CHS,<br />
+                    Flat no. 805/A Wing, 8th Floor,<br />
+                    Pokhran Road No. 1, Vartak Nagar,<br />
+                    Thane (W), 400606
+                  </address>
                 </div>
-              ))}
+              </div>
+              <div className="grid gap-3">
+                <a
+                  href="tel:+919167959756"
+                  className="flex items-center gap-3 rounded-2xl border border-black/8 bg-white/85 p-4 transition hover:border-[#3acd32] hover:bg-white"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/15 text-[#237b2a]">
+                    <Phone size={18} aria-hidden="true" />
+                  </span>
+                  <span>
+                    <span className="block text-xs font-bold uppercase tracking-[.12em] text-black/45">Call us</span>
+                    <span className="mt-1 block text-sm font-semibold text-black">+91 91679 59756</span>
+                  </span>
+                </a>
+                <a
+                  href="mailto:info@atwassup.com"
+                  className="flex items-center gap-3 rounded-2xl border border-black/8 bg-white/85 p-4 transition hover:border-[#3acd32] hover:bg-white"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/15 text-[#237b2a]">
+                    <Mail size={18} aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-xs font-bold uppercase tracking-[.12em] text-black/45">Email</span>
+                    <span className="mt-1 block break-all text-sm font-semibold text-black">info@atwassup.com</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+
+            <div className="mt-4 overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
+              <iframe
+                title="Map to the AtWassup office in Thane"
+                src={officeMapEmbedUrl}
+                className="h-[220px] w-full border-0 sm:h-[250px]"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+              <div className="flex flex-wrap items-center justify-between gap-3 border-t border-black/5 px-4 py-3">
+                <p className="text-sm font-semibold text-black">AtWassup · Thane, Maharashtra</p>
+                <a
+                  href={officeMapUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-[#237b2a] transition hover:text-black"
+                >
+                  <MapPin size={15} aria-hidden="true" />
+                  Open in Maps
+                </a>
+              </div>
+            </div>
+
+            <div className="mt-5 flex flex-wrap items-center gap-3">
+              <span className="mr-1 text-xs font-bold uppercase tracking-[.12em] text-black/45">Follow AtWassup</span>
+              <a
+                href="https://www.instagram.com/at.wassup/?hl=en"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="AtWassup on Instagram"
+                className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2.5 text-sm font-semibold text-black transition hover:border-[#3acd32] hover:bg-[#3acd32]/10"
+              >
+                <Instagram size={17} aria-hidden="true" />
+                Instagram
+              </a>
+              <a
+                href="https://www.linkedin.com/in/atwassup"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="AtWassup on LinkedIn"
+                className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2.5 text-sm font-semibold text-black transition hover:border-[#3acd32] hover:bg-[#3acd32]/10"
+              >
+                <Linkedin size={17} aria-hidden="true" />
+                LinkedIn
+              </a>
             </div>
           </div>
-          <ContactWhatsAppForm />
         </div>
       </section>
 
