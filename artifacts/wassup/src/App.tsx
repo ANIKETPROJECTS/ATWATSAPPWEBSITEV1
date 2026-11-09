@@ -407,12 +407,25 @@ function HeroAtWassupWordmark() {
 
 function Nav({ onLead }: { onLead: () => void }) {
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeMenu = () => setOpen(false);
   return (
-    <header className="absolute inset-x-0 top-0 z-40 border-b border-black/5 bg-white/95 shadow-[0_4px_18px_rgba(10,20,10,.06)] backdrop-blur-md">
-      <div className="section-shell flex h-[76px] items-center justify-between lg:h-[88px]">
+    <header
+      onKeyDown={(event) => {
+        if (event.key === 'Escape') {
+          closeMenu();
+          menuButtonRef.current?.focus();
+        }
+      }}
+      className="absolute inset-x-0 top-0 z-40 border-b border-black/5 bg-white/95 shadow-[0_4px_18px_rgba(10,20,10,.06)] backdrop-blur-md"
+    >
+      <div className="section-shell flex h-16 items-center justify-between sm:h-[72px] lg:h-[88px]">
         <a href="#top" data-testid="link-logo" className="flex shrink-0 items-center">
-          <img src={logoPath} alt="AtWassup — AI WhatsApp Marketing Automation" className="h-[76px] w-[min(340px,calc(100vw_-_104px))] object-cover object-[center_52%]" />
+          <img
+            src={logoPath}
+            alt="AtWassup — AI WhatsApp Marketing Automation"
+            className="h-16 w-[min(280px,calc(100vw_-_112px))] object-cover object-[center_52%] sm:h-[68px] sm:w-[min(320px,calc(100vw_-_120px))] lg:h-[76px] lg:w-[min(340px,calc(100vw_-_104px))]"
+          />
         </a>
         <nav aria-label="Main navigation" className="hidden items-center gap-8 lg:flex">
           <a data-testid="link-ai-features" href="#features" className="site-nav-link">Features</a>
@@ -424,22 +437,35 @@ function Nav({ onLead }: { onLead: () => void }) {
           <button data-testid="button-book-demo" onClick={onLead} className="header-action header-action-primary">Schedule demo</button>
           <a data-testid="button-login" href="https://app.atwassup.com" className="header-action header-action-secondary">Login</a>
         </div>
-        <button data-testid="button-mobile-menu" onClick={() => setOpen(!open)} aria-label="Toggle menu" aria-expanded={open} aria-controls="mobile-navigation-panel" className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white lg:hidden">{open ? <X size={20} /> : <Menu size={20} />}</button>
+        <button
+          ref={menuButtonRef}
+          type="button"
+          data-testid="button-mobile-menu"
+          onClick={() => setOpen(!open)}
+          aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={open}
+          aria-controls="mobile-navigation-panel"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white transition-colors hover:border-[#3acd32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3acd32] lg:hidden"
+        >
+          {open ? <X size={20} /> : <Menu size={20} />}
+        </button>
       </div>
-      {open && (
-        <div id="mobile-navigation-panel" className="section-shell lg:hidden">
+      <div
+        id="mobile-navigation-panel"
+        aria-hidden={!open}
+        className={`section-shell lg:hidden${open ? '' : ' hidden'}`}
+      >
           <nav aria-label="Mobile navigation" className="mobile-menu-panel mb-3 rounded-2xl border border-black/10 bg-white p-3 shadow-xl">
             <a data-testid="mobile-link-ai-features" href="#features" onClick={closeMenu} className="site-nav-link">Features</a>
             <a data-testid="mobile-link-how-it-works" href="#how-it-works" onClick={closeMenu} className="site-nav-link">How It Works</a>
             <a data-testid="mobile-link-pricing" href="#pricing" onClick={closeMenu} className="site-nav-link">Pricing</a>
             <a data-testid="mobile-link-contact" href="#contact" onClick={closeMenu} className="site-nav-link">Contact</a>
-            <div className="mt-3 grid grid-cols-2 gap-2">
+            <div className="mobile-menu-actions mt-3 grid grid-cols-2 gap-2">
               <button data-testid="mobile-button-book-demo" onClick={() => { closeMenu(); onLead(); }} className="header-action header-action-primary w-full">Schedule demo</button>
               <a data-testid="mobile-link-login" href="https://app.atwassup.com" onClick={closeMenu} className="header-action header-action-secondary w-full">Login</a>
             </div>
           </nav>
-        </div>
-      )}
+      </div>
     </header>
   );
 }
