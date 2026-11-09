@@ -487,7 +487,11 @@ function Home() {
       <section className="relative overflow-hidden pb-8 pt-24 sm:pb-10 sm:pt-28 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pb-[14px] lg:pt-[72px]">
         <div className="section-shell hero-shell relative grid items-center gap-10 lg:grid-cols-[1.02fr_.98fr] lg:items-start lg:gap-5">
           <div ref={heroReveal} className="reveal hero-copy">
-            <h1 className="mt-6 max-w-[720px] font-display text-[clamp(2.5rem,10.2vw,5.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:text-[clamp(3.25rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(3rem,4.5vw,4.5rem)]">Turn WhatsApp into your <span className="text-[#3acd32]">sales &amp; support engine.</span></h1>
+            <h1 className="mt-6 max-w-[720px] space-y-1.5 font-display text-[clamp(2.5rem,10.2vw,5.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:text-[clamp(3.25rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(2.25rem,3.5vw,3.25rem)]">
+              <span className="block">Make your business</span>
+              <span className="block">smarter with WhatsApp</span>
+              <span className="block text-[#3acd32]">AI that drives leads &amp; sales.</span>
+            </h1>
             <p className="mt-8 max-w-[540px] text-justify text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-base">AtWassup is an AI-powered WhatsApp Business platform that brings customer messaging, marketing, and team tools together in one place.</p>
             <div className="mt-8 flex flex-wrap items-center gap-3 lg:mt-5"><PrimaryButton onClick={() => setLeadOpen(true)} testId="hero-button-book-demo">Schedule demo</PrimaryButton><a data-testid="hero-link-explore-features" href="#features" className="header-action header-action-secondary min-w-[180px] px-8">Explore Features</a></div>
             <div className="mt-8" data-testid="hero-meta-business-partner">
