@@ -812,8 +812,8 @@ function Home() {
         data-testid="footer"
       >
         <div className="relative mx-auto w-[calc(100%-40px)] max-w-[1440px] sm:w-[calc(100%-64px)] lg:w-[calc(100%-80px)]">
-          <div className="grid gap-x-10 gap-y-9 pb-3 md:grid-cols-2 xl:grid-cols-[1.2fr_.7fr_1.2fr_.85fr_1.2fr] xl:gap-x-7">
-            <div className="order-5 xl:order-1">
+          <div className="grid grid-cols-2 gap-x-5 gap-y-8 pb-3 md:gap-x-10 md:gap-y-9 xl:grid-cols-[1.2fr_.7fr_1.2fr_.85fr_1.2fr] xl:gap-x-7">
+            <div className="order-5 col-span-2 md:col-span-1 xl:order-1">
               <a href="#top" aria-label="AtWassup home" data-testid="footer-link-home">
                 <img
                   src={logoPath}
@@ -863,7 +863,7 @@ function Home() {
               </ul>
             </nav>
 
-            <div className="order-2 xl:order-3" data-testid="footer-company-contact">
+            <div className="order-3 col-span-2 md:order-2 md:col-span-1 xl:order-3" data-testid="footer-company-contact">
               <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black">Contact</h2>
               <div className="mt-4 space-y-4">
                 <a
@@ -897,7 +897,7 @@ function Home() {
               </div>
             </div>
 
-            <nav aria-label="Legal" className="order-3 xl:order-4">
+            <nav aria-label="Legal" className="order-2 md:order-3 xl:order-4">
               <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black">Legal</h2>
               <ul className="mt-4 space-y-3.5 text-base font-medium text-black">
                 <li>
@@ -927,7 +927,7 @@ function Home() {
               </ul>
             </nav>
 
-            <div className="order-4 xl:order-5">
+            <div className="order-4 col-span-2 md:col-span-1 xl:order-5">
               <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black">Find us</h2>
               <div className="relative mt-4 h-[190px] overflow-hidden rounded-2xl border border-black/10 bg-[#f4f7f1]">
                 <iframe
