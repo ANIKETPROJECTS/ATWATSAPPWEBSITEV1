@@ -823,21 +823,13 @@ function Home() {
               <p className="mt-2 max-w-[290px] text-base leading-relaxed text-black">
                 WhatsApp Business API, AI chatbot, and Flow solutions.
               </p>
-              <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
+              <div className="mt-5 flex items-center">
                 <img
                   src={metaBusinessPartnerPath}
                   alt="Meta Business Partner"
                   data-testid="footer-meta-business-partner"
                   className="h-[56px] w-[165px] object-contain object-left"
                 />
-                <div className="inline-flex items-center gap-2" data-testid="footer-made-in-india">
-                  <img
-                    src={madeInIndiaFlagPath}
-                    alt=""
-                    className="h-9 w-[54px] object-contain"
-                  />
-                  <span className="whitespace-nowrap text-sm font-semibold text-black">Made in India</span>
-                </div>
               </div>
               <div className="mt-5 flex items-center gap-3" role="group" aria-label="Social media">
                 {[
@@ -949,8 +941,17 @@ function Home() {
             </div>
           </div>
 
-          <div className="pt-4 text-sm text-black">
-            <p>© {new Date().getFullYear()} AtWassup. All rights reserved.</p>
+          <div className="grid grid-cols-1 items-center gap-3 pt-4 text-xs text-black sm:grid-cols-[1fr_auto_1fr] sm:gap-0 sm:text-sm">
+            <p className="text-left">© {new Date().getFullYear()} AtWassup. All rights reserved.</p>
+            <div className="inline-flex items-center gap-2 justify-self-center" data-testid="footer-made-in-india">
+              <img
+                src={madeInIndiaFlagPath}
+                alt=""
+                className="h-7 w-10 object-contain sm:h-9 sm:w-[54px]"
+              />
+              <span className="whitespace-nowrap text-xs font-semibold text-black sm:text-sm">Made in India</span>
+            </div>
+            <div aria-hidden="true" className="hidden sm:block" />
           </div>
         </div>
       </footer>
