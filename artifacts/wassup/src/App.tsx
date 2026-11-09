@@ -379,6 +379,32 @@ function DemoModal({ onClose }: { onClose: () => void }) {
   );
 }
 
+function HeroAtWassupWordmark() {
+  return (
+    <svg
+      aria-label="AtWassup"
+      className="inline-block h-[.9em] w-auto shrink-0 align-baseline"
+      role="img"
+      viewBox="98 160 268 64"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <clipPath id="hero-atwassup-wordmark-clip" clipPathUnits="userSpaceOnUse">
+          <path d="M98 160H323V205H98Z M323 160H366V224H323Z" />
+        </clipPath>
+      </defs>
+      <image
+        clipPath="url(#hero-atwassup-wordmark-clip)"
+        height="375"
+        href={logoPath}
+        width="375"
+        x="0"
+        y="0"
+      />
+    </svg>
+  );
+}
+
 function Nav({ onLead }: { onLead: () => void }) {
   const [open, setOpen] = useState(false);
   const closeMenu = () => setOpen(false);
@@ -486,11 +512,11 @@ function Home() {
     <main className="noise min-h-[100dvh] bg-[#fcfbf8]" id="top">
       <Nav onLead={() => setLeadOpen(true)} />
       <section className="relative overflow-hidden pb-8 pt-24 sm:pb-10 sm:pt-28 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pb-[14px] lg:pt-[72px]">
-        <div className="section-shell hero-shell relative grid items-center gap-10 lg:grid-cols-[1.02fr_.98fr] lg:items-start lg:gap-5">
+        <div className="section-shell hero-shell relative grid items-center gap-10 lg:grid-cols-[1.02fr_.98fr] lg:items-center lg:gap-5">
           <div ref={heroReveal} className="reveal hero-copy">
             <h1 className="mt-6 max-w-[720px] space-y-1.5 font-display text-[clamp(2.5rem,10.2vw,5.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:text-[clamp(3.25rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(2.25rem,3.5vw,3.25rem)]">
               <span className="block">Make your business</span>
-              <span className="block">smarter with WhatsApp</span>
+              <span className="block">smarter with <HeroAtWassupWordmark /></span>
               <HeroHeadlineRotator />
             </h1>
             <p className="mt-8 max-w-[540px] text-justify text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-base">Start with AtWassup. Connect the WhatsApp Business API and let AI answer customer questions, capture leads, follow up, close sales, and run broadcasts all through AtWassup, your all-in-one WhatsApp AI marketing platform.</p>
