@@ -512,16 +512,29 @@ function Home() {
     <main className="noise min-h-[100dvh] bg-[#fcfbf8]" id="top">
       <Nav onLead={() => setLeadOpen(true)} />
       <section className="relative overflow-hidden pb-8 pt-24 sm:pb-10 sm:pt-28 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pb-[14px] lg:pt-[72px]">
-        <div className="section-shell hero-shell relative grid items-center gap-10 lg:grid-cols-[1.02fr_.98fr] lg:items-center lg:gap-5">
+        <div className="section-shell hero-shell relative grid items-start gap-6 sm:gap-8 lg:grid-cols-[1.02fr_.98fr] lg:items-center lg:gap-x-5 lg:gap-y-0">
           <div ref={heroReveal} className="reveal hero-copy">
-            <h1 className="mt-6 flex max-w-[720px] flex-col font-display text-[clamp(2.5rem,10.2vw,5.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:text-[clamp(3.25rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(2.25rem,3.5vw,3.25rem)]">
+            <h1 className="mt-2 flex max-w-[720px] flex-col font-display text-[clamp(2rem,9.2vw,2.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:mt-6 sm:text-[clamp(2.75rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(2.25rem,3.5vw,3.25rem)]">
               <span className="block">Make your business</span>
               <span className="-mt-1 block">smarter with <HeroAtWassupWordmark /></span>
               <HeroHeadlineRotator />
             </h1>
-            <p className="mt-8 max-w-[540px] text-justify text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-base">Start with AtWassup. Connect the WhatsApp Business API and let AI answer customer questions, capture leads, follow up, close sales, and run broadcasts all through AtWassup, your all-in-one WhatsApp AI marketing platform.</p>
-            <div className="mt-8 flex flex-wrap items-center gap-3 lg:mt-5"><PrimaryButton onClick={() => setLeadOpen(true)} testId="hero-button-book-demo">Schedule demo</PrimaryButton><a data-testid="hero-link-explore-features" href="#features" className="header-action header-action-secondary min-w-[180px] px-8">Explore Features</a></div>
-            <div className="mt-8" data-testid="hero-meta-business-partner">
+            <p className="mt-6 max-w-[540px] text-left text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-justify lg:text-base">Start with AtWassup. Connect the WhatsApp Business API and let AI answer customer questions, capture leads, follow up, close sales, and run broadcasts all through AtWassup, your all-in-one WhatsApp AI marketing platform.</p>
+            <div className="hero-actions mt-6 lg:mt-5">
+              <PrimaryButton onClick={() => setLeadOpen(true)} testId="hero-button-book-demo">Schedule demo</PrimaryButton>
+              <a data-testid="hero-link-explore-features" href="#features" className="header-action header-action-secondary min-w-[180px] px-8">Explore Features</a>
+            </div>
+          </div>
+          <div className="hero-showcase-column relative flex justify-center lg:translate-y-6 lg:justify-end">
+            <div className="hero-showcase-layout relative z-10">
+              <div className="hero-airavata-demo relative z-10 w-full">
+                <CommerceDemo onFeatureStageChange={setHeroFeatureStage} />
+              </div>
+              <HeroFeatureFlow stage={heroFeatureStage} />
+            </div>
+          </div>
+          <div className="hero-proof">
+            <div className="mt-0 lg:mt-8" data-testid="hero-meta-business-partner">
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                 <img
                   src={metaBusinessPartnerPath}
@@ -558,14 +571,6 @@ function Home() {
                   <FigmaSvgCrop x={288} y={58} width={88} height={36} className="hero-profile-actions-art" />
                 </span>
               </div>
-            </div>
-          </div>
-          <div className="relative flex justify-center lg:translate-y-6 lg:justify-end">
-            <div className="hero-showcase-layout relative z-10">
-              <div className="hero-airavata-demo relative z-10 w-full">
-                <CommerceDemo onFeatureStageChange={setHeroFeatureStage} />
-              </div>
-              <HeroFeatureFlow stage={heroFeatureStage} />
             </div>
           </div>
         </div>
