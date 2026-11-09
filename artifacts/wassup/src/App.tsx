@@ -942,9 +942,9 @@ function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col items-start gap-3 pt-4 text-xs text-black sm:flex-row sm:items-center sm:justify-between sm:text-sm">
-            <p className="text-left">© {new Date().getFullYear()} AtWassup. All rights reserved.</p>
-            <div className="inline-flex items-center gap-2" data-testid="footer-made-in-india">
+          <div className="flex w-full flex-col items-center gap-3 pt-4 pr-16 text-xs text-black sm:flex-row sm:items-center sm:justify-between sm:pr-0 sm:text-sm">
+            <p className="w-full text-center sm:w-auto sm:text-left">© {new Date().getFullYear()} AtWassup. All rights reserved.</p>
+            <div className="inline-flex items-center justify-center gap-2" data-testid="footer-made-in-india">
               <img
                 src={madeInIndiaFlagPath}
                 alt=""
@@ -956,7 +956,7 @@ function Home() {
               href="https://www.airavatatechnologies.com/"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center justify-end gap-2 pr-20 text-right text-xs leading-relaxed text-black hover:underline sm:text-sm"
+              className="flex w-full items-center justify-center gap-2 text-center text-xs leading-relaxed text-black hover:underline sm:w-auto sm:justify-end sm:pr-20 sm:text-right sm:text-sm"
             >
               <svg
                 viewBox="60 30 255 212"
@@ -972,7 +972,7 @@ function Home() {
                   preserveAspectRatio="none"
                 />
               </svg>
-              <span>A Product Designed and Developed by Airavata Technologies</span>
+              <span className="min-w-0">A Product Designed and Developed by Airavata Technologies</span>
             </a>
           </div>
         </div>
