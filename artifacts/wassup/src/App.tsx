@@ -36,6 +36,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import CommerceDemo from '@/components/hero/CommerceDemo';
 import { FigmaSvgCrop } from '@/components/hero/FigmaChrome';
 import HeroFeatureFlow, { type HeroFeatureStage } from '@/components/hero/HeroFeatureFlow';
+import HeroHeadlineRotator from '@/components/hero/HeroHeadlineRotator';
 import ChatbotInquiryDemo from '@/components/chatbot/ChatbotInquiryDemo';
 import ClinicAppointmentDemo from '@/components/flows/ClinicAppointmentDemo';
 import ContactWhatsAppForm from '@/components/ContactWhatsAppForm';
@@ -490,7 +491,7 @@ function Home() {
             <h1 className="mt-6 max-w-[720px] space-y-1.5 font-display text-[clamp(2.5rem,10.2vw,5.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:text-[clamp(3.25rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(2.25rem,3.5vw,3.25rem)]">
               <span className="block">Make your business</span>
               <span className="block">smarter with WhatsApp</span>
-              <span className="block text-[#3acd32]">AI that drives leads &amp; sales.</span>
+              <HeroHeadlineRotator />
             </h1>
             <p className="mt-8 max-w-[540px] text-justify text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-base">AtWassup is an AI-powered WhatsApp Business platform that brings customer messaging, marketing, and team tools together in one place.</p>
             <div className="mt-8 flex flex-wrap items-center gap-3 lg:mt-5"><PrimaryButton onClick={() => setLeadOpen(true)} testId="hero-button-book-demo">Schedule demo</PrimaryButton><a data-testid="hero-link-explore-features" href="#features" className="header-action header-action-secondary min-w-[180px] px-8">Explore Features</a></div>
