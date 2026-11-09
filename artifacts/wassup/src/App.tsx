@@ -858,7 +858,121 @@ function Home() {
         </div>
       </section>
 
-      <footer className="bg-[#101110] py-12 text-white" data-testid="footer"><div className="section-shell flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:gap-10"><div className="order-2 md:order-none"><img src={logoPath} alt="AtWassup — AI WhatsApp Marketing Automation" className="h-[52px] w-[150px] object-cover object-center brightness-0 invert" /><p className="mt-4 max-w-[300px] text-xs leading-relaxed text-white/45">AtWassup — WhatsApp Business solutions by Airavata Technologies.</p></div><nav aria-label="Footer" className="order-1 flex flex-wrap gap-x-7 gap-y-3 text-xs font-semibold text-white/70 md:order-none"><a data-testid="footer-link-domain" href="#top" className="transition hover:text-[#3acd32]">atwassup.com</a><a data-testid="footer-link-features" href="#features" className="transition hover:text-[#3acd32]">Features</a><a data-testid="footer-link-pricing" href="#pricing" className="transition hover:text-[#3acd32]">Pricing</a><a data-testid="footer-link-contact" href="#contact" className="transition hover:text-[#3acd32]">Contact</a></nav><p className="order-3 text-xs text-white/30 md:order-none">© {new Date().getFullYear()} Airavata Technologies</p></div></footer>
+      <footer
+        id="footer"
+        className="relative overflow-hidden bg-[#101310] pt-12 pb-[calc(5.5rem+env(safe-area-inset-bottom))] text-white sm:pt-14 sm:pb-10"
+        data-testid="footer"
+      >
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#3acd32]/70 to-transparent" />
+        <div className="section-shell relative">
+          <div className="grid gap-x-10 gap-y-9 border-b border-white/10 pb-9 md:grid-cols-2 lg:grid-cols-[1.25fr_.8fr_1.3fr_.75fr] lg:gap-x-12">
+            <div className="order-4 lg:order-1">
+              <a href="#top" aria-label="AtWassup home" data-testid="footer-link-home">
+                <img
+                  src={logoPath}
+                  alt="AtWassup — AI WhatsApp Marketing Automation"
+                  className="h-[52px] w-[150px] object-cover object-center brightness-0 invert"
+                />
+              </a>
+              <p className="mt-4 max-w-[290px] text-sm leading-relaxed text-white/65">
+                WhatsApp Business API, AI chatbot, and Flow solutions by Airavata Technologies.
+              </p>
+              <a
+                href="https://atwassup.com/"
+                target="_blank"
+                rel="noreferrer"
+                data-testid="footer-link-domain"
+                className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#3acd32] transition hover:text-white"
+              >
+                atwassup.com <ArrowDownRight size={15} aria-hidden="true" />
+              </a>
+            </div>
+
+            <nav aria-label="Footer navigation" className="order-1 lg:order-2">
+              <h2 className="text-xs font-bold uppercase tracking-[.16em] text-white/45">Explore</h2>
+              <ul className="mt-4 space-y-3 text-sm font-medium text-white/80">
+                <li><a data-testid="footer-link-features" href="#features" className="transition hover:text-[#3acd32]">Features</a></li>
+                <li><a data-testid="footer-link-how-it-works" href="#how-it-works" className="transition hover:text-[#3acd32]">How it works</a></li>
+                <li><a data-testid="footer-link-pricing" href="#pricing" className="transition hover:text-[#3acd32]">Pricing</a></li>
+                <li><a data-testid="footer-link-contact" href="#contact" className="transition hover:text-[#3acd32]">Contact</a></li>
+              </ul>
+            </nav>
+
+            <div className="order-2" data-testid="footer-company-contact">
+              <h2 className="text-xs font-bold uppercase tracking-[.16em] text-white/45">Get in touch</h2>
+              <div className="mt-4 space-y-4">
+                <a
+                  href="tel:+919167959756"
+                  data-testid="footer-contact-phone"
+                  className="flex items-center gap-3 text-sm font-semibold text-white/85 transition hover:text-[#3acd32]"
+                >
+                  <Phone size={16} className="shrink-0 text-[#3acd32]" aria-hidden="true" />
+                  +91 91679 59756
+                </a>
+                <a
+                  href="mailto:info@atwassup.com"
+                  data-testid="footer-contact-email"
+                  className="flex items-center gap-3 text-sm font-semibold text-white/85 transition hover:text-[#3acd32]"
+                >
+                  <Mail size={16} className="shrink-0 text-[#3acd32]" aria-hidden="true" />
+                  info@atwassup.com
+                </a>
+                <div className="flex items-start gap-3 text-sm leading-relaxed text-white/70">
+                  <MapPin size={16} className="mt-0.5 shrink-0 text-[#3acd32]" aria-hidden="true" />
+                  <address className="not-italic">
+                    Hubtown Greenwood CHS, Flat no. 805/A Wing, 8th Floor, Pokhran Road No. 1, Vartak Nagar, Thane (W), 400606
+                  </address>
+                </div>
+                <a
+                  href={officeMapUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-testid="footer-link-directions"
+                  className="ml-7 inline-flex items-center gap-1.5 text-xs font-bold text-[#3acd32] transition hover:text-white"
+                >
+                  Open directions <ArrowDownRight size={14} aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+
+            <div className="order-3">
+              <h2 className="text-xs font-bold uppercase tracking-[.16em] text-white/45">Follow AtWassup</h2>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <a
+                  href="https://www.instagram.com/at.wassup/?hl=en"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="AtWassup on Instagram"
+                  data-testid="footer-social-instagram"
+                  className="inline-flex items-center gap-2.5 rounded-full border border-white/15 px-3.5 py-2.5 text-sm font-semibold text-white/80 transition hover:border-[#3acd32] hover:bg-[#3acd32]/10 hover:text-white"
+                >
+                  <Instagram size={16} className="text-[#3acd32]" aria-hidden="true" />
+                  Instagram
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/atwassup"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="AtWassup on LinkedIn"
+                  data-testid="footer-social-linkedin"
+                  className="inline-flex items-center gap-2.5 rounded-full border border-white/15 px-3.5 py-2.5 text-sm font-semibold text-white/80 transition hover:border-[#3acd32] hover:bg-[#3acd32]/10 hover:text-white"
+                >
+                  <Linkedin size={16} className="text-[#3acd32]" aria-hidden="true" />
+                  LinkedIn
+                </a>
+              </div>
+              <p className="mt-4 max-w-[220px] text-xs leading-relaxed text-white/45">
+                Follow product updates and ideas for better customer conversations.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2 py-5 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between sm:pr-14">
+            <p>© {new Date().getFullYear()} Airavata Technologies. All rights reserved.</p>
+            <p>AtWassup — WhatsApp Business solutions.</p>
+          </div>
+        </div>
+      </footer>
       {(showBackToTop || footerInView) && (
         <button
           type="button"
