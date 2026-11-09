@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
-import broadcastIcon from '../../assets/hero-feature-icons/broadcast.svg';
+import broadcastIcon from '../../assets/hero-feature-icons/broadcast-campaign.svg';
 import assistantIcon from '../../assets/hero-feature-icons/assistant.svg';
 import agentsIcon from '../../assets/hero-feature-icons/agents.svg';
 import aiChatbotIcon from '../../assets/hero-feature-icons/ai-chatbot-headset.svg';
