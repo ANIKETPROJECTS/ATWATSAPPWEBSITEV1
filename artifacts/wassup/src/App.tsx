@@ -41,6 +41,7 @@ import NotFound from '@/pages/not-found';
 import madeInIndiaFlagPath from './assets/made-in-india-flag.png';
 import metaBusinessPartnerPath from './assets/meta-business-partner.png';
 import logoPath from './assets/airavata-technologies-logo.svg';
+import airavataTriangleSourcePath from './assets/airavata-technologies-mark-source.svg';
 import contactEmailPath from './assets/contact-email.png';
 import contactLocationPath from './assets/contact-location.png';
 import contactPhonePath from './assets/contact-phone.png';
@@ -941,23 +942,37 @@ function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 items-center gap-3 pt-4 text-xs text-black sm:grid-cols-[1fr_auto_1fr] sm:gap-0 sm:text-sm">
+          <div className="flex flex-col items-start gap-3 pt-4 text-xs text-black sm:flex-row sm:items-center sm:justify-between sm:text-sm">
             <p className="text-left">© {new Date().getFullYear()} AtWassup. All rights reserved.</p>
-            <div className="inline-flex items-center gap-2 justify-self-center" data-testid="footer-made-in-india">
+            <div className="inline-flex items-center gap-2" data-testid="footer-made-in-india">
               <img
                 src={madeInIndiaFlagPath}
                 alt=""
                 className="h-7 w-10 object-contain sm:h-9 sm:w-[54px]"
               />
-              <span className="whitespace-nowrap text-xs font-semibold text-black sm:text-sm">Made in India</span>
+              <span className="whitespace-nowrap text-xs font-normal text-black sm:text-sm">Made in India</span>
             </div>
             <a
               href="https://www.airavatatechnologies.com/"
               target="_blank"
               rel="noreferrer"
-              className="justify-self-stretch text-right text-xs leading-relaxed text-black hover:underline sm:text-sm"
+              className="flex items-center justify-end gap-2 pr-20 text-right text-xs leading-relaxed text-black hover:underline sm:text-sm"
             >
-              A product designed and Developed by Airavata Technologies
+              <svg
+                viewBox="60 30 255 212"
+                className="h-8 w-9 shrink-0 scale-110"
+                aria-hidden="true"
+              >
+                <image
+                  href={airavataTriangleSourcePath}
+                  x="0"
+                  y="0"
+                  width="375"
+                  height="375"
+                  preserveAspectRatio="none"
+                />
+              </svg>
+              <span>A Product Designed and Developed by Airavata Technologies</span>
             </a>
           </div>
         </div>
