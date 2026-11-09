@@ -1,8 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Check, Send } from 'lucide-react';
+import { Check, ChevronDown, Send } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import {
+  getCountries,
+  getCountryCallingCode,
+  isValidPhoneNumber,
+  parsePhoneNumber,
+  type CountryCode,
+} from 'libphonenumber-js';
 import { useSubmitDemoRequest } from '@workspace/api-client-react';
 import {
   Form,
@@ -12,7 +19,16 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
 import { Input } from '@/components/ui/input';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Textarea } from '@/components/ui/textarea';
 import { DevicePreviewFrame } from '@/components/hero/DevicePreview';
 import { FigmaSvgCrop } from '@/components/hero/FigmaChrome';
@@ -20,26 +36,47 @@ import avatarLogoPath from '../assets/airavata-technologies-mark.svg';
 import '@/components/hero/airavata-demo.css';
 import './contact-whatsapp-form.css';
 
-const contactFormSchema = z.object({
-  name: z.string().trim().min(2, 'Enter your name.').max(120),
-  whatsapp: z
-    .string()
-    .trim()
-    .min(8, 'Enter your WhatsApp number.')
-    .max(40, 'Enter a valid mobile number.')
-    .refine((value) => {
-      const normalized = value.replace(/[\s()-]/g, '');
-      return /^\+?[1-9]\d{7,14}$/.test(normalized);
-    }, 'Enter a valid mobile number with 8–15 digits.'),
-  email: z
-    .string()
-    .trim()
-    .email('Enter a valid email address, such as name@example.com.')
-    .max(254, 'Email must be 254 characters or fewer.'),
-  message: z.string().trim().min(10, 'Add a little more detail.').max(1000),
-});
+const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+const flagEmoji = (country: string) =>
+  String.fromCodePoint(...country.split('').map((character) => 127397 + character.charCodeAt(0)));
+const countryOptions = getCountries()
+  .map((country) => ({
+    country,
+    name: regionNames.of(country) ?? country,
+    dialCode: `+${getCountryCallingCode(country)}`,
+    flag: flagEmoji(country),
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name));
 
-type ContactFormValues = z.infer<typeof contactFormSchema>;
+const createContactFormSchema = (country: CountryCode) =>
+  z.object({
+    name: z
+      .string()
+      .trim()
+      .min(1, 'Enter your name.')
+      .max(120, 'Name must be 120 characters or fewer.'),
+    whatsapp: z
+      .string()
+      .trim()
+      .min(1, 'Enter your mobile number.')
+      .max(15, 'Enter a valid mobile number.')
+      .regex(/^\d*$/, 'Use digits only for your mobile number.')
+      .refine(
+        (value) => value === '' || isValidPhoneNumber(value, country),
+        'Enter a valid mobile number for the selected country.',
+      ),
+    email: z
+      .string()
+      .trim()
+      .max(254, 'Email must be 254 characters or fewer.')
+      .refine(
+        (value) => !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+        'Enter a valid email address, or leave it blank.',
+      ),
+    message: z.string().trim().max(1000, 'Message must be 1000 characters or fewer.'),
+  });
+
+type ContactFormValues = z.infer<ReturnType<typeof createContactFormSchema>>;
 
 const defaultValues: ContactFormValues = {
   name: '',
@@ -51,8 +88,15 @@ const defaultValues: ContactFormValues = {
 export default function ContactWhatsAppForm() {
   const stageRef = useRef<HTMLDivElement>(null);
   const [screenWidth, setScreenWidth] = useState(280);
+  const [selectedCountry, setSelectedCountry] = useState<CountryCode>('IN');
+  const [countryPickerOpen, setCountryPickerOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [sentName, setSentName] = useState('');
   const submitRequest = useSubmitDemoRequest();
+  const contactFormSchema = useMemo(
+    () => createContactFormSchema(selectedCountry),
+    [selectedCountry],
+  );
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues,
@@ -90,16 +134,29 @@ export default function ContactWhatsAppForm() {
   }, []);
 
   const onSubmit = async (values: ContactFormValues) => {
+    const phoneNumber = parsePhoneNumber(values.whatsapp, selectedCountry);
+    if (!phoneNumber?.isValid()) {
+      form.setError('whatsapp', {
+        type: 'validate',
+        message: 'Enter a valid mobile number for the selected country.',
+      });
+      return;
+    }
+
     try {
+      const name = values.name.trim();
+      const email = values.email.trim();
+      const message = values.message.trim();
       await submitRequest.mutateAsync({
         data: {
-          name: values.name.trim(),
-          whatsapp: values.whatsapp.trim(),
-          email: values.email.trim(),
-          message: values.message.trim(),
+          whatsapp: phoneNumber.number,
+          ...(name ? { name } : {}),
+          ...(email ? { email } : {}),
+          ...(message ? { message } : {}),
         },
       });
-      setSentName(values.name.trim());
+      setSentName(name);
+      setSubmitted(true);
       form.reset(defaultValues);
     } catch (error) {
       const errorData =
@@ -119,6 +176,8 @@ export default function ContactWhatsAppForm() {
 
   const screenScale = screenWidth / 252;
   const screenHeight = Math.round(524 * screenScale);
+  const activeCountry =
+    countryOptions.find((option) => option.country === selectedCountry) ?? countryOptions[0];
 
   return (
     <div className="contact-wa-stage" ref={stageRef} data-testid="contact-whatsapp-preview">
@@ -155,7 +214,7 @@ export default function ContactWhatsAppForm() {
                   <span className="demo-incoming-meta"><time>10:41 AM</time></span>
                 </div>
 
-                {sentName ? (
+                {submitted ? (
                   <div className="contact-wa-success-flow" role="status" data-testid="status-contact-sent">
                     <div className="demo-message from-customer contact-wa-message">
                       <span className="demo-message-copy">I’ve shared my details.</span>
@@ -164,18 +223,34 @@ export default function ContactWhatsAppForm() {
                     <div className="demo-message from-business contact-wa-message">
                       <span className="contact-wa-sender">AtWassup</span>
                       <span className="demo-message-copy">
-                        Thanks, {sentName.split(/\s+/)[0]}! Your inquiry is with our team. We’ll reach out soon.
+                        {sentName
+                          ? `Thank you, ${sentName.split(/\s+/)[0]}. `
+                          : 'Thank you for reaching out. '}
+                        Our support team has received your request and will contact you shortly.
                       </span>
                       <span className="demo-incoming-meta"><time>10:42 AM</time></span>
                     </div>
                     <div className="contact-wa-success-card">
                       <span className="contact-wa-success-check"><Check size={13} strokeWidth={3} /></span>
-                      <span><strong>Details sent</strong><small>We’ll be in touch shortly.</small></span>
+                      <span>
+                        <strong>Request received</strong>
+                        <small>Our support team will contact you shortly.</small>
+                      </span>
+                    </div>
+                    <div className="demo-message from-business contact-wa-message contact-wa-followup">
+                      <span className="contact-wa-sender">Need help sooner?</span>
+                      <span className="demo-message-copy">
+                        Call <a href="tel:+919167959756">+91 91679 59756</a> or email{' '}
+                        <a href="mailto:info@atwassup.com">info@atwassup.com</a>.
+                      </span>
                     </div>
                     <button
                       type="button"
                       className="contact-wa-reset"
-                      onClick={() => setSentName('')}
+                      onClick={() => {
+                        setSubmitted(false);
+                        setSentName('');
+                      }}
                       data-testid="button-contact-start-again"
                     >
                       Send another message
@@ -196,39 +271,116 @@ export default function ContactWhatsAppForm() {
                       <FormField
                         control={form.control}
                         name="name"
-                        render={({ field }) => (
+                        render={({ field, fieldState }) => (
                           <FormItem className="contact-wa-field">
-                            <FormLabel className="contact-wa-label">Name</FormLabel>
-                            <FormControl>
-                              <Input {...field} required autoComplete="name" placeholder="Your full name" maxLength={120} className="contact-wa-input" data-testid="input-contact-name" />
-                            </FormControl>
-                            <FormMessage className="contact-wa-error" />
+                            <FormLabel className="contact-wa-label">
+                              Name <span className="contact-wa-required" aria-hidden="true">*</span>
+                              <span className="sr-only"> required</span>
+                            </FormLabel>
+                            <div className={`contact-wa-input-shell${fieldState.error ? ' has-error' : ''}`}>
+                              <FormControl>
+                                <Input {...field} required autoComplete="name" placeholder="Your full name" maxLength={120} className="contact-wa-input" data-testid="input-contact-name" />
+                              </FormControl>
+                              <FormMessage className="sr-only" />
+                            </div>
                           </FormItem>
                         )}
                       />
                       <FormField
                         control={form.control}
                         name="whatsapp"
-                        render={({ field }) => (
+                        render={({ field, fieldState }) => (
                           <FormItem className="contact-wa-field">
-                            <FormLabel className="contact-wa-label">Number</FormLabel>
-                            <FormControl>
-                              <Input {...field} required type="tel" inputMode="tel" autoComplete="tel" placeholder="+91 90000 00000" maxLength={40} className="contact-wa-input" data-testid="input-contact-number" />
-                            </FormControl>
-                            <FormMessage className="contact-wa-error" />
+                            <FormLabel className="contact-wa-label">
+                              Number <span className="contact-wa-required" aria-hidden="true">*</span>
+                              <span className="sr-only"> required</span>
+                            </FormLabel>
+                            <div className="contact-wa-number-control">
+                              <Popover open={countryPickerOpen} onOpenChange={setCountryPickerOpen}>
+                                <PopoverTrigger asChild>
+                                  <button
+                                    type="button"
+                                    className="contact-wa-country-trigger"
+                                    aria-label={`Country code: ${activeCountry.name} ${activeCountry.dialCode}`}
+                                    data-testid="button-contact-country"
+                                  >
+                                    <span aria-hidden="true">{activeCountry.flag}</span>
+                                    <span>{activeCountry.dialCode}</span>
+                                    <ChevronDown size={11} aria-hidden="true" />
+                                  </button>
+                                </PopoverTrigger>
+                                <PopoverContent
+                                  className="contact-wa-country-popover"
+                                  align="start"
+                                  side="bottom"
+                                  sideOffset={4}
+                                >
+                                  <Command>
+                                    <CommandInput
+                                      placeholder="Search country or code"
+                                      aria-label="Search country or calling code"
+                                    />
+                                    <CommandList className="contact-wa-country-list">
+                                      <CommandEmpty>No country found.</CommandEmpty>
+                                      <CommandGroup>
+                                        {countryOptions.map((option) => (
+                                          <CommandItem
+                                            key={option.country}
+                                            value={`${option.name} ${option.dialCode} ${option.country}`}
+                                            onSelect={() => {
+                                              setSelectedCountry(option.country);
+                                              setCountryPickerOpen(false);
+                                            }}
+                                            className="contact-wa-country-option"
+                                          >
+                                            <span className="contact-wa-country-flag" aria-hidden="true">
+                                              {option.flag}
+                                            </span>
+                                            <span className="contact-wa-country-name">{option.name}</span>
+                                            <span className="contact-wa-country-dial">{option.dialCode}</span>
+                                            {option.country === selectedCountry && (
+                                              <Check size={13} aria-hidden="true" />
+                                            )}
+                                          </CommandItem>
+                                        ))}
+                                      </CommandGroup>
+                                    </CommandList>
+                                  </Command>
+                                </PopoverContent>
+                              </Popover>
+                              <div className={`contact-wa-input-shell${fieldState.error ? ' has-error' : ''}`}>
+                                <FormControl>
+                                  <Input
+                                    {...field}
+                                    required
+                                    type="tel"
+                                    inputMode="numeric"
+                                    autoComplete="tel-national"
+                                    placeholder="Enter your mobile number"
+                                    maxLength={15}
+                                    className="contact-wa-input"
+                                    data-testid="input-contact-number"
+                                    onChange={(event) => field.onChange(event.target.value.replace(/\D/g, '').slice(0, 15))}
+                                  />
+                                </FormControl>
+                                <FormMessage className="sr-only" />
+                              </div>
+                            </div>
                           </FormItem>
                         )}
                       />
                       <FormField
                         control={form.control}
                         name="email"
-                        render={({ field }) => (
+                        render={({ field, fieldState }) => (
                           <FormItem className="contact-wa-field">
                             <FormLabel className="contact-wa-label">Email</FormLabel>
-                            <FormControl>
-                              <Input {...field} required type="email" autoComplete="email" placeholder="you@company.com" maxLength={254} className="contact-wa-input" data-testid="input-contact-email" />
-                            </FormControl>
-                            <FormMessage className="contact-wa-error" />
+                            <div className={`contact-wa-input-shell${fieldState.error ? ' has-error' : ''}`}>
+                              <FormControl>
+                                <Input {...field} type="email" autoComplete="email" placeholder="Enter email or leave blank" maxLength={254} className="contact-wa-input" data-testid="input-contact-email" />
+                              </FormControl>
+                              <FormMessage className="sr-only" />
+                            </div>
                           </FormItem>
                         )}
                       />
@@ -239,7 +391,7 @@ export default function ContactWhatsAppForm() {
                           <FormItem className="contact-wa-field">
                             <FormLabel className="contact-wa-label">What can we help with?</FormLabel>
                             <FormControl>
-                              <Textarea {...field} required rows={2} maxLength={1000} placeholder="Tell us what you need…" className="contact-wa-input contact-wa-textarea" data-testid="input-contact-custom" />
+                              <Textarea {...field} rows={2} maxLength={1000} placeholder="A few words are fine…" className="contact-wa-input contact-wa-textarea" data-testid="input-contact-custom" />
                             </FormControl>
                             <FormMessage className="contact-wa-error" />
                           </FormItem>

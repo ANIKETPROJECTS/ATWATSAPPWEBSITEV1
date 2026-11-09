@@ -11,24 +11,24 @@ router.post("/leads/demo", async (req, res): Promise<void> => {
   const parsed = SubmitDemoRequestBody.safeParse(req.body);
   if (!parsed.success) {
     req.log.warn({ issueCount: parsed.error.issues.length }, "Rejected invalid demo request");
-    res.status(400).json({ error: "Enter a valid name and email address." });
+    res.status(400).json({ error: "Provide a valid mobile number or email address." });
     return;
   }
 
-  const name = parsed.data.name.trim();
-  const email = parsed.data.email.trim();
+  const name = parsed.data.name?.trim();
+  const email = parsed.data.email?.trim();
   const whatsapp = parsed.data.whatsapp?.trim();
   const message = parsed.data.message?.trim();
-  if (!name || !email) {
-    res.status(400).json({ error: "Enter a valid name and email address." });
+  if (!whatsapp && !email) {
+    res.status(400).json({ error: "Provide a valid mobile number or email address." });
     return;
   }
 
   try {
     await sendDemoRequestEmail({
-      name,
-      email,
       ...(whatsapp ? { whatsapp } : {}),
+      ...(name ? { name } : {}),
+      ...(email ? { email } : {}),
       ...(message ? { message } : {}),
     });
   } catch (error) {

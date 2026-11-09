@@ -41,8 +41,8 @@ export async function sendDemoRequestEmail(input: DemoRequestInput): Promise<voi
     socketTimeout: 20_000,
   });
 
-  const name = input.name.trim();
-  const email = input.email.trim();
+  const name = input.name?.trim();
+  const email = input.email?.trim();
   const whatsapp = input.whatsapp?.trim() || "Not provided";
   const message = input.message?.trim();
   const isContactRequest = Boolean(message);
@@ -53,14 +53,14 @@ export async function sendDemoRequestEmail(input: DemoRequestInput): Promise<voi
     ? "New contact inquiry"
     : "New demo request";
   const detailLines = [
-    `Name: ${name}`,
-    `Work email: ${email}`,
+    ...(name ? [`Name: ${name}`] : []),
+    ...(email ? [`Email: ${email}`] : []),
     `WhatsApp: ${whatsapp}`,
     ...(message ? [`Message: ${message}`] : []),
   ];
   const detailHtml = [
-    `<p><strong>Name:</strong> ${escapeHtml(name)}</p>`,
-    `<p><strong>Work email:</strong> ${escapeHtml(email)}</p>`,
+    ...(name ? [`<p><strong>Name:</strong> ${escapeHtml(name)}</p>`] : []),
+    ...(email ? [`<p><strong>Email:</strong> ${escapeHtml(email)}</p>`] : []),
     `<p><strong>WhatsApp:</strong> ${escapeHtml(whatsapp)}</p>`,
     ...(message
       ? [`<p><strong>Message:</strong><br>${escapeHtml(message).replace(/\n/g, "<br>")}</p>`]
@@ -71,7 +71,7 @@ export async function sendDemoRequestEmail(input: DemoRequestInput): Promise<voi
     await transporter.sendMail({
       from: { name: "AtWassup Website", address: user },
       to: recipient,
-      replyTo: email,
+      ...(email ? { replyTo: email } : {}),
       subject: requestTitle,
       text: [requestLabel, ...detailLines].join("\n"),
       html: [

@@ -7,21 +7,15 @@
  */
 
 export interface DemoRequestInput {
-  /**
-     * @minLength 1
-     * @maxLength 120
-     */
-  name: string;
+  /** @maxLength 120 */
+  name?: string;
   /**
      * @maxLength 254
      * @pattern ^[^\s@]+@[^\s@]+\.[^\s@]+$
      */
-  email: string;
+  email?: string;
   /** @maxLength 40 */
   whatsapp?: string;
-  /**
-     * @minLength 10
-     * @maxLength 1000
-     */
+  /** @maxLength 1000 */
   message?: string;
 }

@@ -66,7 +66,7 @@
   position: relative;
   display: grid;
   flex: 0 0 auto;
-  gap: 6px;
+  gap: 5px;
   align-self: stretch;
   border: 1px solid #e3e8e4;
   border-radius: 9px;
@@ -92,14 +92,127 @@
 
 .contact-wa-field {
   display: grid;
-  gap: 3px;
+  gap: 2px;
+}
+
+.contact-wa-required {
+  color: #c62828;
+  font-weight: 700;
+}
+
+.contact-wa-number-control {
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr);
+  align-items: start;
+  gap: 4px;
+}
+
+.contact-wa-country-trigger {
+  display: flex;
+  width: 100%;
+  height: 29px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px;
+  border: 1px solid #dfe5e0;
+  border-radius: 5px;
+  background: #fbfcfb;
+  padding: 0 4px;
+  color: #000;
+  font-family: inherit;
+  font-size: 10px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.contact-wa-country-trigger:focus-visible {
+  border-color: #2e9b47;
+  outline: 2px solid rgb(46 155 71 / 20%);
+  outline-offset: 1px;
+}
+
+.contact-wa-country-popover {
+  width: min(280px, calc(100vw - 24px));
+  overflow: hidden;
+  border-color: #dfe5e0;
+  border-radius: 8px;
+  padding: 0;
+  background: #fff;
+  color: #111;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 16%);
+}
+
+.contact-wa-country-popover [cmdk-input-wrapper] {
+  border-bottom: 1px solid #e7ebe8;
+  padding: 0 9px;
+}
+
+.contact-wa-country-popover [cmdk-input] {
+  height: 38px;
+  font-size: 12px;
+}
+
+.contact-wa-country-list {
+  max-height: 220px;
+}
+
+.contact-wa-country-option {
+  min-height: 32px;
+  font-size: 11px;
+}
+
+.contact-wa-country-flag {
+  flex: 0 0 auto;
+  font-size: 15px;
+}
+
+.contact-wa-country-name {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contact-wa-country-dial {
+  color: #5d6860;
+  font-variant-numeric: tabular-nums;
+}
+
+.contact-wa-input-shell {
+  display: grid;
+  min-width: 0;
+  border: 1px solid #dfe5e0;
+  border-radius: 5px;
+  background: #fbfcfb;
+}
+
+.contact-wa-input-shell:focus-within {
+  border-color: #2e9b47;
+  box-shadow: 0 0 0 1px rgb(46 155 71 / 20%);
+}
+
+.contact-wa-input-shell.has-error {
+  border-color: #b42318;
+  background: #fffafa;
+}
+
+.contact-wa-input-shell .contact-wa-input {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.contact-wa-input-shell .contact-wa-input:focus-visible {
+  border-color: transparent;
+  box-shadow: none;
 }
 
 .contact-wa-label {
   color: #000;
   font-size: 9px;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
 .contact-wa-input {
@@ -152,7 +265,7 @@
   margin-top: 1px;
   border: 0;
   border-radius: 6px;
-  background: #138c54;
+  background: #117842;
   color: #fff;
   font-family: inherit;
   font-size: 10px;
@@ -162,7 +275,7 @@
 }
 
 .contact-wa-submit:hover:not(:disabled) {
-  background: #0d7545;
+  background: #0d6937;
 }
 
 .contact-wa-submit:focus-visible,
@@ -219,6 +332,17 @@
 .contact-wa-success-card small {
   color: #6b7f70;
   font-size: 8px;
+}
+
+.contact-wa-followup .demo-message-copy {
+  line-height: 1.4;
+}
+
+.contact-wa-followup a {
+  color: #087445;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 1px;
 }
 
 .contact-wa-reset {

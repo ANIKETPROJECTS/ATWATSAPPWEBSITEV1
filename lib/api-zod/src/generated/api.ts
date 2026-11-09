@@ -29,16 +29,15 @@ export const submitDemoRequestBodyEmailMax = 254;
 export const submitDemoRequestBodyEmailRegExp = new RegExp('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$');
 export const submitDemoRequestBodyWhatsappMax = 40;
 
-export const submitDemoRequestBodyMessageMin = 10;
 export const submitDemoRequestBodyMessageMax = 1000;
 
 
 
 export const SubmitDemoRequestBody = zod.object({
-  "name": zod.string().min(1).max(submitDemoRequestBodyNameMax),
-  "email": zod.string().max(submitDemoRequestBodyEmailMax).regex(submitDemoRequestBodyEmailRegExp),
+  "name": zod.string().max(submitDemoRequestBodyNameMax).optional(),
+  "email": zod.string().max(submitDemoRequestBodyEmailMax).regex(submitDemoRequestBodyEmailRegExp).optional(),
   "whatsapp": zod.string().max(submitDemoRequestBodyWhatsappMax).optional(),
-  "message": zod.string().min(submitDemoRequestBodyMessageMin).max(submitDemoRequestBodyMessageMax).optional()
+  "message": zod.string().max(submitDemoRequestBodyMessageMax).optional()
 })
 
 export const SubmitDemoRequestResponse = zod.object({
