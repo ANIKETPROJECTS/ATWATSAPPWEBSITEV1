@@ -165,6 +165,7 @@
     max-width: none;
     height: 84%;
     align-self: center;
+    transform: translateX(clamp(12px, 2vw, 24px));
   }
 
   .hero-feature-flow-step {
