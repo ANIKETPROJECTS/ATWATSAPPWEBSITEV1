@@ -40,6 +40,7 @@ import ContactWhatsAppForm from '@/components/ContactWhatsAppForm';
 import NotFound from '@/pages/not-found';
 import madeInIndiaFlagPath from './assets/made-in-india-flag.png';
 import metaBusinessPartnerPath from './assets/meta-business-partner.png';
+import verifiedBusinessBadge from './assets/verified-business.svg';
 import logoPath from './assets/airavata-technologies-logo.svg';
 import airavataTriangleSourcePath from './assets/airavata-technologies-mark-source.svg';
 import contactEmailPath from './assets/contact-email.png';
@@ -471,15 +472,24 @@ function Home() {
             <h1 className="mt-6 max-w-[720px] font-display text-[clamp(2.5rem,10.2vw,5.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:text-[clamp(3.25rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(3rem,4.5vw,4.5rem)]">Turn WhatsApp into your <span className="text-[#3acd32]">sales &amp; support engine.</span></h1>
             <p className="mt-8 max-w-[540px] text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-base">AtWassup helps you onboard to WhatsApp Business API, connect the tools you already use, and bring customer conversations, campaigns, and support into one channel.</p>
             <div className="mt-8 flex flex-wrap items-center gap-3 lg:mt-5"><PrimaryButton onClick={() => setLeadOpen(true)} testId="hero-button-book-demo">Book a demo</PrimaryButton><a data-testid="hero-link-explore-features" href="#features" className="group inline-flex items-center gap-2 rounded-full border border-black/15 bg-white/60 px-5 py-3.5 text-sm font-bold transition hover:-translate-y-1 hover:border-black hover:bg-white">Explore features <ArrowDownRight size={15} className="transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" /></a></div>
-            <div className="mt-8 flex flex-wrap items-center gap-3" data-testid="hero-meta-business-partner">
-              <img
-                src={metaBusinessPartnerPath}
-                alt="Meta Business Partner"
-                className="h-9 w-[112px] shrink-0 object-contain object-left sm:h-10 sm:w-[130px]"
-                data-testid="hero-meta-business-partner-logo"
-              />
-              <p className="max-w-[250px] text-xs font-medium leading-5 text-black/60 sm:text-sm" data-testid="hero-meta-business-partner-copy">
-                AtWassup is an official Meta Business Partner.
+            <div className="mt-8" data-testid="hero-meta-business-partner">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                <img
+                  src={metaBusinessPartnerPath}
+                  alt="Meta Business Partner"
+                  className="h-[52px] w-[135px] shrink-0 object-contain object-left sm:h-16 sm:w-[180px]"
+                  data-testid="hero-meta-business-partner-logo"
+                />
+                <img
+                  src={logoPath}
+                  alt="AtWassup"
+                  className="h-[50px] w-[200px] shrink-0 object-cover object-[center_52%] sm:h-[66px] sm:w-[260px]"
+                  data-testid="hero-atwassup-logo"
+                />
+              </div>
+              <p className="mt-2 text-sm font-medium leading-6 text-black/60 sm:text-base" data-testid="hero-meta-business-partner-copy">
+                We are an official Meta Business Partner
+                <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="ml-1.5 inline-block h-4 w-4 align-middle object-contain sm:h-[18px] sm:w-[18px]" />
               </p>
             </div>
           </div>
