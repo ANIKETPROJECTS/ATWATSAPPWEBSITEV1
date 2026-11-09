@@ -44,6 +44,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  --hero-feature-progress-height: 0px;
 }
 
 .hero-feature-flow-list::before {
@@ -51,9 +52,22 @@
   top: 14px;
   bottom: 14px;
   left: 12px;
-  width: 1px;
-  background: linear-gradient(to bottom, rgb(58 205 50 / 42%), rgb(0 0 0 / 9%));
+  width: 2px;
+  border-radius: 999px;
+  background: #bfc5bf;
   content: '';
+}
+
+.hero-feature-flow-list::after {
+  position: absolute;
+  top: 14px;
+  left: 11.5px;
+  width: 3px;
+  height: var(--hero-feature-progress-height);
+  border-radius: 999px;
+  background: #3acd32;
+  content: '';
+  transition: height 360ms cubic-bezier(.2, .7, .2, 1);
 }
 
 .hero-feature-flow-step {

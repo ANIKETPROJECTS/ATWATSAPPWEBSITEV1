@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import broadcastIcon from '../../assets/hero-feature-icons/broadcast.svg';
 import assistantIcon from '../../assets/hero-feature-icons/assistant.svg';
@@ -72,6 +72,7 @@ const featureSequenceByStage: Record<HeroFeatureStage, string[]> = {
 export default function HeroFeatureFlow({ stage }: { stage: HeroFeatureStage }) {
   const prefersReducedMotion = useReducedMotion() === true;
   const [activeFeatureId, setActiveFeatureId] = useState('broadcast');
+  const featureListRef = useRef<HTMLOListElement>(null);
 
   useEffect(() => {
     const sequence = featureSequenceByStage[stage];
@@ -82,9 +83,30 @@ export default function HeroFeatureFlow({ stage }: { stage: HeroFeatureStage }) 
     return () => window.clearTimeout(timeout);
   }, [stage, prefersReducedMotion]);
 
+  useLayoutEffect(() => {
+    const list = featureListRef.current;
+    if (!list) return;
+
+    const updateProgress = () => {
+      const activeStep = list.querySelector<HTMLElement>('.hero-feature-flow-step.is-active');
+      const icon = activeStep?.querySelector<HTMLElement>('.hero-feature-flow-icon');
+      if (!icon) return;
+
+      const listTop = list.getBoundingClientRect().top + 14;
+      const iconCenter = icon.getBoundingClientRect().top + icon.getBoundingClientRect().height / 2;
+      list.style.setProperty('--hero-feature-progress-height', `${Math.max(0, iconCenter - listTop)}px`);
+    };
+
+    updateProgress();
+    const observer = new ResizeObserver(updateProgress);
+    observer.observe(list);
+    list.querySelectorAll('.hero-feature-flow-step').forEach((step) => observer.observe(step));
+    return () => observer.disconnect();
+  }, [activeFeatureId]);
+
   return (
     <aside className="hero-feature-flow" aria-label="AtWassup features in a customer journey">
-      <ol className="hero-feature-flow-list">
+      <ol ref={featureListRef} className="hero-feature-flow-list">
         {features.map(({ id, title, description, icon }) => {
           const isActive = activeFeatureId === id;
           return (
