@@ -223,10 +223,10 @@ function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capability
   );
 }
 
-function PrimaryButton({ children, onClick, testId, dark = false }: { children: ReactNode; onClick: () => void; testId: string; dark?: boolean }) {
+function PrimaryButton({ children, onClick, testId }: { children: ReactNode; onClick: () => void; testId: string }) {
   return (
-    <button data-testid={testId} onClick={onClick} className={`group inline-flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold transition duration-200 hover:-translate-y-1 hover:shadow-[0_8px_0_rgba(0,0,0,.18)] active:translate-y-0 ${dark ? 'bg-[#3acd32] text-[#050505]' : 'bg-[#050505] text-white hover:bg-[#3acd32] hover:text-[#050505]'}`}>
-      {children}<ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+    <button data-testid={testId} onClick={onClick} className="header-action header-action-primary min-w-[180px] px-8">
+      {children}
     </button>
   );
 }
@@ -489,7 +489,7 @@ function Home() {
           <div ref={heroReveal} className="reveal hero-copy">
             <h1 className="mt-6 max-w-[720px] font-display text-[clamp(2.5rem,10.2vw,5.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:text-[clamp(3.25rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(3rem,4.5vw,4.5rem)]">Turn WhatsApp into your <span className="text-[#3acd32]">sales &amp; support engine.</span></h1>
             <p className="mt-8 max-w-[540px] text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-base">AtWassup helps you onboard to WhatsApp Business API, connect the tools you already use, and bring customer conversations, campaigns, and support into one channel.</p>
-            <div className="mt-8 flex flex-wrap items-center gap-3 lg:mt-5"><PrimaryButton onClick={() => setLeadOpen(true)} testId="hero-button-book-demo">Book a demo</PrimaryButton><a data-testid="hero-link-explore-features" href="#features" className="group inline-flex items-center gap-2 rounded-full border border-black/15 bg-white/60 px-5 py-3.5 text-sm font-bold transition hover:-translate-y-1 hover:border-black hover:bg-white">Explore features <ArrowDownRight size={15} className="transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" /></a></div>
+            <div className="mt-8 flex flex-wrap items-center gap-3 lg:mt-5"><PrimaryButton onClick={() => setLeadOpen(true)} testId="hero-button-book-demo">Schedule demo</PrimaryButton><a data-testid="hero-link-explore-features" href="#features" className="header-action header-action-secondary min-w-[180px] px-8">Explore Features</a></div>
             <div className="mt-8" data-testid="hero-meta-business-partner">
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                 <img
@@ -505,9 +505,9 @@ function Home() {
                   data-testid="hero-atwassup-logo"
                 />
               </div>
-              <p className="mt-2 text-sm font-medium leading-6 text-black/60 sm:text-base" data-testid="hero-meta-business-partner-copy">
+              <p className="mt-2 text-base font-medium leading-6 text-black/60 sm:text-lg" data-testid="hero-meta-business-partner-copy">
                 We are an official Meta Business Partner
-                <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="ml-1.5 inline-block h-4 w-4 align-middle object-contain sm:h-[18px] sm:w-[18px]" />
+                <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="ml-1.5 inline-block h-[18px] w-[18px] align-middle object-contain sm:h-5 sm:w-5" />
               </p>
             </div>
             <div className="mt-6 max-w-[520px]" data-testid="hero-whatsapp-profile-showcase">
