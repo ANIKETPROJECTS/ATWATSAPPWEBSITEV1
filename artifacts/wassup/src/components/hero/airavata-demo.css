@@ -426,9 +426,9 @@
 .hero-airavata-demo .demo-phone-wrap {
   transform: none;
 }
-@media (max-width: 780px) {
+@media (max-width: 1023px) {
   .hero-airavata-demo {
-    height: min(850px, 96svh);
+    height: min(792px, calc(220vw - 88px));
     min-height: 280px;
   }
 }

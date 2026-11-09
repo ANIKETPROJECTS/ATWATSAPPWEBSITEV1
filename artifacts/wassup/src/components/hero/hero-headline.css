@@ -9,7 +9,7 @@
   display: block;
   width: 100%;
   min-width: 0;
-  height: 2.1em;
+  height: 1.1em;
   overflow: hidden;
   text-align: left;
 }
@@ -18,7 +18,7 @@
   display: block;
   width: 100%;
   min-width: 0;
-  height: 2.1em;
+  height: 1.1em;
   text-align: left;
   animation: hero-headline-enter 420ms cubic-bezier(.2, .7, .2, 1) both;
 }
@@ -26,7 +26,7 @@
 @keyframes hero-headline-enter {
   from {
     opacity: .65;
-    transform: translateY(45%);
+    transform: translateY(20%);
   }
 
   to {
@@ -36,13 +36,15 @@
 }
 
 @media (min-width: 720px) {
-  .hero-headline-rotator,
-  .hero-headline-slide-in {
-    height: 1.1em;
-  }
-
   .hero-headline-slide-in {
     white-space: nowrap;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero-atwassup-wordmark {
+    height: 1.1em;
+    transform: translateY(.34em);
   }
 }
 

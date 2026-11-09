@@ -21,7 +21,7 @@ export default function HeroHeadlineRotator() {
   }, []);
 
   return (
-    <span className="hero-headline-rotator mt-4 text-[#3acd32]">
+    <span className="hero-headline-rotator mt-0 lg:mt-4 text-[#3acd32]">
       <span className="sr-only">
         AI that drives leads and sales. AI for WhatsApp marketing. AI that grows your business.
       </span>

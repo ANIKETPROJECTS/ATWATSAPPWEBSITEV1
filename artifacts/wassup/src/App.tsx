@@ -512,16 +512,16 @@ function Home() {
     <main className="noise min-h-[100dvh] bg-[#fcfbf8]" id="top">
       <Nav onLead={() => setLeadOpen(true)} />
       <section className="relative overflow-hidden pb-8 pt-24 sm:pb-10 sm:pt-28 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pb-[14px] lg:pt-[72px]">
-        <div className="section-shell hero-shell relative grid items-start gap-6 sm:gap-8 lg:grid-cols-[1.02fr_.98fr] lg:items-center lg:gap-x-5 lg:gap-y-0">
+        <div className="section-shell hero-shell relative grid items-start gap-4 sm:gap-6 lg:grid-cols-[1.02fr_.98fr] lg:items-center lg:gap-x-5 lg:gap-y-0">
           <div ref={heroReveal} className="reveal hero-heading">
-            <h1 className="mt-2 flex max-w-[720px] flex-col font-display text-[clamp(1.45rem,7.25vw,1.9rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:mt-6 sm:text-[clamp(2rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(2.25rem,3.5vw,3.25rem)]">
+            <h1 className="mt-2 flex max-w-[720px] flex-col gap-y-1.5 font-display text-[clamp(1.45rem,7.25vw,1.9rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:mt-6 sm:text-[clamp(2rem,5.3vw,5.5rem)] lg:mt-0 lg:gap-y-0 lg:text-[clamp(2.25rem,3.5vw,3.25rem)]">
               <span className="block">Make your business</span>
-              <span className="-mt-1 block">smarter with <HeroAtWassupWordmark /></span>
+              <span className="-mt-2 block lg:mt-0">smarter with <HeroAtWassupWordmark /></span>
               <HeroHeadlineRotator />
             </h1>
           </div>
           <div className="hero-details">
-            <p className="mt-6 max-w-[540px] text-left text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-justify lg:text-base">Start with AtWassup. Connect the WhatsApp Business API and let AI answer customer questions, capture leads, follow up, close sales, and run broadcasts all through AtWassup, your all-in-one WhatsApp AI marketing platform.</p>
+            <p className="mt-0 max-w-[540px] text-left text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-justify lg:text-base">Start with AtWassup. Connect the WhatsApp Business API and let AI answer customer questions, capture leads, follow up, close sales, and run broadcasts all through AtWassup, your all-in-one WhatsApp AI marketing platform.</p>
             <div className="hero-actions mt-6 lg:mt-5">
               <PrimaryButton onClick={() => setLeadOpen(true)} testId="hero-button-book-demo">Schedule demo</PrimaryButton>
               <a data-testid="hero-link-explore-features" href="#features" className="header-action header-action-secondary min-w-[180px] px-8">Explore Features</a>
@@ -556,7 +556,7 @@ function Home() {
                 <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="ml-1.5 inline-block h-5 w-5 align-middle object-contain" />
               </p>
             </div>
-            <div className="mt-6 max-w-[520px]" data-testid="hero-whatsapp-profile-showcase">
+            <div className="mt-4 max-w-[520px]" data-testid="hero-whatsapp-profile-showcase">
               <div className="flex items-center gap-1.5 rounded-none border border-black/10 bg-white px-2 py-4 sm:gap-2.5 sm:px-3">
                 <ChevronLeft aria-hidden="true" className="h-5 w-5 shrink-0 text-[#111b21] sm:h-[22px] sm:w-[22px]" />
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#d1e1d2] bg-[#dceadd] text-base font-semibold text-[#447b54] sm:h-12 sm:w-12 sm:text-lg">
