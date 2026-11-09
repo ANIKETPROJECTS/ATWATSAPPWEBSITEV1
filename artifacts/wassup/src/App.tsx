@@ -496,21 +496,21 @@ function Home() {
             </div>
             <div className="mt-6 max-w-[520px]" data-testid="hero-whatsapp-profile-showcase">
               <h2 className="max-w-[480px] text-lg font-semibold leading-snug tracking-tight text-black sm:text-xl">
-                Start with AtWassup. Automate business workflows with AI and turn WhatsApp into a growth engine.
+                Start with AtWassup. Let AI answer WhatsApp chats and follow up with leads automatically.
               </h2>
-              <div className="mt-3 flex items-center gap-1.5 rounded-md border border-black/10 bg-[#f5f2eb] px-2 py-3 sm:gap-2.5 sm:px-3">
+              <div className="mt-3 flex items-center gap-1.5 rounded-none border border-black/10 bg-[#f5f2eb] px-2 py-3 sm:gap-2.5 sm:px-3">
                 <ChevronLeft aria-hidden="true" className="h-[18px] w-[18px] shrink-0 text-[#111b21] sm:h-5 sm:w-5" />
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#d1e1d2] bg-[#dceadd] text-sm font-semibold text-[#447b54] sm:h-10 sm:w-10">
                   Y
                 </span>
                 <div className="min-w-0 flex-1">
-                  <div className="flex min-w-0 items-center gap-1.5">
-                    <span className="truncate text-xs font-semibold text-[#111b21] sm:text-base">Your Business / Brand Name</span>
+                  <div className="flex min-w-0 flex-wrap items-center gap-1.5">
+                    <span className="min-w-0 text-xs font-semibold leading-tight text-[#111b21] sm:text-base">Your Business / Brand Name</span>
                     <img src={verifiedBusinessBadge} alt="Verified business" className="h-4 w-4 shrink-0 object-contain" />
                   </div>
-                  <span className="block truncate text-xs leading-4 text-black/50">AI · Smart Marketing</span>
+                  <span className="block text-sm leading-5 text-black/50">AI Smart WhatsApp Marketing</span>
                 </div>
-                <span role="img" aria-label="WhatsApp video and phone call buttons" className="relative h-[23px] w-[56px] shrink-0">
+                <span role="img" aria-label="WhatsApp video and phone call buttons" className="relative h-[28px] w-[68px] shrink-0">
                   <FigmaSvgCrop x={288} y={58} width={88} height={36} className="hero-profile-actions-art" />
                 </span>
               </div>
