@@ -1,3 +1,10 @@
+.hero-atwassup-wordmark {
+  height: 1.22em;
+  width: auto;
+  transform: translateY(.46em);
+  transform-origin: left center;
+}
+
 .hero-headline-rotator {
   display: block;
   width: 100%;

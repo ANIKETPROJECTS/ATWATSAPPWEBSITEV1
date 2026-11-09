@@ -383,7 +383,7 @@ function HeroAtWassupWordmark() {
   return (
     <svg
       aria-label="AtWassup"
-      className="inline-block h-[.9em] w-auto shrink-0 align-baseline"
+      className="hero-atwassup-wordmark inline-block w-auto shrink-0 align-baseline"
       role="img"
       viewBox="98 160 268 64"
       xmlns="http://www.w3.org/2000/svg"
@@ -514,7 +514,7 @@ function Home() {
       <section className="relative overflow-hidden pb-8 pt-24 sm:pb-10 sm:pt-28 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pb-[14px] lg:pt-[72px]">
         <div className="section-shell hero-shell relative grid items-center gap-10 lg:grid-cols-[1.02fr_.98fr] lg:items-center lg:gap-5">
           <div ref={heroReveal} className="reveal hero-copy">
-            <h1 className="mt-6 max-w-[720px] space-y-1.5 font-display text-[clamp(2.5rem,10.2vw,5.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:text-[clamp(3.25rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(2.25rem,3.5vw,3.25rem)]">
+            <h1 className="mt-6 flex max-w-[720px] flex-col font-display text-[clamp(2.5rem,10.2vw,5.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:text-[clamp(3.25rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(2.25rem,3.5vw,3.25rem)]">
               <span className="block">Make your business</span>
               <span className="block">smarter with <HeroAtWassupWordmark /></span>
               <HeroHeadlineRotator />
