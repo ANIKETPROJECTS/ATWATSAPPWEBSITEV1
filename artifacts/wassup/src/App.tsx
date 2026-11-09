@@ -7,6 +7,7 @@ import {
   BarChart3,
   Bot,
   Check,
+  ChevronLeft,
   ChevronRight,
   Database,
   FileText,
@@ -33,6 +34,7 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import CommerceDemo from '@/components/hero/CommerceDemo';
+import { FigmaSvgCrop } from '@/components/hero/FigmaChrome';
 import HeroFeatureFlow, { type HeroFeatureStage } from '@/components/hero/HeroFeatureFlow';
 import ChatbotInquiryDemo from '@/components/chatbot/ChatbotInquiryDemo';
 import ClinicAppointmentDemo from '@/components/flows/ClinicAppointmentDemo';
@@ -491,6 +493,27 @@ function Home() {
                 We are an official Meta Business Partner
                 <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="ml-1.5 inline-block h-4 w-4 align-middle object-contain sm:h-[18px] sm:w-[18px]" />
               </p>
+            </div>
+            <div className="mt-6 max-w-[520px]" data-testid="hero-whatsapp-profile-showcase">
+              <h2 className="max-w-[480px] text-lg font-semibold leading-snug tracking-tight text-black sm:text-xl">
+                Start with AtWassup. Automate business workflows with AI and turn WhatsApp into a growth engine.
+              </h2>
+              <div className="mt-3 flex items-center gap-1.5 rounded-md border border-black/10 bg-[#f5f2eb] px-2 py-3 sm:gap-2.5 sm:px-3">
+                <ChevronLeft aria-hidden="true" className="h-[18px] w-[18px] shrink-0 text-[#111b21] sm:h-5 sm:w-5" />
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#d1e1d2] bg-[#dceadd] text-sm font-semibold text-[#447b54] sm:h-10 sm:w-10">
+                  Y
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex min-w-0 items-center gap-1.5">
+                    <span className="truncate text-xs font-semibold text-[#111b21] sm:text-base">Your Business / Brand Name</span>
+                    <img src={verifiedBusinessBadge} alt="Verified business" className="h-4 w-4 shrink-0 object-contain" />
+                  </div>
+                  <span className="block truncate text-xs leading-4 text-black/50">AI · Smart Marketing</span>
+                </div>
+                <span role="img" aria-label="WhatsApp video and phone call buttons" className="relative h-[23px] w-[56px] shrink-0">
+                  <FigmaSvgCrop x={288} y={58} width={88} height={36} className="hero-profile-actions-art" />
+                </span>
+              </div>
             </div>
           </div>
           <div className="relative flex justify-center lg:translate-y-6 lg:justify-end">
