@@ -498,19 +498,19 @@ function Home() {
               <h2 className="max-w-[480px] text-lg font-semibold leading-snug tracking-tight text-black sm:text-xl">
                 Start with AtWassup. Let AI answer WhatsApp chats and follow up with leads automatically.
               </h2>
-              <div className="mt-3 flex items-center gap-1.5 rounded-none border border-black/10 bg-[#f5f2eb] px-2 py-3 sm:gap-2.5 sm:px-3">
-                <ChevronLeft aria-hidden="true" className="h-[18px] w-[18px] shrink-0 text-[#111b21] sm:h-5 sm:w-5" />
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#d1e1d2] bg-[#dceadd] text-sm font-semibold text-[#447b54] sm:h-10 sm:w-10">
+              <div className="mt-3 flex items-center gap-1.5 rounded-none border border-black/10 bg-white px-2 py-4 sm:gap-2.5 sm:px-3">
+                <ChevronLeft aria-hidden="true" className="h-5 w-5 shrink-0 text-[#111b21] sm:h-[22px] sm:w-[22px]" />
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#d1e1d2] bg-[#dceadd] text-base font-semibold text-[#447b54] sm:h-12 sm:w-12 sm:text-lg">
                   Y
                 </span>
                 <div className="min-w-0 flex-1">
                   <div className="flex min-w-0 flex-wrap items-center gap-1.5">
-                    <span className="min-w-0 text-xs font-semibold leading-tight text-[#111b21] sm:text-base">Your Business / Brand Name</span>
-                    <img src={verifiedBusinessBadge} alt="Verified business" className="h-4 w-4 shrink-0 object-contain" />
+                    <span className="min-w-0 text-sm font-semibold leading-tight text-[#111b21] sm:text-lg">Your Business / Brand Name</span>
+                    <img src={verifiedBusinessBadge} alt="Verified business" className="h-[18px] w-[18px] shrink-0 object-contain sm:h-5 sm:w-5" />
                   </div>
-                  <span className="block text-sm leading-5 text-black/50">AI Smart WhatsApp Marketing</span>
+                  <span className="block text-[15px] leading-5 text-black/60 sm:text-base">AI Smart WhatsApp Marketing</span>
                 </div>
-                <span role="img" aria-label="WhatsApp video and phone call buttons" className="relative h-[28px] w-[68px] shrink-0">
+                <span role="img" aria-label="WhatsApp video and phone call buttons" className="relative h-[30px] w-[74px] shrink-0">
                   <FigmaSvgCrop x={288} y={58} width={88} height={36} className="hero-profile-actions-art" />
                 </span>
               </div>
