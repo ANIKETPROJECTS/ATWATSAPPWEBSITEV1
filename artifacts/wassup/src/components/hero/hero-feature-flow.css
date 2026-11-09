@@ -30,7 +30,7 @@
   max-width: 520px;
   flex-direction: column;
   margin-inline: auto;
-  color: #101210;
+  color: #111;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -64,8 +64,8 @@
   align-items: center;
   gap: 10px;
   padding: 4px 0;
-  opacity: .72;
-  transition: opacity 220ms ease;
+  opacity: 1;
+  transition: transform 220ms ease;
 }
 
 .hero-feature-flow-icon {
@@ -76,8 +76,8 @@
   height: 26px;
   place-items: center;
   background: #fcfbf8;
-  color: #65836a;
-  transition: color 220ms ease, transform 220ms ease;
+  color: #111;
+  transition: color 260ms ease, transform 260ms ease, filter 260ms ease;
 }
 
 .hero-feature-flow-icon img {
@@ -85,7 +85,7 @@
   width: 30px;
   height: 30px;
   object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(51%) sepia(10%) saturate(764%) hue-rotate(78deg) brightness(94%) contrast(88%);
+  filter: brightness(0) saturate(100%);
 }
 
 .hero-feature-flow-copy {
@@ -97,10 +97,11 @@
 .hero-feature-flow-copy > strong {
   display: -webkit-box;
   overflow: hidden;
-  color: rgb(0 0 0 / 72%);
+  color: #111;
   font-size: 13px;
   font-weight: 600;
   line-height: 1.25;
+  transition: color 300ms ease, text-shadow 300ms ease;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
@@ -108,32 +109,32 @@
 .hero-feature-flow-copy > span {
   display: -webkit-box;
   overflow: hidden;
-  color: rgb(0 0 0 / 48%);
+  color: #111;
   font-size: 10.5px;
   line-height: 1.35;
+  transition: color 300ms ease, text-shadow 300ms ease;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
 
 .hero-feature-flow-step.is-active {
-  opacity: 1;
+  transform: translateX(2px);
 }
 
 .hero-feature-flow-step.is-active .hero-feature-flow-icon {
-  transform: scale(1.04);
-  color: #219b28;
+  transform: scale(1.1);
+  color: #3acd32;
+  filter: drop-shadow(0 0 5px rgb(58 205 50 / 42%));
 }
 
 .hero-feature-flow-step.is-active .hero-feature-flow-icon img {
-  filter: brightness(0) saturate(100%) invert(45%) sepia(86%) saturate(1036%) hue-rotate(75deg) brightness(96%) contrast(91%);
+  filter: brightness(0) saturate(100%) invert(69%) sepia(82%) saturate(589%) hue-rotate(63deg) brightness(91%) contrast(91%) drop-shadow(0 0 4px rgb(58 205 50 / 42%));
 }
 
-.hero-feature-flow-step.is-active .hero-feature-flow-copy > strong {
-  color: #111;
-}
-
+.hero-feature-flow-step.is-active .hero-feature-flow-copy > strong,
 .hero-feature-flow-step.is-active .hero-feature-flow-copy > span {
-  color: rgb(0 0 0 / 63%);
+  color: #3acd32;
+  text-shadow: 0 0 8px rgb(58 205 50 / 42%), 0 0 18px rgb(58 205 50 / 22%);
 }
 
 @media (min-width: 1024px) {

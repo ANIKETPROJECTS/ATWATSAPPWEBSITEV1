@@ -210,6 +210,22 @@ export default function CommerceDemo({
   const invoiceViewerShownRef = useRef(false);
   const nextOrderNumber = useRef(15);
 
+  const replayDemo = useCallback(() => {
+    setStep('template');
+    setCheckout({ ...emptyCheckout });
+    setReceipt(null);
+    setInvoiceFileSize('');
+    setInvoiceViewerOpen(false);
+    setShowTemplateMessage(false);
+    setShowScrollButton(false);
+    setConfirmedStage('summary');
+    setPostPaymentStage('payment');
+    setRazorpayStage('upi');
+    setSelectedUpiApp('Google Pay');
+    invoiceViewerShownRef.current = false;
+    setFlowTypingField(null);
+  }, []);
+
   useEffect(() => {
     const featureStageByDemoStep: Record<DemoStep, HeroFeatureStage> = {
       template: 'broadcast',
@@ -275,12 +291,11 @@ export default function CommerceDemo({
       timeouts.push(window.setTimeout(() => setPostPaymentStage('replay'), 9000));
       timeouts.push(window.setTimeout(() => {
         if (invoiceViewerShownRef.current) return;
-        invoiceViewerShownRef.current = true;
-        setInvoiceViewerOpen(true);
+        replayDemo();
       }, 14000));
     }
     return () => timeouts.forEach(timeout => window.clearTimeout(timeout));
-  }, [step, confirmedStage]);
+  }, [step, confirmedStage, replayDemo]);
 
   useEffect(() => {
     if (step !== 'confirmed') return;
@@ -365,21 +380,6 @@ export default function CommerceDemo({
   const submitCheckout = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     completeCheckout(checkout);
-  };
-
-  const replayDemo = () => {
-    setStep('template');
-    setCheckout({ ...emptyCheckout });
-    setReceipt(null);
-    setInvoiceFileSize('');
-    setInvoiceViewerOpen(false);
-    setShowTemplateMessage(false);
-    setConfirmedStage('summary');
-    setPostPaymentStage('payment');
-    setRazorpayStage('upi');
-    setSelectedUpiApp('Google Pay');
-    invoiceViewerShownRef.current = false;
-    setFlowTypingField(null);
   };
 
   const screenScale = screenWidth / 252;

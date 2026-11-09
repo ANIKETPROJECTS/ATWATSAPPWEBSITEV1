@@ -62,9 +62,9 @@ const features: Array<{
 ];
 
 const featureSequenceByStage: Record<HeroFeatureStage, string[]> = {
-  broadcast: ['broadcast', 'catalog'],
+  broadcast: ['broadcast'],
   reply: ['assistant', 'agents'],
-  answer: ['ai-chatbot', 'chatbots'],
+  answer: ['ai-chatbot', 'catalog'],
   forms: ['forms'],
   checkout: ['payments'],
 };
