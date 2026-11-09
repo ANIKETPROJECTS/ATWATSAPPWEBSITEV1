@@ -811,7 +811,7 @@ function Home() {
         data-testid="footer"
       >
         <div className="relative mx-auto w-[calc(100%-40px)] max-w-[1440px] sm:w-[calc(100%-64px)] lg:w-[calc(100%-80px)]">
-          <div className="grid gap-x-10 gap-y-9 border-b border-black/10 pb-9 md:grid-cols-2 xl:grid-cols-[1.2fr_.7fr_1.2fr_.85fr_1.2fr] xl:gap-x-7">
+          <div className="grid gap-x-10 gap-y-9 pb-3 md:grid-cols-2 xl:grid-cols-[1.2fr_.7fr_1.2fr_.85fr_1.2fr] xl:gap-x-7">
             <div className="order-5 xl:order-1">
               <a href="#top" aria-label="AtWassup home" data-testid="footer-link-home">
                 <img
@@ -821,7 +821,7 @@ function Home() {
                 />
               </a>
               <p className="mt-2 max-w-[290px] text-base leading-relaxed text-black">
-                WhatsApp Business API, AI chatbot, and Flow solutions by Airavata Technologies.
+                WhatsApp Business API, AI chatbot, and Flow solutions.
               </p>
               <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
                 <img
@@ -949,11 +949,8 @@ function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-2 pt-5 text-sm text-black sm:flex-row sm:items-center sm:justify-between sm:pr-20">
-            <p>© {new Date().getFullYear()} Airavata Technologies. All rights reserved.</p>
-            <a href="https://atwassup.com/" target="_blank" rel="noreferrer" data-testid="footer-link-domain" className="text-base font-semibold text-black transition hover:text-black">
-              AtWassup.com
-            </a>
+          <div className="pt-4 text-sm text-black">
+            <p>© {new Date().getFullYear()} AtWassup. All rights reserved.</p>
           </div>
         </div>
       </footer>
