@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import './hero-headline.css';
 
 const headlines = [
-  'AI that drives leads & sales.',
-  'AI for WhatsApp marketing.',
-  'AI that grows your business.',
+  'AI that drives leads & sales',
+  'AI for WhatsApp marketing',
+  'AI that grows your business',
 ];
 
 export default function HeroHeadlineRotator() {
