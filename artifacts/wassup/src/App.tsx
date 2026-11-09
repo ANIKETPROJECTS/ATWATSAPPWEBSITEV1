@@ -55,7 +55,6 @@ import socialLinkedinPath from './assets/social-linkedin.png';
 import socialYoutubePath from './assets/social-youtube.png';
 import whatsappContactPath from './assets/whatsapp-contact.png';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
-import dashboardScreenshotPath from '../../../attached_assets/Screenshot_2026-11-10_at_12.41.34_AM_1794251497032.png';
 
 const queryClient = new QueryClient();
 const officeAddress =
@@ -77,12 +76,11 @@ const capabilities = [
   { group: 'grow', icon: ShoppingBag, motion: 'catalog', title: 'Product catalogs', text: 'Showcase products and help customers shop inside WhatsApp.' },
 ];
 
-const connectAndAutomateCapabilities = capabilities.filter(
-  ({ group, title }) => group === 'connect' || title === 'Message templates' || title === 'Chatbot builder',
-);
-const automateAndGrowCapabilities = capabilities.filter(
-  ({ group, title }) => group === 'grow' || title === 'WhatsApp Flows' || title === 'Campaigns',
-);
+const capabilityGroups = [
+  { id: 'connect', label: '01 · CONNECT', title: 'Get everything connected', description: 'Start with the right setup, then bring your existing tools into the conversation.' },
+  { id: 'automate', label: '02 · AUTOMATE', title: 'Make every message work harder', description: 'Turn common questions and customer journeys into repeatable experiences.' },
+  { id: 'grow', label: '03 · SUPPORT & GROW', title: 'Keep improving the experience', description: 'Support people when they need you and learn from every interaction.' },
+];
 
 const processSteps = [
   { title: 'Onboard', text: 'Get help setting up your WhatsApp Business API and verification.' },
@@ -182,35 +180,47 @@ function SectionLabel({ children, tone = 'green' }: { children: ReactNode; tone?
   );
 }
 
-function CapabilityCallout({
-  capability,
-  index,
-}: {
-  capability: (typeof capabilities)[number];
-  index: number;
-}) {
-  const Icon = capability.icon;
-  const category = capability.group === 'grow' ? 'Support & grow' : capability.group;
+function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capabilityGroups)[number]; groupIndex: number }) {
+  const labelDelay = 920 + groupIndex * 480;
 
   return (
-    <article
-      className="feature-row feature-callout"
-      data-icon-motion={capability.motion}
-      data-testid={`feature-${capability.group}-${capability.title.toLowerCase().replaceAll(' ', '-')}`}
-      style={{ '--feature-row-delay': `${620 + index * 95}ms` } as CSSProperties}
-    >
-      <div className="feature-row-title-line">
-        <span className="feature-row-icon" aria-hidden="true">
-          <Icon size={18} className="feature-icon-underlay text-[#3acd32]" />
-          <Icon size={18} className="feature-icon-draw text-[#3acd32]" />
-        </span>
-        <div className="feature-row-title-wrap">
-          <span className="feature-callout-category">{category}</span>
-          <h4 className="feature-row-title">{capability.title}</h4>
+    <div className="feature-group" data-group-index={groupIndex} data-testid={`capability-group-${group.id}`}>
+      <div className="feature-group-intro">
+        <div className="feature-group-label-wrap" style={{ '--feature-label-delay': `${labelDelay}ms` } as CSSProperties}>
+          <p className="feature-group-label font-mono text-[10px] font-bold uppercase tracking-[.18em] text-[#3acd32]">{group.label}</p>
+          <span className="feature-group-label-flash" aria-hidden="true" />
         </div>
+        <h3 className="mt-2 font-display text-xl font-bold leading-tight tracking-[-.04em]">{group.title}</h3>
+        <p className="mt-1.5 text-xs leading-relaxed text-white/45">{group.description}</p>
       </div>
-      <p className="feature-row-description">{capability.text}</p>
-    </article>
+      <div className="feature-list">
+        {capabilities.filter((capability) => capability.group === group.id).map(({ icon: Icon, motion, title, text }, rowIndex) => {
+          const rowDelay = 900 + groupIndex * 500 + rowIndex * 130;
+
+          return (
+            <article
+              key={title}
+              className="feature-row"
+              data-icon-motion={motion}
+              data-testid={`feature-${group.id}-${title.toLowerCase().replaceAll(' ', '-')}`}
+              style={{ '--feature-row-delay': `${rowDelay}ms` } as CSSProperties}
+            >
+              <div className="feature-row-title-line">
+                <span className="feature-row-icon" aria-hidden="true">
+                  <Icon size={14} className="feature-icon-underlay text-[#3acd32]" />
+                  <Icon size={14} className="feature-icon-draw text-[#3acd32]" />
+                </span>
+                <span className="feature-row-title-wrap">
+                  <h4 className="feature-row-title text-xs font-bold leading-snug text-white/90">{title}</h4>
+                  <span className="feature-row-title-underline" aria-hidden="true" />
+                </span>
+              </div>
+              <p className="feature-row-description">{text}</p>
+            </article>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
@@ -570,15 +580,15 @@ function Home() {
 
       <section
         ref={(node) => { capabilitiesSectionRef.current = node; }}
-        className={`feature-motion-section relative overflow-hidden bg-[#1a1d1a] py-12 text-white sm:py-16 lg:py-20${capabilitiesInView ? ' is-in-view' : ''}`}
+        className={`feature-motion-section relative overflow-hidden bg-[#101110] py-9 text-white sm:py-11${capabilitiesInView ? ' is-in-view' : ''}`}
         id="features"
       >
         <div className="feature-orbit pointer-events-none absolute -right-40 top-10 h-96 w-96 rounded-full border border-[#3acd32]/15" />
-        <div ref={capabilitiesReveal} className="section-shell feature-section-shell reveal relative">
+        <div ref={capabilitiesReveal} className="section-shell reveal relative">
           <div className="feature-heading-row">
-            <div className="feature-heading-copy">
+            <div className="max-w-[720px]">
               <SectionLabel tone="dark">One channel · ten capabilities</SectionLabel>
-              <h2 className="font-display text-[clamp(2.6rem,5vw,4.25rem)] font-bold leading-[.98] tracking-[-.065em]">
+              <h2 className="font-display text-5xl font-bold leading-[.94] tracking-[-.07em] sm:text-5xl">
                 <span className="sr-only">One channel. So much more.</span>
                 <span className="feature-heading-visual" aria-hidden="true">
                   <span className="feature-heading-line">
@@ -596,10 +606,10 @@ function Home() {
                   </span>
                 </span>
               </h2>
-              <p className="feature-intro mt-4 max-w-[680px] text-base leading-relaxed text-white/60">AtWassup brings onboarding, automation, support, campaigns, commerce, and analytics together on WhatsApp.</p>
+              <p className="mt-4 max-w-[720px] text-sm leading-relaxed text-white/55">AtWassup brings onboarding, automation, support, campaigns, commerce, and analytics together on WhatsApp.</p>
             </div>
             <div className="feature-stat">
-              <span className="feature-counter font-display text-[clamp(5rem,8vw,7rem)] font-bold leading-[.78] tracking-[-.1em] text-[#3acd32]" aria-label="10">
+              <span className="feature-counter font-display text-8xl font-bold leading-[.78] tracking-[-.1em] text-[#3acd32]" aria-label="10">
                 <span className="sr-only">10</span>
                 <span className="feature-counter-window" aria-hidden="true">
                   <span className="feature-counter-stack feature-counter-tens">
@@ -610,51 +620,20 @@ function Home() {
                   </span>
                 </span>
               </span>
-              <span className="feature-stat-label pb-0.5 text-sm font-semibold leading-relaxed text-white/65">connected capabilities<br />one WhatsApp channel</span>
+              <span className="feature-stat-label pb-0.5 text-xs font-semibold leading-relaxed text-white/55">connected capabilities<br />one WhatsApp channel</span>
             </div>
           </div>
-          <div className="feature-showcase-grid" aria-label="AtWassup dashboard and capabilities">
-            <aside className="feature-rail feature-rail-left" aria-label="Connect and automate capabilities">
-              <div className="feature-rail-heading">
-                <p className="feature-rail-kicker">01 · CONNECT + AUTOMATE</p>
-                <h3>Bring your tools together</h3>
-              </div>
-              <div className="feature-list">
-                {connectAndAutomateCapabilities.map((capability, index) => (
-                  <CapabilityCallout key={capability.title} capability={capability} index={index} />
-                ))}
-              </div>
-            </aside>
-
-            <div className="feature-laptop-wrap" data-testid="feature-dashboard-preview">
-              <p className="feature-laptop-label">ATWASSUP WORKSPACE · DASHBOARD</p>
-              <div className="feature-laptop" aria-label="AtWassup software displayed on a MacBook">
-                <div className="feature-laptop-lid">
-                  <span className="feature-laptop-camera" aria-hidden="true" />
-                  <div className="feature-laptop-screen">
-                    <img
-                      src={dashboardScreenshotPath}
-                      alt="AtWassup dashboard with WhatsApp connection status, campaign delivery, customer activity, and recent campaign performance"
-                    />
-                  </div>
-                </div>
-                <div className="feature-laptop-base" aria-hidden="true">
-                  <span />
-                </div>
-              </div>
-            </div>
-
-            <aside className="feature-rail feature-rail-right" aria-label="Automation, support, and growth capabilities">
-              <div className="feature-rail-heading">
-                <p className="feature-rail-kicker">02 · AUTOMATE + GROW</p>
-                <h3>Support every conversation</h3>
-              </div>
-              <div className="feature-list">
-                {automateAndGrowCapabilities.map((capability, index) => (
-                  <CapabilityCallout key={capability.title} capability={capability} index={index + 5} />
-                ))}
-              </div>
-            </aside>
+          <div className="feature-groups" aria-label="AtWassup capabilities">
+            <svg className="feature-connector feature-connector-desktop" viewBox="0 0 1000 20" preserveAspectRatio="none" aria-hidden="true">
+              <path className="feature-connector-main" d="M860 0H0" />
+              <path className="feature-connector-branch feature-connector-branch-1" d="M0 0V16" />
+              <path className="feature-connector-branch feature-connector-branch-2" d="M333 0V16" />
+              <path className="feature-connector-branch feature-connector-branch-3" d="M666 0V16" />
+            </svg>
+            <span className="feature-connector-dot" aria-hidden="true" />
+            {capabilityGroups.map((group, groupIndex) => (
+              <CapabilityGroupPanel key={group.id} group={group} groupIndex={groupIndex} />
+            ))}
           </div>
         </div>
       </section>
