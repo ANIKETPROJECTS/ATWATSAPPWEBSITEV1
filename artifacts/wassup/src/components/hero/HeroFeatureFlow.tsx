@@ -24,49 +24,49 @@ const features: Array<{
   {
     id: 'broadcast',
     title: 'WhatsApp Broadcasting',
-    description: 'Send approved campaigns to customers',
+    description: 'Reach customers',
     icon: Megaphone,
   },
   {
     id: 'assistant',
     title: 'AI Assistant',
-    description: 'Understand and guide each conversation',
+    description: 'Guide conversations',
     icon: Sparkles,
   },
   {
     id: 'agents',
     title: 'WhatsApp AI Agents',
-    description: 'Follow up with helpful replies',
+    description: 'Follow up in chat',
     icon: Bot,
   },
   {
     id: 'ai-chatbot',
     title: 'AI WhatsApp Chatbot',
-    description: 'Answer FAQs and capture leads',
+    description: 'Answer FAQs & leads',
     icon: MessageCircle,
   },
   {
     id: 'chatbots',
     title: 'WhatsApp Chatbots',
-    description: 'Automate the next steps',
+    description: 'Automate journeys',
     icon: Workflow,
   },
   {
     id: 'catalog',
     title: 'WhatsApp Catalog',
-    description: 'Show products inside WhatsApp',
+    description: 'Show products in chat',
     icon: ShoppingBag,
   },
   {
     id: 'forms',
     title: 'WhatsApp Forms',
-    description: 'Collect details right in the chat',
+    description: 'Collect details',
     icon: ClipboardList,
   },
   {
     id: 'payments',
     title: 'WhatsApp Payments',
-    description: 'Complete checkout in the conversation',
+    description: 'Payments in chat',
     icon: CreditCard,
   },
 ];
@@ -82,7 +82,6 @@ const featureSequenceByStage: Record<HeroFeatureStage, string[]> = {
 export default function HeroFeatureFlow({ stage }: { stage: HeroFeatureStage }) {
   const prefersReducedMotion = useReducedMotion() === true;
   const [activeFeatureId, setActiveFeatureId] = useState('broadcast');
-  const activeIndex = features.findIndex((feature) => feature.id === activeFeatureId);
 
   useEffect(() => {
     const sequence = featureSequenceByStage[stage];
@@ -96,13 +95,11 @@ export default function HeroFeatureFlow({ stage }: { stage: HeroFeatureStage }) 
   return (
     <aside className="hero-feature-flow" aria-label="AtWassup features in a customer journey">
       <div className="hero-feature-flow-heading">
-        <span className="hero-feature-flow-heading-dot" aria-hidden="true" />
         <span>One connected journey</span>
-        <span className="hero-feature-flow-count">{String(activeIndex + 1).padStart(2, '0')}<span> / 08</span></span>
       </div>
 
       <ol className="hero-feature-flow-list">
-        {features.map(({ id, title, description, icon: Icon }, index) => {
+        {features.map(({ id, title, description, icon: Icon }) => {
           const isActive = activeFeatureId === id;
           return (
             <li
@@ -117,15 +114,10 @@ export default function HeroFeatureFlow({ stage }: { stage: HeroFeatureStage }) 
                 <strong>{title}</strong>
                 <span>{description}</span>
               </span>
-              <span className="hero-feature-flow-index" aria-hidden="true">
-                {isActive ? <span className="hero-feature-flow-pulse" /> : String(index + 1).padStart(2, '0')}
-              </span>
             </li>
           );
         })}
       </ol>
-
-      <p className="hero-feature-flow-footer">Broadcast <span aria-hidden="true">→</span> conversation <span aria-hidden="true">→</span> checkout</p>
     </aside>
   );
 }

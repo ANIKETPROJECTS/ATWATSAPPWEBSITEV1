@@ -467,8 +467,6 @@ function Home() {
     <main className="noise min-h-[100dvh] bg-[#fcfbf8]" id="top">
       <Nav onLead={() => setLeadOpen(true)} />
       <section className="relative overflow-hidden pb-8 pt-24 sm:pb-10 sm:pt-28 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pb-[14px] lg:pt-[72px]">
-        <div className="absolute -right-32 top-20 h-[420px] w-[420px] rounded-full bg-[#3acd32]/20 blur-3xl" />
-        <div className="absolute left-[-100px] top-[450px] h-[220px] w-[220px] rounded-full bg-[#3acd32]/20 blur-3xl" />
         <div className="section-shell relative grid items-center gap-10 lg:grid-cols-[1.08fr_.92fr] lg:gap-8">
           <div ref={heroReveal} className="reveal">
             <h1 className="mt-6 max-w-[720px] font-display text-[clamp(2.5rem,10.2vw,5.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:text-[clamp(3.25rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(3rem,4.5vw,4.5rem)]">Turn WhatsApp into your <span className="text-[#3acd32]">sales &amp; support engine.</span></h1>
@@ -477,7 +475,6 @@ function Home() {
             <div className="mt-10 flex items-center gap-3 text-xs font-semibold text-black/45 lg:mt-6"><span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#3acd32] text-black"><Zap size={14} /></span>Setup support, automation, and live chat in one WhatsApp channel</div>
           </div>
           <div className="relative flex justify-center lg:translate-y-6 lg:justify-end">
-            <div className="absolute right-[10%] top-[-12%] h-44 w-44 rounded-full border border-[#3acd32]/30" /><div className="absolute right-[16%] top-[-5%] h-32 w-32 rounded-full border border-dashed border-black/10" />
             <div className="hero-showcase-layout relative z-10">
               <div className="hero-airavata-demo relative z-10 w-full">
                 <CommerceDemo onFeatureStageChange={setHeroFeatureStage} />
