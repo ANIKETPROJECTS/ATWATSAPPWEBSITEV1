@@ -707,16 +707,14 @@ function Home() {
                 </p>
                 <div className="mt-3 grid gap-1.5">
                   {[
-                    'Customer numbers saved from the first message',
-                    'AI answers common questions automatically',
-                    'Names and custom details captured in chat',
-                    'Opted-in contacts ready for targeted campaigns',
-                  ].map((benefit) => (
-                    <div key={benefit} className="flex items-center gap-2.5 text-[13px] font-semibold leading-5 text-black/80">
-                      <span className="flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[#3acd32] text-black">
-                        <Check size={11} strokeWidth={3} aria-hidden="true" />
-                      </span>
-                      <span>{benefit}</span>
+                    { text: 'Customer numbers saved from the first message', icon: socialFacebookPath },
+                    { text: 'AI answers common questions automatically', icon: socialInstagramPath },
+                    { text: 'Names and custom details captured in chat', icon: socialYoutubePath },
+                    { text: 'Opted-in contacts ready for targeted campaigns', icon: socialLinkedinPath },
+                  ].map(({ text, icon }) => (
+                    <div key={text} className="flex items-center gap-2.5 text-[13px] font-semibold leading-5 text-black/80">
+                      <img src={icon} alt="" aria-hidden="true" className="h-[18px] w-[18px] shrink-0 object-contain" />
+                      <span>{text}</span>
                     </div>
                   ))}
                 </div>
