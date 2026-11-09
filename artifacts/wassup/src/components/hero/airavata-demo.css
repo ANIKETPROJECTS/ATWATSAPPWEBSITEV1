@@ -423,7 +423,7 @@
 }
 @media (max-width: 780px) {
   .hero-airavata-demo {
-    height: min(760px, 90svh);
+    height: min(850px, 96svh);
     min-height: 280px;
   }
 }

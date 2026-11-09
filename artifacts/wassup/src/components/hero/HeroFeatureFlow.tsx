@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
-import {
-  Bot,
-  ClipboardList,
-  CreditCard,
-  Megaphone,
-  MessageCircle,
-  ShoppingBag,
-  Sparkles,
-  Workflow,
-  type LucideIcon,
-} from 'lucide-react';
+import broadcastIcon from '../../assets/hero-feature-icons/broadcast.svg';
+import assistantIcon from '../../assets/hero-feature-icons/assistant.svg';
+import agentsIcon from '../../assets/hero-feature-icons/agents.svg';
+import aiChatbotIcon from '../../assets/hero-feature-icons/ai-chatbot.svg';
+import catalogIcon from '../../assets/hero-feature-icons/catalog.svg';
+import formsIcon from '../../assets/hero-feature-icons/forms.svg';
+import paymentsIcon from '../../assets/hero-feature-icons/payments.svg';
 import './hero-feature-flow.css';
 
 export type HeroFeatureStage = 'broadcast' | 'reply' | 'answer' | 'forms' | 'checkout';
@@ -19,55 +15,49 @@ const features: Array<{
   id: string;
   title: string;
   description: string;
-  icon: LucideIcon;
+  icon: string;
 }> = [
   {
     id: 'broadcast',
     title: 'WhatsApp Broadcasting',
     description: 'Reach customers',
-    icon: Megaphone,
+    icon: broadcastIcon,
   },
   {
     id: 'assistant',
     title: 'AI Assistant',
     description: 'Guide conversations',
-    icon: Sparkles,
+    icon: assistantIcon,
   },
   {
     id: 'agents',
     title: 'WhatsApp AI Agents',
     description: 'Follow up in chat',
-    icon: Bot,
+    icon: agentsIcon,
   },
   {
     id: 'ai-chatbot',
     title: 'AI WhatsApp Chatbot',
     description: 'Answer FAQs & leads',
-    icon: MessageCircle,
-  },
-  {
-    id: 'chatbots',
-    title: 'WhatsApp Chatbots',
-    description: 'Automate journeys',
-    icon: Workflow,
+    icon: aiChatbotIcon,
   },
   {
     id: 'catalog',
     title: 'WhatsApp Catalog',
     description: 'Show products in chat',
-    icon: ShoppingBag,
+    icon: catalogIcon,
   },
   {
     id: 'forms',
     title: 'WhatsApp Forms',
     description: 'Collect details',
-    icon: ClipboardList,
+    icon: formsIcon,
   },
   {
     id: 'payments',
     title: 'WhatsApp Payments',
     description: 'Payments in chat',
-    icon: CreditCard,
+    icon: paymentsIcon,
   },
 ];
 
@@ -94,12 +84,8 @@ export default function HeroFeatureFlow({ stage }: { stage: HeroFeatureStage }) 
 
   return (
     <aside className="hero-feature-flow" aria-label="AtWassup features in a customer journey">
-      <div className="hero-feature-flow-heading">
-        <span>One connected journey</span>
-      </div>
-
       <ol className="hero-feature-flow-list">
-        {features.map(({ id, title, description, icon: Icon }) => {
+        {features.map(({ id, title, description, icon }) => {
           const isActive = activeFeatureId === id;
           return (
             <li
@@ -108,7 +94,7 @@ export default function HeroFeatureFlow({ stage }: { stage: HeroFeatureStage }) 
               aria-current={isActive ? 'step' : undefined}
             >
               <span className="hero-feature-flow-icon" aria-hidden="true">
-                <Icon size={14} strokeWidth={2} />
+                <img src={icon} alt="" draggable={false} />
               </span>
               <span className="hero-feature-flow-copy">
                 <strong>{title}</strong>

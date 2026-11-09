@@ -467,7 +467,7 @@ function Home() {
     <main className="noise min-h-[100dvh] bg-[#fcfbf8]" id="top">
       <Nav onLead={() => setLeadOpen(true)} />
       <section className="relative overflow-hidden pb-8 pt-24 sm:pb-10 sm:pt-28 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pb-[14px] lg:pt-[72px]">
-        <div className="section-shell relative grid items-center gap-10 lg:grid-cols-[1.08fr_.92fr] lg:gap-8">
+        <div className="section-shell hero-shell relative grid items-center gap-10 lg:grid-cols-[1.02fr_.98fr] lg:gap-5">
           <div ref={heroReveal} className="reveal">
             <h1 className="mt-6 max-w-[720px] font-display text-[clamp(2.5rem,10.2vw,5.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:text-[clamp(3.25rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(3rem,4.5vw,4.5rem)]">Turn WhatsApp into your <span className="text-[#3acd32]">sales &amp; support engine.</span></h1>
             <p className="mt-8 max-w-[540px] text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-base">AtWassup helps you onboard to WhatsApp Business API, connect the tools you already use, and bring customer conversations, campaigns, and support into one channel.</p>
