@@ -513,12 +513,14 @@ function Home() {
       <Nav onLead={() => setLeadOpen(true)} />
       <section className="relative overflow-hidden pb-8 pt-24 sm:pb-10 sm:pt-28 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pb-[14px] lg:pt-[72px]">
         <div className="section-shell hero-shell relative grid items-start gap-6 sm:gap-8 lg:grid-cols-[1.02fr_.98fr] lg:items-center lg:gap-x-5 lg:gap-y-0">
-          <div ref={heroReveal} className="reveal hero-copy">
-            <h1 className="mt-2 flex max-w-[720px] flex-col font-display text-[clamp(2rem,9.2vw,2.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:mt-6 sm:text-[clamp(2.75rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(2.25rem,3.5vw,3.25rem)]">
+          <div ref={heroReveal} className="reveal hero-heading">
+            <h1 className="mt-2 flex max-w-[720px] flex-col font-display text-[clamp(1.45rem,7.25vw,1.9rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:mt-6 sm:text-[clamp(2rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(2.25rem,3.5vw,3.25rem)]">
               <span className="block">Make your business</span>
               <span className="-mt-1 block">smarter with <HeroAtWassupWordmark /></span>
               <HeroHeadlineRotator />
             </h1>
+          </div>
+          <div className="hero-details">
             <p className="mt-6 max-w-[540px] text-left text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-justify lg:text-base">Start with AtWassup. Connect the WhatsApp Business API and let AI answer customer questions, capture leads, follow up, close sales, and run broadcasts all through AtWassup, your all-in-one WhatsApp AI marketing platform.</p>
             <div className="hero-actions mt-6 lg:mt-5">
               <PrimaryButton onClick={() => setLeadOpen(true)} testId="hero-button-book-demo">Schedule demo</PrimaryButton>
@@ -535,23 +537,23 @@ function Home() {
           </div>
           <div className="hero-proof">
             <div className="mt-0 lg:mt-8" data-testid="hero-meta-business-partner">
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-2 sm:gap-x-4">
                 <img
                   src={metaBusinessPartnerPath}
                   alt="Meta Business Partner"
-                  className="h-[52px] w-[135px] shrink-0 object-contain object-left sm:h-16 sm:w-[180px]"
+                  className="hero-meta-logo h-[52px] w-[135px] shrink-0 object-contain object-left sm:h-16 sm:w-[180px]"
                   data-testid="hero-meta-business-partner-logo"
                 />
                 <img
                   src={logoPath}
                   alt="AtWassup"
-                  className="h-[50px] w-[200px] shrink-0 object-cover object-[center_52%] sm:h-[66px] sm:w-[260px]"
+                  className="hero-atwassup-logo h-[50px] w-[200px] shrink-0 object-cover object-[center_52%] sm:h-[66px] sm:w-[260px]"
                   data-testid="hero-atwassup-logo"
                 />
               </div>
-              <p className="mt-2 text-base font-medium leading-6 text-black/60 sm:text-lg" data-testid="hero-meta-business-partner-copy">
+              <p className="mt-2 text-lg font-medium leading-6 text-black/60" data-testid="hero-meta-business-partner-copy">
                 We are an official Meta Business Partner
-                <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="ml-1.5 inline-block h-[18px] w-[18px] align-middle object-contain sm:h-5 sm:w-5" />
+                <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="ml-1.5 inline-block h-5 w-5 align-middle object-contain" />
               </p>
             </div>
             <div className="mt-6 max-w-[520px]" data-testid="hero-whatsapp-profile-showcase">
