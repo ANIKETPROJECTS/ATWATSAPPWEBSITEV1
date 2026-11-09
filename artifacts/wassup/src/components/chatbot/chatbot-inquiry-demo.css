@@ -2,7 +2,7 @@
   --cid-ink: #0f1f15;
   --cid-deep: #12693a;
   position: relative;
-  overflow: clip;
+  overflow: hidden;
   overflow-anchor: none;
   padding-block: 64px;
   border-block: 1px solid rgba(58, 205, 50, .14);
