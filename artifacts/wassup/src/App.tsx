@@ -493,7 +493,7 @@ function Home() {
               <span className="block">smarter with WhatsApp</span>
               <HeroHeadlineRotator />
             </h1>
-            <p className="mt-8 max-w-[540px] text-justify text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-base">AtWassup is an AI-powered WhatsApp Business platform that brings customer messaging, marketing, and team tools together in one place.</p>
+            <p className="mt-8 max-w-[540px] text-justify text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-base">Start with AtWassup. Connect the WhatsApp Business API and let AI answer customer questions, capture leads, follow up, close sales, and run broadcasts—all from one place.</p>
             <div className="mt-8 flex flex-wrap items-center gap-3 lg:mt-5"><PrimaryButton onClick={() => setLeadOpen(true)} testId="hero-button-book-demo">Schedule demo</PrimaryButton><a data-testid="hero-link-explore-features" href="#features" className="header-action header-action-secondary min-w-[180px] px-8">Explore Features</a></div>
             <div className="mt-8" data-testid="hero-meta-business-partner">
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -516,10 +516,7 @@ function Home() {
               </p>
             </div>
             <div className="mt-6 max-w-[520px]" data-testid="hero-whatsapp-profile-showcase">
-              <h2 className="max-w-[480px] text-justify text-lg font-medium leading-snug tracking-tight text-black sm:text-xl">
-                Start with AtWassup. From answering customer queries and generating leads to closing sales and running broadcasts, let AI automate your business conversations all on WhatsApp.
-              </h2>
-              <div className="mt-3 flex items-center gap-1.5 rounded-none border border-black/10 bg-white px-2 py-4 sm:gap-2.5 sm:px-3">
+              <div className="flex items-center gap-1.5 rounded-none border border-black/10 bg-white px-2 py-4 sm:gap-2.5 sm:px-3">
                 <ChevronLeft aria-hidden="true" className="h-5 w-5 shrink-0 text-[#111b21] sm:h-[22px] sm:w-[22px]" />
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#d1e1d2] bg-[#dceadd] text-base font-semibold text-[#447b54] sm:h-12 sm:w-12 sm:text-lg">
                   Y
