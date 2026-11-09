@@ -876,7 +876,7 @@ function Home() {
                 <a
                   href="tel:+919167959756"
                   data-testid="footer-contact-phone"
-                  className="flex items-center gap-3 text-base font-semibold text-black transition hover:text-black"
+                  className="flex items-center gap-3 text-base font-medium text-black transition hover:text-black"
                 >
                   <img src={contactPhonePath} alt="" className="h-6 w-6 shrink-0 object-contain" />
                   +91 91679 59756
@@ -884,7 +884,7 @@ function Home() {
                 <a
                   href="mailto:info@atwassup.com"
                   data-testid="footer-contact-email"
-                  className="flex items-center gap-3 text-base font-semibold text-black transition hover:text-black"
+                  className="flex items-center gap-3 text-base font-medium text-black transition hover:text-black"
                 >
                   <img src={contactEmailPath} alt="" className="h-6 w-6 shrink-0 object-contain" />
                   info@atwassup.com
@@ -894,7 +894,7 @@ function Home() {
                   target="_blank"
                   rel="noreferrer"
                   data-testid="footer-link-directions"
-                  className="flex items-start gap-3 text-base leading-6 text-black transition hover:text-black"
+                  className="flex items-start gap-3 text-base font-medium leading-6 text-black transition hover:text-black"
                 >
                   <img src={contactLocationPath} alt="" className="mt-0.5 h-6 w-6 shrink-0 object-contain" />
                   <span>
