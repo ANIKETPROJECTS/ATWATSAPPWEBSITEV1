@@ -126,6 +126,61 @@
   .lift:hover { transform: translateY(-4px); box-shadow: 0 12px 0 rgba(0,0,0,.10); }
 }
 
+@layer components {
+  .site-nav-link {
+    position: relative;
+    display: inline-flex;
+    min-height: 56px;
+    align-items: center;
+    color: #111;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(16px, 1.15vw, 18px);
+    font-weight: 600;
+    letter-spacing: -.025em;
+    line-height: 1.25;
+    text-decoration: none;
+    transition: color .2s ease;
+  }
+  .site-nav-link::after {
+    position: absolute;
+    right: 0;
+    bottom: 7px;
+    left: 0;
+    height: 2px;
+    background: #3acd32;
+    content: '';
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform .24s cubic-bezier(.2, .7, .2, 1);
+  }
+  .site-nav-link:hover::after,
+  .site-nav-link:focus-visible::after { transform: scaleX(1); }
+  .site-nav-actions { align-items: center; gap: 10px; }
+  .header-action {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 18px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+  }
+  .header-action-primary { border-color: #3acd32; background: #3acd32; color: #fff; }
+  .header-action-primary:hover { transform: translateY(-1px); border-color: #31b92b; background: #31b92b; }
+  .header-action-secondary { border-color: rgba(0, 0, 0, .14); background: #fff; color: #111; }
+  .header-action-secondary:hover { border-color: #3acd32; background: #fff; color: #111; }
+  .mobile-menu-panel .site-nav-link { display: flex; width: 100%; min-height: 48px; padding: 0 12px; font-size: 16px; }
+  .mobile-menu-panel .site-nav-link::after { right: 12px; bottom: 3px; left: 12px; }
+  .mobile-menu-panel .header-action { min-height: 44px; padding-inline: 10px; font-size: 14px; }
+}
+
 h1.font-display,
 h2.font-display,
 h3.font-display {
