@@ -42,6 +42,9 @@ import NotFound from '@/pages/not-found';
 import madeInIndiaFlagPath from './assets/made-in-india-flag.png';
 import metaBusinessPartnerPath from './assets/meta-business-partner.png';
 import logoPath from './assets/airavata-technologies-logo.svg';
+import contactEmailPath from './assets/contact-email.png';
+import contactLocationPath from './assets/contact-location.png';
+import contactPhonePath from './assets/contact-phone.png';
 import socialFacebookPath from './assets/social-facebook.png';
 import socialInstagramPath from './assets/social-instagram.png';
 import socialLinkedinPath from './assets/social-linkedin.png';
@@ -870,8 +873,8 @@ function Home() {
         data-testid="footer"
       >
         <div className="section-shell relative">
-          <div className="grid gap-x-10 gap-y-9 border-b border-black/10 pb-9 md:grid-cols-2 xl:grid-cols-[1.15fr_.7fr_1.15fr_1.25fr] xl:gap-x-10">
-            <div className="order-4 xl:order-1">
+          <div className="grid gap-x-10 gap-y-9 border-b border-black/10 pb-9 md:grid-cols-2 xl:grid-cols-[1.2fr_.7fr_1.2fr_.85fr_1.2fr] xl:gap-x-7">
+            <div className="order-5 xl:order-1">
               <a href="#top" aria-label="AtWassup home" data-testid="footer-link-home">
                 <img
                   src={logoPath}
@@ -929,7 +932,7 @@ function Home() {
               </ul>
             </nav>
 
-            <div className="order-2" data-testid="footer-company-contact">
+            <div className="order-2 xl:order-3" data-testid="footer-company-contact">
               <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black/50">Contact</h2>
               <div className="mt-4 space-y-4">
                 <a
@@ -937,7 +940,7 @@ function Home() {
                   data-testid="footer-contact-phone"
                   className="flex items-center gap-3 text-base font-semibold text-black/80 transition hover:text-[#237b2a]"
                 >
-                  <Phone size={16} className="shrink-0 text-[#237b2a]" aria-hidden="true" />
+                  <img src={contactPhonePath} alt="" className="h-6 w-6 shrink-0 object-contain" />
                   +91 91679 59756
                 </a>
                 <a
@@ -945,7 +948,7 @@ function Home() {
                   data-testid="footer-contact-email"
                   className="flex items-center gap-3 text-base font-semibold text-black/80 transition hover:text-[#237b2a]"
                 >
-                  <Mail size={16} className="shrink-0 text-[#237b2a]" aria-hidden="true" />
+                  <img src={contactEmailPath} alt="" className="h-6 w-6 shrink-0 object-contain" />
                   info@atwassup.com
                 </a>
                 <a
@@ -955,18 +958,54 @@ function Home() {
                   data-testid="footer-link-directions"
                   className="flex items-start gap-3 text-base leading-6 text-black/70 transition hover:text-[#237b2a]"
                 >
-                  <MapPin size={16} className="mt-0.5 shrink-0 text-[#237b2a]" aria-hidden="true" />
+                  <img src={contactLocationPath} alt="" className="mt-0.5 h-6 w-6 shrink-0 object-contain" />
                   <span>
                     Hubtown Greenwood CHS, Flat no. 805/A Wing, 8th Floor, Pokhran Road No. 1, Vartak Nagar, Thane (W), 400606
-                    <span className="mt-1 flex items-center gap-1 text-sm font-bold text-[#237b2a]">
-                      Open directions <ArrowDownRight size={13} aria-hidden="true" />
-                    </span>
                   </span>
                 </a>
               </div>
             </div>
 
-            <div className="order-3">
+            <nav aria-label="Legal" className="order-3 xl:order-4">
+              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black/50">Legal</h2>
+              <ul className="mt-4 space-y-3.5 text-base font-medium text-black/75">
+                <li>
+                  <a
+                    href="https://aisensy.com/privacy-policy"
+                    target="_blank"
+                    rel="noreferrer"
+                    data-testid="footer-link-privacy-policy"
+                    className="transition hover:text-[#3acd32]"
+                  >
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://aisensy.com/refund-policy"
+                    target="_blank"
+                    rel="noreferrer"
+                    data-testid="footer-link-refund-policy"
+                    className="transition hover:text-[#3acd32]"
+                  >
+                    Refund Policy
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://aisensy.com/tos"
+                    target="_blank"
+                    rel="noreferrer"
+                    data-testid="footer-link-terms"
+                    className="transition hover:text-[#3acd32]"
+                  >
+                    Terms &amp; Conditions
+                  </a>
+                </li>
+              </ul>
+            </nav>
+
+            <div className="order-4 xl:order-5">
               <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black/50">Find us</h2>
               <div className="relative mt-4 h-[190px] overflow-hidden rounded-2xl border border-black/10 bg-[#f4f7f1]">
                 <iframe
