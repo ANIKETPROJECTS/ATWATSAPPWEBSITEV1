@@ -44,15 +44,18 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  --hero-feature-track-top: 17px;
+  --hero-feature-track-height: calc(100% - 34px);
   --hero-feature-progress-height: 0px;
 }
 
 .hero-feature-flow-list::before {
   position: absolute;
-  top: 14px;
-  bottom: 14px;
-  left: 12px;
+  z-index: 0;
+  top: var(--hero-feature-track-top);
+  left: 15px;
   width: 2px;
+  height: var(--hero-feature-track-height);
   border-radius: 999px;
   background: #bfc5bf;
   content: '';
@@ -60,8 +63,9 @@
 
 .hero-feature-flow-list::after {
   position: absolute;
-  top: 14px;
-  left: 11.5px;
+  z-index: 0;
+  top: var(--hero-feature-track-top);
+  left: 14.5px;
   width: 3px;
   height: var(--hero-feature-progress-height);
   border-radius: 999px;
@@ -72,9 +76,10 @@
 
 .hero-feature-flow-step {
   position: relative;
+  z-index: 1;
   display: grid;
   min-height: 44px;
-  grid-template-columns: 26px minmax(0, 1fr);
+  grid-template-columns: 32px minmax(0, 1fr);
   align-items: center;
   gap: 10px;
   padding: 4px 0;
@@ -84,10 +89,10 @@
 
 .hero-feature-flow-icon {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: grid;
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
   place-items: center;
   background: #fcfbf8;
   color: #111;
@@ -164,7 +169,7 @@
 
   .hero-feature-flow-step {
     min-height: 34px;
-    grid-template-columns: 26px minmax(0, 1fr);
+    grid-template-columns: 32px minmax(0, 1fr);
     gap: 7px;
     padding-block: 0;
   }

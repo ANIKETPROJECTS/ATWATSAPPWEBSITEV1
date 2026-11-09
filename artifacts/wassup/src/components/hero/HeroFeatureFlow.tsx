@@ -88,13 +88,23 @@ export default function HeroFeatureFlow({ stage }: { stage: HeroFeatureStage }) 
     if (!list) return;
 
     const updateProgress = () => {
+      const steps = Array.from(list.querySelectorAll<HTMLElement>('.hero-feature-flow-step'));
+      const stepCenter = (step: HTMLElement) => {
+        const icon = step.querySelector<HTMLElement>('.hero-feature-flow-icon');
+        if (!icon) return null;
+        const bounds = icon.getBoundingClientRect();
+        return bounds.top + bounds.height / 2;
+      };
+      const firstCenter = steps[0] ? stepCenter(steps[0]) : null;
+      const lastCenter = steps.length ? stepCenter(steps[steps.length - 1]) : null;
       const activeStep = list.querySelector<HTMLElement>('.hero-feature-flow-step.is-active');
-      const icon = activeStep?.querySelector<HTMLElement>('.hero-feature-flow-icon');
-      if (!icon) return;
+      const activeCenter = activeStep ? stepCenter(activeStep) : null;
+      if (firstCenter === null || lastCenter === null || activeCenter === null) return;
 
-      const listTop = list.getBoundingClientRect().top + 14;
-      const iconCenter = icon.getBoundingClientRect().top + icon.getBoundingClientRect().height / 2;
-      list.style.setProperty('--hero-feature-progress-height', `${Math.max(0, iconCenter - listTop)}px`);
+      const listTop = list.getBoundingClientRect().top;
+      list.style.setProperty('--hero-feature-track-top', `${firstCenter - listTop}px`);
+      list.style.setProperty('--hero-feature-track-height', `${Math.max(0, lastCenter - firstCenter)}px`);
+      list.style.setProperty('--hero-feature-progress-height', `${Math.max(0, activeCenter - firstCenter)}px`);
     };
 
     updateProgress();
