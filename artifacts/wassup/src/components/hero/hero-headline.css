@@ -1,12 +1,18 @@
 .hero-headline-rotator {
   display: block;
+  width: 100%;
+  min-width: 0;
   height: 2.1em;
   overflow: hidden;
+  text-align: left;
 }
 
 .hero-headline-slide-in {
   display: block;
+  width: 100%;
+  min-width: 0;
   height: 2.1em;
+  text-align: left;
   animation: hero-headline-enter 420ms cubic-bezier(.2, .7, .2, 1) both;
 }
 
