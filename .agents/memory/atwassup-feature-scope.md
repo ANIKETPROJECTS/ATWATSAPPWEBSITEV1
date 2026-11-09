@@ -8,3 +8,9 @@ AtWassup supports the reference features for AI Assistant, WhatsApp Broadcasting
 **Why:** the user clarified which items in the reference feature list are actually in their system.
 
 **How to apply:** use the available feature set in AtWassup marketing content, and never include Ads Manager or WhatsApp Webviews as current product features.
+
+AtWassup is an official Meta Business Partner.
+
+**Why:** the user stated this while requesting partnership messaging in the hero.
+
+**How to apply:** use the official-partner claim in AtWassup copy without extending it to other endorsements.

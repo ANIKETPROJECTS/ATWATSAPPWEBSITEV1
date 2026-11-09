@@ -28,6 +28,7 @@ import sareeImage from '../../assets/airavata/atw-banarasi-saree-product.jpg';
 import pdfFileIcon from '../../assets/airavata/pdf_1791198174982.png';
 import razorpayLogo from '../../assets/airavata/razorpay-merchant-logo.svg';
 import paymentSuccessAnimation from '../../assets/airavata/payment-success-check.json';
+import verifiedBusinessBadge from '../../assets/verified-business.svg';
 import './airavata-demo.css';
 
 type DemoStep =
@@ -399,7 +400,13 @@ export default function CommerceDemo({
               <div className="demo-chat-header">
                 <FigmaSvgCrop x={3} y={58} width={22} height={36} className="demo-back-art" />
                 <div className="demo-shop-avatar">R</div>
-                <div className="demo-shop-name"><strong>Rangrez Studio</strong><small>tap here for contact info</small></div>
+                <div className="demo-shop-name">
+                  <span className="demo-shop-name-title">
+                    <strong>Rangrez Studio</strong>
+                    <img className="demo-shop-verified-badge" src={verifiedBusinessBadge} alt="Verified business" />
+                  </span>
+                  <small>tap here for contact info</small>
+                </div>
                 <FigmaSvgCrop x={288} y={58} width={88} height={36} className="demo-header-actions-art" />
               </div>
               <div

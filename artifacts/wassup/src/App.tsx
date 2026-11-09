@@ -27,7 +27,6 @@ import {
   Workflow,
   Wifi,
   X,
-  Zap,
 } from 'lucide-react';
 import { useSubmitDemoRequest } from '@workspace/api-client-react';
 import { ErrorBoundary } from '@/components/error-boundary';
@@ -467,12 +466,22 @@ function Home() {
     <main className="noise min-h-[100dvh] bg-[#fcfbf8]" id="top">
       <Nav onLead={() => setLeadOpen(true)} />
       <section className="relative overflow-hidden pb-8 pt-24 sm:pb-10 sm:pt-28 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pb-[14px] lg:pt-[72px]">
-        <div className="section-shell hero-shell relative grid items-center gap-10 lg:grid-cols-[1.02fr_.98fr] lg:gap-5">
-          <div ref={heroReveal} className="reveal">
+        <div className="section-shell hero-shell relative grid items-center gap-10 lg:grid-cols-[1.02fr_.98fr] lg:items-start lg:gap-5">
+          <div ref={heroReveal} className="reveal hero-copy">
             <h1 className="mt-6 max-w-[720px] font-display text-[clamp(2.5rem,10.2vw,5.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:text-[clamp(3.25rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(3rem,4.5vw,4.5rem)]">Turn WhatsApp into your <span className="text-[#3acd32]">sales &amp; support engine.</span></h1>
             <p className="mt-8 max-w-[540px] text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-base">AtWassup helps you onboard to WhatsApp Business API, connect the tools you already use, and bring customer conversations, campaigns, and support into one channel.</p>
             <div className="mt-8 flex flex-wrap items-center gap-3 lg:mt-5"><PrimaryButton onClick={() => setLeadOpen(true)} testId="hero-button-book-demo">Book a demo</PrimaryButton><a data-testid="hero-link-explore-features" href="#features" className="group inline-flex items-center gap-2 rounded-full border border-black/15 bg-white/60 px-5 py-3.5 text-sm font-bold transition hover:-translate-y-1 hover:border-black hover:bg-white">Explore features <ArrowDownRight size={15} className="transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" /></a></div>
-            <div className="mt-10 flex items-center gap-3 text-xs font-semibold text-black/45 lg:mt-6"><span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#3acd32] text-black"><Zap size={14} /></span>Setup support, automation, and live chat in one WhatsApp channel</div>
+            <div className="mt-8 flex flex-wrap items-center gap-3" data-testid="hero-meta-business-partner">
+              <img
+                src={metaBusinessPartnerPath}
+                alt="Meta Business Partner"
+                className="h-9 w-[112px] shrink-0 object-contain object-left sm:h-10 sm:w-[130px]"
+                data-testid="hero-meta-business-partner-logo"
+              />
+              <p className="max-w-[250px] text-xs font-medium leading-5 text-black/60 sm:text-sm" data-testid="hero-meta-business-partner-copy">
+                AtWassup is an official Meta Business Partner.
+              </p>
+            </div>
           </div>
           <div className="relative flex justify-center lg:translate-y-6 lg:justify-end">
             <div className="hero-showcase-layout relative z-10">

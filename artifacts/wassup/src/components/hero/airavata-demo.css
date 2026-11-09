@@ -87,7 +87,10 @@
 .demo-back-art { top: 50%; left: 4px; transform: translateY(-50%); }
 .demo-shop-avatar { position: absolute; top: 0; left: 31px; display: flex; width: 28px; height: 28px; align-items: center; justify-content: center; border: 1px solid #d1e1d2; border-radius: 50%; background: #dceadd; color: #447b54; font-size: 9px; font-weight: 600; }
 .demo-shop-name { position: absolute; top: 3px; left: 67px; right: 66px; display: flex; min-width: 0; flex-direction: column; gap: 1px; }
+.demo-shop-name-title { display: flex; min-width: 0; align-items: center; gap: 2px; }
 .demo-shop-name strong { color: #0a0a0a; font-size: 10px; font-weight: 600; line-height: 12px; }
+.demo-shop-name-title strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.demo-shop-verified-badge { display: block; width: 12px; height: 12px; flex: 0 0 12px; object-fit: contain; }
 .demo-shop-name small { color: rgb(0 0 0 / 50%); font-size: 8px; line-height: 9px; }
 .demo-header-actions-art { top: 0; right: 11px; }
 .demo-date-art { position: relative; flex: 0 0 auto; align-self: center; }
