@@ -1,5 +1,6 @@
 - [Orval and Zod email validation](orval-zod-email-validation.md) — OpenAPI `format: email` can generate Zod 4 calls in a Zod 3 workspace; use a pattern or align versions.
 - [AtWassup homepage styling](atwassup-homepage-readability.md) — use Poppins with readable heading spacing, charcoal dark sections, centered Flow Builder benefits, and legible Chatbot text.
+- [AtWassup feature scope](atwassup-feature-scope.md) — showcase AI assistants, broadcasts, AI agents/chatbots, forms, catalog, and payments; exclude Ads Manager and WhatsApp Webviews.
 - [Floating WhatsApp contact](mobile-footer-arrow-spacing.md) — keep the safe-area-aware WhatsApp footer button; do not restore the back-to-top arrow.
 - [AtWassup pricing](atwassup-pricing.md) — one ₹15,000 annual plan, Meta fees at cost, and short, plain-language pricing copy.
 - [Device preview sizing](device-preview-sizing.md) — library safe areas reduce usable content height; flex chat content to avoid hiding the composer.

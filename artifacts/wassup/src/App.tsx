@@ -34,6 +34,7 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import CommerceDemo from '@/components/hero/CommerceDemo';
+import HeroFeatureFlow, { type HeroFeatureStage } from '@/components/hero/HeroFeatureFlow';
 import ChatbotInquiryDemo from '@/components/chatbot/ChatbotInquiryDemo';
 import ClinicAppointmentDemo from '@/components/flows/ClinicAppointmentDemo';
 import ContactWhatsAppForm from '@/components/ContactWhatsAppForm';
@@ -401,6 +402,7 @@ function Nav({ onLead }: { onLead: () => void }) {
 function Home() {
   const [leadOpen, setLeadOpen] = useState(false);
   const [demoOpen, setDemoOpen] = useState(false);
+  const [heroFeatureStage, setHeroFeatureStage] = useState<HeroFeatureStage>('broadcast');
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const stepsCarouselRef = useRef<HTMLDivElement>(null);
   const stepCardRefs = useRef<(HTMLElement | null)[]>([]);
@@ -476,8 +478,11 @@ function Home() {
           </div>
           <div className="relative flex justify-center lg:translate-y-6 lg:justify-end">
             <div className="absolute right-[10%] top-[-12%] h-44 w-44 rounded-full border border-[#3acd32]/30" /><div className="absolute right-[16%] top-[-5%] h-32 w-32 rounded-full border border-dashed border-black/10" />
-            <div className="hero-airavata-demo relative z-10 w-full">
-              <CommerceDemo />
+            <div className="hero-showcase-layout relative z-10">
+              <div className="hero-airavata-demo relative z-10 w-full">
+                <CommerceDemo onFeatureStageChange={setHeroFeatureStage} />
+              </div>
+              <HeroFeatureFlow stage={heroFeatureStage} />
             </div>
           </div>
         </div>

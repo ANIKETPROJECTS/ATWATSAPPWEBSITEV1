@@ -23,6 +23,7 @@ import {
   getPaymentReference,
 } from './createDemoInvoicePdf';
 import { FigmaReadReceipt, FigmaSvgCrop } from './FigmaChrome';
+import type { HeroFeatureStage } from './HeroFeatureFlow';
 import sareeImage from '../../assets/airavata/atw-banarasi-saree-product.jpg';
 import pdfFileIcon from '../../assets/airavata/pdf_1791198174982.png';
 import razorpayLogo from '../../assets/airavata/razorpay-merchant-logo.svg';
@@ -178,7 +179,11 @@ function InvoiceDocumentPage({
   );
 }
 
-export default function CommerceDemo() {
+export default function CommerceDemo({
+  onFeatureStageChange,
+}: {
+  onFeatureStageChange?: (stage: HeroFeatureStage) => void;
+} = {}) {
   const prefersReducedMotion = useReducedMotion() === true;
   const motionTransition = {
     duration: prefersReducedMotion ? 0.01 : DEMO_MOTION_DURATION,
@@ -203,6 +208,20 @@ export default function CommerceDemo() {
   const chatBodyRef = useRef<HTMLDivElement>(null);
   const invoiceViewerShownRef = useRef(false);
   const nextOrderNumber = useRef(15);
+
+  useEffect(() => {
+    const featureStageByDemoStep: Record<DemoStep, HeroFeatureStage> = {
+      template: 'broadcast',
+      customerReply: 'reply',
+      details: 'answer',
+      flow: 'forms',
+      confirmed: 'checkout',
+      razorpay: 'checkout',
+      paymentSuccess: 'checkout',
+      paid: 'checkout',
+    };
+    onFeatureStageChange?.(featureStageByDemoStep[step]);
+  }, [onFeatureStageChange, step]);
 
   useEffect(() => {
     const stage = demoStageRef.current;
