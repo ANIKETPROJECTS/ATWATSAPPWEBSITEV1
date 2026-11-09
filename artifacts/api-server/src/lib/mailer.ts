@@ -21,11 +21,11 @@ const escapeHtml = (value: string): string =>
   });
 
 export async function sendDemoRequestEmail(input: DemoRequestInput): Promise<void> {
-  const user = process.env.SMTP_USER?.trim();
+  const user = process.env.SMTP_USER?.trim() || "info@atwassup.com";
   const password = process.env.SMTP_PASS?.replace(/\s+/g, "");
-  const host = process.env.SMTP_HOST?.trim() || "smtp.gmail.com";
+  const host = process.env.SMTP_HOST?.trim() || "smtp.hostinger.com";
   const port = Number(process.env.SMTP_PORT ?? "465");
-  const recipient = process.env.LEAD_INBOX?.trim() || user;
+  const recipient = process.env.LEAD_INBOX?.trim() || "info@atwassup.com";
 
   if (!user || !password || !host || !recipient || !Number.isInteger(port) || port < 1 || port > 65535) {
     throw new MailConfigurationError();
