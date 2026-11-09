@@ -279,7 +279,7 @@ export default function ContactWhatsAppForm() {
                             </FormLabel>
                             <div className={`contact-wa-input-shell${fieldState.error ? ' has-error' : ''}`}>
                               <FormControl>
-                                <Input {...field} required autoComplete="name" placeholder="Your full name" maxLength={120} className="contact-wa-input" data-testid="input-contact-name" />
+                                <Input {...field} required autoComplete="name" placeholder="Enter your Name" maxLength={120} className="contact-wa-input" data-testid="input-contact-name" />
                               </FormControl>
                               <FormMessage className="sr-only" />
                             </div>
@@ -356,7 +356,7 @@ export default function ContactWhatsAppForm() {
                                     type="tel"
                                     inputMode="numeric"
                                     autoComplete="tel-national"
-                                    placeholder="Enter your mobile number"
+                                    placeholder="Enter your Mobile Number"
                                     maxLength={15}
                                     className="contact-wa-input"
                                     data-testid="input-contact-number"
@@ -377,7 +377,7 @@ export default function ContactWhatsAppForm() {
                             <FormLabel className="contact-wa-label">Email</FormLabel>
                             <div className={`contact-wa-input-shell${fieldState.error ? ' has-error' : ''}`}>
                               <FormControl>
-                                <Input {...field} type="email" autoComplete="email" placeholder="Enter email or leave blank" maxLength={254} className="contact-wa-input" data-testid="input-contact-email" />
+                                <Input {...field} type="email" autoComplete="email" placeholder="Enter your Email" maxLength={254} className="contact-wa-input" data-testid="input-contact-email" />
                               </FormControl>
                               <FormMessage className="sr-only" />
                             </div>
@@ -391,7 +391,7 @@ export default function ContactWhatsAppForm() {
                           <FormItem className="contact-wa-field">
                             <FormLabel className="contact-wa-label">What can we help with?</FormLabel>
                             <FormControl>
-                              <Textarea {...field} rows={2} maxLength={1000} placeholder="A few words are fine…" className="contact-wa-input contact-wa-textarea" data-testid="input-contact-custom" />
+                              <Textarea {...field} rows={2} maxLength={1000} placeholder="Enter your Query" className="contact-wa-input contact-wa-textarea" data-testid="input-contact-custom" />
                             </FormControl>
                             <FormMessage className="contact-wa-error" />
                           </FormItem>
