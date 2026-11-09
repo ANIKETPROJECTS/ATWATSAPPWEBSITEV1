@@ -942,21 +942,25 @@ function Home() {
             </div>
           </div>
 
-          <div className="flex w-full flex-col items-center gap-3 pt-4 pr-16 text-xs text-black sm:flex-row sm:items-center sm:justify-between sm:pr-0 sm:text-sm">
-            <p className="w-full text-center sm:w-auto sm:text-left">© {new Date().getFullYear()} AtWassup. All rights reserved.</p>
-            <div className="inline-flex items-center justify-center gap-2" data-testid="footer-made-in-india">
+          <div className="flex w-full flex-col items-start gap-3 pt-4 text-xs text-black sm:flex-row sm:items-center sm:justify-between sm:text-sm">
+            <div className="flex w-full flex-nowrap items-center gap-2 sm:contents">
+              <p className="shrink-0 whitespace-nowrap text-left text-[11px] sm:text-sm">
+                © {new Date().getFullYear()} AtWassup. All rights reserved.
+              </p>
+              <div className="inline-flex shrink-0 items-center gap-1.5" data-testid="footer-made-in-india">
               <img
                 src={madeInIndiaFlagPath}
                 alt=""
-                className="h-7 w-10 object-contain sm:h-9 sm:w-[54px]"
+                className="h-6 w-9 object-contain sm:h-9 sm:w-[54px]"
               />
-              <span className="whitespace-nowrap text-xs font-normal text-black sm:text-sm">Made in India</span>
+                <span className="whitespace-nowrap text-[11px] font-normal text-black sm:text-sm">Made in India</span>
+              </div>
             </div>
             <a
               href="https://www.airavatatechnologies.com/"
               target="_blank"
               rel="noreferrer"
-              className="flex w-full items-center justify-center gap-2 text-center text-xs leading-relaxed text-black hover:underline sm:w-auto sm:justify-end sm:pr-20 sm:text-right sm:text-sm"
+              className="flex w-full items-center justify-start gap-2 pr-16 text-left text-xs leading-relaxed text-black hover:underline sm:w-auto sm:justify-end sm:pr-20 sm:text-right sm:text-sm"
             >
               <svg
                 viewBox="60 30 255 212"
