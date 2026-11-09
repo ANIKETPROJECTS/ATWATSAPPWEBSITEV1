@@ -1,4 +1,4 @@
-.caf-section { padding-block: 64px; color: #eef8ea; overflow: hidden; overflow-anchor: none; }
+.caf-section { padding-block: 64px; color: #eef8ea; overflow: clip; overflow-anchor: none; }
 .caf-grid { display: grid; gap: 40px; align-items: center; grid-template-columns: minmax(0, 1fr); }
 .caf-copy { order: -1; min-width: 0; max-width: 500px; }
 @media (min-width: 900px) {

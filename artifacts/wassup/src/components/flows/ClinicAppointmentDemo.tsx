@@ -184,9 +184,9 @@ export default function ClinicAppointmentDemo() {
       id="flow-builder"
       aria-labelledby="flow-builder-heading"
       data-testid="section-flow-builder"
-      className="flow-builder-section caf-section"
+      className="story-chapter story-long-chapter flow-builder-section caf-section"
     >
-      <div className="section-shell caf-grid">
+      <div className="story-stage section-shell caf-grid">
         <div className="caf-stage" ref={stageRef}>
           <div className="caf-phone">
             <DevicePreviewFrame

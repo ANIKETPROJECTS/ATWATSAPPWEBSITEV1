@@ -147,8 +147,8 @@ export default function ChatbotInquiryDemo() {
   ];
 
   return (
-    <section ref={sectionRef} id="chatbot" aria-labelledby="chatbot-heading" data-testid="section-chatbot-works" className="cid-section">
-      <div className="section-shell cid-grid">
+    <section ref={sectionRef} id="chatbot" aria-labelledby="chatbot-heading" data-testid="section-chatbot-works" className="story-chapter story-long-chapter cid-section">
+      <div className="story-stage section-shell cid-grid">
         <div className="cid-copy">
           <p className="cid-eyebrow"><span aria-hidden="true" />AI WhatsApp chatbot</p>
           <h2 id="chatbot-heading" className="font-display cid-title">

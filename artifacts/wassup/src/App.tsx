@@ -464,10 +464,10 @@ function Home() {
   return (
     <main className="noise min-h-[100dvh] bg-[#fcfbf8]" id="top">
       <Nav onLead={() => setLeadOpen(true)} />
-      <section className="relative overflow-hidden pb-8 pt-24 sm:pb-10 sm:pt-28 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pb-[14px] lg:pt-[72px]">
+      <section className="story-chapter relative overflow-clip pb-8 pt-24 sm:pb-10 sm:pt-28 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-start lg:pb-[14px] lg:pt-[72px]">
         <div className="absolute -right-32 top-20 h-[420px] w-[420px] rounded-full bg-[#3acd32]/20 blur-3xl" />
         <div className="absolute left-[-100px] top-[450px] h-[220px] w-[220px] rounded-full bg-[#3acd32]/20 blur-3xl" />
-        <div className="section-shell relative grid items-center gap-10 lg:grid-cols-[1.08fr_.92fr] lg:gap-8">
+        <div className="story-stage section-shell relative grid items-center gap-10 lg:grid-cols-[1.08fr_.92fr] lg:gap-8">
           <div ref={heroReveal} className="reveal">
             <h1 className="mt-6 max-w-[720px] font-display text-[clamp(2.5rem,10.2vw,5.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:text-[clamp(3.25rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(3rem,4.5vw,4.5rem)]">Turn WhatsApp into your <span className="text-[#3acd32]">sales &amp; support engine.</span></h1>
             <p className="mt-8 max-w-[540px] text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-base">AtWassup helps you onboard to WhatsApp Business API, connect the tools you already use, and bring customer conversations, campaigns, and support into one channel.</p>
@@ -485,11 +485,11 @@ function Home() {
 
       <section
         ref={(node) => { capabilitiesSectionRef.current = node; }}
-        className={`feature-motion-section relative overflow-hidden bg-[#101110] py-9 text-white sm:py-11${capabilitiesInView ? ' is-in-view' : ''}`}
+        className={`story-chapter feature-motion-section relative overflow-clip bg-[#101110] py-9 text-white sm:py-11${capabilitiesInView ? ' is-in-view' : ''}`}
         id="features"
       >
         <div className="feature-orbit pointer-events-none absolute -right-40 top-10 h-96 w-96 rounded-full border border-[#3acd32]/15" />
-        <div ref={capabilitiesReveal} className="section-shell reveal relative">
+        <div ref={capabilitiesReveal} className="story-stage section-shell reveal relative">
           <div className="feature-heading-row">
             <div className="max-w-[720px]">
               <SectionLabel tone="dark">One channel · ten capabilities</SectionLabel>
@@ -547,8 +547,8 @@ function Home() {
 
       <ClinicAppointmentDemo />
 
-      <section className="bg-[#fcfbf8] pb-24 pt-20 sm:pb-32 sm:pt-24" id="how-it-works">
-        <div ref={stepsReveal} className="section-shell reveal">
+      <section className="story-chapter bg-[#fcfbf8] pb-24 pt-20 sm:pb-32 sm:pt-24" id="how-it-works">
+        <div ref={stepsReveal} className="story-stage section-shell reveal">
           <div className="max-w-[680px]"><SectionLabel>Simple to get started</SectionLabel><h2 className="font-display text-5xl font-bold leading-[.94] tracking-[-.07em] sm:text-7xl">From first setup to <span className="text-[#3acd32]">better conversations.</span></h2><p className="mt-6 max-w-[520px] text-base leading-relaxed text-black/55">A clear path from connecting your number to growing the way you use WhatsApp.</p></div>
           <div
             ref={stepsCarouselRef}
@@ -588,8 +588,8 @@ function Home() {
         </div>
       </section>
 
-      <section className="border-y border-black/10 bg-[#f2f9e9] py-8 sm:py-10" id="pricing">
-        <div ref={pricingReveal} className="section-shell reveal">
+      <section className="story-chapter border-y border-black/10 bg-[#f2f9e9] py-8 sm:py-10" id="pricing">
+        <div ref={pricingReveal} className="story-stage section-shell reveal">
           <div className="mx-auto max-w-6xl">
             <SectionLabel>Simple pricing</SectionLabel>
             <h2 className="font-display text-3xl font-bold leading-tight tracking-[-.055em] sm:text-[2.5rem]">
@@ -643,8 +643,8 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-[#252a27] py-24 text-white sm:py-32">
-        <div ref={trustReveal} className="section-shell reveal grid items-start gap-12 lg:grid-cols-[.8fr_1.2fr]">
+      <section className="story-chapter bg-[#252a27] py-24 text-white sm:py-32">
+        <div ref={trustReveal} className="story-stage section-shell reveal grid items-start gap-12 lg:grid-cols-[.8fr_1.2fr]">
           <div><SectionLabel tone="dark">The right foundations</SectionLabel><h2 className="max-w-[470px] font-display text-5xl font-bold leading-[.94] tracking-[-.07em] sm:text-6xl">Built around how your team <span className="text-[#3acd32]">really works.</span></h2><p className="mt-6 max-w-[390px] text-sm leading-relaxed text-white/55">Work with the official WhatsApp Business Platform, connect the systems your team already relies on, and bring people into the conversation when needed.</p></div>
             <div className="grid gap-3 sm:grid-cols-3">
               {[
@@ -669,10 +669,10 @@ function Home() {
         </div>
       </section>
 
-      <section className="home-cta-section relative overflow-hidden bg-[#3acd32] py-12 sm:py-[4.5rem]" id="contact-cta">
+      <section className="story-chapter home-cta-section relative overflow-clip bg-[#3acd32] py-12 sm:py-[4.5rem]" id="contact-cta">
         <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full border-[32px] border-black/10" />
         <div className="absolute bottom-[-100px] left-[-30px] h-72 w-72 rounded-full border-[32px] border-black/10" />
-        <div ref={contactCtaReveal} className="home-cta-content section-shell relative reveal text-center">
+        <div ref={contactCtaReveal} className="story-stage home-cta-content section-shell relative reveal text-center">
           <SectionLabel>Talk with the AtWassup team</SectionLabel>
           <h2 className="home-cta-heading mx-auto font-display font-bold tracking-[-.08em]">
             Make WhatsApp work harder for your <span className="underline decoration-[5px] underline-offset-[10px]">business.</span>
@@ -691,13 +691,13 @@ function Home() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-t border-black/5 bg-[#f7f8f3] py-16 sm:py-24" id="contact">
-        <div ref={contactReveal} className="section-shell relative reveal">
+      <section className="story-chapter story-long-chapter relative overflow-clip border-t border-black/5 bg-[#f7f8f3] py-16 sm:py-24" id="contact">
+        <div ref={contactReveal} className="story-stage section-shell relative reveal">
           <div className="grid items-stretch gap-10 lg:grid-cols-[.95fr_1.05fr] lg:gap-14">
             <div className="order-2 lg:order-1">
               <ContactWhatsAppForm />
             </div>
-            <div className="order-1 flex w-full max-w-[640px] flex-col lg:order-2">
+            <div className="contact-details-column order-1 flex w-full max-w-[640px] flex-col lg:order-2">
               <div className="mb-4">
                 <h2 className="max-w-[560px] font-display text-3xl font-bold leading-[1.02] tracking-[-.045em] text-black sm:text-[34px]">
                   Turn WhatsApp chats into <span className="text-[#3acd32]">business growth.</span>
