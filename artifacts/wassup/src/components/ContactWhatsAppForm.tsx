@@ -181,7 +181,6 @@ export default function ContactWhatsAppForm() {
 
   return (
     <div className="contact-wa-stage" ref={stageRef} data-testid="contact-whatsapp-preview">
-      <div className="contact-wa-orbit" aria-hidden="true" />
       <div className="contact-wa-device">
         <DevicePreviewFrame screenWidth={screenWidth} hideStatusBar>
           <div className="demo-phone-screen" style={{ height: screenHeight }}>

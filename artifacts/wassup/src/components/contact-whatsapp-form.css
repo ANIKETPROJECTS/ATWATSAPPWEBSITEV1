@@ -8,19 +8,10 @@
   overflow: hidden;
 }
 
-.contact-wa-orbit {
-  position: absolute;
-  width: min(88%, 440px);
-  aspect-ratio: 1;
-  border: 1px solid rgb(58 205 50 / 22%);
-  border-radius: 50%;
-  background: radial-gradient(circle, rgb(58 205 50 / 10%), transparent 68%);
-}
-
 .contact-wa-device {
   position: relative;
   z-index: 1;
-  filter: drop-shadow(0 24px 28px rgb(26 45 28 / 18%));
+  filter: none;
 }
 
 .contact-wa-avatar {
@@ -265,7 +256,7 @@
   margin-top: 1px;
   border: 0;
   border-radius: 6px;
-  background: #117842;
+  background: #3acd32;
   color: #fff;
   font-family: inherit;
   font-size: 10px;
@@ -275,7 +266,7 @@
 }
 
 .contact-wa-submit:hover:not(:disabled) {
-  background: #0d6937;
+  background: #31b52a;
 }
 
 .contact-wa-submit:focus-visible,
@@ -383,13 +374,6 @@
     min-height: 580px;
   }
 
-  .contact-wa-orbit {
-    display: none;
-  }
-
-  .contact-wa-device {
-    filter: none;
-  }
 }
 
 @media (min-width: 1024px) {
