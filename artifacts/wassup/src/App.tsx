@@ -872,7 +872,7 @@ function Home() {
         className="relative overflow-hidden border-t border-black/5 bg-white pt-12 pb-[calc(5.5rem+env(safe-area-inset-bottom))] font-sans text-black sm:pt-14 sm:pb-10"
         data-testid="footer"
       >
-        <div className="section-shell relative">
+        <div className="relative mx-auto w-[calc(100%-40px)] max-w-[1440px] sm:w-[calc(100%-64px)] lg:w-[calc(100%-80px)]">
           <div className="grid gap-x-10 gap-y-9 border-b border-black/10 pb-9 md:grid-cols-2 xl:grid-cols-[1.2fr_.7fr_1.2fr_.85fr_1.2fr] xl:gap-x-7">
             <div className="order-5 xl:order-1">
               <a href="#top" aria-label="AtWassup home" data-testid="footer-link-home">
@@ -970,37 +970,28 @@ function Home() {
               <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black/50">Legal</h2>
               <ul className="mt-4 space-y-3.5 text-base font-medium text-black/75">
                 <li>
-                  <a
-                    href="https://aisensy.com/privacy-policy"
-                    target="_blank"
-                    rel="noreferrer"
+                  <span
                     data-testid="footer-link-privacy-policy"
-                    className="transition hover:text-[#3acd32]"
+                    className="block"
                   >
                     Privacy Policy
-                  </a>
+                  </span>
                 </li>
                 <li>
-                  <a
-                    href="https://aisensy.com/refund-policy"
-                    target="_blank"
-                    rel="noreferrer"
+                  <span
                     data-testid="footer-link-refund-policy"
-                    className="transition hover:text-[#3acd32]"
+                    className="block"
                   >
                     Refund Policy
-                  </a>
+                  </span>
                 </li>
                 <li>
-                  <a
-                    href="https://aisensy.com/tos"
-                    target="_blank"
-                    rel="noreferrer"
+                  <span
                     data-testid="footer-link-terms"
-                    className="transition hover:text-[#3acd32]"
+                    className="block"
                   >
                     Terms &amp; Conditions
-                  </a>
+                  </span>
                 </li>
               </ul>
             </nav>
