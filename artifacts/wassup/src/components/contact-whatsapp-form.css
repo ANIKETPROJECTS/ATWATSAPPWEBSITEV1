@@ -258,6 +258,14 @@
   .contact-wa-stage {
     min-height: 580px;
   }
+
+  .contact-wa-orbit {
+    display: none;
+  }
+
+  .contact-wa-device {
+    filter: none;
+  }
 }
 
 @media (min-width: 1024px) {
