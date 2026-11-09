@@ -101,7 +101,7 @@
   font-size: 13px;
   font-weight: 600;
   line-height: 1.25;
-  transition: color 300ms ease, text-shadow 300ms ease;
+  transition: color 300ms ease;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
@@ -112,7 +112,7 @@
   color: #111;
   font-size: 10.5px;
   line-height: 1.35;
-  transition: color 300ms ease, text-shadow 300ms ease;
+  transition: color 300ms ease;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
@@ -124,17 +124,15 @@
 .hero-feature-flow-step.is-active .hero-feature-flow-icon {
   transform: scale(1.1);
   color: #3acd32;
-  filter: drop-shadow(0 0 5px rgb(58 205 50 / 42%));
 }
 
 .hero-feature-flow-step.is-active .hero-feature-flow-icon img {
-  filter: brightness(0) saturate(100%) invert(69%) sepia(82%) saturate(589%) hue-rotate(63deg) brightness(91%) contrast(91%) drop-shadow(0 0 4px rgb(58 205 50 / 42%));
+  filter: brightness(0) saturate(100%) invert(69%) sepia(82%) saturate(589%) hue-rotate(63deg) brightness(91%) contrast(91%);
 }
 
 .hero-feature-flow-step.is-active .hero-feature-flow-copy > strong,
 .hero-feature-flow-step.is-active .hero-feature-flow-copy > span {
   color: #3acd32;
-  text-shadow: 0 0 8px rgb(58 205 50 / 42%), 0 0 18px rgb(58 205 50 / 22%);
 }
 
 @media (min-width: 1024px) {
