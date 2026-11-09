@@ -1,8 +1,13 @@
 .section-shell.hero-shell {
   width: min(1360px, calc(100% - 32px));
+  grid-template-columns: minmax(0, 1fr);
 }
 
 @media (min-width: 1024px) {
+  .section-shell.hero-shell {
+    grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr);
+  }
+
   .hero-copy {
     padding-top: clamp(32px, 5vh, 48px);
   }

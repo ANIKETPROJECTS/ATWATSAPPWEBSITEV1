@@ -59,6 +59,12 @@ const emptyCheckout: CheckoutDetails = {
   pinCode: '',
 };
 
+const getInitialHeroPhoneWidth = () => {
+  if (typeof window === 'undefined') return 252;
+  if (window.innerWidth <= 1023) return Math.max(160, Math.min(360, window.innerWidth - 40));
+  return 252;
+};
+
 const checkoutProfile: CheckoutDetails = {
   name: 'Priya Sharma',
   phone: '+91 90000 00000',
@@ -203,7 +209,7 @@ export default function CommerceDemo({
   const [selectedUpiApp, setSelectedUpiApp] = useState<'Google Pay' | 'Paytm' | 'PhonePe'>('Google Pay');
   const startRazorpayPreview = useCallback(() => setRazorpayStage('processing'), []);
   const [flowTypingField, setFlowTypingField] = useState<keyof CheckoutDetails | null>(null);
-  const [screenWidth, setScreenWidth] = useState(252);
+  const [screenWidth, setScreenWidth] = useState(getInitialHeroPhoneWidth);
   const [showScrollButton, setShowScrollButton] = useState(false);
   const demoStageRef = useRef<HTMLDivElement>(null);
   const chatBodyRef = useRef<HTMLDivElement>(null);
@@ -245,16 +251,29 @@ export default function CommerceDemo({
     if (!stage) return;
 
     const updateScreenWidth = () => {
-      const heightLimit = Math.floor(stage.clientHeight / 2.35);
-      const widthLimit = stage.clientWidth - 24;
-      if (heightLimit <= 0 || widthLimit <= 0) return;
-      setScreenWidth(Math.max(160, Math.min(heightLimit, widthLimit)));
+      let nextScreenWidth: number;
+
+      if (window.innerWidth <= 1023) {
+        // The mobile mockup follows the viewport width, not changing hero content.
+        nextScreenWidth = Math.max(160, Math.min(360, window.innerWidth - 40));
+      } else {
+        const heightLimit = Math.floor(stage.clientHeight / 2.35);
+        const widthLimit = stage.clientWidth - 24;
+        if (heightLimit <= 0 || widthLimit <= 0) return;
+        nextScreenWidth = Math.max(160, Math.min(heightLimit, widthLimit));
+      }
+
+      setScreenWidth((current) => current === nextScreenWidth ? current : nextScreenWidth);
     };
 
     const observer = new ResizeObserver(updateScreenWidth);
     observer.observe(stage);
+    window.addEventListener('resize', updateScreenWidth);
     updateScreenWidth();
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', updateScreenWidth);
+    };
   }, []);
 
   useEffect(() => {
