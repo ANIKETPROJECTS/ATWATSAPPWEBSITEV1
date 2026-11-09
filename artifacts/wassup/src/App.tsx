@@ -951,7 +951,14 @@ function Home() {
               />
               <span className="whitespace-nowrap text-xs font-semibold text-black sm:text-sm">Made in India</span>
             </div>
-            <div aria-hidden="true" className="hidden sm:block" />
+            <a
+              href="https://www.airavatatechnologies.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="justify-self-stretch text-right text-xs leading-relaxed text-black hover:underline sm:text-sm"
+            >
+              A product designed and Developed by Airavata Technologies
+            </a>
           </div>
         </div>
       </footer>
