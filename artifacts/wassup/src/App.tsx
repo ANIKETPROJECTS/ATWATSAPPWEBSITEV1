@@ -516,7 +516,7 @@ function Home() {
           <div ref={heroReveal} className="reveal hero-copy">
             <h1 className="mt-6 flex max-w-[720px] flex-col font-display text-[clamp(2.5rem,10.2vw,5.5rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:text-[clamp(3.25rem,5.3vw,5.5rem)] lg:mt-0 lg:text-[clamp(2.25rem,3.5vw,3.25rem)]">
               <span className="block">Make your business</span>
-              <span className="block">smarter with <HeroAtWassupWordmark /></span>
+              <span className="-mt-1 block">smarter with <HeroAtWassupWordmark /></span>
               <HeroHeadlineRotator />
             </h1>
             <p className="mt-8 max-w-[540px] text-justify text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-base">Start with AtWassup. Connect the WhatsApp Business API and let AI answer customer questions, capture leads, follow up, close sales, and run broadcasts all through AtWassup, your all-in-one WhatsApp AI marketing platform.</p>
