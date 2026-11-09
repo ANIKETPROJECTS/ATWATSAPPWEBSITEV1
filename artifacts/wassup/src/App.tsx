@@ -3,7 +3,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   ArrowDownRight,
   ArrowRight,
-  ArrowUp,
   BadgeCheck,
   BarChart3,
   Bot,
@@ -49,6 +48,7 @@ import socialFacebookPath from './assets/social-facebook.png';
 import socialInstagramPath from './assets/social-instagram.png';
 import socialLinkedinPath from './assets/social-linkedin.png';
 import socialYoutubePath from './assets/social-youtube.png';
+import whatsappContactPath from './assets/whatsapp-contact.png';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
 const queryClient = new QueryClient();
@@ -400,8 +400,6 @@ function Nav({ onLead }: { onLead: () => void }) {
 function Home() {
   const [leadOpen, setLeadOpen] = useState(false);
   const [demoOpen, setDemoOpen] = useState(false);
-  const [showBackToTop, setShowBackToTop] = useState(false);
-  const [footerInView, setFooterInView] = useState(false);
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const stepsCarouselRef = useRef<HTMLDivElement>(null);
   const stepCardRefs = useRef<(HTMLElement | null)[]>([]);
@@ -413,66 +411,6 @@ function Home() {
   const trustReveal = useReveal();
   const contactCtaReveal = useReveal();
   const contactReveal = useReveal();
-
-  useEffect(() => {
-    let animationFrame = 0;
-    const pendingUpdates = new Set<number>();
-    const updateBackToTopVisibility = () => {
-      if (animationFrame) window.cancelAnimationFrame(animationFrame);
-      animationFrame = window.requestAnimationFrame(() => {
-        const scrollY = Math.max(
-        window.scrollY,
-        window.pageYOffset,
-        document.documentElement.scrollTop,
-        document.body.scrollTop,
-        window.visualViewport?.pageTop ?? 0,
-        );
-        const threshold = window.matchMedia('(max-width: 767px)').matches ? 250 : 400;
-        setShowBackToTop(scrollY > threshold);
-      });
-    };
-    const updateAfterViewportChange = () => {
-      updateBackToTopVisibility();
-      for (const delay of [100, 350]) {
-        const timer = window.setTimeout(() => {
-          pendingUpdates.delete(timer);
-          updateBackToTopVisibility();
-        }, delay);
-        pendingUpdates.add(timer);
-      }
-    };
-    updateAfterViewportChange();
-    window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
-    document.addEventListener('scroll', updateBackToTopVisibility, { passive: true, capture: true });
-    window.addEventListener('resize', updateAfterViewportChange, { passive: true });
-    window.addEventListener('pageshow', updateAfterViewportChange);
-    window.addEventListener('hashchange', updateAfterViewportChange);
-    window.addEventListener('popstate', updateAfterViewportChange);
-    window.visualViewport?.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
-    window.visualViewport?.addEventListener('resize', updateAfterViewportChange, { passive: true });
-    return () => {
-      if (animationFrame) window.cancelAnimationFrame(animationFrame);
-      for (const timer of pendingUpdates) window.clearTimeout(timer);
-      window.removeEventListener('scroll', updateBackToTopVisibility);
-      document.removeEventListener('scroll', updateBackToTopVisibility, true);
-      window.removeEventListener('resize', updateAfterViewportChange);
-      window.removeEventListener('pageshow', updateAfterViewportChange);
-      window.removeEventListener('hashchange', updateAfterViewportChange);
-      window.removeEventListener('popstate', updateAfterViewportChange);
-      window.visualViewport?.removeEventListener('scroll', updateBackToTopVisibility);
-      window.visualViewport?.removeEventListener('resize', updateAfterViewportChange);
-    };
-  }, []);
-
-  useEffect(() => {
-    const footer = document.querySelector('[data-testid="footer"]');
-    if (!footer) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      setFooterInView(entry.isIntersecting);
-    });
-    observer.observe(footer);
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -761,7 +699,7 @@ function Home() {
             <div className="order-1 flex w-full max-w-[640px] flex-col lg:order-2">
               <div className="mb-4">
                 <h2 className="max-w-[560px] font-display text-3xl font-bold leading-[1.02] tracking-[-.045em] text-black sm:text-[34px]">
-                  Turn WhatsApp chats into <span className="text-[#237b2a]">business growth.</span>
+                  Turn WhatsApp chats into <span className="text-[#3acd32]">business growth.</span>
                 </h2>
                 <p className="mt-2 max-w-[550px] text-sm leading-5 text-black/65">
                   Capture new numbers, answer questions with AI, and keep customer details ready for follow-up.
@@ -784,7 +722,7 @@ function Home() {
               </div>
               <div className="rounded-[20px] border border-black/10 bg-white p-4 shadow-[0_12px_32px_rgba(15,23,42,.05)]">
                 <div className="flex items-start gap-3">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/12 text-[#237b2a]">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/12 text-[#3acd32]">
                     <MapPin size={17} aria-hidden="true" />
                   </span>
                   <div>
@@ -800,11 +738,11 @@ function Home() {
 
                 <div className="mt-3 grid gap-2 border-t border-black/8 pt-3 sm:grid-cols-2">
                   <a href="tel:+919167959756" className="flex min-w-0 items-center gap-2.5 rounded-xl bg-[#f7f8f3] px-3 py-2.5 text-[13px] font-semibold text-black transition hover:bg-[#3acd32]/10">
-                    <Phone size={15} className="shrink-0 text-[#237b2a]" aria-hidden="true" />
+                    <Phone size={15} className="shrink-0 text-[#3acd32]" aria-hidden="true" />
                     <span>+91 91679 59756</span>
                   </a>
                   <a href="mailto:info@atwassup.com" className="flex min-w-0 items-center gap-2.5 rounded-xl bg-[#f7f8f3] px-3 py-2.5 text-[13px] font-semibold text-black transition hover:bg-[#3acd32]/10">
-                    <Mail size={15} className="shrink-0 text-[#237b2a]" aria-hidden="true" />
+                    <Mail size={15} className="shrink-0 text-[#3acd32]" aria-hidden="true" />
                     <span className="break-all">info@atwassup.com</span>
                   </a>
                 </div>
@@ -838,7 +776,7 @@ function Home() {
                   aria-label="AtWassup on Instagram"
                   className="flex min-w-0 items-center gap-2.5 rounded-2xl border border-black/10 bg-white p-3 shadow-[0_8px_24px_rgba(15,23,42,.04)] transition hover:border-[#3acd32] hover:bg-[#3acd32]/5"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/12 text-[#237b2a]">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/12 text-[#3acd32]">
                     <Instagram size={17} aria-hidden="true" />
                   </span>
                   <span className="min-w-0">
@@ -853,7 +791,7 @@ function Home() {
                   aria-label="AtWassup on LinkedIn"
                   className="flex min-w-0 items-center gap-2.5 rounded-2xl border border-black/10 bg-white p-3 shadow-[0_8px_24px_rgba(15,23,42,.04)] transition hover:border-[#3acd32] hover:bg-[#3acd32]/5"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/12 text-[#237b2a]">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#3acd32]/12 text-[#3acd32]">
                     <Linkedin size={17} aria-hidden="true" />
                   </span>
                   <span className="min-w-0">
@@ -869,7 +807,7 @@ function Home() {
 
       <footer
         id="footer"
-        className="relative overflow-hidden border-t border-black/5 bg-white pt-12 pb-[calc(5.5rem+env(safe-area-inset-bottom))] font-sans text-black sm:pt-14 sm:pb-10"
+        className="relative overflow-hidden border-t border-black/5 bg-white pt-12 pb-[calc(1rem+env(safe-area-inset-bottom))] font-sans text-black sm:pt-14 sm:pb-5"
         data-testid="footer"
       >
         <div className="relative mx-auto w-[calc(100%-40px)] max-w-[1440px] sm:w-[calc(100%-64px)] lg:w-[calc(100%-80px)]">
@@ -882,7 +820,7 @@ function Home() {
                   className="h-[90px] w-full max-w-[320px] object-cover object-[center_52%]"
                 />
               </a>
-              <p className="mt-2 max-w-[290px] text-base leading-relaxed text-black/65">
+              <p className="mt-2 max-w-[290px] text-base leading-relaxed text-black">
                 WhatsApp Business API, AI chatbot, and Flow solutions by Airavata Technologies.
               </p>
               <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
@@ -898,7 +836,7 @@ function Home() {
                     alt=""
                     className="h-9 w-[54px] object-contain"
                   />
-                  <span className="whitespace-nowrap text-sm font-semibold text-black/75">Made in India</span>
+                  <span className="whitespace-nowrap text-sm font-semibold text-black">Made in India</span>
                 </div>
               </div>
               <div className="mt-5 flex items-center gap-3" role="group" aria-label="Social media">
@@ -923,22 +861,22 @@ function Home() {
             </div>
 
             <nav aria-label="Footer navigation" className="order-1 xl:order-2">
-              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black/50">Explore</h2>
-              <ul className="mt-4 space-y-3.5 text-base font-medium text-black/75">
-                <li><a data-testid="footer-link-features" href="#features" className="transition hover:text-[#3acd32]">Features</a></li>
-                <li><a data-testid="footer-link-how-it-works" href="#how-it-works" className="transition hover:text-[#3acd32]">How it works</a></li>
-                <li><a data-testid="footer-link-pricing" href="#pricing" className="transition hover:text-[#3acd32]">Pricing</a></li>
-                <li><a data-testid="footer-link-contact" href="#contact" className="transition hover:text-[#3acd32]">Contact</a></li>
+              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black">Explore</h2>
+              <ul className="mt-4 space-y-3.5 text-base font-medium text-black">
+                <li><a data-testid="footer-link-features" href="#features" className="transition hover:text-black">Features</a></li>
+                <li><a data-testid="footer-link-how-it-works" href="#how-it-works" className="transition hover:text-black">How it works</a></li>
+                <li><a data-testid="footer-link-pricing" href="#pricing" className="transition hover:text-black">Pricing</a></li>
+                <li><a data-testid="footer-link-contact" href="#contact" className="transition hover:text-black">Contact</a></li>
               </ul>
             </nav>
 
             <div className="order-2 xl:order-3" data-testid="footer-company-contact">
-              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black/50">Contact</h2>
+              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black">Contact</h2>
               <div className="mt-4 space-y-4">
                 <a
                   href="tel:+919167959756"
                   data-testid="footer-contact-phone"
-                  className="flex items-center gap-3 text-base font-semibold text-black/80 transition hover:text-[#237b2a]"
+                  className="flex items-center gap-3 text-base font-semibold text-black transition hover:text-black"
                 >
                   <img src={contactPhonePath} alt="" className="h-6 w-6 shrink-0 object-contain" />
                   +91 91679 59756
@@ -946,7 +884,7 @@ function Home() {
                 <a
                   href="mailto:info@atwassup.com"
                   data-testid="footer-contact-email"
-                  className="flex items-center gap-3 text-base font-semibold text-black/80 transition hover:text-[#237b2a]"
+                  className="flex items-center gap-3 text-base font-semibold text-black transition hover:text-black"
                 >
                   <img src={contactEmailPath} alt="" className="h-6 w-6 shrink-0 object-contain" />
                   info@atwassup.com
@@ -956,7 +894,7 @@ function Home() {
                   target="_blank"
                   rel="noreferrer"
                   data-testid="footer-link-directions"
-                  className="flex items-start gap-3 text-base leading-6 text-black/70 transition hover:text-[#237b2a]"
+                  className="flex items-start gap-3 text-base leading-6 text-black transition hover:text-black"
                 >
                   <img src={contactLocationPath} alt="" className="mt-0.5 h-6 w-6 shrink-0 object-contain" />
                   <span>
@@ -967,8 +905,8 @@ function Home() {
             </div>
 
             <nav aria-label="Legal" className="order-3 xl:order-4">
-              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black/50">Legal</h2>
-              <ul className="mt-4 space-y-3.5 text-base font-medium text-black/75">
+              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black">Legal</h2>
+              <ul className="mt-4 space-y-3.5 text-base font-medium text-black">
                 <li>
                   <span
                     data-testid="footer-link-privacy-policy"
@@ -997,7 +935,7 @@ function Home() {
             </nav>
 
             <div className="order-4 xl:order-5">
-              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black/50">Find us</h2>
+              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black">Find us</h2>
               <div className="relative mt-4 h-[190px] overflow-hidden rounded-2xl border border-black/10 bg-[#f4f7f1]">
                 <iframe
                   title="AtWassup office location in Thane"
@@ -1007,40 +945,33 @@ function Home() {
                   referrerPolicy="no-referrer-when-downgrade"
                   allowFullScreen
                 />
-                <a
-                  href={officeMapUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  data-testid="footer-map-open"
-                  className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-white/95 px-3 py-2 text-xs font-bold text-black shadow-sm transition hover:bg-[#3acd32]"
-                >
-                  <MapPin size={14} aria-hidden="true" />
-                  Open in Google Maps
-                </a>
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col gap-2 py-5 text-sm text-black/55 sm:flex-row sm:items-center sm:justify-between sm:pr-14">
+          <div className="flex flex-col gap-2 pt-5 text-sm text-black sm:flex-row sm:items-center sm:justify-between sm:pr-20">
             <p>© {new Date().getFullYear()} Airavata Technologies. All rights reserved.</p>
-            <a href="https://atwassup.com/" target="_blank" rel="noreferrer" data-testid="footer-link-domain" className="text-base font-semibold transition hover:text-[#237b2a]">
+            <a href="https://atwassup.com/" target="_blank" rel="noreferrer" data-testid="footer-link-domain" className="text-base font-semibold text-black transition hover:text-black">
               AtWassup.com
             </a>
           </div>
         </div>
       </footer>
-      {(showBackToTop || footerInView) && (
-        <button
-          type="button"
-          onClick={() => document.getElementById('top')?.scrollIntoView({ block: 'start', behavior: 'smooth' })}
-          aria-label="Back to top"
-          title="Back to top"
-          data-testid="button-back-to-top"
-          className="fixed bottom-5 right-5 z-[70] flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#3acd32] bg-[#101110] text-[#3acd32] shadow-[0_12px_30px_rgba(0,0,0,.24)] transition hover:-translate-y-1 hover:border-[#3acd32] hover:bg-[#3acd32] hover:text-black focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#3acd32]/50"
-        >
-          <ArrowUp size={20} />
-        </button>
-      )}
+      <a
+        href="https://wa.me/919167959756"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Chat with AtWassup on WhatsApp"
+        title="Chat with AtWassup on WhatsApp"
+        data-testid="floating-whatsapp-contact"
+        className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-5 z-[70] flex h-14 w-14 items-center justify-center rounded-2xl transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#3acd32]/50"
+      >
+        <img
+          src={whatsappContactPath}
+          alt=""
+          className="h-full w-full object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,.2)]"
+        />
+      </a>
       {demoOpen && <DemoModal onClose={() => setDemoOpen(false)} />}
       {leadOpen && <LeadModal onClose={() => setLeadOpen(false)} />}
     </main>

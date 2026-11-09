@@ -1,10 +1,10 @@
 ---
-name: Mobile footer arrow spacing
-description: Keep the fixed back-to-top control clear of footer content on narrow screens.
+name: Floating WhatsApp contact
+description: Keep the WhatsApp footer button safe-area-aware and do not restore the back-to-top arrow.
 ---
 
-On mobile, reserve a safe-area-aware strip below footer text so the fixed back-to-top button can remain visible without sharing space with the copyright row.
+The footer uses a fixed WhatsApp contact button in place of the former back-to-top arrow.
 
-**Why:** The user reported that the mobile footer and arrow issue persisted after an earlier check.
+**Why:** the user asked to remove the page-up icon and use a WhatsApp logo at the bottom-right of the website.
 
-**How to apply:** When changing the footer or back-to-top control, verify the bottom-of-page state at a phone-width viewport and confirm there is a visible gap between the button and footer text.
+**How to apply:** when changing the footer, keep the contact button clear of footer text and respect mobile safe-area insets; do not reintroduce the back-to-top control.
