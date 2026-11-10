@@ -563,24 +563,18 @@ function Home() {
           </div>
           <div className="hero-proof">
             <div className="mt-0 lg:mt-8" data-testid="hero-meta-business-partner">
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-2 sm:gap-x-4">
+              <p className="mb-1.5 text-lg font-medium leading-6 text-black/60" data-testid="hero-meta-business-partner-copy">
+                We are an official Meta Business Partner
+                <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="ml-1.5 inline-block h-5 w-5 align-middle object-contain" />
+              </p>
+              <div className="flex items-center">
                 <img
                   src={metaBusinessPartnerPath}
                   alt="Meta Business Partner"
                   className="hero-meta-logo h-[52px] w-[135px] shrink-0 object-contain object-left sm:h-16 sm:w-[180px]"
                   data-testid="hero-meta-business-partner-logo"
                 />
-                <img
-                  src={logoPath}
-                  alt="AtWassup"
-                  className="hero-atwassup-logo h-[50px] w-[200px] shrink-0 object-cover object-[center_52%] sm:h-[66px] sm:w-[260px]"
-                  data-testid="hero-atwassup-logo"
-                />
               </div>
-              <p className="mt-2 text-lg font-medium leading-6 text-black/60" data-testid="hero-meta-business-partner-copy">
-                We are an official Meta Business Partner
-                <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="ml-1.5 inline-block h-5 w-5 align-middle object-contain" />
-              </p>
             </div>
             <div className="mt-4 max-w-[520px]" data-testid="hero-whatsapp-profile-showcase">
               <div className="flex items-center gap-1.5 rounded-none border border-black/10 bg-white px-2 py-4 sm:gap-2.5 sm:px-3">
