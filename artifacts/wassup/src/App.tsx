@@ -43,6 +43,7 @@ import ContactWhatsAppForm from '@/components/ContactWhatsAppForm';
 import NotFound from '@/pages/not-found';
 import madeInIndiaFlagPath from './assets/made-in-india-flag.png';
 import metaBusinessPartnerPath from './assets/meta-business-partner.png';
+import metaTechProviderPath from './assets/meta-tech-provider.png';
 import verifiedBusinessBadge from './assets/verified-business.svg';
 import logoPath from './assets/airavata-technologies-logo.svg';
 import airavataTriangleSourcePath from './assets/airavata-technologies-mark-source.svg';
@@ -567,12 +568,18 @@ function Home() {
                 We are an official Meta Business Partner
                 <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="ml-1.5 inline-block h-5 w-5 align-middle object-contain" />
               </p>
-              <div className="flex items-center">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
                 <img
                   src={metaBusinessPartnerPath}
                   alt="Meta Business Partner"
                   className="hero-meta-logo h-[52px] w-[135px] shrink-0 object-contain object-left sm:h-16 sm:w-[180px]"
                   data-testid="hero-meta-business-partner-logo"
+                />
+                <img
+                  src={metaTechProviderPath}
+                  alt="Meta Tech Provider"
+                  className="h-[56px] w-[118px] shrink-0 object-contain object-left sm:h-16 sm:w-[132px]"
+                  data-testid="hero-meta-tech-provider-logo"
                 />
               </div>
             </div>
