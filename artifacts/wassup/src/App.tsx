@@ -568,7 +568,7 @@ function Home() {
                 We are an official Meta Business Partner
                 <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="ml-1.5 inline-block h-5 w-5 align-middle object-contain" />
               </p>
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
                 <img
                   src={metaBusinessPartnerPath}
                   alt="Meta Business Partner"
@@ -578,7 +578,7 @@ function Home() {
                 <img
                   src={metaTechProviderPath}
                   alt="Meta Tech Provider"
-                  className="h-[56px] w-[118px] shrink-0 object-contain object-left sm:h-16 sm:w-[132px]"
+                  className="hero-meta-logo h-[52px] w-[135px] shrink-0 object-contain object-left sm:h-16 sm:w-[180px]"
                   data-testid="hero-meta-tech-provider-logo"
                 />
               </div>
