@@ -564,7 +564,7 @@ function Home() {
             </div>
           </div>
           <div className="hero-proof">
-            <div className="mt-0 lg:mt-8" data-testid="hero-meta-business-partner">
+            <div className="mt-0 lg:mt-4" data-testid="hero-meta-business-partner">
               <p className="mb-1.5 text-lg font-medium leading-6 text-black/60" data-testid="hero-meta-business-partner-copy">
                 <span>We are an official Meta Business Partner</span>
                 <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="ml-1.5 inline-block h-5 w-5 align-middle object-contain" />
