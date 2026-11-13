@@ -173,17 +173,18 @@
   width: 32px;
   height: 32px;
   place-items: center;
-  background: #fcfbf8;
-  color: #111;
-  transition: color 260ms ease, transform 260ms ease, filter 260ms ease;
+  border-radius: 50%;
+  background: #3acd32;
+  color: #fff;
+  transition: transform 260ms ease;
 }
 
 .hero-feature-flow-icon img {
   display: block;
-  width: 30px;
-  height: 30px;
+  width: 72%;
+  height: 72%;
   object-fit: contain;
-  filter: brightness(0) saturate(100%);
+  filter: brightness(0) invert(1);
 }
 
 .hero-feature-flow-copy {
@@ -221,11 +222,6 @@
 
 .hero-feature-flow-step.is-active .hero-feature-flow-icon {
   transform: scale(1.1);
-  color: #3acd32;
-}
-
-.hero-feature-flow-step.is-active .hero-feature-flow-icon img {
-  filter: brightness(0) saturate(100%) invert(69%) sepia(82%) saturate(589%) hue-rotate(63deg) brightness(91%) contrast(91%);
 }
 
 .hero-feature-flow-step.is-active .hero-feature-flow-copy > strong,
@@ -329,11 +325,6 @@
   .hero-feature-flow-icon {
     width: 44px;
     height: 44px;
-  }
-
-  .hero-feature-flow-icon img {
-    width: 40px;
-    height: 40px;
   }
 
   .hero-feature-flow-copy > strong {
