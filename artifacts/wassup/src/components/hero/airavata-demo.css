@@ -94,7 +94,7 @@
 .demo-shop-name small { color: rgb(0 0 0 / 50%); font-size: 8px; line-height: 9px; }
 .demo-header-actions-art { top: 0; right: 11px; }
 .hero-profile-actions-art { top: 0; right: 0; transform: scale(1.3); transform-origin: right top; }
-.hero-profile-actions-art img { filter: brightness(1.1); }
+.hero-profile-actions-art img { filter: brightness(1.1); mix-blend-mode: multiply; }
 .demo-date-art { position: relative; flex: 0 0 auto; align-self: center; }
 .demo-chat-body { position: relative; display: flex; min-height: 0; flex: 1; flex-direction: column; gap: 8px; overflow-y: auto; padding: 8px 10px; background: #f5f2eb; scrollbar-width: none; }
 .demo-chat-body::-webkit-scrollbar { display: none; }
@@ -430,6 +430,14 @@
   .hero-airavata-demo {
     height: min(792px, calc(220vw - 88px));
     min-height: 280px;
+  }
+
+  .hero-airavata-demo .demo-chat-body,
+  .hero-airavata-demo .flow-screen-content,
+  .hero-airavata-demo .razorpay-checkout-content,
+  .hero-airavata-demo .razorpay-processing-content,
+  .hero-airavata-demo .invoice-viewer-canvas {
+    overflow-y: hidden;
   }
 }
 @media (prefers-reduced-motion: reduce) {

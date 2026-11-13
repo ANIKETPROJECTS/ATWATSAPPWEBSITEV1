@@ -291,11 +291,24 @@
 }
 
 @media (max-width: 640px) {
+  .hero-feature-flow {
+    align-items: center;
+  }
+
+  .hero-feature-flow-list {
+    width: fit-content;
+    max-width: 100%;
+  }
+
   .hero-feature-flow-step {
     min-height: 56px;
     grid-template-columns: 40px minmax(0, 1fr);
     gap: 12px;
     padding-block: 4px;
+  }
+
+  .hero-feature-flow-step:nth-last-child(-n + 2) {
+    padding-right: 0;
   }
 
   .hero-feature-flow-list {
@@ -327,6 +340,21 @@
   .hero-meta-logo {
     width: clamp(120px, 36vw, 160px);
     height: clamp(46px, 13vw, 58px);
+  }
+
+  .hero-proof [data-testid="hero-meta-business-partner"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-proof [data-testid="hero-meta-business-partner-copy"] {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-proof [data-testid="hero-meta-business-partner"] > div {
+    justify-content: center;
   }
 
   .hero-atwassup-logo {
