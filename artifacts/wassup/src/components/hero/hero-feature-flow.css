@@ -1,8 +1,6 @@
 .hero-section {
   background-color: #fcfbf8;
-  background-image:
-    linear-gradient(rgba(252, 251, 248, .08), rgba(252, 251, 248, .08)),
-    url('../../assets/hero-whatsapp-chat-texture.png');
+  background-image: url('../../assets/hero-whatsapp-chat-texture-transparent.png');
   background-position: center top;
   background-repeat: repeat;
   background-size: 380px auto;
