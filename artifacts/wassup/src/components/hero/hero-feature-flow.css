@@ -123,8 +123,9 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  --hero-feature-track-top: 17px;
-  --hero-feature-track-height: calc(100% - 34px);
+  --hero-feature-track-center: 20px;
+  --hero-feature-track-top: 20px;
+  --hero-feature-track-height: calc(100% - 40px);
   --hero-feature-progress-height: 0px;
 }
 
@@ -132,7 +133,7 @@
   position: absolute;
   z-index: 0;
   top: var(--hero-feature-track-top);
-  left: 15px;
+  left: calc(var(--hero-feature-track-center) - 1px);
   width: 2px;
   height: var(--hero-feature-track-height);
   border-radius: 999px;
@@ -144,7 +145,7 @@
   position: absolute;
   z-index: 0;
   top: var(--hero-feature-track-top);
-  left: 14.5px;
+  left: calc(var(--hero-feature-track-center) - 1.5px);
   width: 3px;
   height: var(--hero-feature-progress-height);
   border-radius: 999px;
@@ -158,7 +159,7 @@
   z-index: 1;
   display: grid;
   min-height: 44px;
-  grid-template-columns: 32px minmax(0, 1fr);
+  grid-template-columns: 40px minmax(0, 1fr);
   align-items: center;
   gap: 10px;
   padding: 4px 0;
@@ -170,8 +171,8 @@
   position: relative;
   z-index: 2;
   display: grid;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   place-items: center;
   border-radius: 50%;
   background: #3acd32;
@@ -181,8 +182,8 @@
 
 .hero-feature-flow-icon img {
   display: block;
-  width: 72%;
-  height: 72%;
+  width: 64%;
+  height: 64%;
   object-fit: contain;
   filter: brightness(0) invert(1);
 }
@@ -244,8 +245,8 @@
   }
 
   .hero-feature-flow-step {
-    min-height: 34px;
-    grid-template-columns: 32px minmax(0, 1fr);
+    min-height: 44px;
+    grid-template-columns: 40px minmax(0, 1fr);
     gap: 7px;
     padding-block: 0;
   }
@@ -298,7 +299,7 @@
 
   .hero-feature-flow-step {
     min-height: 60px;
-    grid-template-columns: 44px minmax(0, 1fr);
+    grid-template-columns: 52px minmax(0, 1fr);
     gap: 12px;
     padding-block: 4px;
   }
@@ -309,9 +310,9 @@
 
   .hero-feature-flow-list {
     gap: 8px;
-    --hero-feature-track-center: 22px;
-    --hero-feature-track-top: 20px;
-    --hero-feature-track-height: calc(100% - 40px);
+    --hero-feature-track-center: 26px;
+    --hero-feature-track-top: 26px;
+    --hero-feature-track-height: calc(100% - 52px);
   }
 
   .hero-feature-flow-list::before {
@@ -323,8 +324,8 @@
   }
 
   .hero-feature-flow-icon {
-    width: 44px;
-    height: 44px;
+    width: 52px;
+    height: 52px;
   }
 
   .hero-feature-flow-copy > strong {
