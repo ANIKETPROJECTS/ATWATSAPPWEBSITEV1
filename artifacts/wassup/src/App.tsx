@@ -420,12 +420,12 @@ function Nav({ onLead }: { onLead: () => void }) {
       }}
       className="absolute inset-x-0 top-0 z-40 border-b border-black/5 bg-white/95 shadow-[0_4px_18px_rgba(10,20,10,.06)] backdrop-blur-md"
     >
-      <div className="section-shell flex h-16 items-center justify-between sm:h-[72px] lg:h-[88px]">
-        <a href="#top" data-testid="link-logo" className="flex shrink-0 items-center">
+      <div className="section-shell relative flex h-16 items-center justify-between sm:h-[72px] lg:h-[88px]">
+        <a href="#top" data-testid="link-logo" className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 shrink-0 items-center lg:static lg:translate-x-0 lg:translate-y-0">
           <img
             src={logoPath}
             alt="AtWassup — AI WhatsApp Marketing Automation"
-            className="h-16 w-[min(280px,calc(100vw_-_112px))] object-cover object-[center_52%] sm:h-[68px] sm:w-[min(320px,calc(100vw_-_120px))] lg:h-[76px] lg:w-[min(340px,calc(100vw_-_104px))]"
+            className="h-16 w-[min(280px,calc(100vw_-_136px))] object-cover object-[center_52%] sm:h-[68px] sm:w-[min(320px,calc(100vw_-_136px))] lg:h-[76px] lg:w-[min(340px,calc(100vw_-_104px))]"
           />
         </a>
         <nav aria-label="Main navigation" className="hidden items-center gap-8 lg:flex">
@@ -446,7 +446,7 @@ function Nav({ onLead }: { onLead: () => void }) {
           aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
           aria-expanded={open}
           aria-controls="mobile-navigation-panel"
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white transition-colors hover:border-[#3acd32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3acd32] lg:hidden"
+          className="ml-auto flex h-11 w-11 shrink-0 items-center justify-center text-black transition-colors hover:text-[#3acd32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3acd32] lg:hidden"
         >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
@@ -454,7 +454,8 @@ function Nav({ onLead }: { onLead: () => void }) {
       <div
         id="mobile-navigation-panel"
         aria-hidden={!open}
-        className={`section-shell lg:hidden${open ? '' : ' hidden'}`}
+        inert={!open}
+        className={`section-shell mobile-menu-shell lg:hidden${open ? ' is-open' : ''}`}
       >
           <nav aria-label="Mobile navigation" className="mobile-menu-panel mb-3 rounded-2xl border border-black/10 bg-white p-3 shadow-xl">
             <a data-testid="mobile-link-ai-features" href="#features" onClick={closeMenu} className="site-nav-link">Features</a>
@@ -548,7 +549,7 @@ function Home() {
             </h1>
           </div>
           <div className="hero-details">
-            <p className="mt-0 max-w-[540px] text-left text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-justify lg:text-base">Start with AtWassup. Connect the WhatsApp Business API and let AI answer customer questions, capture leads, follow up, close sales, and run broadcasts all through AtWassup, your all-in-one WhatsApp AI marketing platform.</p>
+            <p className="mt-0 max-w-[540px] text-justify text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-base">Start with AtWassup. Connect the WhatsApp Business API and let AI answer customer questions, capture leads, follow up, close sales, and run broadcasts all through AtWassup, your all-in-one WhatsApp AI marketing platform.</p>
             <div className="hero-actions mt-6 lg:mt-5">
               <PrimaryButton onClick={() => setLeadOpen(true)} testId="hero-button-book-demo">Schedule demo</PrimaryButton>
               <a data-testid="hero-link-explore-features" href="#features" className="header-action header-action-secondary min-w-[180px] px-8">Explore Features</a>
@@ -565,7 +566,7 @@ function Home() {
           <div className="hero-proof">
             <div className="mt-0 lg:mt-8" data-testid="hero-meta-business-partner">
               <p className="mb-1.5 text-lg font-medium leading-6 text-black/60" data-testid="hero-meta-business-partner-copy">
-                We are an official Meta Business Partner
+                <span>We are an official Meta Business Partner</span>
                 <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="ml-1.5 inline-block h-5 w-5 align-middle object-contain" />
               </p>
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2">

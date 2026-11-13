@@ -156,6 +156,21 @@
   .site-nav-link:hover::after,
   .site-nav-link:focus-visible::after { transform: scaleX(1); }
   .site-nav-actions { align-items: center; gap: 10px; }
+  .mobile-menu-shell {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    visibility: hidden;
+    transition: max-height .32s cubic-bezier(.2, .7, .2, 1), opacity .2s ease, transform .32s cubic-bezier(.2, .7, .2, 1), visibility 0s linear .32s;
+  }
+  .mobile-menu-shell.is-open {
+    max-height: calc(100svh - 88px);
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    transition-delay: 0s;
+  }
   .mobile-menu-panel {
     max-height: calc(100svh - 88px);
     overflow-y: auto;
@@ -715,6 +730,8 @@ h3.font-display {
   .feature-motion-section .feature-row-icon,
   .feature-motion-section .feature-row-icon svg,
   .feature-motion-section .feature-row-title-underline { transition: none !important; }
+  .mobile-menu-shell,
+  .mobile-menu-shell.is-open { transform: none; }
   .trust-card-cursor { display: none !important; animation: none !important; }
   .reveal.is-visible .trust-card { animation: none !important; }
 }
