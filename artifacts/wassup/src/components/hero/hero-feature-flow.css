@@ -313,8 +313,17 @@
 
   .hero-feature-flow-list {
     gap: 8px;
+    --hero-feature-track-center: 22px;
     --hero-feature-track-top: 20px;
     --hero-feature-track-height: calc(100% - 40px);
+  }
+
+  .hero-feature-flow-list::before {
+    left: calc(var(--hero-feature-track-center) - 1px);
+  }
+
+  .hero-feature-flow-list::after {
+    left: calc(var(--hero-feature-track-center) - 1.5px);
   }
 
   .hero-feature-flow-icon {
