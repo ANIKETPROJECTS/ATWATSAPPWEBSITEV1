@@ -539,7 +539,7 @@ function Home() {
   return (
     <main className="noise min-h-[100dvh] bg-[#fcfbf8]" id="top">
       <Nav onLead={() => setLeadOpen(true)} />
-      <section className="relative overflow-hidden pb-8 pt-20 sm:pb-10 sm:pt-28 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pb-[14px] lg:pt-[72px]">
+      <section className="hero-section relative overflow-hidden pb-8 pt-20 sm:pb-10 sm:pt-28 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pb-[14px] lg:pt-[72px]">
         <div className="section-shell hero-shell relative grid items-start gap-3 sm:gap-6 lg:grid-cols-[1.02fr_.98fr] lg:items-center lg:gap-x-5 lg:gap-y-0">
           <div ref={heroReveal} className="reveal hero-heading">
             <h1 className="mt-2 flex max-w-[720px] flex-col gap-y-1.5 font-display text-[clamp(1.45rem,7.25vw,1.9rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:mt-6 sm:text-[clamp(2rem,5.3vw,5.5rem)] lg:mt-0 lg:gap-y-0 lg:text-[clamp(2.25rem,3.5vw,3.25rem)]">
