@@ -584,7 +584,7 @@ function Home() {
                 />
               </div>
             </div>
-            <div className="mt-4 max-w-[520px]" data-testid="hero-whatsapp-profile-showcase">
+            <div className="mt-8 max-w-[520px]" data-testid="hero-whatsapp-profile-showcase">
               <div className="flex items-center gap-1.5 rounded-none border border-black/10 bg-white px-2 py-4 sm:gap-2.5 sm:px-3">
                 <ChevronLeft aria-hidden="true" className="h-5 w-5 shrink-0 text-[#111b21] sm:h-[22px] sm:w-[22px]" />
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#d1e1d2] bg-[#dceadd] text-base font-semibold text-[#447b54] sm:h-12 sm:w-12 sm:text-lg">
