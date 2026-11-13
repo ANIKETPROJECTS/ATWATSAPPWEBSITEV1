@@ -549,7 +549,7 @@ function Home() {
             </h1>
           </div>
           <div className="hero-details">
-            <p className="mt-0 max-w-[540px] text-justify text-base leading-relaxed text-black/60 sm:text-lg lg:mt-5 lg:text-base">Start with AtWassup. Connect the WhatsApp Business API and let AI answer customer questions, capture leads, follow up, close sales, and run broadcasts all through AtWassup, your all-in-one WhatsApp AI marketing platform.</p>
+            <p className="mt-0 max-w-[540px] text-justify text-lg font-medium leading-6 text-black lg:mt-5">Start with AtWassup. Connect the WhatsApp Business API and let AI answer customer questions, capture leads, follow up, close sales, and run broadcasts all through AtWassup, your all-in-one WhatsApp AI marketing platform.</p>
             <div className="hero-actions mt-6 lg:mt-5">
               <PrimaryButton onClick={() => setLeadOpen(true)} testId="hero-button-book-demo">Schedule demo</PrimaryButton>
               <a data-testid="hero-link-explore-features" href="#features" className="header-action header-action-secondary min-w-[180px] px-8">Explore Features</a>
@@ -565,7 +565,7 @@ function Home() {
           </div>
           <div className="hero-proof">
             <div className="mt-0 lg:mt-4" data-testid="hero-meta-business-partner">
-              <p className="mb-1.5 text-lg font-medium leading-6 text-black/60" data-testid="hero-meta-business-partner-copy">
+              <p className="mb-1.5 text-lg font-medium leading-6 text-black" data-testid="hero-meta-business-partner-copy">
                 <span>We are an official Meta Business Partner</span>
                 <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="ml-1.5 inline-block h-5 w-5 align-middle object-contain" />
               </p>
@@ -595,7 +595,7 @@ function Home() {
                     <span className="min-w-0 text-sm font-semibold leading-tight text-[#111b21] sm:text-lg">Your Business / Brand Name</span>
                     <img src={verifiedBusinessBadge} alt="Verified business" className="h-[18px] w-[18px] shrink-0 object-contain sm:h-5 sm:w-5" />
                   </div>
-                  <span className="block text-[15px] leading-5 text-black/60 sm:text-base">AI Smart WhatsApp Marketing</span>
+                  <span className="block text-[15px] leading-5 text-black sm:text-base">AI Smart WhatsApp Marketing</span>
                 </div>
                 <span role="img" aria-label="WhatsApp video and phone call buttons" className="relative h-[30px] w-[74px] shrink-0">
                   <FigmaSvgCrop x={288} y={58} width={88} height={36} className="hero-profile-actions-art" />

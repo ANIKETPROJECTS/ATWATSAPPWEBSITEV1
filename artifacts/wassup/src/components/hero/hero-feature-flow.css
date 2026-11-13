@@ -235,7 +235,7 @@
 
 .hero-feature-flow-step.is-active .hero-feature-flow-copy > strong,
 .hero-feature-flow-step.is-active .hero-feature-flow-copy > span {
-  color: #3acd32;
+  color: #111;
 }
 
 @media (min-width: 1024px) {
