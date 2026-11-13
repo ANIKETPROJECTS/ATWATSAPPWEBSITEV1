@@ -207,6 +207,13 @@
   .mobile-menu-actions { grid-template-columns: minmax(0, 1fr); }
 }
 
+@media (max-width: 1023px) {
+  .header-logo-image {
+    transform: scale(1.15);
+    transform-origin: center;
+  }
+}
+
 h1.font-display,
 h2.font-display,
 h3.font-display {

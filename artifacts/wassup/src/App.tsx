@@ -425,7 +425,7 @@ function Nav({ onLead }: { onLead: () => void }) {
           <img
             src={logoPath}
             alt="AtWassup — AI WhatsApp Marketing Automation"
-            className="h-16 w-[min(280px,calc(100vw_-_136px))] object-cover object-[center_52%] sm:h-[68px] sm:w-[min(320px,calc(100vw_-_136px))] lg:h-[76px] lg:w-[min(340px,calc(100vw_-_104px))]"
+            className="header-logo-image h-[72px] w-[min(340px,calc(100vw_-_80px))] object-cover object-[center_52%] sm:h-[76px] sm:w-[min(340px,calc(100vw_-_80px))] lg:h-[84px] lg:w-[min(360px,calc(100vw_-_104px))]"
           />
         </a>
         <nav aria-label="Main navigation" className="hidden items-center gap-8 lg:flex">
@@ -446,7 +446,7 @@ function Nav({ onLead }: { onLead: () => void }) {
           aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
           aria-expanded={open}
           aria-controls="mobile-navigation-panel"
-          className="ml-auto flex h-11 w-11 shrink-0 items-center justify-center text-black transition-colors hover:text-[#3acd32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3acd32] lg:hidden"
+          className="relative z-10 ml-auto flex h-11 w-11 shrink-0 items-center justify-center text-black transition-colors hover:text-[#3acd32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3acd32] lg:hidden"
         >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
