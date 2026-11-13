@@ -138,6 +138,7 @@
     font-weight: 600;
     letter-spacing: -.025em;
     line-height: 1.25;
+    white-space: nowrap;
     text-decoration: none;
     transition: color .2s ease;
   }

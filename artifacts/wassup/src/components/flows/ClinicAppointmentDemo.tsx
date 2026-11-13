@@ -185,6 +185,7 @@ export default function ClinicAppointmentDemo() {
       aria-labelledby="flow-builder-heading"
       data-testid="section-flow-builder"
       className="flow-builder-section caf-section"
+      dir="ltr"
     >
       <div className="section-shell caf-grid">
         <div className="caf-stage" ref={stageRef}>

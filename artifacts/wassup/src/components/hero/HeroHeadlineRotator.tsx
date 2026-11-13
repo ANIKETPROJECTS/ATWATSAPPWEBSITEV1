@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import './hero-headline.css';
 
 const headlines = [
-  'AI that drives leads & sales',
-  'AI for WhatsApp marketing',
-  'AI that grows your business',
+  'hero.rotator.leads',
+  'hero.rotator.marketing',
+  'hero.rotator.growth',
 ];
 
 export default function HeroHeadlineRotator() {
+  const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -22,11 +24,9 @@ export default function HeroHeadlineRotator() {
 
   return (
     <span className="hero-headline-rotator mt-0 lg:mt-4 text-[#3acd32]">
-      <span className="sr-only">
-        AI that drives leads and sales. AI for WhatsApp marketing. AI that grows your business.
-      </span>
+      <span className="sr-only">{headlines.map((headline) => t(headline)).join(' · ')}</span>
       <span key={activeIndex} className="hero-headline-slide-in" aria-hidden="true">
-        {headlines[activeIndex]}
+        {t(headlines[activeIndex])}
       </span>
     </span>
   );

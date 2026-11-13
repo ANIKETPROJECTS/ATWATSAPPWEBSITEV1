@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Check, ChevronDown, Send } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -86,6 +87,7 @@ const defaultValues: ContactFormValues = {
 };
 
 export default function ContactWhatsAppForm() {
+  const { t, i18n } = useTranslation();
   const stageRef = useRef<HTMLDivElement>(null);
   const [screenWidth, setScreenWidth] = useState(280);
   const [selectedCountry, setSelectedCountry] = useState<CountryCode>('IN');
@@ -93,6 +95,13 @@ export default function ContactWhatsAppForm() {
   const [submitted, setSubmitted] = useState(false);
   const [sentName, setSentName] = useState('');
   const submitRequest = useSubmitDemoRequest();
+  const localizedCountryOptions = useMemo(() => {
+    const names = new Intl.DisplayNames([i18n.resolvedLanguage ?? 'en'], { type: 'region' });
+    return countryOptions.map((option) => ({
+      ...option,
+      name: names.of(option.country) ?? option.name,
+    }));
+  }, [i18n.resolvedLanguage]);
   const contactFormSchema = useMemo(
     () => createContactFormSchema(selectedCountry),
     [selectedCountry],
@@ -177,14 +186,14 @@ export default function ContactWhatsAppForm() {
   const screenScale = screenWidth / 252;
   const screenHeight = Math.round(524 * screenScale);
   const activeCountry =
-    countryOptions.find((option) => option.country === selectedCountry) ?? countryOptions[0];
+    localizedCountryOptions.find((option) => option.country === selectedCountry) ?? localizedCountryOptions[0];
 
   return (
     <div className="contact-wa-stage" ref={stageRef} data-testid="contact-whatsapp-preview">
       <div className="contact-wa-device">
         <DevicePreviewFrame screenWidth={screenWidth} hideStatusBar>
           <div className="demo-phone-screen" style={{ height: screenHeight }}>
-            <div className="demo-screen-content" style={{ transform: `scale(${screenScale})` }}>
+            <div className="demo-screen-content" dir={submitted ? 'ltr' : undefined} style={{ transform: `scale(${screenScale})` }}>
               <div className="demo-status-bar" aria-hidden="true">
                 <FigmaSvgCrop x={0} y={0} width={393} height={42} className="demo-status-art" />
               </div>
@@ -225,15 +234,15 @@ export default function ContactWhatsAppForm() {
                         {sentName
                           ? `Thank you, ${sentName.split(/\s+/)[0]}. `
                           : 'Thank you for reaching out. '}
-                        Our support team has received your request and will contact you shortly.
+                        {t('form.supportContact')}
                       </span>
                       <span className="demo-incoming-meta"><time>10:42 AM</time></span>
                     </div>
                     <div className="contact-wa-success-card">
                       <span className="contact-wa-success-check"><Check size={13} strokeWidth={3} /></span>
                       <span>
-                        <strong>Request received</strong>
-                        <small>Our support team will contact you shortly.</small>
+                        <strong>{t('form.requestReceived')}</strong>
+                        <small>{t('form.supportContact')}</small>
                       </span>
                     </div>
                     <div className="demo-message from-business contact-wa-message contact-wa-followup">
@@ -252,7 +261,7 @@ export default function ContactWhatsAppForm() {
                       }}
                       data-testid="button-contact-start-again"
                     >
-                      Send another message
+                      {t('form.sendAnother')}
                     </button>
                   </div>
                 ) : (
@@ -264,7 +273,7 @@ export default function ContactWhatsAppForm() {
                       data-testid="form-contact-whatsapp"
                     >
                       <div className="contact-wa-card-heading">
-                        <strong>Contact Form</strong>
+                        <strong>{t('form.title')}</strong>
                       </div>
 
                       <FormField
@@ -273,12 +282,12 @@ export default function ContactWhatsAppForm() {
                         render={({ field, fieldState }) => (
                           <FormItem className="contact-wa-field">
                             <FormLabel className="contact-wa-label">
-                              Name <span className="contact-wa-required" aria-hidden="true">*</span>
-                              <span className="sr-only"> required</span>
+                              {t('form.name')} <span className="contact-wa-required" aria-hidden="true">*</span>
+                              <span className="sr-only"> {t('form.required')}</span>
                             </FormLabel>
                             <div className={`contact-wa-input-shell${fieldState.error ? ' has-error' : ''}`}>
                               <FormControl>
-                                <Input {...field} required autoComplete="name" placeholder="Enter your Name" maxLength={120} className="contact-wa-input" data-testid="input-contact-name" />
+                                <Input {...field} required autoComplete="name" placeholder={t('form.enterName')} maxLength={120} className="contact-wa-input" data-testid="input-contact-name" />
                               </FormControl>
                               <FormMessage className="sr-only" />
                             </div>
@@ -291,8 +300,8 @@ export default function ContactWhatsAppForm() {
                         render={({ field, fieldState }) => (
                           <FormItem className="contact-wa-field">
                             <FormLabel className="contact-wa-label">
-                              Number <span className="contact-wa-required" aria-hidden="true">*</span>
-                              <span className="sr-only"> required</span>
+                              {t('form.number')} <span className="contact-wa-required" aria-hidden="true">*</span>
+                              <span className="sr-only"> {t('form.required')}</span>
                             </FormLabel>
                             <div className="contact-wa-number-control">
                               <Popover open={countryPickerOpen} onOpenChange={setCountryPickerOpen}>
@@ -316,13 +325,13 @@ export default function ContactWhatsAppForm() {
                                 >
                                   <Command>
                                     <CommandInput
-                                      placeholder="Search country or code"
-                                      aria-label="Search country or calling code"
+                                      placeholder={t('form.searchCountry')}
+                                      aria-label={t('form.searchCallingCode')}
                                     />
                                     <CommandList className="contact-wa-country-list">
-                                      <CommandEmpty>No country found.</CommandEmpty>
+                                      <CommandEmpty>{t('form.noCountry')}</CommandEmpty>
                                       <CommandGroup>
-                                        {countryOptions.map((option) => (
+                                        {localizedCountryOptions.map((option) => (
                                           <CommandItem
                                             key={option.country}
                                             value={`${option.name} ${option.dialCode} ${option.country}`}
@@ -355,7 +364,7 @@ export default function ContactWhatsAppForm() {
                                     type="tel"
                                     inputMode="numeric"
                                     autoComplete="tel-national"
-                                    placeholder="Enter your Mobile Number"
+                                    placeholder={t('form.enterMobile')}
                                     maxLength={15}
                                     className="contact-wa-input"
                                     data-testid="input-contact-number"
@@ -373,10 +382,10 @@ export default function ContactWhatsAppForm() {
                         name="email"
                         render={({ field, fieldState }) => (
                           <FormItem className="contact-wa-field">
-                            <FormLabel className="contact-wa-label">Email</FormLabel>
+                            <FormLabel className="contact-wa-label">{t('form.email')}</FormLabel>
                             <div className={`contact-wa-input-shell${fieldState.error ? ' has-error' : ''}`}>
                               <FormControl>
-                                <Input {...field} type="email" autoComplete="email" placeholder="Enter your Email" maxLength={254} className="contact-wa-input" data-testid="input-contact-email" />
+                                <Input {...field} type="email" autoComplete="email" placeholder={t('form.enterEmail')} maxLength={254} className="contact-wa-input" data-testid="input-contact-email" />
                               </FormControl>
                               <FormMessage className="sr-only" />
                             </div>
@@ -388,9 +397,9 @@ export default function ContactWhatsAppForm() {
                         name="message"
                         render={({ field }) => (
                           <FormItem className="contact-wa-field">
-                            <FormLabel className="contact-wa-label">What can we help with?</FormLabel>
+                            <FormLabel className="contact-wa-label">{t('form.whatHelp')}</FormLabel>
                             <FormControl>
-                              <Textarea {...field} rows={2} maxLength={1000} placeholder="Enter your Query" className="contact-wa-input contact-wa-textarea" data-testid="input-contact-custom" />
+                              <Textarea {...field} rows={2} maxLength={1000} placeholder={t('form.enterQuery')} className="contact-wa-input contact-wa-textarea" data-testid="input-contact-custom" />
                             </FormControl>
                             <FormMessage className="contact-wa-error" />
                           </FormItem>
@@ -410,7 +419,7 @@ export default function ContactWhatsAppForm() {
                         data-testid="button-contact-submit"
                       >
                         <Send size={10} aria-hidden="true" />
-                        {submitRequest.isPending ? 'Sending…' : 'Send details'}
+                        {submitRequest.isPending ? t('form.sending') : t('form.sendDetails')}
                       </button>
                     </form>
                   </Form>

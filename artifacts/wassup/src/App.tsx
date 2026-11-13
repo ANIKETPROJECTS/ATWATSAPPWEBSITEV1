@@ -1,4 +1,5 @@
 import { type CSSProperties, type FormEvent, type ReactNode, type UIEvent, useEffect, useRef, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   ArrowDownRight,
@@ -31,6 +32,7 @@ import {
 } from 'lucide-react';
 import { useSubmitDemoRequest } from '@workspace/api-client-react';
 import { ErrorBoundary } from '@/components/error-boundary';
+import LanguageSelector from '@/components/LanguageSelector';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import CommerceDemo from '@/components/hero/CommerceDemo';
@@ -182,17 +184,18 @@ function SectionLabel({ children, tone = 'green' }: { children: ReactNode; tone?
 }
 
 function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capabilityGroups)[number]; groupIndex: number }) {
+  const { t } = useTranslation();
   const labelDelay = 920 + groupIndex * 480;
 
   return (
     <div className="feature-group" data-group-index={groupIndex} data-testid={`capability-group-${group.id}`}>
       <div className="feature-group-intro">
         <div className="feature-group-label-wrap" style={{ '--feature-label-delay': `${labelDelay}ms` } as CSSProperties}>
-          <p className="feature-group-label font-mono text-[10px] font-bold uppercase tracking-[.18em] text-[#3acd32]">{group.label}</p>
+          <p className="feature-group-label font-mono text-[10px] font-bold uppercase tracking-[.18em] text-[#3acd32]">{t(group.label)}</p>
           <span className="feature-group-label-flash" aria-hidden="true" />
         </div>
-        <h3 className="mt-2 font-display text-xl font-bold leading-tight tracking-[-.04em]">{group.title}</h3>
-        <p className="mt-1.5 text-xs leading-relaxed text-white/45">{group.description}</p>
+        <h3 className="mt-2 font-display text-xl font-bold leading-tight tracking-[-.04em]">{t(group.title)}</h3>
+        <p className="mt-1.5 text-xs leading-relaxed text-white/45">{t(group.description)}</p>
       </div>
       <div className="feature-list">
         {capabilities.filter((capability) => capability.group === group.id).map(({ icon: Icon, motion, title, text }, rowIndex) => {
@@ -212,11 +215,11 @@ function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capability
                   <Icon size={14} className="feature-icon-draw text-[#3acd32]" />
                 </span>
                 <span className="feature-row-title-wrap">
-                  <h4 className="feature-row-title text-xs font-bold leading-snug text-white/90">{title}</h4>
+                  <h4 className="feature-row-title text-xs font-bold leading-snug text-white/90">{t(title)}</h4>
                   <span className="feature-row-title-underline" aria-hidden="true" />
                 </span>
               </div>
-              <p className="feature-row-description">{text}</p>
+              <p className="feature-row-description">{t(text)}</p>
             </article>
           );
         })}
@@ -407,6 +410,7 @@ function HeroAtWassupWordmark() {
 }
 
 function Nav({ onLead }: { onLead: () => void }) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeMenu = () => setOpen(false);
@@ -428,15 +432,16 @@ function Nav({ onLead }: { onLead: () => void }) {
             className="header-logo-image h-[72px] w-[min(340px,calc(100vw_-_80px))] object-cover object-[center_52%] sm:h-[76px] sm:w-[min(340px,calc(100vw_-_80px))] lg:h-[84px] lg:w-[min(360px,calc(100vw_-_104px))]"
           />
         </a>
-        <nav aria-label="Main navigation" className="hidden items-center gap-8 lg:flex">
-          <a data-testid="link-ai-features" href="#features" className="site-nav-link">Features</a>
-          <a data-testid="link-how-it-works" href="#how-it-works" className="site-nav-link">How It Works</a>
-          <a data-testid="link-pricing" href="#pricing" className="site-nav-link">Pricing</a>
-          <a data-testid="link-contact" href="#contact" className="site-nav-link">Contact</a>
+        <nav aria-label="Main navigation" className="hidden items-center gap-5 lg:flex">
+          <a data-testid="link-ai-features" href="#features" className="site-nav-link">{t('nav.features')}</a>
+          <a data-testid="link-how-it-works" href="#how-it-works" className="site-nav-link">{t('nav.howItWorks')}</a>
+          <a data-testid="link-pricing" href="#pricing" className="site-nav-link">{t('nav.pricing')}</a>
+          <a data-testid="link-contact" href="#contact" className="site-nav-link">{t('nav.contact')}</a>
         </nav>
         <div className="site-nav-actions hidden lg:flex">
-          <button data-testid="button-book-demo" onClick={onLead} className="header-action header-action-primary">Schedule demo</button>
-          <a data-testid="button-login" href="https://app.atwassup.com" className="header-action header-action-secondary">Login</a>
+          <button data-testid="button-book-demo" onClick={onLead} className="header-action header-action-primary">{t('nav.scheduleDemo')}</button>
+          <a data-testid="button-login" href="https://app.atwassup.com" className="header-action header-action-secondary">{t('nav.login')}</a>
+          <LanguageSelector />
         </div>
         <button
           ref={menuButtonRef}
@@ -458,13 +463,16 @@ function Nav({ onLead }: { onLead: () => void }) {
         className={`section-shell mobile-menu-shell lg:hidden${open ? ' is-open' : ''}`}
       >
           <nav aria-label="Mobile navigation" className="mobile-menu-panel mb-3 rounded-2xl border border-black/10 bg-white p-3 shadow-xl">
-            <a data-testid="mobile-link-ai-features" href="#features" onClick={closeMenu} className="site-nav-link">Features</a>
-            <a data-testid="mobile-link-how-it-works" href="#how-it-works" onClick={closeMenu} className="site-nav-link">How It Works</a>
-            <a data-testid="mobile-link-pricing" href="#pricing" onClick={closeMenu} className="site-nav-link">Pricing</a>
-            <a data-testid="mobile-link-contact" href="#contact" onClick={closeMenu} className="site-nav-link">Contact</a>
+            <a data-testid="mobile-link-ai-features" href="#features" onClick={closeMenu} className="site-nav-link">{t('nav.features')}</a>
+            <a data-testid="mobile-link-how-it-works" href="#how-it-works" onClick={closeMenu} className="site-nav-link">{t('nav.howItWorks')}</a>
+            <a data-testid="mobile-link-pricing" href="#pricing" onClick={closeMenu} className="site-nav-link">{t('nav.pricing')}</a>
+            <a data-testid="mobile-link-contact" href="#contact" onClick={closeMenu} className="site-nav-link">{t('nav.contact')}</a>
+            <div className="mt-3">
+              <LanguageSelector mobile />
+            </div>
             <div className="mobile-menu-actions mt-3 grid grid-cols-2 gap-2">
-              <button data-testid="mobile-button-book-demo" onClick={() => { closeMenu(); onLead(); }} className="header-action header-action-primary w-full">Schedule demo</button>
-              <a data-testid="mobile-link-login" href="https://app.atwassup.com" onClick={closeMenu} className="header-action header-action-secondary w-full">Login</a>
+              <button data-testid="mobile-button-book-demo" onClick={() => { closeMenu(); onLead(); }} className="header-action header-action-primary w-full">{t('nav.scheduleDemo')}</button>
+              <a data-testid="mobile-link-login" href="https://app.atwassup.com" onClick={closeMenu} className="header-action header-action-secondary w-full">{t('nav.login')}</a>
             </div>
           </nav>
       </div>
@@ -473,6 +481,9 @@ function Nav({ onLead }: { onLead: () => void }) {
 }
 
 function Home() {
+  const { t, i18n } = useTranslation();
+  const localeBase = i18n.resolvedLanguage?.split('-')[0] ?? 'en';
+  const keepConnectedScriptTogether = localeBase === 'ar' || localeBase === 'hi';
   const [leadOpen, setLeadOpen] = useState(false);
   const [demoOpen, setDemoOpen] = useState(false);
   const [heroFeatureStage, setHeroFeatureStage] = useState<HeroFeatureStage>('broadcast');
@@ -543,21 +554,27 @@ function Home() {
         <div className="section-shell hero-shell relative grid items-start gap-3 sm:gap-6 lg:grid-cols-[1.02fr_.98fr] lg:items-center lg:gap-x-5 lg:gap-y-0">
           <div ref={heroReveal} className="reveal hero-heading">
             <h1 className="mt-2 flex max-w-[720px] flex-col gap-y-1.5 font-display text-[clamp(1.45rem,7.25vw,1.9rem)] font-bold leading-[.96] tracking-[-.08em] text-black sm:mt-6 sm:text-[clamp(2rem,5.3vw,5.5rem)] lg:mt-0 lg:gap-y-0 lg:text-[clamp(2.25rem,3.5vw,3.25rem)]">
-              <span className="block">Make your business</span>
-              <span className="-mt-2 block lg:mt-0">smarter with <HeroAtWassupWordmark /></span>
+              <Trans
+                i18nKey="hero.heading"
+                components={{
+                  line1: <span className="block" />,
+                  line2: <span className="-mt-2 block lg:mt-0" />,
+                  brand: <HeroAtWassupWordmark />,
+                }}
+              />
               <HeroHeadlineRotator />
             </h1>
           </div>
           <div className="hero-details">
-            <p className="mt-0 max-w-[540px] text-justify text-lg font-medium leading-6 text-black lg:mt-5">Start with AtWassup. Connect the WhatsApp Business API and let AI answer customer questions, capture leads, follow up, close sales, and run broadcasts all through AtWassup, your all-in-one WhatsApp AI marketing platform.</p>
+            <p className="mt-0 max-w-[540px] text-justify text-lg font-medium leading-6 text-black lg:mt-5">{t('hero.description')}</p>
             <div className="hero-actions mt-6 lg:mt-5">
-              <PrimaryButton onClick={() => setLeadOpen(true)} testId="hero-button-book-demo">Schedule demo</PrimaryButton>
-              <a data-testid="hero-link-explore-features" href="#features" className="header-action header-action-secondary min-w-[180px] px-8">Explore Features</a>
+              <PrimaryButton onClick={() => setLeadOpen(true)} testId="hero-button-book-demo">{t('nav.scheduleDemo')}</PrimaryButton>
+              <a data-testid="hero-link-explore-features" href="#features" className="header-action header-action-secondary min-w-[180px] px-8">{t('hero.exploreFeatures')}</a>
             </div>
           </div>
           <div className="hero-showcase-column relative flex justify-center lg:translate-y-6 lg:justify-end">
             <div className="hero-showcase-layout relative z-10">
-              <div className="hero-airavata-demo relative z-10 w-full">
+              <div className="hero-airavata-demo relative z-10 w-full" dir="ltr">
                 <CommerceDemo onFeatureStageChange={setHeroFeatureStage} />
               </div>
               <HeroFeatureFlow stage={heroFeatureStage} />
@@ -566,7 +583,7 @@ function Home() {
           <div className="hero-proof">
             <div className="mt-0 lg:mt-4" data-testid="hero-meta-business-partner">
               <p className="mb-1.5 text-lg font-medium leading-6 text-black" data-testid="hero-meta-business-partner-copy">
-                <span>We are an official Meta Business Partner</span>
+                <span>{t('hero.partner')}</span>
                 <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="ml-1.5 inline-block h-5 w-5 align-middle object-contain" />
               </p>
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
@@ -592,10 +609,10 @@ function Home() {
                 </span>
                 <div className="min-w-0 flex-1">
                   <div className="flex min-w-0 flex-wrap items-center gap-1.5">
-                    <span className="min-w-0 text-sm font-semibold leading-tight text-[#111b21] sm:text-lg">Your Business / Brand Name</span>
+                    <span className="min-w-0 text-sm font-semibold leading-tight text-[#111b21] sm:text-lg">{t('hero.brandName')}</span>
                     <img src={verifiedBusinessBadge} alt="Verified business" className="h-[18px] w-[18px] shrink-0 object-contain sm:h-5 sm:w-5" />
                   </div>
-                  <span className="block text-[15px] leading-5 text-black sm:text-base">AI Smart WhatsApp Marketing</span>
+                  <span className="block text-[15px] leading-5 text-black sm:text-base">{t('hero.brandTagline')}</span>
                 </div>
                 <span role="img" aria-label="WhatsApp video and phone call buttons" className="relative h-[30px] w-[74px] shrink-0">
                   <FigmaSvgCrop x={288} y={58} width={88} height={36} className="hero-profile-actions-art" />
@@ -615,26 +632,30 @@ function Home() {
         <div ref={capabilitiesReveal} className="section-shell reveal relative">
           <div className="feature-heading-row">
             <div className="max-w-[720px]">
-              <SectionLabel tone="dark">One channel · ten capabilities</SectionLabel>
+              <SectionLabel tone="dark">{t('site.capabilitiesLabel')}</SectionLabel>
               <h2 className="font-display text-5xl font-bold leading-[.94] tracking-[-.07em] sm:text-5xl">
-                <span className="sr-only">One channel. So much more.</span>
+                <span className="sr-only">{t('site.capabilitiesHeading')}</span>
                 <span className="feature-heading-visual" aria-hidden="true">
                   <span className="feature-heading-line">
-                    {'One channel.'.split('').map((character, index) => (
-                      <span key={`first-${index}`} className="feature-heading-character" style={{ animationDelay: `${index * 18}ms` }}>{character === ' ' ? '\u00a0' : character}</span>
-                    ))}
+                    {keepConnectedScriptTogether
+                      ? t('site.capabilitiesHeadingFirst')
+                      : t('site.capabilitiesHeadingFirst').split('').map((character, index) => (
+                        <span key={`first-${index}`} className="feature-heading-character" style={{ animationDelay: `${index * 18}ms` }}>{character === ' ' ? '\u00a0' : character}</span>
+                      ))}
                     <span className="feature-heading-cursor feature-heading-cursor-first" />
                   </span>
                   <br />
                   <span className="feature-heading-line text-[#3acd32]">
-                    {'So much more.'.split('').map((character, index) => (
-                      <span key={`second-${index}`} className="feature-heading-character" style={{ animationDelay: `${340 + index * 18}ms` }}>{character === ' ' ? '\u00a0' : character}</span>
-                    ))}
+                    {keepConnectedScriptTogether
+                      ? t('site.capabilitiesHeadingSecond')
+                      : t('site.capabilitiesHeadingSecond').split('').map((character, index) => (
+                        <span key={`second-${index}`} className="feature-heading-character" style={{ animationDelay: `${340 + index * 18}ms` }}>{character === ' ' ? '\u00a0' : character}</span>
+                      ))}
                     <span className="feature-heading-cursor feature-heading-cursor-second" />
                   </span>
                 </span>
               </h2>
-              <p className="mt-4 max-w-[720px] text-sm leading-relaxed text-white/55">AtWassup brings onboarding, automation, support, campaigns, commerce, and analytics together on WhatsApp.</p>
+              <p className="mt-4 max-w-[720px] text-sm leading-relaxed text-white/55">{t('site.capabilitiesDescription')}</p>
             </div>
             <div className="feature-stat">
               <span className="feature-counter font-display text-8xl font-bold leading-[.78] tracking-[-.1em] text-[#3acd32]" aria-label="10">
@@ -648,7 +669,7 @@ function Home() {
                   </span>
                 </span>
               </span>
-              <span className="feature-stat-label pb-0.5 text-xs font-semibold leading-relaxed text-white/55">connected capabilities<br />one WhatsApp channel</span>
+              <span className="feature-stat-label pb-0.5 text-xs font-semibold leading-relaxed text-white/55">{t('site.capabilitiesCount')}<br />{t('site.capabilitiesChannel')}</span>
             </div>
           </div>
           <div className="feature-groups" aria-label="AtWassup capabilities">
@@ -672,7 +693,7 @@ function Home() {
 
       <section className="bg-[#fcfbf8] pb-24 pt-20 sm:pb-32 sm:pt-24" id="how-it-works">
         <div ref={stepsReveal} className="section-shell reveal">
-          <div className="max-w-[680px]"><SectionLabel>Simple to get started</SectionLabel><h2 className="font-display text-5xl font-bold leading-[.94] tracking-[-.07em] sm:text-7xl">From first setup to <span className="text-[#3acd32]">better conversations.</span></h2><p className="mt-6 max-w-[520px] text-base leading-relaxed text-black/55">A clear path from connecting your number to growing the way you use WhatsApp.</p></div>
+          <div className="max-w-[680px]"><SectionLabel>{t('site.processLabel')}</SectionLabel><h2 className="font-display text-5xl font-bold leading-[.94] tracking-[-.07em] sm:text-7xl">{t('site.processHeading')} <span className="text-[#3acd32]">{t('site.processHighlight')}</span></h2><p className="mt-6 max-w-[520px] text-base leading-relaxed text-black/55">{t('site.processDescription')}</p></div>
           <div
             ref={stepsCarouselRef}
             onScroll={handleStepsCarouselScroll}
@@ -687,8 +708,8 @@ function Home() {
                   <span aria-hidden="true" className="mt-3 h-3 w-3 rounded-full bg-[#3acd32] shadow-[0_0_18px_rgba(58,205,50,.9)] transition duration-300 group-hover:scale-125" />
                 </div>
                 <div className="mb-5 h-px w-14 bg-[#3acd32] shadow-[0_0_12px_rgba(58,205,50,.55)] transition-all duration-300 group-hover:w-24" />
-                <h3 className="font-display text-2xl font-bold tracking-[-.04em]">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-black/50">{text}</p>
+                <h3 className="font-display text-2xl font-bold tracking-[-.04em]">{t(title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-black/50">{t(text)}</p>
               </article>
             ))}
           </div>
@@ -706,7 +727,7 @@ function Home() {
                 />
               ))}
             </div>
-            <span className="text-[10px] font-semibold text-black/40">Swipe to turn the page</span>
+            <span className="text-[10px] font-semibold text-black/40">{t('site.processSwipe')}</span>
           </div>
         </div>
       </section>
@@ -714,61 +735,59 @@ function Home() {
       <section className="border-y border-black/10 bg-[#f2f9e9] py-8 sm:py-10" id="pricing">
         <div ref={pricingReveal} className="section-shell reveal">
           <div className="mx-auto max-w-6xl">
-            <SectionLabel>Simple pricing</SectionLabel>
+            <SectionLabel>{t('site.pricingLabel')}</SectionLabel>
             <h2 className="font-display text-3xl font-bold leading-tight tracking-[-.055em] sm:text-[2.5rem]">
-              One plan. <span className="text-[#3acd32]">Clear costs.</span>
+              {t('site.pricingHeading')} <span className="text-[#3acd32]">{t('site.pricingHighlight')}</span>
             </h2>
             <p className="mt-1 text-sm text-black/60">
-              ₹15,000/year + applicable GST + Meta message charges = your total.
+              {t('site.pricingSummary')}
             </p>
           </div>
           <div className="mx-auto mt-5 grid max-w-6xl gap-6 lg:grid-cols-[.78fr_1.22fr] lg:gap-9">
             <div className="border-b border-black/15 pb-5 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-8">
-              <p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#3acd32]">You pay AtWassup</p>
+              <p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#3acd32]">{t('site.pricingYouPay')}</p>
               <p className="mt-2 font-display text-4xl font-bold leading-none tracking-[-.07em] sm:text-[2.75rem]">
-                <span className="pricing-price-reveal">₹15,000</span><span className="ml-2 align-baseline font-sans text-xs font-semibold tracking-normal text-black/50">/ year</span>
+                <span className="pricing-price-reveal">₹15,000</span><span className="ml-2 align-baseline font-sans text-xs font-semibold tracking-normal text-black/50">{t('site.pricingYear')}</span>
               </p>
-              <p className="mt-1 text-[11px] text-black/50">GST, if applicable</p>
-              <p className="mt-4 text-xs font-medium leading-relaxed text-black/65">
-                Every feature included <span className="px-1 text-[#3acd32]">·</span> No tiers <span className="px-1 text-[#3acd32]">·</span> No hidden fees
-              </p>
+              <p className="mt-1 text-[11px] text-black/50">{t('site.pricingGST')}</p>
+              <p className="mt-4 text-xs font-medium leading-relaxed text-black/65">{t('site.pricingFeatureLine')}</p>
               <button
                 onClick={() => setLeadOpen(true)}
                 data-testid="button-annual-plan-demo"
                 className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-[#3acd32] px-4 py-2.5 text-xs font-bold text-black transition hover:-translate-y-0.5"
               >
-                Book a demo <ArrowRight size={14} />
+                {t('site.ctaBookDemo')} <ArrowRight size={14} />
               </button>
             </div>
             <div>
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#3acd32]">You pay Meta</p>
-                <p className="text-[11px] text-black/50">Per message · Meta’s rates · no AtWassup markup</p>
+                <p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#3acd32]">{t('site.pricingMeta')}</p>
+                <p className="text-[11px] text-black/50">{t('site.pricingMetaRate')}</p>
               </div>
               <div className="mt-2 grid grid-cols-[1fr_auto] items-center gap-x-4 text-xs sm:text-sm">
-                <div className="border-b border-black/10 py-2 font-medium">Marketing</div><div className="border-b border-black/10 py-2 text-right font-semibold">₹0.8631</div>
-                <div className="border-b border-black/10 py-2 font-medium">Utility</div><div className="border-b border-black/10 py-2 text-right font-semibold">₹0.115</div>
-                <div className="border-b border-black/10 py-2 font-medium">Authentication (India)</div><div className="border-b border-black/10 py-2 text-right font-semibold">₹0.115</div>
-                <div className="py-2 font-medium">Service replies</div><div className="py-2 text-right font-semibold">₹0.115 after free quota</div>
+                <div className="border-b border-black/10 py-2 font-medium">{t('Marketing')}</div><div className="border-b border-black/10 py-2 text-right font-semibold">₹0.8631</div>
+                <div className="border-b border-black/10 py-2 font-medium">{t('Utility')}</div><div className="border-b border-black/10 py-2 text-right font-semibold">₹0.115</div>
+                <div className="border-b border-black/10 py-2 font-medium">{t('Authentication (India)')}</div><div className="border-b border-black/10 py-2 text-right font-semibold">₹0.115</div>
+                <div className="py-2 font-medium">{t('Service replies')}</div><div className="py-2 text-right font-semibold">{t('₹0.115 after free quota')}</div>
               </div>
               <p className="mt-1 text-[11px] leading-relaxed text-black/55">
-                First 1,000 service replies free each month, per business number. Example: 10,000 utility messages = ₹1,150 to Meta.
+                {t('First 1,000 service replies free each month, per business number. Example: 10,000 utility messages = ₹1,150 to Meta.')}
               </p>
             </div>
           </div>
           <div className="mx-auto mt-4 flex max-w-6xl flex-wrap items-center gap-x-2 border-t border-black/15 pt-3 text-xs">
-            <span className="font-bold text-[#3acd32]">Others:</span>
-            <span className="text-black/55">packages + possible markups</span>
+            <span className="font-bold text-[#3acd32]">{t('Others:')}</span>
+            <span className="text-black/55">{t('packages + possible markups')}</span>
             <span className="mx-1 text-[#3acd32]">→</span>
-            <span className="font-bold text-[#252a27]">AtWassup:</span>
-            <span className="text-black/65">one plan, Meta rate only</span>
+            <span className="font-bold text-[#252a27]">{t('AtWassup:')}</span>
+            <span className="text-black/65">{t('one plan, Meta rate only')}</span>
           </div>
         </div>
       </section>
 
       <section className="bg-[#252a27] py-24 text-white sm:py-32">
         <div ref={trustReveal} className="section-shell reveal grid items-start gap-12 lg:grid-cols-[.8fr_1.2fr]">
-          <div><SectionLabel tone="dark">The right foundations</SectionLabel><h2 className="max-w-[470px] font-display text-5xl font-bold leading-[.94] tracking-[-.07em] sm:text-6xl">Built around how your team <span className="text-[#3acd32]">really works.</span></h2><p className="mt-6 max-w-[390px] text-sm leading-relaxed text-white/55">Work with the official WhatsApp Business Platform, connect the systems your team already relies on, and bring people into the conversation when needed.</p></div>
+          <div><SectionLabel tone="dark">{t('site.foundationLabel')}</SectionLabel><h2 className="max-w-[470px] font-display text-5xl font-bold leading-[.94] tracking-[-.07em] sm:text-6xl">{t('site.foundationHeading')} <span className="text-[#3acd32]">{t('site.foundationHighlight')}</span></h2><p className="mt-6 max-w-[390px] text-sm leading-relaxed text-white/55">{t('site.foundationDescription')}</p></div>
             <div className="grid gap-3 sm:grid-cols-3">
               {[
                 { title: 'Guided setup', text: 'Support for API onboarding, Meta verification, and Green Tick assistance.' },
@@ -781,8 +800,8 @@ function Home() {
                     <span className="font-mono text-[10px] font-bold uppercase tracking-[.16em] text-[#3acd32]">0{index + 1} / ATWASSUP</span>
                   </div>
                   <div className="my-7 h-px w-14 bg-[#3acd32] shadow-[0_0_12px_rgba(58,205,50,.65)] transition-all duration-300 group-hover:w-24" />
-                  <h3 className="relative font-display text-lg font-bold tracking-[-.03em]">{title}</h3>
-                  <p className="relative mt-2 text-sm leading-relaxed text-white/60">{text}</p>
+                  <h3 className="relative font-display text-lg font-bold tracking-[-.03em]">{t(title)}</h3>
+                  <p className="relative mt-2 text-sm leading-relaxed text-white/60">{t(text)}</p>
                   <svg className="trust-card-cursor" viewBox="0 0 20 24" aria-hidden="true">
                     <path d="M2 1.5v17l4.7-4.2 3.3 7 3.1-1.5-3.5-6.7 6.3-.5L2 1.5Z" fill="white" stroke="#252a27" strokeWidth="1.8" strokeLinejoin="round" />
                   </svg>
@@ -796,19 +815,19 @@ function Home() {
         <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full border-[32px] border-black/10" />
         <div className="absolute bottom-[-100px] left-[-30px] h-72 w-72 rounded-full border-[32px] border-black/10" />
         <div ref={contactCtaReveal} className="home-cta-content section-shell relative reveal text-center">
-          <SectionLabel>Talk with the AtWassup team</SectionLabel>
+          <SectionLabel>{t('site.contactCtaLabel')}</SectionLabel>
           <h2 className="home-cta-heading mx-auto font-display font-bold tracking-[-.08em]">
-            Make WhatsApp work harder for your <span className="underline decoration-[5px] underline-offset-[10px]">business.</span>
+            {t('site.ctaHeading')}
           </h2>
           <p className="home-cta-description mx-auto text-base leading-relaxed text-black/65">
-            Book a walkthrough of the platform, talk through your use case, and find the plan that fits.
+            {t('site.contactCtaDescription')}
           </p>
           <div className="home-cta-actions flex flex-wrap justify-center gap-3">
             <button data-testid="final-button-book-demo" onClick={() => setLeadOpen(true)} className="group inline-flex items-center gap-2 rounded-full bg-black px-6 py-4 text-sm font-bold text-white transition hover:-translate-y-1 hover:bg-white hover:text-black">
-              Book a demo <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+              {t('site.ctaBookDemo')} <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </button>
             <a data-testid="final-link-pricing" href="#pricing" className="inline-flex items-center gap-2 rounded-full border border-black/20 px-6 py-4 text-sm font-bold text-black transition hover:-translate-y-1 hover:bg-black hover:text-white">
-              Explore plans <ChevronRight size={16} />
+              {t('site.ctaExplorePlans')} <ChevronRight size={16} />
             </a>
           </div>
         </div>
@@ -823,10 +842,10 @@ function Home() {
             <div className="order-1 flex w-full max-w-[640px] flex-col lg:order-2">
               <div className="mb-4">
                 <h2 className="max-w-[560px] font-display text-3xl font-bold leading-[1.02] tracking-[-.045em] text-black sm:text-[34px]">
-                  Turn WhatsApp chats into <span className="text-[#3acd32]">business growth.</span>
+                  {t('site.contactHeading')}
                 </h2>
                 <p className="mt-2 max-w-[550px] text-sm leading-5 text-black/65">
-                  Capture new numbers, answer questions with AI, and keep customer details ready for follow-up.
+                  {t('site.contactDescription')}
                 </p>
                 <div className="mt-3 grid gap-1.5">
                   {[
@@ -837,7 +856,7 @@ function Home() {
                   ].map(({ text, icon }) => (
                     <div key={text} className="flex items-center gap-2.5 text-[13px] font-semibold leading-5 text-black/80">
                       <img src={icon} alt="" aria-hidden="true" className="h-[18px] w-[18px] shrink-0 object-contain" />
-                      <span>{text}</span>
+                      <span>{t(text)}</span>
                     </div>
                   ))}
                 </div>
@@ -848,7 +867,7 @@ function Home() {
                     <MapPin size={17} aria-hidden="true" />
                   </span>
                   <div>
-                    <p className="text-[11px] font-bold uppercase tracking-[.12em] text-black/45">Office address</p>
+                    <p className="text-[11px] font-bold uppercase tracking-[.12em] text-black/45">{t('site.officeAddress')}</p>
                     <address className="mt-1.5 not-italic text-[13px] font-medium leading-5 text-black">
                       Hubtown Greenwood CHS,<br />
                       Flat no. 805/A Wing, 8th Floor,<br />
@@ -886,7 +905,7 @@ function Home() {
                   className="absolute bottom-3 right-3 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3.5 py-2 text-xs font-bold text-black shadow-md transition hover:bg-[#3acd32]"
                 >
                   <MapPin size={14} aria-hidden="true" />
-                  Open in Google Maps
+                  {t('site.openMap')}
                 </a>
               </div>
 
@@ -943,7 +962,7 @@ function Home() {
                 />
               </a>
               <p className="mt-2 max-w-[290px] text-base leading-relaxed text-black">
-                WhatsApp Business API, AI chatbot, and Flow solutions.
+                {t('site.footerTagline')}
               </p>
               <div className="mt-5 flex items-center">
                 <img
@@ -975,17 +994,17 @@ function Home() {
             </div>
 
             <nav aria-label="Footer navigation" className="order-2 md:order-1 xl:order-2">
-              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black">Explore</h2>
+              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black">{t('site.footerExplore')}</h2>
               <ul className="mt-4 space-y-3.5 text-base font-medium text-black">
-                <li><a data-testid="footer-link-features" href="#features" className="transition hover:text-black">Features</a></li>
-                <li><a data-testid="footer-link-how-it-works" href="#how-it-works" className="transition hover:text-black">How it works</a></li>
-                <li><a data-testid="footer-link-pricing" href="#pricing" className="transition hover:text-black">Pricing</a></li>
-                <li><a data-testid="footer-link-contact" href="#contact" className="transition hover:text-black">Contact</a></li>
+                <li><a data-testid="footer-link-features" href="#features" className="transition hover:text-black">{t('nav.features')}</a></li>
+                <li><a data-testid="footer-link-how-it-works" href="#how-it-works" className="transition hover:text-black">{t('nav.howItWorks')}</a></li>
+                <li><a data-testid="footer-link-pricing" href="#pricing" className="transition hover:text-black">{t('nav.pricing')}</a></li>
+                <li><a data-testid="footer-link-contact" href="#contact" className="transition hover:text-black">{t('nav.contact')}</a></li>
               </ul>
             </nav>
 
             <div className="order-4 col-span-2 md:order-2 md:col-span-1 xl:order-3" data-testid="footer-company-contact">
-              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black">Contact</h2>
+              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black">{t('nav.contact')}</h2>
               <div className="mt-4 space-y-4">
                 <a
                   href="tel:+919167959756"
@@ -1019,14 +1038,14 @@ function Home() {
             </div>
 
             <nav aria-label="Legal" className="order-3 md:order-3 xl:order-4">
-              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black">Legal</h2>
+              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black">{t('site.footerLegal')}</h2>
               <ul className="mt-4 space-y-3.5 text-base font-medium text-black">
                 <li>
                   <span
                     data-testid="footer-link-privacy-policy"
                     className="block"
                   >
-                    Privacy Policy
+                    {t('site.privacyPolicy')}
                   </span>
                 </li>
                 <li>
@@ -1034,7 +1053,7 @@ function Home() {
                     data-testid="footer-link-refund-policy"
                     className="block"
                   >
-                    Refund Policy
+                    {t('site.refundPolicy')}
                   </span>
                 </li>
                 <li>
@@ -1042,14 +1061,14 @@ function Home() {
                     data-testid="footer-link-terms"
                     className="block"
                   >
-                    Terms &amp; Conditions
+                    {t('site.termsConditions')}
                   </span>
                 </li>
               </ul>
             </nav>
 
             <div className="order-5 col-span-2 md:order-4 md:col-span-1 xl:order-5">
-              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black">Find us</h2>
+              <h2 className="text-sm font-bold uppercase tracking-[.12em] text-black">{t('site.footerFindUs')}</h2>
               <div className="relative mt-4 h-[190px] overflow-hidden rounded-2xl border border-black/10 bg-[#f4f7f1]">
                 <iframe
                   title="AtWassup office location in Thane"
@@ -1066,7 +1085,7 @@ function Home() {
           <div className="flex w-full flex-col items-start gap-3 pt-4 text-xs text-black sm:flex-row sm:items-center sm:justify-between sm:text-sm">
             <div className="flex w-full flex-nowrap items-center gap-2 sm:contents">
               <p className="shrink-0 whitespace-nowrap text-left text-[11px] sm:text-sm">
-                © {new Date().getFullYear()} AtWassup. All rights reserved.
+                © {new Date().getFullYear()} AtWassup. {t('site.footerRights')}
               </p>
               <div className="inline-flex shrink-0 items-center gap-1.5" data-testid="footer-made-in-india">
               <img
@@ -1074,7 +1093,7 @@ function Home() {
                 alt=""
                 className="h-6 w-9 object-contain sm:h-9 sm:w-[54px]"
               />
-                <span className="whitespace-nowrap text-[11px] font-normal text-black sm:text-sm">Made in India</span>
+                <span className="whitespace-nowrap text-[11px] font-normal text-black sm:text-sm">{t('site.footerMadeInIndia')}</span>
               </div>
             </div>
             <a
@@ -1097,7 +1116,7 @@ function Home() {
                   preserveAspectRatio="none"
                 />
               </svg>
-              <span className="min-w-0">A Product Designed and Developed by Airavata Technologies</span>
+              <span className="min-w-0">{t('site.footerCompanyCredit')}</span>
             </a>
           </div>
         </div>

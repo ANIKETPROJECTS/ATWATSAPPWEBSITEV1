@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import broadcastIcon from '../../assets/hero-feature-icons/broadcast-campaign.svg';
 import assistantIcon from '../../assets/hero-feature-icons/assistant.svg';
 import agentsIcon from '../../assets/hero-feature-icons/agents.svg';
@@ -19,44 +20,44 @@ const features: Array<{
 }> = [
   {
     id: 'broadcast',
-    title: 'WhatsApp Broadcasting',
-    description: 'Reach customers',
+    title: 'flow.broadcast.title',
+    description: 'flow.broadcast.description',
     icon: broadcastIcon,
   },
   {
     id: 'assistant',
-    title: 'AI Assistant',
-    description: 'Guide conversations',
+    title: 'flow.assistant.title',
+    description: 'flow.assistant.description',
     icon: assistantIcon,
   },
   {
     id: 'agents',
-    title: 'WhatsApp AI Agents',
-    description: 'Follow up in chat',
+    title: 'flow.agents.title',
+    description: 'flow.agents.description',
     icon: agentsIcon,
   },
   {
     id: 'ai-chatbot',
-    title: 'AI WhatsApp Chatbot',
-    description: 'Answer FAQs & leads',
+    title: 'flow.chatbot.title',
+    description: 'flow.chatbot.description',
     icon: aiChatbotIcon,
   },
   {
     id: 'catalog',
-    title: 'WhatsApp Catalog',
-    description: 'Show products in chat',
+    title: 'flow.catalog.title',
+    description: 'flow.catalog.description',
     icon: catalogIcon,
   },
   {
     id: 'forms',
-    title: 'WhatsApp Forms',
-    description: 'Collect details',
+    title: 'flow.forms.title',
+    description: 'flow.forms.description',
     icon: formsIcon,
   },
   {
     id: 'payments',
-    title: 'WhatsApp Payments',
-    description: 'Payments in chat',
+    title: 'flow.payments.title',
+    description: 'flow.payments.description',
     icon: paymentsIcon,
   },
 ];
@@ -70,6 +71,7 @@ const featureSequenceByStage: Record<HeroFeatureStage, string[]> = {
 };
 
 export default function HeroFeatureFlow({ stage }: { stage: HeroFeatureStage }) {
+  const { t } = useTranslation();
   const prefersReducedMotion = useReducedMotion() === true;
   const [activeFeatureId, setActiveFeatureId] = useState('broadcast');
   const featureListRef = useRef<HTMLOListElement>(null);
@@ -129,8 +131,8 @@ export default function HeroFeatureFlow({ stage }: { stage: HeroFeatureStage }) 
                 <img src={icon} alt="" draggable={false} />
               </span>
               <span className="hero-feature-flow-copy">
-                <strong>{title}</strong>
-                <span>{description}</span>
+                <strong>{t(title)}</strong>
+                <span>{t(description)}</span>
               </span>
             </li>
           );
