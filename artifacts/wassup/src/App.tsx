@@ -420,7 +420,7 @@ function Nav({ onLead }: { onLead: () => void }) {
       }}
       className="absolute inset-x-0 top-0 z-40 border-b border-black/5 bg-white/95 shadow-[0_4px_18px_rgba(10,20,10,.06)] backdrop-blur-md"
     >
-      <div className="section-shell relative flex h-16 items-center justify-between sm:h-[72px] lg:h-[88px]">
+      <div className="section-shell relative flex h-16 items-center justify-between sm:h-[72px] lg:h-[84px]">
         <a href="#top" data-testid="link-logo" className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 shrink-0 items-center lg:static lg:translate-x-0 lg:translate-y-0">
           <img
             src={logoPath}

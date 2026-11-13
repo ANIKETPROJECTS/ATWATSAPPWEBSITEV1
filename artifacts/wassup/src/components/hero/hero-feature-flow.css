@@ -200,6 +200,8 @@
   display: grid;
   min-width: 0;
   gap: 1px;
+  transform-origin: left center;
+  transition: transform 260ms ease;
 }
 
 .hero-feature-flow-copy > strong {
@@ -236,6 +238,10 @@
 .hero-feature-flow-step.is-active .hero-feature-flow-copy > strong,
 .hero-feature-flow-step.is-active .hero-feature-flow-copy > span {
   color: #111;
+}
+
+.hero-feature-flow-step.is-active .hero-feature-flow-copy {
+  transform: scale(1.05);
 }
 
 @media (min-width: 1024px) {
