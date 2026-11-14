@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Check, Snowflake } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { DevicePreviewFrame } from '@/components/hero/DevicePreview';
 import { FigmaReadReceipt, FigmaSvgCrop } from '@/components/hero/FigmaChrome';
 import '@/components/hero/airavata-demo.css';
@@ -12,27 +13,6 @@ const BUSINESS = 'CoolCare AC';
 
 // Illustrative only. Number, name and address are fictional placeholders, not real customer data.
 const SENDER_NUMBER = '+91 90000 00000';
-
-const script: Msg[] = [
-  { from: 'customer', text: 'Hi, my AC is not cooling. Can you send someone to check it?', time: '10:41 AM', capture: { phone: SENDER_NUMBER } },
-  { from: 'bot', text: 'Sure, we can help with that. May I have your name?', time: '10:41 AM' },
-  { from: 'customer', text: 'It is Rohan Mehta.', time: '10:42 AM', capture: { name: 'Rohan Mehta' } },
-  { from: 'bot', text: 'Thanks, Rohan. What is your pincode?', time: '10:42 AM' },
-  { from: 'customer', text: '411038, Pune.', time: '10:42 AM', capture: { pincode: '411038, Pune' } },
-  { from: 'bot', text: 'We cover 411038. Please share the address for the visit.', time: '10:43 AM' },
-  { from: 'customer', text: 'Flat 302, Green Park Society, Kothrud.', time: '10:43 AM', capture: { address: 'Flat 302, Green Park Society, Kothrud' } },
-  { from: 'bot', text: 'Got it. Is it a split AC or a window AC?', time: '10:44 AM' },
-  { from: 'customer', text: 'Split AC.', time: '10:44 AM', capture: { acType: 'Split AC' } },
-  { from: 'bot', text: 'Thank you, Rohan. Your details are saved. Our team will message you here with a visit slot.', time: '10:44 AM' },
-];
-
-const fields: { key: FieldKey; label: string }[] = [
-  { key: 'phone', label: 'WhatsApp number' },
-  { key: 'name', label: 'Customer name' },
-  { key: 'pincode', label: 'Pincode' },
-  { key: 'acType', label: 'AC type' },
-  { key: 'address', label: 'Address' },
-];
 
 function deriveRecord(visible: Msg[]) {
   const record: Partial<Record<FieldKey, string>> = {};
@@ -51,6 +31,8 @@ const typingFor = (m: Msg) => (m.from === 'bot' ? 900 + Math.min(m.text.length *
 const LOOP_PAUSE = 5000;
 
 export default function ChatbotInquiryDemo() {
+  const { t, i18n } = useTranslation();
+  const copyDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
   const sectionRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const chatRef = useRef<HTMLDivElement>(null);
@@ -61,6 +43,25 @@ export default function ChatbotInquiryDemo() {
   const [typing, setTyping] = useState<Msg['from'] | null>(null);
   const [inView, setInView] = useState(false);
   const [docVisible, setDocVisible] = useState(true);
+  const script = useMemo<Msg[]>(() => [
+    { from: 'customer', text: t('chatbot.demo.problem'), time: '10:41 AM', capture: { phone: SENDER_NUMBER } },
+    { from: 'bot', text: t('chatbot.demo.askName'), time: '10:41 AM' },
+    { from: 'customer', text: t('chatbot.demo.customerName'), time: '10:42 AM', capture: { name: 'Rohan Mehta' } },
+    { from: 'bot', text: t('chatbot.demo.askPincode'), time: '10:42 AM' },
+    { from: 'customer', text: t('chatbot.demo.pincode'), time: '10:42 AM', capture: { pincode: '411038, Pune' } },
+    { from: 'bot', text: t('chatbot.demo.coverage'), time: '10:43 AM' },
+    { from: 'customer', text: t('chatbot.demo.address'), time: '10:43 AM', capture: { address: 'Flat 302, Green Park Society, Kothrud' } },
+    { from: 'bot', text: t('chatbot.demo.askAcType'), time: '10:44 AM' },
+    { from: 'customer', text: t('chatbot.demo.acType'), time: '10:44 AM', capture: { acType: 'Split AC' } },
+    { from: 'bot', text: t('chatbot.demo.saved'), time: '10:44 AM' },
+  ], [t]);
+  const fields: { key: FieldKey; label: string }[] = [
+    { key: 'phone', label: t('chatbot.field.phone') },
+    { key: 'name', label: t('chatbot.field.name') },
+    { key: 'pincode', label: t('chatbot.field.pincode') },
+    { key: 'acType', label: t('chatbot.field.acType') },
+    { key: 'address', label: t('chatbot.field.address') },
+  ];
 
   useEffect(() => {
     if (window.location.hash !== '#chatbot') return;
@@ -123,7 +124,7 @@ export default function ChatbotInquiryDemo() {
       t = window.setTimeout(() => setTyping(next.from), count === 0 ? 500 : next.from === 'customer' ? 1500 : 450);
     }
     return () => window.clearTimeout(t);
-  }, [running, count, typing]);
+  }, [running, count, typing, script]);
 
   useEffect(() => {
     const el = chatRef.current;
@@ -136,27 +137,27 @@ export default function ChatbotInquiryDemo() {
   const { record, latest } = deriveRecord(script.slice(0, count));
   const savedCount = Object.values(record).filter(Boolean).length;
   const chips = [
-    record.pincode && 'Pune',
+    record.pincode && t('chatbot.location.pune'),
     record.pincode && '411038',
     record.acType,
   ].filter(Boolean) as string[];
   const outcomes = [
-    { text: 'WhatsApp number saved on first message', on: Boolean(record.phone) },
-    { text: 'Customer details added as they reply', on: Boolean(record.name && record.pincode) },
-    { text: 'Custom attributes ready for follow-up', on: Boolean(record.address && record.acType) },
+    { text: t('chatbot.outcome.phone'), on: Boolean(record.phone) },
+    { text: t('chatbot.outcome.customerDetails'), on: Boolean(record.name && record.pincode) },
+    { text: t('chatbot.outcome.attributes'), on: Boolean(record.address && record.acType) },
   ];
 
   return (
-    <section ref={sectionRef} id="chatbot" aria-labelledby="chatbot-heading" data-testid="section-chatbot-works" className="cid-section" dir="ltr">
-      <div className="section-shell cid-grid">
-        <div className="cid-copy">
-          <p className="cid-eyebrow"><span aria-hidden="true" />AI WhatsApp chatbot</p>
+    <section ref={sectionRef} id="chatbot" aria-labelledby="chatbot-heading" data-testid="section-chatbot-works" className="cid-section">
+      <div className="section-shell cid-grid" dir="ltr">
+        <div className="cid-copy" dir={copyDirection}>
+          <p className="cid-eyebrow"><span aria-hidden="true" />{t('chatbot.eyebrow')}</p>
           <h2 id="chatbot-heading" className="font-display cid-title">
-            Your AI answers. <em>Every detail is saved.</em>
+            {t('chatbot.title.first')} <em>{t('chatbot.title.second')}</em>
           </h2>
-          <p className="cid-lede">It saves the WhatsApp number from the first message, then adds names, locations and custom details as customers reply—ready for follow-up and opted-in marketing.</p>
+          <p className="cid-lede">{t('chatbot.description')}</p>
 
-          <ol className="cid-outcomes" aria-label="What the AI chatbot does">
+          <ol className="cid-outcomes" aria-label={t('chatbot.outcomes.aria')}>
             {outcomes.map((outcome) => (
               <li className={outcome.on ? 'is-on' : ''} key={outcome.text}>
                 <span className="cid-tick" aria-hidden="true"><Check size={11} strokeWidth={3} /></span>
@@ -167,8 +168,8 @@ export default function ChatbotInquiryDemo() {
 
           <div className="cid-capture" data-testid="chatbot-customer-record">
             <div className="cid-capture-head">
-              <h3 className="cid-capture-heading">Saved in AtWassup</h3>
-              <span className="cid-record-count">{String(savedCount).padStart(2, '0')} / {String(fields.length).padStart(2, '0')} details</span>
+              <h3 className="cid-capture-heading">{t('chatbot.record.label')}</h3>
+              <span className="cid-record-count">{t('chatbot.record.count', { saved: String(savedCount).padStart(2, '0'), total: String(fields.length).padStart(2, '0') })}</span>
             </div>
 
             <dl className="cid-attrs">
@@ -184,36 +185,36 @@ export default function ChatbotInquiryDemo() {
                       {f.label}
                     </dt>
                     <dd key={value ?? 'empty'}>
-                      {value ?? <span className="cid-pending">{f.key === 'phone' ? 'Waiting for a message' : 'Not shared yet'}</span>}
+                      {value ?? <span className="cid-pending">{f.key === 'phone' ? t('chatbot.pending.waiting') : t('chatbot.pending.notShared')}</span>}
                     </dd>
                   </div>
                 );
               })}
               <div className="cid-attr cid-attr-audience" data-testid="record-field-audience">
-                <dt>Audience tags</dt>
+                <dt>{t('chatbot.field.audience')}</dt>
                 <dd>
                   {chips.length
                     ? <span className="cid-chip-list">{chips.map((chip) => <span key={chip} className="cid-chip">{chip}</span>)}</span>
-                    : <span className="cid-pending">Added as details arrive</span>}
+                    : <span className="cid-pending">{t('chatbot.pending.added')}</span>}
                 </dd>
               </div>
             </dl>
           </div>
-          <p className="cid-foot">Use saved details for targeted WhatsApp marketing to contacts who have opted in.</p>
+          <p className="cid-foot">{t('chatbot.foot')}</p>
         </div>
 
-        <div className="cid-stage" ref={stageRef}>
+        <div className="cid-stage" ref={stageRef} dir="ltr">
           <div className="cid-phone">
             <DevicePreviewFrame screenWidth={screenWidth} hideStatusBar>
               <div className="demo-phone-screen" style={{ height: screenHeight }}>
-                <div className="demo-screen-content" style={{ transform: `scale(${screenScale})` }}>
+                <div className="demo-screen-content" dir="ltr" style={{ transform: `scale(${screenScale})` }}>
                   <div className="demo-status-bar" aria-hidden="true">
                     <FigmaSvgCrop x={0} y={0} width={393} height={42} className="demo-status-art" />
                   </div>
                   <div className="demo-chat-header">
                     <FigmaSvgCrop x={3} y={58} width={22} height={36} className="demo-back-art" />
                     <div className="demo-shop-avatar"><Snowflake size={14} strokeWidth={2.2} aria-hidden="true" /></div>
-                    <div className="demo-shop-name"><strong>{BUSINESS}</strong><small>{typing === 'bot' ? 'typing...' : 'tap here for contact info'}</small></div>
+                    <div className="demo-shop-name"><strong>{BUSINESS}</strong><small dir="auto">{typing === 'bot' ? t('demo.typing') : t('demo.contactInfo')}</small></div>
                     <FigmaSvgCrop x={288} y={58} width={88} height={36} className="demo-header-actions-art" />
                   </div>
                   <div
@@ -221,21 +222,21 @@ export default function ChatbotInquiryDemo() {
                     className="demo-chat-body cid-chat"
                     role="log"
                     aria-live={running ? 'polite' : 'off'}
-                    aria-label={`Illustrative WhatsApp conversation between a customer and ${BUSINESS}`}
+                    aria-label={t('chatbot.demo.conversationAria', { business: BUSINESS })}
                     data-testid="chat-demo-transcript"
                     tabIndex={0}
                   >
-                    <FigmaSvgCrop x={146} y={280} width={101} height={21} className="demo-date-art" />
+                    <span className="demo-date-pill" dir="auto">{t('demo.today')}</span>
                     {script.slice(0, count).map((m, i) => (
                       <div
                         key={i}
                         className={`demo-message ${m.from === 'customer' ? 'from-customer' : 'from-business'}${reduced ? '' : ' message-appear'}`}
                         data-testid={`chat-demo-message-${i}`}
                         role="group"
-                        aria-label={m.from === 'customer' ? 'Customer message' : `${BUSINESS} message`}
+                        aria-label={m.from === 'customer' ? t('demo.customerMessage') : t('demo.businessMessage', { business: BUSINESS })}
                       >
                         {m.from === 'bot' && <span className="cid-sender">{BUSINESS}</span>}
-                        <span className="demo-message-copy">{m.text}</span>
+                        <span className="demo-message-copy" dir="auto">{m.text}</span>
                         {m.from === 'customer'
                           ? <span className="demo-outgoing-meta"><time>{m.time}</time><FigmaReadReceipt /></span>
                           : <span className="demo-incoming-meta"><time>{m.time}</time></span>}

@@ -1,5 +1,6 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import { demoTranslations } from './demo-translations';
 
 export const LANGUAGE_STORAGE_KEY = 'atwassup-language';
 
@@ -1362,7 +1363,7 @@ const pageCopy: Partial<Record<LanguageCode, Record<string, string>>> = {
 const resources = Object.fromEntries(
   languageOptions.map(({ code }) => [
     code,
-    { translation: { ...translations[code], ...pageCopy[code] } },
+    { translation: { ...translations[code], ...pageCopy[code], ...demoTranslations[code] } },
   ]),
 );
 

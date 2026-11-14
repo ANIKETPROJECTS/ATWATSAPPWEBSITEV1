@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { ArrowLeft, Check, ExternalLink, Lock, Stethoscope, X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { DevicePreviewFrame } from '@/components/hero/DevicePreview';
 import { FigmaReadReceipt, FigmaSvgCrop } from '@/components/hero/FigmaChrome';
 import '@/components/hero/airavata-demo.css';
@@ -8,33 +9,6 @@ import './clinic-appointment-demo.css';
 // Illustrative marketing animation only. Clinic, patient, number and doctors are fictional
 // placeholders; nothing is booked, stored or sent anywhere.
 const CLINIC = 'Everwell Clinic';
-const booking = {
-  patient: 'Ananya Sharma',
-  phone: '+91 90000 00000',
-  visitType: 'New consultation',
-  doctor: 'Dr. Kavya Rao',
-  specialty: 'General Physician',
-  date: 'Tomorrow',
-  time: '11:30 AM',
-  ref: 'EW-2087',
-};
-
-const visitTypes = ['New consultation', 'Follow-up visit'];
-const doctors = [
-  { name: 'Dr. Kavya Rao', specialty: 'General Physician' },
-  { name: 'Dr. Arjun Menon', specialty: 'Paediatrics' },
-];
-const dates = [
-  { label: 'Today', full: true },
-  { label: 'Tomorrow', full: false },
-  { label: 'In 2 days', full: false },
-];
-const slots = [
-  { label: '10:30 AM', full: false },
-  { label: '11:30 AM', full: false },
-  { label: '12:30 PM', full: true },
-  { label: '4:00 PM', full: false },
-];
 
 const stages = [
   { id: 'ask', ms: 1800 },
@@ -63,6 +37,8 @@ const S = Object.fromEntries(stages.map((s, i) => [s.id, i])) as Record<StageId,
 const LAST = stages.length - 1;
 
 export default function ClinicAppointmentDemo() {
+  const { t, i18n } = useTranslation();
+  const phoneTextDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
   const sectionRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const chatRef = useRef<HTMLDivElement>(null);
@@ -72,6 +48,32 @@ export default function ClinicAppointmentDemo() {
   const [si, setSi] = useState(0);
   const [inView, setInView] = useState(false);
   const [docVisible, setDocVisible] = useState(true);
+  const booking = {
+    patient: 'Ananya Sharma',
+    phone: '+91 90000 00000',
+    visitType: t('clinic.form.visit.new'),
+    doctor: 'Dr. Kavya Rao',
+    specialty: t('clinic.form.specialty.general'),
+    date: t('clinic.form.date.tomorrow'),
+    time: '11:30 AM',
+    ref: 'EW-2087',
+  };
+  const visitTypes = [t('clinic.form.visit.new'), t('clinic.form.visit.followup')];
+  const doctors = [
+    { name: 'Dr. Kavya Rao', specialty: t('clinic.form.specialty.general') },
+    { name: 'Dr. Arjun Menon', specialty: t('clinic.form.specialty.pediatrics') },
+  ];
+  const dates = [
+    { label: t('clinic.form.date.today'), full: true },
+    { label: t('clinic.form.date.tomorrow'), full: false },
+    { label: t('clinic.form.date.inTwoDays'), full: false },
+  ];
+  const slots = [
+    { label: '10:30 AM', full: false },
+    { label: '11:30 AM', full: false },
+    { label: '12:30 PM', full: true },
+    { label: '4:00 PM', full: false },
+  ];
 
   useEffect(() => {
     if (window.location.hash !== '#flow-builder') return;
@@ -158,24 +160,24 @@ export default function ClinicAppointmentDemo() {
   const screenHeight = Math.round(524 * screenScale);
 
   const outcomes = [
-    { text: 'Form shared in the chat', on: si >= S.cta },
-    { text: 'Patient picks doctor and slot', on: si >= S.fillSlot },
-    { text: 'Details land in AtWassup', on: received },
-    { text: 'AI answers the follow-up', on: si >= S.answer },
+    { text: t('clinic.outcome.shared'), on: si >= S.cta },
+    { text: t('clinic.outcome.pick'), on: si >= S.fillSlot },
+    { text: t('clinic.outcome.received'), on: received },
+    { text: t('clinic.outcome.followup'), on: si >= S.answer },
   ];
   const current = outcomes.reduce((acc, o, i) => (o.on ? i : acc), -1);
 
   const waiting = !received && (formOpen
-    ? `Patient is on ${screen === 1 ? 'patient details' : 'appointment details'}`
-    : si >= S.cta ? 'Form shared. Waiting for the patient.' : 'Patient asks to book an appointment.');
+    ? t(screen === 1 ? 'clinic.wait.patientDetails' : 'clinic.wait.appointmentDetails')
+    : si >= S.cta ? t('clinic.wait.patient') : t('clinic.wait.booking'));
 
   const receipt = [
-    { label: 'Patient', value: booking.patient },
-    { label: 'WhatsApp', value: booking.phone },
-    { label: 'Visit', value: booking.visitType },
-    { label: 'Doctor', value: `${booking.doctor}`, sub: booking.specialty },
-    { label: 'Date', value: booking.date },
-    { label: 'Time', value: booking.time },
+    { label: t('clinic.receipt.patient'), value: booking.patient },
+    { label: t('clinic.receipt.whatsapp'), value: booking.phone },
+    { label: t('clinic.receipt.visit'), value: booking.visitType },
+    { label: t('clinic.receipt.doctor'), value: booking.doctor, sub: booking.specialty },
+    { label: t('clinic.receipt.date'), value: booking.date },
+    { label: t('clinic.receipt.time'), value: booking.time },
   ];
 
   return (
@@ -185,10 +187,9 @@ export default function ClinicAppointmentDemo() {
       aria-labelledby="flow-builder-heading"
       data-testid="section-flow-builder"
       className="flow-builder-section caf-section"
-      dir="ltr"
     >
-      <div className="section-shell caf-grid">
-        <div className="caf-stage" ref={stageRef}>
+      <div className="section-shell caf-grid" dir="ltr">
+        <div className="caf-stage" ref={stageRef} dir="ltr">
           <div className="caf-phone">
             <DevicePreviewFrame
               screenWidth={screenWidth}
@@ -196,14 +197,14 @@ export default function ClinicAppointmentDemo() {
               frameColor="#151922"
             >
               <div className="demo-phone-screen" style={{ height: screenHeight }}>
-                <div className="demo-screen-content" style={{ transform: `scale(${screenScale})` }}>
+                <div className="demo-screen-content" dir="ltr" style={{ transform: `scale(${screenScale})` }}>
                   <div className="demo-status-bar" aria-hidden="true">
                     <FigmaSvgCrop x={0} y={0} width={393} height={42} className="demo-status-art" />
                   </div>
                   <div className="demo-chat-header">
                     <FigmaSvgCrop x={3} y={58} width={22} height={36} className="demo-back-art" />
                     <div className="demo-shop-avatar"><Stethoscope size={14} strokeWidth={2.2} aria-hidden="true" /></div>
-                    <div className="demo-shop-name"><strong>{CLINIC}</strong><small>{botTyping ? 'typing...' : 'tap here for contact info'}</small></div>
+                    <div className="demo-shop-name"><strong>{CLINIC}</strong><small dir="auto">{botTyping ? t('demo.typing') : t('demo.contactInfo')}</small></div>
                     <FigmaSvgCrop x={288} y={58} width={88} height={36} className="demo-header-actions-art" />
                   </div>
 
@@ -211,20 +212,20 @@ export default function ClinicAppointmentDemo() {
                     ref={chatRef}
                     className="demo-chat-body caf-chat"
                     role="log"
-                    aria-label={`Illustrative WhatsApp conversation with ${CLINIC}. Not a real booking.`}
+                    aria-label={t('clinic.demo.conversationAria', { clinic: CLINIC })}
                     data-testid="flow-demo-transcript"
                     tabIndex={0}
                   >
-                    <FigmaSvgCrop x={146} y={280} width={101} height={21} className="demo-date-art" />
+                    <span className="demo-date-pill" dir="auto">{t('demo.today')}</span>
 
                     <Bubble from="patient" time="10:40 AM" testId="flow-stage-ask" reduced={reduced}>
-                      Hi, I would like to book an appointment with a doctor.
+                      {t('clinic.demo.ask')}
                     </Bubble>
 
                     {si >= S.cta && (
-                      <div className={`demo-message from-business caf-cta-msg${reduced ? '' : ' message-appear'}`} role="group" aria-label={`${CLINIC} message`} data-testid="flow-stage-cta">
+                      <div className={`demo-message from-business caf-cta-msg${reduced ? '' : ' message-appear'}`} role="group" aria-label={t('demo.businessMessage', { business: CLINIC })} data-testid="flow-stage-cta">
                         <span className="caf-sender">{CLINIC}</span>
-                        <span className="demo-message-copy">Happy to help. Tap below to choose your doctor, day and time. It takes under a minute.</span>
+                        <span className="demo-message-copy" dir="auto">{t('clinic.demo.invite')}</span>
                         <span className="demo-incoming-meta"><time>10:40 AM</time></span>
                         <button
                           type="button"
@@ -233,32 +234,32 @@ export default function ClinicAppointmentDemo() {
                           disabled={formOpen || received}
                           data-testid="button-flow-open-form"
                         >
-                          <ExternalLink size={10} aria-hidden="true" /> Book appointment
+                          <ExternalLink size={10} aria-hidden="true" /> {t('clinic.demo.book')}
                         </button>
                       </div>
                     )}
 
                     {received && (
-                      <div className={`demo-message from-customer caf-response${reduced ? '' : ' message-appear'}`} role="group" aria-label="Patient form response" data-testid="flow-stage-submitted">
-                        <span className="caf-response-title"><Check size={9} strokeWidth={3} aria-hidden="true" /> Form submitted</span>
-                        <span className="demo-message-copy">{booking.doctor}, {booking.date.toLowerCase()}, {booking.time}</span>
+                      <div className={`demo-message from-customer caf-response${reduced ? '' : ' message-appear'}`} role="group" aria-label={t('clinic.demo.patientResponseAria')} data-testid="flow-stage-submitted">
+                        <span className="caf-response-title"><Check size={9} strokeWidth={3} aria-hidden="true" /> {t('clinic.demo.formSubmitted')}</span>
+                        <span className="demo-message-copy" dir="auto">{booking.doctor}, {booking.date.toLocaleLowerCase()}, {booking.time}</span>
                         <span className="demo-outgoing-meta"><time>10:41 AM</time><FigmaReadReceipt /></span>
                       </div>
                     )}
 
                     {si >= S.ack && (
                       <Bubble from="clinic" time="10:41 AM" testId="flow-stage-ack" reduced={reduced}>
-                        Thank you, Ananya. Your visit with {booking.doctor} is set for {booking.date.toLowerCase()} at {booking.time}. Reference {booking.ref}.
+                        {t('clinic.demo.confirmation', { name: booking.patient, doctor: booking.doctor, date: booking.date.toLocaleLowerCase(), time: booking.time, ref: booking.ref })}
                       </Bubble>
                     )}
                     {si >= S.question && (
                       <Bubble from="patient" time="10:42 AM" testId="flow-stage-question" reduced={reduced}>
-                        What time should I arrive?
+                        {t('clinic.demo.question')}
                       </Bubble>
                     )}
                     {si >= S.answer && (
                       <Bubble from="clinic" time="10:42 AM" testId="flow-stage-answer" reduced={reduced}>
-                        Please arrive by 11:15 AM so the front desk can complete registration before your visit.
+                        {t('clinic.demo.answer')}
                       </Bubble>
                     )}
 
@@ -276,17 +277,18 @@ export default function ClinicAppointmentDemo() {
                   <div
                     className={`caf-sheet${formOpen ? ' is-open' : ''}`}
                     role="dialog"
-                    aria-label="Illustrative WhatsApp appointment form"
+                    aria-label={t('clinic.form.aria')}
                     aria-hidden={!formOpen}
                     data-testid="flow-form"
                     data-screen={screen}
+                    dir={phoneTextDirection}
                   >
                     <div className="caf-sheet-head">
                       {screen === 2
-                        ? <button type="button" onClick={goBack} aria-label="Back to patient details" tabIndex={tab(formOpen)} data-testid="button-flow-back"><ArrowLeft size={12} /></button>
-                        : <button type="button" onClick={closeForm} aria-label="Close form" tabIndex={tab(formOpen)} data-testid="button-flow-close-form"><X size={12} /></button>}
+                        ? <button type="button" onClick={goBack} aria-label={t('clinic.form.back')} tabIndex={tab(formOpen)} data-testid="button-flow-back"><ArrowLeft size={12} /></button>
+                        : <button type="button" onClick={closeForm} aria-label={t('clinic.form.close')} tabIndex={tab(formOpen)} data-testid="button-flow-close-form"><X size={12} /></button>}
                       <div className="caf-sheet-title">
-                        <strong>{screen === 1 ? 'Patient details' : 'Appointment details'}</strong>
+                        <strong>{screen === 1 ? t('clinic.form.patientDetails') : t('clinic.form.appointmentDetails')}</strong>
                         <small>{CLINIC}</small>
                       </div>
                       <span className="caf-step">{screen}/2</span>
@@ -295,27 +297,27 @@ export default function ClinicAppointmentDemo() {
 
                     <div className="caf-screens">
                        <div className={`caf-screen${screen === 1 ? ' is-current' : ' is-left'}`} aria-hidden={screen !== 1} data-testid="flow-form-screen-1">
-                        <p className="caf-help">Tell us who the visit is for.</p>
+                        <p className="caf-help">{t('clinic.form.tellWho')}</p>
 
                         <div className={`caf-q${active === 'name' ? ' is-active' : ''}`} data-testid="flow-field-patient">
-                          <span className="caf-q-label">Full name</span>
+                          <span className="caf-q-label">{t('clinic.form.fullName')}</span>
                           <span className={`caf-text${has.name ? ' has-value' : ''}`}>
-                            <span key={String(has.name)}>{has.name ? booking.patient : 'Enter full name'}</span>
+                            <span key={String(has.name)}>{has.name ? booking.patient : t('clinic.form.enterName')}</span>
                             {active === 'name' && <i className="caf-caret" aria-hidden="true" />}
                           </span>
                         </div>
 
                         <div className="caf-q" data-testid="flow-field-phone">
-                          <span className="caf-q-label">WhatsApp number</span>
+                          <span className="caf-q-label">{t('clinic.form.whatsapp')}</span>
                           <span className="caf-text has-value is-locked">
                             <span>{booking.phone}</span>
                             <Lock size={9} aria-hidden="true" />
                           </span>
-                          <span className="caf-note">Added from this chat</span>
+                          <span className="caf-note">{t('clinic.form.addedFromChat')}</span>
                         </div>
 
                         <div className={`caf-q${active === 'type' ? ' is-active' : ''}`} data-testid="flow-field-visit-type">
-                          <span className="caf-q-label">Visit type</span>
+                          <span className="caf-q-label">{t('clinic.form.visitType')}</span>
                           <div className="caf-options">
                             {visitTypes.map((v) => (
                               <span key={v} className={`caf-option${(has.type || active === 'type') && v === booking.visitType ? ' is-on' : ''}`}>
@@ -327,10 +329,10 @@ export default function ClinicAppointmentDemo() {
                       </div>
 
                        <div className={`caf-screen${screen === 2 ? ' is-current' : ' is-right'}`} aria-hidden={screen !== 2} data-testid="flow-form-screen-2">
-                        <p className="caf-help">Pick a doctor and an open slot.</p>
+                        <p className="caf-help">{t('clinic.form.pickDoctor')}</p>
 
                         <div className={`caf-q${active === 'doctor' ? ' is-active' : ''}`} data-testid="flow-field-doctor">
-                          <span className="caf-q-label">Doctor</span>
+                          <span className="caf-q-label">{t('clinic.form.doctor')}</span>
                           <div className="caf-options">
                             {doctors.map((d) => (
                               <span key={d.name} className={`caf-option caf-doctor${(has.doctor || active === 'doctor') && d.name === booking.doctor ? ' is-on' : ''}`}>
@@ -342,18 +344,18 @@ export default function ClinicAppointmentDemo() {
                         </div>
 
                         <div className={`caf-q${active === 'date' ? ' is-active' : ''}`} data-testid="flow-field-date">
-                          <span className="caf-q-label">Day</span>
+                          <span className="caf-q-label">{t('clinic.form.day')}</span>
                           <div className="caf-chips">
                             {dates.map((d) => (
                               <span key={d.label} className={`caf-chip${d.full ? ' is-full' : ''}${(has.date || active === 'date') && d.label === booking.date ? ' is-on' : ''}`}>
-                                {d.label}{d.full && <small>Full</small>}
+                                {d.label}{d.full && <small>{t('clinic.form.full')}</small>}
                               </span>
                             ))}
                           </div>
                         </div>
 
                         <div className={`caf-q${active === 'slot' ? ' is-active' : ''}`} data-testid="flow-field-time">
-                          <span className="caf-q-label">Available slots</span>
+                          <span className="caf-q-label">{t('clinic.form.availableSlots')}</span>
                           <div className="caf-chips caf-slots">
                             {slots.map((s) => (
                               <span key={s.label} className={`caf-chip${s.full ? ' is-full' : ''}${(has.slot || active === 'slot') && s.label === booking.time ? ' is-on' : ''}`}>
@@ -375,7 +377,7 @@ export default function ClinicAppointmentDemo() {
                           tabIndex={tab(formOpen)}
                           data-testid="button-flow-next"
                         >
-                          Next
+                          {t('clinic.form.next')}
                         </button>
                       ) : (
                         <button
@@ -386,10 +388,10 @@ export default function ClinicAppointmentDemo() {
                           tabIndex={tab(formOpen)}
                           data-testid="button-flow-submit"
                         >
-                          {si === S.submitting ? 'Submitting...' : 'Submit'}
+                          {si === S.submitting ? t('clinic.form.submitting') : t('clinic.form.submit')}
                         </button>
                       )}
-                      <small>Managed by {CLINIC}</small>
+                      <small>{t('clinic.form.managedBy', { clinic: CLINIC })}</small>
                     </div>
                   </div>
                 </div>
@@ -398,12 +400,12 @@ export default function ClinicAppointmentDemo() {
           </div>
         </div>
 
-        <div className="caf-copy">
-          <p className="caf-eyebrow"><span aria-hidden="true" />WhatsApp Flows</p>
+        <div className="caf-copy" dir={phoneTextDirection}>
+          <p className="caf-eyebrow"><span aria-hidden="true" />{t('clinic.eyebrow')}</p>
           <h2 id="flow-builder-heading" className="font-display caf-title">
-            Book appointments. <em>Inside WhatsApp.</em>
+            {t('clinic.title.first')} <em>{t('clinic.title.second')}</em>
           </h2>
-          <p className="caf-lede">Build your booking form in AtWassup. Share it on WhatsApp. Your AI guides the patient, and the completed details come back to your platform.</p>
+          <p className="caf-lede">{t('clinic.description')}</p>
 
           <ul className="caf-outcomes" data-testid="flow-outcomes">
             {outcomes.map((o, i) => (
@@ -418,7 +420,7 @@ export default function ClinicAppointmentDemo() {
             {received ? (
               <div className="caf-receipt" key="receipt">
                 <div className="caf-receipt-head">
-                  <span className="caf-receipt-kicker">Received in AtWassup</span>
+                  <span className="caf-receipt-kicker">{t('clinic.receipt.title')}</span>
                   <span className="caf-ref">{booking.ref}</span>
                 </div>
                 <dl className="caf-receipt-grid">
@@ -444,16 +446,17 @@ export default function ClinicAppointmentDemo() {
 }
 
 function Bubble({ from, time, testId, reduced, children }: { from: 'patient' | 'clinic'; time: string; testId: string; reduced: boolean; children: ReactNode }) {
+  const { t } = useTranslation();
   const isPatient = from === 'patient';
   return (
     <div
       className={`demo-message ${isPatient ? 'from-customer' : 'from-business'}${reduced ? '' : ' message-appear'}`}
       role="group"
-      aria-label={isPatient ? 'Patient message' : `${CLINIC} message`}
+      aria-label={isPatient ? t('clinic.demo.patientMessageAria') : t('demo.businessMessage', { business: CLINIC })}
       data-testid={testId}
     >
       {!isPatient && <span className="caf-sender">{CLINIC}</span>}
-      <span className="demo-message-copy">{children}</span>
+      <span className="demo-message-copy" dir="auto">{children}</span>
       {isPatient
         ? <span className="demo-outgoing-meta"><time>{time}</time><FigmaReadReceipt /></span>
         : <span className="demo-incoming-meta"><time>{time}</time></span>}
