@@ -44,8 +44,8 @@ import ClinicAppointmentDemo from '@/components/flows/ClinicAppointmentDemo';
 import ContactWhatsAppForm from '@/components/ContactWhatsAppForm';
 import NotFound from '@/pages/not-found';
 import madeInIndiaFlagPath from './assets/made-in-india-flag.png';
-import metaBusinessPartnerPath from './assets/meta-business-partner.png';
-import metaTechProviderPath from './assets/meta-tech-provider.png';
+import metaBusinessPartnerPath from './assets/meta-business-partner.webp';
+import metaTechProviderPath from './assets/meta-tech-provider.webp';
 import verifiedBusinessBadge from './assets/verified-business.svg';
 import logoPath from './assets/airavata-technologies-logo.svg';
 import airavataTriangleSourcePath from './assets/airavata-technologies-mark-source.svg';
@@ -590,12 +590,14 @@ function Home() {
                 <img
                   src={metaBusinessPartnerPath}
                   alt="Meta Business Partner"
+                  decoding="async"
                   className="hero-meta-logo h-[52px] w-[135px] shrink-0 object-contain object-left sm:h-16 sm:w-[180px]"
                   data-testid="hero-meta-business-partner-logo"
                 />
                 <img
                   src={metaTechProviderPath}
                   alt="Meta Tech Provider"
+                  decoding="async"
                   className="hero-meta-logo h-[52px] w-[135px] shrink-0 object-contain object-left sm:h-16 sm:w-[180px]"
                   data-testid="hero-meta-tech-provider-logo"
                 />
@@ -969,6 +971,8 @@ function Home() {
                   src={metaBusinessPartnerPath}
                   alt="Meta Business Partner"
                   data-testid="footer-meta-business-partner"
+                  loading="lazy"
+                  decoding="async"
                   className="h-[56px] w-[165px] object-contain object-left"
                 />
               </div>
@@ -987,7 +991,7 @@ function Home() {
                     data-testid={`footer-social-${name.toLowerCase()}`}
                     className="flex h-10 w-10 items-center justify-center transition-opacity hover:opacity-75"
                   >
-                    <img src={image} alt="" className="h-8 w-8 object-contain" />
+                    <img src={image} alt="" loading="lazy" decoding="async" className="h-8 w-8 object-contain" />
                   </span>
                 ))}
               </div>
@@ -1011,7 +1015,7 @@ function Home() {
                   data-testid="footer-contact-phone"
                   className="flex items-center gap-3 text-base font-medium text-black transition hover:text-black"
                 >
-                  <img src={contactPhonePath} alt="" className="h-6 w-6 shrink-0 object-contain" />
+                  <img src={contactPhonePath} alt="" loading="lazy" decoding="async" className="h-6 w-6 shrink-0 object-contain" />
                   +91 91679 59756
                 </a>
                 <a
@@ -1019,7 +1023,7 @@ function Home() {
                   data-testid="footer-contact-email"
                   className="flex items-center gap-3 text-base font-medium text-black transition hover:text-black"
                 >
-                  <img src={contactEmailPath} alt="" className="h-6 w-6 shrink-0 object-contain" />
+                  <img src={contactEmailPath} alt="" loading="lazy" decoding="async" className="h-6 w-6 shrink-0 object-contain" />
                   info@atwassup.com
                 </a>
                 <a
@@ -1029,7 +1033,7 @@ function Home() {
                   data-testid="footer-link-directions"
                   className="flex items-start gap-3 text-base font-medium leading-6 text-black transition hover:text-black"
                 >
-                  <img src={contactLocationPath} alt="" className="mt-0.5 h-6 w-6 shrink-0 object-contain" />
+                  <img src={contactLocationPath} alt="" loading="lazy" decoding="async" className="mt-0.5 h-6 w-6 shrink-0 object-contain" />
                   <span>
                     Hubtown Greenwood CHS, Flat no. 805/A Wing, 8th Floor, Pokhran Road No. 1, Vartak Nagar, Thane (W), 400606
                   </span>
