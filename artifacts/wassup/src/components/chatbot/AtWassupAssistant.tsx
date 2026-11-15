@@ -1,10 +1,11 @@
 import { type FormEvent, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSubmitDemoRequest } from '@workspace/api-client-react';
-import { ArrowUp, Check, MessageCircle, X } from 'lucide-react';
+import { Check, MessageCircle, X } from 'lucide-react';
 import assistantIcon from '@assets/AIRAVATA_TECHNOLOGIES_LOGO_(5)_1794762850056.svg';
 import whatsappIcon from '@assets/2111774_1794764261230.svg';
-import phoneIcon from '@assets/597177_1794764282373.svg';
+import phoneIcon from '@assets/159832_(1)_1794765086474.svg';
+import sendIcon from '@assets/10322482_1794765030209.svg';
 import brandLogoPath from '../../assets/airavata-technologies-logo.svg';
 import verifiedBusinessBadge from '../../assets/verified-business.svg';
 import i18n, { languageOptions, type LanguageCode } from '../../i18n';
@@ -163,6 +164,7 @@ export default function AtWassupAssistant() {
             <div className="atw-assistant-brand">
               <h2 id="atw-assistant-title" className="sr-only">{copy.title}</h2>
               <div className="atw-assistant-brand-row">
+                <img src={assistantIcon} alt="" aria-hidden="true" className="atw-assistant-brand-mark" />
                 <svg
                   aria-label="AtWassup"
                   className="atw-assistant-wordmark"
@@ -278,7 +280,6 @@ export default function AtWassupAssistant() {
                 {formError && <p className="atw-assistant-form-error" role="alert">{formError}</p>}
                 <button type="submit" disabled={isSubmitting} data-testid="button-assistant-submit">
                   {isSubmitting ? copy.sending : copy.submit}
-                  {!isSubmitting && <ArrowUp size={15} aria-hidden="true" />}
                 </button>
               </form>
             )}
@@ -304,7 +305,7 @@ export default function AtWassupAssistant() {
                 data-testid="input-assistant-question"
               />
               <button type="submit" aria-label={copy.send} disabled={!draft.trim() || isTyping} data-testid="button-assistant-send">
-                <ArrowUp size={17} />
+                <img src={sendIcon} alt="" aria-hidden="true" />
               </button>
             </form>
           )}
