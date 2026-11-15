@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Check, ChevronDown, Globe2, Search } from 'lucide-react';
+import { ChevronDown, Search } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import translateIcon from '../assets/google-translate.svg';
 import i18n, { LANGUAGE_STORAGE_KEY, languageOptions, type LanguageCode } from '../i18n';
 
 type LanguageSelectorProps = {
@@ -70,18 +71,18 @@ export default function LanguageSelector({ mobile = false }: LanguageSelectorPro
           'inline-flex items-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3acd32]/70',
           mobile
             ? 'h-11 w-full justify-start gap-3 rounded-xl border border-black/10 bg-white px-3 text-sm font-semibold text-black'
-            : 'h-10 min-w-[56px] justify-center gap-1.5 rounded-md px-2 text-xs font-bold text-black hover:bg-black/5',
+            : 'h-10 min-w-[72px] justify-center gap-1.5 rounded-md px-2 text-[#111] hover:bg-black/5',
         ].join(' ')}
         data-testid={mobile ? 'button-mobile-language-selector' : 'button-language-selector'}
       >
-        <Globe2 aria-hidden="true" className="h-[17px] w-[17px] shrink-0" />
+        <img src={translateIcon} alt="" aria-hidden="true" className="h-[22px] w-[22px] shrink-0 object-contain" />
         {mobile ? (
           <>
             <span>{t('language.label')}</span>
             <span className="ml-auto text-black/55">{activeLanguage.label}</span>
           </>
         ) : (
-          <span>{activeLanguage.short}</span>
+          <span className="language-selector-trigger-label">{activeLanguage.short}</span>
         )}
         <ChevronDown aria-hidden="true" className={`h-3.5 w-3.5 shrink-0 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
@@ -120,12 +121,11 @@ export default function LanguageSelector({ mobile = false }: LanguageSelectorPro
                   role="option"
                   aria-selected={isSelected}
                   onClick={() => handleLanguageChange(code)}
-                  className={`flex min-h-10 w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition-colors hover:bg-[#3acd32]/10 focus-visible:bg-[#3acd32]/10 focus-visible:outline-none ${isSelected ? 'bg-[#3acd32]/10 font-semibold text-[#187a14]' : 'text-[#222]'}`}
+                  className={`flex min-h-10 w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition-colors focus-visible:outline-none ${isSelected ? 'bg-[#3acd32] font-semibold text-white hover:bg-[#35bd2e] focus-visible:bg-[#35bd2e]' : 'text-[#222] hover:bg-[#3acd32]/10 focus-visible:bg-[#3acd32]/10'}`}
                   data-testid={`language-option-${code}`}
                 >
                   <span className="min-w-0 flex-1">{label}</span>
-                  <span className="text-xs font-normal text-black/45">{englishLabel}</span>
-                  {isSelected && <Check aria-hidden="true" className="h-4 w-4 shrink-0 text-[#23971d]" />}
+                  <span className={`text-xs font-normal ${isSelected ? 'text-white/80' : 'text-black/45'}`}>{englishLabel}</span>
                 </button>
               );
             })}
