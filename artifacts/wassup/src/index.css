@@ -316,15 +316,16 @@ h3.font-display {
   padding-bottom: 20px;
 }
 #features .feature-heading-row > div > .mb-5 { margin-bottom: .75rem; }
-.feature-stat {
-  display: inline-flex;
-  flex: 0 0 auto;
-  align-items: flex-end;
-  gap: 12px;
-  border-top: 1px solid rgba(255, 255, 255, .15);
-  padding-top: 15px;
-  margin-bottom: 3px;
+.feature-software-preview {
+  width: min(100%, 1024px);
+  margin: 8px auto 34px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, .28);
 }
+.feature-software-preview img { display: block; width: 100%; height: auto; }
 .feature-groups {
   position: relative;
   display: grid;
@@ -353,12 +354,6 @@ h3.font-display {
   font-size: 10px;
   line-height: 1.35;
 }
-.feature-motion-section .feature-orbit {
-  transform-origin: center;
-  animation: feature-orbit-turn 60s linear infinite;
-  animation-play-state: paused;
-}
-.feature-motion-section.is-in-view .feature-orbit { animation-play-state: running; }
 .feature-motion-section .feature-heading-character {
   display: inline-block;
   opacity: 0;
@@ -373,35 +368,6 @@ h3.font-display {
   opacity: 0;
   transform: translateY(.08em);
   vertical-align: -.05em;
-}
-.feature-motion-section .feature-stat-label {
-  opacity: 0;
-  transform: translateY(7px);
-}
-.feature-counter {
-  display: inline-flex;
-  height: .78em;
-  overflow: hidden;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -.1em;
-}
-.feature-counter-window {
-  display: flex;
-  height: .78em;
-  overflow: hidden;
-}
-.feature-counter-stack {
-  display: flex;
-  flex-direction: column;
-  width: .52em;
-  line-height: .78em;
-  text-align: center;
-}
-.feature-counter-digit {
-  display: block;
-  height: .78em;
-  flex: 0 0 .78em;
-  line-height: .78em;
 }
 .feature-group-label-wrap {
   position: relative;
@@ -544,18 +510,6 @@ h3.font-display {
   animation: feature-cursor-blink .42s steps(2, end) .48s both;
   animation-play-state: paused;
 }
-.feature-motion-section .reveal.is-visible .feature-counter-tens {
-  animation: feature-counter-tens .52s cubic-bezier(.2, .75, .2, 1) both;
-  animation-play-state: paused;
-}
-.feature-motion-section .reveal.is-visible .feature-counter-ones {
-  animation: feature-counter-ones .52s steps(10, end) both;
-  animation-play-state: paused;
-}
-.feature-motion-section .reveal.is-visible .feature-stat-label {
-  animation: feature-stat-label-in .24s ease-out .42s both;
-  animation-play-state: paused;
-}
 .feature-motion-section .reveal.is-visible .feature-group-label-flash {
   animation: feature-group-flash .34s ease-out var(--feature-label-delay) both;
   animation-play-state: paused;
@@ -596,7 +550,7 @@ h3.font-display {
   animation: feature-dot-route 1.75s cubic-bezier(.35, .03, .48, 1) .52s both;
   animation-play-state: paused;
 }
-.feature-motion-section.is-in-view .reveal.is-visible :is(.feature-heading-character, .feature-heading-cursor, .feature-counter-stack, .feature-stat-label, .feature-group-label-flash, .feature-row, .feature-icon-draw, .feature-icon-draw :is(path, line, polyline, circle, rect, polygon), .feature-connector-main, .feature-connector-branch, .feature-connector-dot) {
+.feature-motion-section.is-in-view .reveal.is-visible :is(.feature-heading-character, .feature-heading-cursor, .feature-group-label-flash, .feature-row, .feature-icon-draw, .feature-icon-draw :is(path, line, polyline, circle, rect, polygon), .feature-connector-main, .feature-connector-branch, .feature-connector-dot) {
   animation-play-state: running;
 }
 .feature-motion-section.is-in-view .reveal.is-visible .feature-row::after { animation-play-state: running; }
@@ -608,9 +562,8 @@ h3.font-display {
 @media (max-width: 639px) {
   #features { padding-block: 30px; }
   #features .feature-heading-row { display: block; padding-bottom: 22px; }
-  #features .feature-heading-row h2 { font-size: 2.7rem; }
-  #features .feature-stat { margin-top: 20px; }
-  #features .feature-stat > span:first-child { font-size: 4.5rem; }
+  #features .feature-heading-row h2 { font-family: 'Poppins', sans-serif; font-size: clamp(3rem, 11vw, 4rem); }
+  .feature-software-preview { margin: 4px auto 26px; border-radius: 12px; }
   #features .feature-groups { grid-template-columns: minmax(0, 1fr); }
   #features .feature-group,
   #features .feature-group:first-child,
@@ -651,7 +604,6 @@ h3.font-display {
   78% { opacity: 1; transform: scaleX(1); }
   100% { opacity: 0; transform: translateX(105%) scaleX(.3); }
 }
-@keyframes feature-orbit-turn { to { transform: rotate(360deg); } }
 @keyframes feature-heading-letter {
   from { opacity: 0; transform: translateY(.16em); }
   to { opacity: 1; transform: translateY(0); }
@@ -660,12 +612,6 @@ h3.font-display {
   0%, 12%, 36%, 58% { opacity: 0; }
   22%, 46%, 72% { opacity: 1; }
   100% { opacity: 0; }
-}
-@keyframes feature-counter-tens { to { transform: translateY(-.78em); } }
-@keyframes feature-counter-ones { to { transform: translateY(-7.8em); } }
-@keyframes feature-stat-label-in {
-  from { opacity: 0; transform: translateY(7px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 @keyframes feature-group-flash {
   0% { opacity: 0; transform: scaleX(.72); }
@@ -735,12 +681,8 @@ h3.font-display {
   .pricing-price-reveal::before,
   .pricing-price-reveal::after { display: none !important; }
   .steps-page { opacity: 1; transform: none; }
-  .feature-motion-section .feature-orbit { animation: none !important; transform: none !important; }
   .feature-motion-section .feature-heading-character { opacity: 1 !important; transform: none !important; animation: none !important; }
   .feature-motion-section .feature-heading-cursor { display: none !important; animation: none !important; }
-  .feature-motion-section .feature-counter-tens { transform: translateY(-.78em) !important; animation: none !important; }
-  .feature-motion-section .feature-counter-ones { transform: translateY(-7.8em) !important; animation: none !important; }
-  .feature-motion-section .feature-stat-label { opacity: 1 !important; transform: none !important; animation: none !important; }
   .feature-motion-section .feature-group-label-flash { display: none !important; animation: none !important; }
   .feature-motion-section .feature-row { opacity: 1 !important; transform: none !important; animation: none !important; }
   .feature-motion-section .feature-row::after { display: none !important; animation: none !important; }

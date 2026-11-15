@@ -57,6 +57,7 @@ import socialFacebookPath from './assets/social-facebook.png';
 import socialInstagramPath from './assets/social-instagram.png';
 import socialLinkedinPath from './assets/social-linkedin.png';
 import socialYoutubePath from './assets/social-youtube.png';
+import processDashboardPreview from '@assets/Screenshot_2026-11-16_at_1.43.32_AM_1794773615246.png';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
 const queryClient = new QueryClient();
@@ -630,12 +631,10 @@ function Home() {
         className={`feature-motion-section relative overflow-hidden bg-[#101110] py-9 text-white sm:py-11${capabilitiesInView ? ' is-in-view' : ''}`}
         id="features"
       >
-        <div className="feature-orbit pointer-events-none absolute -right-40 top-10 h-96 w-96 rounded-full border border-[#3acd32]/15" />
         <div ref={capabilitiesReveal} className="section-shell reveal relative">
           <div className="feature-heading-row">
             <div className="max-w-[720px]">
-              <SectionLabel tone="dark">{t('site.capabilitiesLabel')}</SectionLabel>
-              <h2 className="font-display text-5xl font-bold leading-[.94] tracking-[-.07em] sm:text-5xl">
+              <h2 className="font-display text-6xl font-bold leading-[.94] tracking-[-.06em] sm:text-7xl">
                 <span className="sr-only">{t('site.capabilitiesHeading')}</span>
                 <span className="feature-heading-visual" aria-hidden="true">
                   <span className="feature-heading-line">
@@ -659,21 +658,15 @@ function Home() {
               </h2>
               <p className="mt-4 max-w-[720px] text-sm leading-relaxed text-white/55">{t('site.capabilitiesDescription')}</p>
             </div>
-            <div className="feature-stat">
-              <span className="feature-counter font-display text-8xl font-bold leading-[.78] tracking-[-.1em] text-[#3acd32]" aria-label="10">
-                <span className="sr-only">10</span>
-                <span className="feature-counter-window" aria-hidden="true">
-                  <span className="feature-counter-stack feature-counter-tens">
-                    {['0', '1'].map((digit, index) => <span key={`tens-${index}`} className="feature-counter-digit">{digit}</span>)}
-                  </span>
-                  <span className="feature-counter-stack feature-counter-ones">
-                    {['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].map((digit, index) => <span key={`ones-${index}`} className="feature-counter-digit">{digit}</span>)}
-                  </span>
-                </span>
-              </span>
-              <span className="feature-stat-label pb-0.5 text-xs font-semibold leading-relaxed text-white/55">{t('site.capabilitiesCount')}<br />{t('site.capabilitiesChannel')}</span>
-            </div>
           </div>
+          <figure className="feature-software-preview">
+            <img
+              src={processDashboardPreview}
+              alt="AtWassup software dashboard showing WhatsApp template setup and phone preview"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
           <div className="feature-groups" aria-label="AtWassup capabilities">
             <svg className="feature-connector feature-connector-desktop" viewBox="0 0 1000 20" preserveAspectRatio="none" aria-hidden="true">
               <path className="feature-connector-main" d="M860 0H0" />
