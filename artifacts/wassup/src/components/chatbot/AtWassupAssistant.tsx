@@ -1,7 +1,7 @@
 import { type FormEvent, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSubmitDemoRequest } from '@workspace/api-client-react';
-import { Check, MessageCircle, X } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 import assistantIcon from '@assets/AIRAVATA_TECHNOLOGIES_LOGO_(5)_1794762850056.svg';
 import whatsappIcon from '@assets/2111774_1794764261230.svg';
 import phoneIcon from '@assets/597177_(1)_1794766988189.svg';
@@ -160,10 +160,9 @@ export default function AtWassupAssistant() {
     if (isSubmitting) return;
     const form = new FormData(event.currentTarget);
     const name = String(form.get('name') ?? '').trim();
-    const email = String(form.get('email') ?? '').trim();
     const whatsapp = String(form.get('whatsapp') ?? '').trim();
 
-    if (!email && !whatsapp) {
+    if (!name || !whatsapp) {
       setFormError(copy.contactRequired);
       return;
     }
@@ -174,8 +173,7 @@ export default function AtWassupAssistant() {
       await submitRequest({
         data: {
           name,
-          ...(email ? { email } : {}),
-          ...(whatsapp ? { whatsapp } : {}),
+          whatsapp,
           message: `Website assistant question: ${lastQuestionRef.current.slice(0, 800)}`,
         },
       });
@@ -256,7 +254,6 @@ export default function AtWassupAssistant() {
 
           <div className="atw-assistant-messages" ref={messageListRef} aria-live="polite">
             <div className="atw-assistant-welcome">
-              <span className="atw-assistant-welcome-icon"><MessageCircle size={17} /></span>
               <p>{copy.greeting}</p>
             </div>
             {messages.map((message) => (
@@ -268,16 +265,24 @@ export default function AtWassupAssistant() {
                 {message.text}
               </div>
             ))}
-            {messages.length === 0 && (
+            {messages.length === 0 && !showContactForm && (
               <div className="atw-assistant-suggestions">
                 {copy.suggestions.map((suggestion, index) => {
-                  const intent = (['pricing', 'features', 'setup', 'integrations'] as const)[index];
+                  const action = (['pricing', 'features', 'contact'] as const)[index];
                   return (
                     <button
                       type="button"
-                      key={intent}
-                      onClick={() => answerQuestion(suggestion, intent)}
-                      data-testid={`assistant-suggestion-${intent}`}
+                      key={action}
+                      onClick={() => {
+                        if (action === 'contact') {
+                          lastQuestionRef.current = suggestion;
+                          setShowContactForm(true);
+                          setFormError('');
+                        } else {
+                          answerQuestion(suggestion, action);
+                        }
+                      }}
+                      data-testid={`assistant-suggestion-${action}`}
                     >
                       {suggestion}
                     </button>
@@ -304,12 +309,7 @@ export default function AtWassupAssistant() {
               <form className="atw-assistant-contact-form" onSubmit={handleSubmitContact} data-testid="form-assistant-contact">
                 <p>{copy.contactIntro}</p>
                 <input name="name" required maxLength={120} autoComplete="name" placeholder={copy.name} aria-label={copy.name} />
-                <input name="email" type="email" maxLength={254} autoComplete="email" placeholder={copy.email} aria-label={copy.email} />
-                <input name="whatsapp" type="tel" maxLength={40} autoComplete="tel" placeholder={copy.whatsapp} aria-label={copy.whatsapp} />
-                <label className="atw-assistant-consent">
-                  <input type="checkbox" name="consent" required />
-                  <span>{copy.consent}</span>
-                </label>
+                <input name="whatsapp" type="tel" required maxLength={40} autoComplete="tel" placeholder={copy.whatsapp} aria-label={copy.whatsapp} />
                 {formError && <p className="atw-assistant-form-error" role="alert">{formError}</p>}
                 <button type="submit" disabled={isSubmitting} data-testid="button-assistant-submit">
                   {isSubmitting ? copy.sending : copy.submit}

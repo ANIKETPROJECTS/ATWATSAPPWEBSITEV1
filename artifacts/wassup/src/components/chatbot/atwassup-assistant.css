@@ -169,23 +169,16 @@
 
 .atw-assistant-welcome {
   align-self: flex-start;
+  max-width: 78%;
   border: 1px solid rgba(0, 0, 0, .045);
   border-bottom-left-radius: 5px;
   background: rgba(255, 255, 255, .92);
   box-shadow: 0 4px 12px rgba(0, 0, 0, .045);
+  padding: 9px 12px;
+  font-size: 13px;
 }
 
-.atw-assistant-welcome p { margin: 6px 0 0; }
-
-.atw-assistant-welcome-icon {
-  display: inline-grid;
-  width: 28px;
-  height: 28px;
-  place-items: center;
-  border-radius: 10px;
-  background: rgba(58, 205, 50, .13);
-  color: #269a20;
-}
+.atw-assistant-welcome p { margin: 0; }
 
 .atw-assistant-message.from-visitor {
   align-self: flex-end;
@@ -275,41 +268,27 @@
 .atw-assistant-contact-form > p:first-child {
   margin: 0 0 2px;
   color: rgba(0, 0, 0, .66);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.55;
 }
 
 .atw-assistant-contact-form > input {
   width: 100%;
-  min-height: 40px;
-  border: 1px solid rgba(0, 0, 0, .11);
-  border-radius: 11px;
-  background: #fcfbf8;
-  padding: 0 11px;
+  min-height: 42px;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .22);
+  border-radius: 0;
+  background: transparent;
+  padding: 7px 2px;
   color: #111;
   font: inherit;
-  font-size: 13px;
+  font-size: 14px;
   outline: none;
 }
 
 .atw-assistant-contact-form > input:focus {
-  border-color: #3acd32;
-  box-shadow: 0 0 0 3px rgba(58, 205, 50, .13);
-}
-
-.atw-assistant-consent {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  color: rgba(0, 0, 0, .66);
-  font-size: 11px;
-  line-height: 1.5;
-}
-
-.atw-assistant-consent input {
-  margin: 2px 0 0;
-  accent-color: #3acd32;
+  border-bottom-color: #3acd32;
 }
 
 .atw-assistant-contact-form .atw-assistant-form-error {
@@ -325,8 +304,8 @@
   justify-content: center;
   gap: 8px;
   border: 0;
-  border-radius: 12px;
-  background: #161b16;
+  border-radius: 0;
+  background: #3acd32;
   color: #fff;
   cursor: pointer;
   font: inherit;
@@ -336,8 +315,8 @@
 }
 
 .atw-assistant-contact-form > button:hover:not(:disabled) {
-  background: #3acd32;
-  color: #101510;
+  background: #2fb728;
+  color: #fff;
 }
 
 .atw-assistant-contact-form > button:disabled { cursor: wait; opacity: .65; }
