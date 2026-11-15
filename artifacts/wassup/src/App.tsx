@@ -432,7 +432,7 @@ function Nav({ onLead }: { onLead: () => void }) {
             className="header-logo-image h-[72px] w-[min(340px,calc(100vw_-_80px))] object-cover object-[center_52%] sm:h-[76px] sm:w-[min(340px,calc(100vw_-_80px))] lg:h-[84px] lg:w-[min(360px,calc(100vw_-_104px))]"
           />
         </a>
-        <nav aria-label="Main navigation" className="hidden items-center gap-5 lg:flex">
+        <nav aria-label="Main navigation" className="hidden items-center gap-5 lg:flex xl:gap-8">
           <a data-testid="link-ai-features" href="#features" className="site-nav-link">{t('nav.features')}</a>
           <a data-testid="link-how-it-works" href="#how-it-works" className="site-nav-link">{t('nav.howItWorks')}</a>
           <a data-testid="link-pricing" href="#pricing" className="site-nav-link">{t('nav.pricing')}</a>
