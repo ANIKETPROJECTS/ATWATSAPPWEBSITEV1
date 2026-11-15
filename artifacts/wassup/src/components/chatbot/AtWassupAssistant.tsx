@@ -7,7 +7,6 @@ import whatsappIcon from '@assets/2111774_1794764261230.svg';
 import phoneIcon from '@assets/icon.svg_(15)_1794765459652.svg';
 import sendIcon from '@assets/10322482_1794765030209.svg';
 import brandLogoPath from '../../assets/airavata-technologies-logo.svg';
-import verifiedBusinessBadge from '../../assets/verified-business.svg';
 import i18n, { languageOptions, type LanguageCode } from '../../i18n';
 import { assistantCopy, detectAssistantIntent, type AssistantIntent } from './assistant-copy';
 import './atwassup-assistant.css';
@@ -53,6 +52,7 @@ export default function AtWassupAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [draft, setDraft] = useState('');
+  const [animatedPlaceholder, setAnimatedPlaceholder] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -77,6 +77,44 @@ export default function AtWassupAssistant() {
     const list = messageListRef.current;
     if (list) list.scrollTo({ top: list.scrollHeight, behavior: 'smooth' });
   }, [messages, isTyping, showContactForm, requestSent]);
+
+  useEffect(() => {
+    if (!isOpen || draft || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setAnimatedPlaceholder(copy.input);
+      return;
+    }
+
+    let index = 0;
+    let deleting = false;
+    let timeoutId = 0;
+
+    const typeNext = () => {
+      if (!deleting) {
+        index += 1;
+        setAnimatedPlaceholder(copy.input.slice(0, index));
+        if (index >= copy.input.length) {
+          deleting = true;
+          timeoutId = window.setTimeout(typeNext, 1250);
+          return;
+        }
+        timeoutId = window.setTimeout(typeNext, 82);
+        return;
+      }
+
+      index -= 1;
+      setAnimatedPlaceholder(copy.input.slice(0, index));
+      if (index <= 0) {
+        deleting = false;
+        timeoutId = window.setTimeout(typeNext, 480);
+        return;
+      }
+      timeoutId = window.setTimeout(typeNext, 35);
+    };
+
+    setAnimatedPlaceholder('');
+    timeoutId = window.setTimeout(typeNext, 350);
+    return () => window.clearTimeout(timeoutId);
+  }, [copy.input, draft, isOpen]);
 
   useEffect(() => () => {
     if (replyTimeoutRef.current) window.clearTimeout(replyTimeoutRef.current);
@@ -163,36 +201,27 @@ export default function AtWassupAssistant() {
           <header className="atw-assistant-header">
             <div className="atw-assistant-brand">
               <h2 id="atw-assistant-title" className="sr-only">{copy.title}</h2>
-              <div className="atw-assistant-brand-row">
-                <img src={assistantIcon} alt="" aria-hidden="true" className="atw-assistant-brand-mark" />
-                <div className="atw-assistant-brand-copy">
-                  <div className="atw-assistant-wordmark-row">
-                    <svg
-                      aria-label="AtWassup"
-                      className="atw-assistant-wordmark"
-                      role="img"
-                      viewBox="98 160 268 64"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <defs>
-                        <clipPath id="atw-assistant-wordmark-clip" clipPathUnits="userSpaceOnUse">
-                          <path d="M98 160H323V205H98Z M323 160H366V224H323Z" />
-                        </clipPath>
-                      </defs>
-                      <image
-                        clipPath="url(#atw-assistant-wordmark-clip)"
-                        height="375"
-                        href={brandLogoPath}
-                        width="375"
-                        x="0"
-                        y="0"
-                      />
-                    </svg>
-                    <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="atw-assistant-verified" />
-                  </div>
-                  <p className="atw-assistant-subtitle">{copy.subtitle}</p>
-                </div>
-              </div>
+              <svg
+                aria-label="AtWassup"
+                className="atw-assistant-header-logo"
+                role="img"
+                viewBox="0 155 375 80"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <clipPath id="atw-assistant-header-logo-clip" clipPathUnits="userSpaceOnUse">
+                    <path d="M0 155H95V235H0Z M98 160H323V205H98Z M323 160H366V224H323Z" />
+                  </clipPath>
+                </defs>
+                <image
+                  clipPath="url(#atw-assistant-header-logo-clip)"
+                  height="375"
+                  href={brandLogoPath}
+                  width="375"
+                  x="0"
+                  y="0"
+                />
+              </svg>
             </div>
             <div className="atw-assistant-header-actions">
               <a
@@ -304,7 +333,7 @@ export default function AtWassupAssistant() {
                 value={draft}
                 onChange={(event) => setDraft(event.currentTarget.value)}
                 maxLength={500}
-                placeholder={copy.input}
+                placeholder={animatedPlaceholder}
                 aria-label={copy.input}
                 data-testid="input-assistant-question"
               />

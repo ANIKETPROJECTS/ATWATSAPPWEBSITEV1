@@ -78,58 +78,18 @@
 }
 
 .atw-assistant-brand {
+  display: flex;
   min-width: 0;
   flex: 1 1 auto;
-}
-
-.atw-assistant-brand-row {
-  display: flex;
   align-items: center;
-  gap: 8px;
 }
 
-.atw-assistant-brand-mark {
+.atw-assistant-header-logo {
   display: block;
-  width: 50px;
-  height: 50px;
-  flex: 0 0 auto;
-  object-fit: contain;
-}
-
-.atw-assistant-brand-copy {
-  min-width: 0;
-}
-
-.atw-assistant-wordmark-row {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.atw-assistant-wordmark {
-  display: block;
-  width: 132px;
-  height: 34px;
+  width: clamp(144px, 45vw, 190px);
+  max-width: 100%;
+  height: auto;
   flex: 0 1 auto;
-  overflow: visible;
-}
-
-.atw-assistant-verified {
-  width: 18px;
-  height: 18px;
-  flex: 0 0 auto;
-  align-self: center;
-  object-fit: contain;
-  transform: translateY(2px);
-}
-
-.atw-assistant-subtitle {
-  margin: 2px 0 0 1px;
-  color: rgba(0, 0, 0, .62);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: -.01em;
-  line-height: 1.3;
 }
 
 .atw-assistant-header-actions {
@@ -438,26 +398,26 @@
 
 .atw-assistant-composer button {
   display: grid;
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 42px;
   flex: 0 0 auto;
   place-items: center;
   border: 0;
-  border-radius: 50%;
-  background: #3acd32;
-  color: #fff;
+  border-radius: 0;
+  background: transparent;
+  color: #3acd32;
   cursor: pointer;
   transition: transform .2s ease, opacity .2s ease;
 }
 
 .atw-assistant-composer button img {
-  width: 22px;
-  height: 22px;
-  filter: brightness(0) invert(1);
+  width: 25px;
+  height: 25px;
+  filter: brightness(0) saturate(100%) invert(63%) sepia(94%) saturate(450%) hue-rotate(64deg) brightness(98%) contrast(94%);
 }
 
 .atw-assistant-composer button:hover:not(:disabled) { transform: scale(1.05); }
-.atw-assistant-composer button:disabled { cursor: not-allowed; opacity: .82; }
+.atw-assistant-composer button:disabled { cursor: not-allowed; opacity: 1; }
 
 @keyframes atw-assistant-enter {
   from { opacity: 0; transform: translateY(18px) scale(.94); filter: blur(7px); }
@@ -496,10 +456,7 @@
 
 @media (max-width: 360px) {
   .atw-assistant-header { gap: 8px; padding-inline: 10px; }
-  .atw-assistant-brand-row { gap: 6px; }
-  .atw-assistant-brand-mark { width: 38px; height: 38px; }
-  .atw-assistant-wordmark { width: 94px; height: 30px; }
-  .atw-assistant-verified { width: 14px; height: 14px; }
+  .atw-assistant-header-logo { width: clamp(140px, 45vw, 160px); }
   .atw-assistant-header-actions { gap: 3px; }
   .atw-assistant-header-contact { width: 28px; height: 30px; }
   .atw-assistant-header-contact img { width: 18px; height: 18px; }
