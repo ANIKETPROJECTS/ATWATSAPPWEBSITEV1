@@ -67,13 +67,13 @@
 
 .atw-assistant-header {
   display: flex;
-  min-height: 88px;
+  min-height: 72px;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 12px;
   border-bottom: 1px solid rgba(0, 0, 0, .08);
   background: #fff;
-  padding: 12px 16px;
+  padding: 8px 16px;
   color: #111;
 }
 

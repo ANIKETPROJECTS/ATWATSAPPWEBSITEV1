@@ -4,7 +4,7 @@ import { useSubmitDemoRequest } from '@workspace/api-client-react';
 import { Check, MessageCircle, X } from 'lucide-react';
 import assistantIcon from '@assets/AIRAVATA_TECHNOLOGIES_LOGO_(5)_1794762850056.svg';
 import whatsappIcon from '@assets/2111774_1794764261230.svg';
-import phoneIcon from '@assets/icon.svg_(15)_1794765459652.svg';
+import phoneIcon from '@assets/597177_(1)_1794766988189.svg';
 import sendIcon from '@assets/10322482_1794765030209.svg';
 import brandLogoPath from '../../assets/airavata-technologies-logo.svg';
 import i18n, { languageOptions, type LanguageCode } from '../../i18n';
