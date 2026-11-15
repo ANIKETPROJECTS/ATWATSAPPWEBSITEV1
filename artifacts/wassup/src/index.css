@@ -326,7 +326,7 @@ h3.font-display {
 .feature-heading-line { white-space: nowrap; }
 .feature-software-carousel {
   width: min(100%, 1024px);
-  margin: 0 auto 34px;
+  margin: 0 auto 24px;
 }
 .feature-software-preview {
   position: relative;
@@ -372,7 +372,7 @@ h3.font-display {
   z-index: 3;
   opacity: 1;
   filter: none;
-  transform: translate(-50%, -50%) scale(.86);
+  transform: translate(-50%, -50%) scale(.9);
 }
 .feature-groups {
   position: relative;
@@ -402,12 +402,16 @@ h3.font-display {
 .feature-group:first-child { padding-left: 0; }
 .feature-group + .feature-group { border-left: 1px solid rgba(255, 255, 255, .15); }
 .feature-group:last-child { padding-right: 0; }
-.feature-group-intro { min-height: 92px; }
+.feature-group-intro { min-height: 78px; }
+#features .feature-group-grow .feature-group-title {
+  font-size: clamp(.75rem, 4vw, 1.25rem);
+  white-space: nowrap;
+}
 .feature-list { display: grid; }
 .feature-row {
   min-width: 0;
   border-top: 1px solid rgba(255, 255, 255, .13);
-  padding: 10px 0;
+  padding: 8px 0;
 }
 .feature-motion-section .feature-heading-character {
   display: inline-block;
@@ -576,23 +580,23 @@ h3.font-display {
 .feature-motion-section.is-in-view .reveal.is-visible .feature-row::after { animation-play-state: running; }
 
 @media (max-width: 639px) {
-  #features { padding-block: 30px; }
+  #features { padding-block: 24px; }
   #features .feature-heading-row { display: block; padding-bottom: 0; text-align: center; }
   #features .feature-capabilities-heading { font-size: clamp(1.05rem, 6vw, 1.45rem); }
-  .feature-software-carousel { margin: 0 auto 26px; }
+  .feature-software-carousel { margin: 0 auto 18px; }
   .feature-software-slide[data-position="-2"] { transform: translate(calc(-50% - 116%), -50%) scale(.48); }
   .feature-software-slide[data-position="-1"] { transform: translate(calc(-50% - 62%), -50%) scale(.62); }
   .feature-software-slide[data-position="1"] { transform: translate(calc(-50% + 62%), -50%) scale(.62); }
   .feature-software-slide[data-position="2"] { transform: translate(calc(-50% + 116%), -50%) scale(.48); }
-  .feature-software-slide[data-position="0"] { transform: translate(-50%, -50%) scale(.8); }
+  .feature-software-slide[data-position="0"] { transform: translate(-50%, -50%) scale(.9); }
   #features .feature-groups { grid-template-columns: minmax(0, 1fr); }
   #features .feature-group,
   #features .feature-group:first-child,
-  #features .feature-group:last-child { padding: 19px 0 0; }
-  #features .feature-group + .feature-group { border-left: 0; border-top: 1px solid rgba(255, 255, 255, .15); margin-top: 18px; }
-  #features .feature-group-intro { min-height: 0; padding-bottom: 12px; }
+  #features .feature-group:last-child { padding: 14px 0 0; }
+  #features .feature-group + .feature-group { border-left: 0; border-top: 1px solid rgba(255, 255, 255, .15); margin-top: 12px; }
+  #features .feature-group-intro { min-height: 0; padding-bottom: 10px; }
   #features .feature-group-title { font-size: 1.55rem; }
-  #features .feature-row { padding: 10px 0; }
+  #features .feature-row { padding: 8px 0; }
   #features .feature-row-title { font-size: 15px; }
   .steps-page.is-visible { animation-delay: 0ms !important; }
 }
@@ -601,11 +605,11 @@ h3.font-display {
   #features .feature-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   #features .feature-group,
   #features .feature-group:first-child,
-  #features .feature-group:last-child { padding: 20px 18px 0; }
+  #features .feature-group:last-child { padding: 16px 18px 0; }
   #features .feature-group:nth-child(odd) { border-left: 0; }
   #features .feature-group:nth-child(even) { border-left: 1px solid rgba(255, 255, 255, .15); }
-  #features .feature-group:nth-child(n+3) { border-top: 1px solid rgba(255, 255, 255, .15); margin-top: 18px; padding-top: 20px; }
-  #features .feature-group-intro { min-height: 92px; }
+  #features .feature-group:nth-child(n+3) { border-top: 1px solid rgba(255, 255, 255, .15); margin-top: 14px; padding-top: 16px; }
+  #features .feature-group-intro { min-height: 78px; }
 }
 @media (max-width: 639px) {
   footer[data-testid="footer"] {

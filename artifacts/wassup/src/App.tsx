@@ -200,7 +200,7 @@ function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capability
   const labelDelay = 920 + groupIndex * 480;
 
   return (
-    <div className="feature-group" data-group-index={groupIndex} data-testid={`capability-group-${group.id}`}>
+    <div className={`feature-group feature-group-${group.id}`} data-group-index={groupIndex} data-testid={`capability-group-${group.id}`}>
       <div className="feature-group-intro">
         <div className="feature-group-label-wrap" style={{ '--feature-label-delay': `${labelDelay}ms` } as CSSProperties}>
           <p className="feature-group-label">{t(group.label)}</p>
@@ -697,7 +697,7 @@ function Home() {
 
       <section
         ref={(node) => { capabilitiesSectionRef.current = node; }}
-        className={`feature-motion-section relative overflow-hidden bg-[#101110] py-9 text-white sm:py-11${capabilitiesInView ? ' is-in-view' : ''}`}
+        className={`feature-motion-section relative overflow-hidden bg-[#101110] py-7 text-white sm:py-9${capabilitiesInView ? ' is-in-view' : ''}`}
         id="features"
       >
         <div ref={capabilitiesReveal} className="section-shell reveal relative">
