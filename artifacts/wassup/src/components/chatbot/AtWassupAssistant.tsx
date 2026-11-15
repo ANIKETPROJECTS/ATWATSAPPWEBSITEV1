@@ -1,0 +1,280 @@
+import { type FormEvent, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSubmitDemoRequest } from '@workspace/api-client-react';
+import { ArrowUp, Check, MessageCircle, X } from 'lucide-react';
+import assistantIcon from '@assets/AIRAVATA_TECHNOLOGIES_LOGO_(5)_1794762850056.svg';
+import i18n, { languageOptions, type LanguageCode } from '../../i18n';
+import { assistantCopy, detectAssistantIntent, type AssistantIntent } from './assistant-copy';
+import './atwassup-assistant.css';
+
+type ChatMessage = {
+  id: number;
+  role: 'assistant' | 'visitor';
+  text: string;
+};
+
+const AUTO_OPEN_DELAY = 8_000;
+const AUTO_OPEN_KEY = 'atwassup-assistant-auto-opened';
+
+function getActiveLanguage(resolved: string | undefined): LanguageCode {
+  resolved = resolved ?? i18n.language ?? 'en';
+  const exactMatch = languageOptions.find(({ code }) => code === resolved);
+  if (exactMatch) return exactMatch.code;
+  return languageOptions.find(({ code }) => code === resolved.split('-')[0])?.code ?? 'en';
+}
+
+function isAutoOpenHandled() {
+  try {
+    return window.sessionStorage.getItem(AUTO_OPEN_KEY) === 'true';
+  } catch {
+    return false;
+  }
+}
+
+function markAutoOpenHandled() {
+  try {
+    window.sessionStorage.setItem(AUTO_OPEN_KEY, 'true');
+  } catch {
+    // Session storage can be unavailable in private browsing; keep the widget usable.
+  }
+}
+
+export default function AtWassupAssistant() {
+  const { mutateAsync: submitRequest } = useSubmitDemoRequest();
+  const { i18n: translationInstance } = useTranslation();
+  const language = getActiveLanguage(translationInstance.resolvedLanguage);
+  const copy = assistantCopy[language];
+  const isRtl = language === 'ar';
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [draft, setDraft] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const [showContactForm, setShowContactForm] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState('');
+  const [requestSent, setRequestSent] = useState(false);
+  const interactionRef = useRef(false);
+  const replyTimeoutRef = useRef<number | null>(null);
+  const messageListRef = useRef<HTMLDivElement>(null);
+  const lastQuestionRef = useRef('');
+
+  useEffect(() => {
+    if (isAutoOpenHandled()) return;
+    const timer = window.setTimeout(() => {
+      if (interactionRef.current) return;
+      markAutoOpenHandled();
+      setIsOpen(true);
+    }, AUTO_OPEN_DELAY);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const list = messageListRef.current;
+    if (list) list.scrollTo({ top: list.scrollHeight, behavior: 'smooth' });
+  }, [messages, isTyping, showContactForm, requestSent]);
+
+  useEffect(() => () => {
+    if (replyTimeoutRef.current) window.clearTimeout(replyTimeoutRef.current);
+  }, []);
+
+  const openAssistant = () => {
+    interactionRef.current = true;
+    markAutoOpenHandled();
+    setIsOpen(true);
+  };
+
+  const closeAssistant = () => {
+    interactionRef.current = true;
+    markAutoOpenHandled();
+    setIsOpen(false);
+  };
+
+  const answerQuestion = (question: string, forcedIntent?: AssistantIntent) => {
+    const normalizedQuestion = question.trim();
+    if (!normalizedQuestion || isTyping) return;
+    lastQuestionRef.current = normalizedQuestion;
+    setMessages((current) => [
+      ...current,
+      { id: Date.now(), role: 'visitor', text: normalizedQuestion },
+    ]);
+    setDraft('');
+    setShowContactForm(false);
+    setFormError('');
+    setIsTyping(true);
+
+    const intent = forcedIntent ?? detectAssistantIntent(normalizedQuestion, language);
+    replyTimeoutRef.current = window.setTimeout(() => {
+      setMessages((current) => [
+        ...current,
+        { id: Date.now() + 1, role: 'assistant', text: copy.answers[intent] },
+      ]);
+      setIsTyping(false);
+    }, 520);
+  };
+
+  const handleSubmitContact = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (isSubmitting) return;
+    const form = new FormData(event.currentTarget);
+    const name = String(form.get('name') ?? '').trim();
+    const email = String(form.get('email') ?? '').trim();
+    const whatsapp = String(form.get('whatsapp') ?? '').trim();
+
+    if (!email && !whatsapp) {
+      setFormError(copy.contactRequired);
+      return;
+    }
+
+    setIsSubmitting(true);
+    setFormError('');
+    try {
+      await submitRequest({
+        data: {
+          name,
+          ...(email ? { email } : {}),
+          ...(whatsapp ? { whatsapp } : {}),
+          message: `Website assistant question: ${lastQuestionRef.current.slice(0, 800)}`,
+        },
+      });
+      setRequestSent(true);
+      setShowContactForm(false);
+    } catch {
+      setFormError(copy.error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className={`atw-assistant${isOpen ? ' is-open' : ''}`} dir={isRtl ? 'rtl' : 'ltr'}>
+      {isOpen && (
+        <section
+          className="atw-assistant-panel"
+          role="dialog"
+          aria-modal="false"
+          aria-labelledby="atw-assistant-title"
+          data-testid="panel-site-assistant"
+        >
+          <header className="atw-assistant-header">
+            <img src={assistantIcon} alt="" aria-hidden="true" className="atw-assistant-brand-icon" />
+            <div className="atw-assistant-heading">
+              <h2 id="atw-assistant-title">{copy.title}</h2>
+              <p><span className="atw-assistant-live-dot" />{copy.status}</p>
+            </div>
+            <button
+              type="button"
+              className="atw-assistant-close"
+              onClick={closeAssistant}
+              aria-label={copy.close}
+              data-testid="button-close-site-assistant"
+            >
+              <X size={18} />
+            </button>
+          </header>
+
+          <div className="atw-assistant-messages" ref={messageListRef} aria-live="polite">
+            <div className="atw-assistant-welcome">
+              <span className="atw-assistant-welcome-icon"><MessageCircle size={17} /></span>
+              <p>{copy.greeting}</p>
+            </div>
+            {messages.map((message) => (
+              <div
+                className={`atw-assistant-message ${message.role === 'visitor' ? 'from-visitor' : 'from-assistant'}`}
+                key={message.id}
+                data-testid={`assistant-message-${message.role}-${message.id}`}
+              >
+                {message.text}
+              </div>
+            ))}
+            {messages.length === 0 && (
+              <div className="atw-assistant-suggestions">
+                {copy.suggestions.map((suggestion, index) => {
+                  const intent = (['pricing', 'features', 'setup', 'integrations'] as const)[index];
+                  return (
+                    <button
+                      type="button"
+                      key={intent}
+                      onClick={() => answerQuestion(suggestion, intent)}
+                      data-testid={`assistant-suggestion-${intent}`}
+                    >
+                      {suggestion}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+            {isTyping && (
+              <div className="atw-assistant-typing" aria-label={copy.typing}>
+                <span /><span /><span />
+              </div>
+            )}
+            {messages.length > 0 && !isTyping && !requestSent && (
+              <button
+                type="button"
+                className="atw-assistant-contact-cta"
+                onClick={() => { setShowContactForm(true); setFormError(''); }}
+                data-testid="button-assistant-contact"
+              >
+                {copy.requestFollowup}
+              </button>
+            )}
+            {showContactForm && !requestSent && (
+              <form className="atw-assistant-contact-form" onSubmit={handleSubmitContact} data-testid="form-assistant-contact">
+                <p>{copy.contactIntro}</p>
+                <input name="name" required maxLength={120} autoComplete="name" placeholder={copy.name} aria-label={copy.name} />
+                <input name="email" type="email" maxLength={254} autoComplete="email" placeholder={copy.email} aria-label={copy.email} />
+                <input name="whatsapp" type="tel" maxLength={40} autoComplete="tel" placeholder={copy.whatsapp} aria-label={copy.whatsapp} />
+                <label className="atw-assistant-consent">
+                  <input type="checkbox" name="consent" required />
+                  <span>{copy.consent}</span>
+                </label>
+                {formError && <p className="atw-assistant-form-error" role="alert">{formError}</p>}
+                <button type="submit" disabled={isSubmitting} data-testid="button-assistant-submit">
+                  {isSubmitting ? copy.sending : copy.submit}
+                  {!isSubmitting && <ArrowUp size={15} aria-hidden="true" />}
+                </button>
+              </form>
+            )}
+            {requestSent && (
+              <div className="atw-assistant-success" role="status" data-testid="assistant-contact-success">
+                <Check size={17} aria-hidden="true" />
+                <span>{copy.success}</span>
+              </div>
+            )}
+          </div>
+
+          {!showContactForm && !requestSent && (
+            <form
+              className="atw-assistant-composer"
+              onSubmit={(event) => { event.preventDefault(); answerQuestion(draft); }}
+            >
+              <input
+                value={draft}
+                onChange={(event) => setDraft(event.currentTarget.value)}
+                maxLength={500}
+                placeholder={copy.input}
+                aria-label={copy.input}
+                data-testid="input-assistant-question"
+              />
+              <button type="submit" aria-label={copy.send} disabled={!draft.trim() || isTyping} data-testid="button-assistant-send">
+                <ArrowUp size={17} />
+              </button>
+            </form>
+          )}
+          <p className="atw-assistant-disclaimer">{copy.disclaimer}</p>
+        </section>
+      )}
+
+      <button
+        type="button"
+        className="atw-assistant-trigger"
+        onClick={isOpen ? closeAssistant : openAssistant}
+        aria-label={isOpen ? copy.close : copy.title}
+        aria-expanded={isOpen}
+        data-testid="button-open-site-assistant"
+      >
+        <img src={assistantIcon} alt="" aria-hidden="true" />
+      </button>
+    </div>
+  );
+}

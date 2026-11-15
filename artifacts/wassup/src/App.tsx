@@ -40,6 +40,7 @@ import { FigmaSvgCrop } from '@/components/hero/FigmaChrome';
 import HeroFeatureFlow, { type HeroFeatureStage } from '@/components/hero/HeroFeatureFlow';
 import HeroHeadlineRotator from '@/components/hero/HeroHeadlineRotator';
 import ChatbotInquiryDemo from '@/components/chatbot/ChatbotInquiryDemo';
+import AtWassupAssistant from '@/components/chatbot/AtWassupAssistant';
 import ClinicAppointmentDemo from '@/components/flows/ClinicAppointmentDemo';
 import ContactWhatsAppForm from '@/components/ContactWhatsAppForm';
 import NotFound from '@/pages/not-found';
@@ -56,7 +57,6 @@ import socialFacebookPath from './assets/social-facebook.png';
 import socialInstagramPath from './assets/social-instagram.png';
 import socialLinkedinPath from './assets/social-linkedin.png';
 import socialYoutubePath from './assets/social-youtube.png';
-import whatsappContactPath from './assets/whatsapp-contact.png';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
 const queryClient = new QueryClient();
@@ -1125,21 +1125,7 @@ function Home() {
           </div>
         </div>
       </footer>
-      <a
-        href="https://wa.me/919167959756"
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Chat with AtWassup on WhatsApp"
-        title="Chat with AtWassup on WhatsApp"
-        data-testid="floating-whatsapp-contact"
-        className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-5 z-[70] flex h-14 w-14 items-center justify-center rounded-2xl transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#3acd32]/50"
-      >
-        <img
-          src={whatsappContactPath}
-          alt=""
-          className="h-full w-full object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,.2)]"
-        />
-      </a>
+      <AtWassupAssistant />
       {demoOpen && <DemoModal onClose={() => setDemoOpen(false)} />}
       {leadOpen && <LeadModal onClose={() => setLeadOpen(false)} />}
     </main>

@@ -1,0 +1,383 @@
+import type { LanguageCode } from '../../i18n';
+
+export type AssistantIntent = 'pricing' | 'features' | 'setup' | 'integrations' | 'team' | 'fallback';
+
+export type AssistantCopy = {
+  title: string;
+  status: string;
+  disclaimer: string;
+  greeting: string;
+  suggestions: [string, string, string, string];
+  input: string;
+  send: string;
+  requestFollowup: string;
+  contactIntro: string;
+  name: string;
+  email: string;
+  whatsapp: string;
+  consent: string;
+  contactRequired: string;
+  submit: string;
+  sending: string;
+  success: string;
+  error: string;
+  typing: string;
+  close: string;
+  answers: Record<AssistantIntent, string>;
+};
+
+export const assistantCopy: Record<LanguageCode, AssistantCopy> = {
+  en: {
+    title: 'AtWassup Assistant',
+    status: 'Here to help',
+    disclaimer: 'Answers use verified AtWassup information. Unanswered questions go to the team.',
+    greeting: 'Hi! Ask me about pricing, features, WhatsApp setup, or integrations. I can answer common questions or pass your question to our team.',
+    suggestions: ['Pricing & plan', 'Features', 'WhatsApp setup', 'Integrations'],
+    input: 'Type your question…',
+    send: 'Send message',
+    requestFollowup: 'Talk to the AtWassup team',
+    contactIntro: 'Share your details and your question. The team will follow up with you.',
+    name: 'Your name',
+    email: 'Email address',
+    whatsapp: 'WhatsApp number (optional)',
+    consent: 'I agree to be contacted about this request.',
+    contactRequired: 'Add an email address or WhatsApp number so the team can reach you.',
+    submit: 'Send request',
+    sending: 'Sending…',
+    success: 'Thanks! Your request has been sent to the AtWassup team.',
+    error: 'Your request could not be sent right now. Please try again.',
+    typing: 'Assistant is replying',
+    close: 'Close assistant',
+    answers: {
+      pricing: 'The AtWassup plan is ₹15,000 per year, plus applicable GST. Meta messaging charges are separate and passed through at cost.',
+      features: 'AtWassup brings WhatsApp Business API onboarding, AI-assisted replies, lead capture, follow-ups, broadcasts, in-chat forms, catalogs, payments, and analytics together.',
+      setup: 'The team can guide your WhatsApp Business API onboarding and Meta verification. Meta makes the final verification decision.',
+      integrations: 'AtWassup can connect your CRM and existing tools. The team can confirm what fits your current setup.',
+      team: 'I can ask the AtWassup team to follow up. Share your contact details and what you need help with.',
+      fallback: 'I don’t have a verified answer for that yet. I can pass your question to the AtWassup team.',
+    },
+  },
+  hi: {
+    title: 'AtWassup सहायक',
+    status: 'मदद के लिए यहाँ',
+    disclaimer: 'जवाब AtWassup की सत्यापित जानकारी पर आधारित हैं। बाकी सवाल टीम तक पहुँचाए जाते हैं।',
+    greeting: 'नमस्ते! कीमत, सुविधाओं, WhatsApp सेटअप या इंटीग्रेशन के बारे में पूछें। मैं सामान्य सवालों के जवाब दे सकता हूँ या आपका सवाल टीम तक पहुँचा सकता हूँ।',
+    suggestions: ['कीमत और प्लान', 'सुविधाएँ', 'WhatsApp सेटअप', 'इंटीग्रेशन'],
+    input: 'अपना सवाल लिखें…',
+    send: 'संदेश भेजें',
+    requestFollowup: 'AtWassup टीम से बात करें',
+    contactIntro: 'अपनी जानकारी और सवाल साझा करें। टीम आपसे संपर्क करेगी।',
+    name: 'आपका नाम',
+    email: 'ईमेल पता',
+    whatsapp: 'WhatsApp नंबर (वैकल्पिक)',
+    consent: 'मैं इस अनुरोध के बारे में संपर्क किए जाने की सहमति देता/देती हूँ।',
+    contactRequired: 'टीम से संपर्क के लिए ईमेल या WhatsApp नंबर दें।',
+    submit: 'अनुरोध भेजें',
+    sending: 'भेजा जा रहा है…',
+    success: 'धन्यवाद! आपका अनुरोध AtWassup टीम को भेज दिया गया है।',
+    error: 'अभी अनुरोध नहीं भेजा जा सका। कृपया फिर कोशिश करें।',
+    typing: 'सहायक जवाब दे रहा है',
+    close: 'सहायक बंद करें',
+    answers: {
+      pricing: 'AtWassup प्लान ₹15,000 प्रति वर्ष का है, साथ में लागू GST। Meta मैसेजिंग शुल्क अलग से वास्तविक लागत पर लिए जाते हैं।',
+      features: 'AtWassup WhatsApp Business API सेटअप, AI-सहायता वाले जवाब, लीड कैप्चर, फॉलो-अप, ब्रॉडकास्ट, चैट फॉर्म, कैटलॉग, भुगतान और एनालिटिक्स को एक साथ लाता है।',
+      setup: 'टीम WhatsApp Business API सेटअप और Meta वेरिफिकेशन में मार्गदर्शन कर सकती है। अंतिम वेरिफिकेशन का निर्णय Meta लेता है।',
+      integrations: 'AtWassup आपके CRM और मौजूदा टूल्स से जुड़ सकता है। आपकी मौजूदा व्यवस्था के अनुसार टीम उपयुक्त विकल्प बता सकती है।',
+      team: 'मैं AtWassup टीम से आपसे संपर्क करने का अनुरोध भेज सकता हूँ। अपनी जानकारी और सवाल साझा करें।',
+      fallback: 'मेरे पास अभी इसका सत्यापित जवाब नहीं है। मैं आपका सवाल AtWassup टीम तक पहुँचा सकता हूँ।',
+    },
+  },
+  ar: {
+    title: 'مساعد AtWassup',
+    status: 'نحن هنا للمساعدة',
+    disclaimer: 'تعتمد الإجابات على معلومات AtWassup المؤكدة. تُحال الأسئلة الأخرى إلى الفريق.',
+    greeting: 'مرحبًا! اسألني عن الأسعار أو الميزات أو إعداد WhatsApp أو عمليات التكامل. أجيب عن الأسئلة الشائعة أو أحيل سؤالك إلى فريقنا.',
+    suggestions: ['الأسعار والخطة', 'الميزات', 'إعداد WhatsApp', 'التكاملات'],
+    input: 'اكتب سؤالك…',
+    send: 'إرسال الرسالة',
+    requestFollowup: 'تواصل مع فريق AtWassup',
+    contactIntro: 'شارك بياناتك وسؤالك، وسيتواصل معك الفريق.',
+    name: 'اسمك',
+    email: 'البريد الإلكتروني',
+    whatsapp: 'رقم WhatsApp (اختياري)',
+    consent: 'أوافق على التواصل معي بشأن هذا الطلب.',
+    contactRequired: 'أدخل بريدًا إلكترونيًا أو رقم WhatsApp ليتمكن الفريق من التواصل معك.',
+    submit: 'إرسال الطلب',
+    sending: 'جارٍ الإرسال…',
+    success: 'شكرًا لك! أُرسل طلبك إلى فريق AtWassup.',
+    error: 'تعذر إرسال طلبك الآن. حاول مرة أخرى.',
+    typing: 'المساعد يكتب ردًا',
+    close: 'إغلاق المساعد',
+    answers: {
+      pricing: 'تبلغ خطة AtWassup ‏15,000 روبية هندية سنويًا، بالإضافة إلى ضريبة السلع والخدمات إن انطبقت. تُحتسب رسوم رسائل Meta بشكل منفصل وبالتكلفة الفعلية.',
+      features: 'تجمع AtWassup إعداد WhatsApp Business API، والردود بمساعدة الذكاء الاصطناعي، وجمع العملاء المحتملين، والمتابعات، والبث، والنماذج داخل الدردشة، والكتالوجات، والمدفوعات والتحليلات.',
+      setup: 'يمكن للفريق إرشادك خلال إعداد WhatsApp Business API والتحقق من Meta. القرار النهائي للتحقق تتخذه Meta.',
+      integrations: 'يمكن لـ AtWassup الاتصال بنظام CRM والأدوات الحالية لديك. يمكن للفريق تأكيد ما يناسب إعدادك.',
+      team: 'يمكنني إرسال طلب إلى فريق AtWassup للتواصل معك. شارك بيانات الاتصال وما تحتاج إليه.',
+      fallback: 'ليس لدي إجابة مؤكدة عن ذلك حتى الآن. يمكنني إحالة سؤالك إلى فريق AtWassup.',
+    },
+  },
+  es: {
+    title: 'Asistente de AtWassup',
+    status: 'Aquí para ayudarte',
+    disclaimer: 'Las respuestas se basan en información verificada de AtWassup. Las demás consultas se envían al equipo.',
+    greeting: '¡Hola! Pregúntame sobre precios, funciones, configuración de WhatsApp o integraciones. Puedo responder preguntas frecuentes o enviar tu consulta al equipo.',
+    suggestions: ['Precios y plan', 'Funciones', 'Configurar WhatsApp', 'Integraciones'],
+    input: 'Escribe tu pregunta…',
+    send: 'Enviar mensaje',
+    requestFollowup: 'Hablar con el equipo de AtWassup',
+    contactIntro: 'Comparte tus datos y tu consulta. El equipo se pondrá en contacto contigo.',
+    name: 'Tu nombre',
+    email: 'Correo electrónico',
+    whatsapp: 'Número de WhatsApp (opcional)',
+    consent: 'Acepto que me contacten sobre esta solicitud.',
+    contactRequired: 'Añade un correo electrónico o número de WhatsApp para que el equipo pueda contactarte.',
+    submit: 'Enviar solicitud',
+    sending: 'Enviando…',
+    success: '¡Gracias! Tu solicitud se ha enviado al equipo de AtWassup.',
+    error: 'No se pudo enviar tu solicitud ahora. Inténtalo de nuevo.',
+    typing: 'El asistente está respondiendo',
+    close: 'Cerrar asistente',
+    answers: {
+      pricing: 'El plan de AtWassup cuesta ₹15.000 al año, más el GST aplicable. Los cargos de mensajería de Meta se cobran aparte, al coste.',
+      features: 'AtWassup reúne la configuración de WhatsApp Business API, respuestas con IA, captación de clientes potenciales, seguimientos, difusiones, formularios, catálogos, pagos y analíticas.',
+      setup: 'El equipo puede guiarte en la configuración de WhatsApp Business API y la verificación de Meta. Meta toma la decisión final de verificación.',
+      integrations: 'AtWassup puede conectarse con tu CRM y tus herramientas actuales. El equipo puede confirmar qué opción se adapta a tu configuración.',
+      team: 'Puedo pedir al equipo de AtWassup que se ponga en contacto contigo. Comparte tus datos y tu consulta.',
+      fallback: 'Aún no tengo una respuesta verificada para eso. Puedo enviar tu pregunta al equipo de AtWassup.',
+    },
+  },
+  fr: {
+    title: 'Assistant AtWassup',
+    status: 'À votre écoute',
+    disclaimer: 'Les réponses reposent sur des informations AtWassup vérifiées. Les autres questions sont transmises à l’équipe.',
+    greeting: 'Bonjour ! Posez vos questions sur les tarifs, les fonctionnalités, la configuration WhatsApp ou les intégrations. Je réponds aux questions fréquentes ou transmets votre demande à notre équipe.',
+    suggestions: ['Tarifs et offre', 'Fonctionnalités', 'Configuration WhatsApp', 'Intégrations'],
+    input: 'Écrivez votre question…',
+    send: 'Envoyer le message',
+    requestFollowup: 'Contacter l’équipe AtWassup',
+    contactIntro: 'Partagez vos coordonnées et votre question. L’équipe vous recontactera.',
+    name: 'Votre nom',
+    email: 'Adresse e-mail',
+    whatsapp: 'Numéro WhatsApp (facultatif)',
+    consent: 'J’accepte d’être contacté au sujet de cette demande.',
+    contactRequired: 'Indiquez une adresse e-mail ou un numéro WhatsApp pour que l’équipe puisse vous contacter.',
+    submit: 'Envoyer la demande',
+    sending: 'Envoi…',
+    success: 'Merci ! Votre demande a été envoyée à l’équipe AtWassup.',
+    error: 'Votre demande n’a pas pu être envoyée. Veuillez réessayer.',
+    typing: 'L’assistant rédige une réponse',
+    close: 'Fermer l’assistant',
+    answers: {
+      pricing: 'L’offre AtWassup coûte ₹15 000 par an, hors taxes GST applicables. Les frais de messagerie Meta sont facturés séparément, au coût réel.',
+      features: 'AtWassup réunit la configuration de WhatsApp Business API, les réponses assistées par IA, la collecte de prospects, les relances, les diffusions, les formulaires, les catalogues, les paiements et les statistiques.',
+      setup: 'L’équipe peut vous accompagner pour la configuration de WhatsApp Business API et la vérification Meta. Meta prend la décision finale.',
+      integrations: 'AtWassup peut se connecter à votre CRM et à vos outils existants. L’équipe peut confirmer la compatibilité avec votre configuration.',
+      team: 'Je peux demander à l’équipe AtWassup de vous recontacter. Partagez vos coordonnées et votre question.',
+      fallback: 'Je n’ai pas encore de réponse vérifiée à ce sujet. Je peux transmettre votre question à l’équipe AtWassup.',
+    },
+  },
+  de: {
+    title: 'AtWassup-Assistent',
+    status: 'Wir helfen gern',
+    disclaimer: 'Die Antworten basieren auf geprüften AtWassup-Informationen. Andere Fragen leiten wir an das Team weiter.',
+    greeting: 'Hallo! Fragen Sie mich zu Preisen, Funktionen, WhatsApp-Einrichtung oder Integrationen. Ich beantworte häufige Fragen oder leite Ihre Anfrage an unser Team weiter.',
+    suggestions: ['Preise und Tarif', 'Funktionen', 'WhatsApp einrichten', 'Integrationen'],
+    input: 'Frage eingeben…',
+    send: 'Nachricht senden',
+    requestFollowup: 'AtWassup-Team kontaktieren',
+    contactIntro: 'Teilen Sie Ihre Kontaktdaten und Ihre Frage. Das Team meldet sich bei Ihnen.',
+    name: 'Ihr Name',
+    email: 'E-Mail-Adresse',
+    whatsapp: 'WhatsApp-Nummer (optional)',
+    consent: 'Ich bin damit einverstanden, zu dieser Anfrage kontaktiert zu werden.',
+    contactRequired: 'Geben Sie eine E-Mail-Adresse oder WhatsApp-Nummer an, damit das Team Sie erreichen kann.',
+    submit: 'Anfrage senden',
+    sending: 'Wird gesendet…',
+    success: 'Vielen Dank! Ihre Anfrage wurde an das AtWassup-Team gesendet.',
+    error: 'Ihre Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut.',
+    typing: 'Der Assistent antwortet',
+    close: 'Assistent schließen',
+    answers: {
+      pricing: 'Der AtWassup-Tarif kostet ₹15.000 pro Jahr zuzüglich gegebenenfalls anfallender GST. Meta-Nachrichtenkosten werden separat zum Selbstkostenpreis berechnet.',
+      features: 'AtWassup vereint die Einrichtung der WhatsApp Business API, KI-gestützte Antworten, Lead-Erfassung, Follow-ups, Broadcasts, Formulare, Kataloge, Zahlungen und Analysen.',
+      setup: 'Das Team unterstützt Sie bei der Einrichtung der WhatsApp Business API und der Meta-Verifizierung. Die endgültige Entscheidung trifft Meta.',
+      integrations: 'AtWassup kann Ihr CRM und bestehende Tools anbinden. Das Team kann bestätigen, was zu Ihrer Einrichtung passt.',
+      team: 'Ich kann das AtWassup-Team um Rückmeldung bitten. Teilen Sie Ihre Kontaktdaten und Ihr Anliegen mit.',
+      fallback: 'Dazu habe ich noch keine bestätigte Antwort. Ich kann Ihre Frage an das AtWassup-Team weiterleiten.',
+    },
+  },
+  'zh-CN': {
+    title: 'AtWassup 助手',
+    status: '随时为您提供帮助',
+    disclaimer: '回答基于 AtWassup 已确认的信息。其他问题会转交给团队。',
+    greeting: '您好！您可以询问价格、功能、WhatsApp 设置或系统集成。我可以回答常见问题，也可以将您的问题转给我们的团队。',
+    suggestions: ['价格与方案', '功能', 'WhatsApp 设置', '系统集成'],
+    input: '输入您的问题…',
+    send: '发送消息',
+    requestFollowup: '联系 AtWassup 团队',
+    contactIntro: '请留下联系方式和问题，团队会与您联系。',
+    name: '您的姓名',
+    email: '电子邮箱',
+    whatsapp: 'WhatsApp 号码（选填）',
+    consent: '我同意就此请求联系我。',
+    contactRequired: '请填写电子邮箱或 WhatsApp 号码，方便团队联系您。',
+    submit: '提交请求',
+    sending: '正在发送…',
+    success: '谢谢！您的请求已发送给 AtWassup 团队。',
+    error: '暂时无法发送请求，请重试。',
+    typing: '助手正在回复',
+    close: '关闭助手',
+    answers: {
+      pricing: 'AtWassup 方案为每年 ₹15,000，另加适用的 GST。Meta 消息费用单独按实际成本收取。',
+      features: 'AtWassup 将 WhatsApp Business API 接入、AI 辅助回复、潜在客户收集、跟进、广播消息、聊天表单、商品目录、支付和数据分析整合在一起。',
+      setup: '团队可协助您接入 WhatsApp Business API 并进行 Meta 验证。最终验证由 Meta 决定。',
+      integrations: 'AtWassup 可以连接您的 CRM 和现有工具。团队可确认哪些方案适合您当前的配置。',
+      team: '我可以请 AtWassup 团队与您联系。请留下联系方式和需要协助的事项。',
+      fallback: '我暂时没有经过确认的答案，可以将您的问题转交给 AtWassup 团队。',
+    },
+  },
+  ja: {
+    title: 'AtWassup アシスタント',
+    status: 'いつでもご相談ください',
+    disclaimer: '回答は確認済みの AtWassup 情報に基づいています。その他の質問はチームに引き継ぎます。',
+    greeting: 'こんにちは。料金、機能、WhatsApp の設定、連携についてお尋ねください。よくある質問に回答するか、チームにお問い合わせを引き継ぎます。',
+    suggestions: ['料金プラン', '機能', 'WhatsApp の設定', '外部連携'],
+    input: '質問を入力…',
+    send: 'メッセージを送信',
+    requestFollowup: 'AtWassup チームに相談',
+    contactIntro: '連絡先とご質問をお知らせください。チームからご連絡します。',
+    name: 'お名前',
+    email: 'メールアドレス',
+    whatsapp: 'WhatsApp 番号（任意）',
+    consent: 'このお問い合わせについて連絡を受けることに同意します。',
+    contactRequired: 'チームから連絡できるよう、メールアドレスまたは WhatsApp 番号を入力してください。',
+    submit: 'お問い合わせを送信',
+    sending: '送信中…',
+    success: 'ありがとうございます。お問い合わせを AtWassup チームに送信しました。',
+    error: '現在送信できません。もう一度お試しください。',
+    typing: 'アシスタントが返信中',
+    close: 'アシスタントを閉じる',
+    answers: {
+      pricing: 'AtWassup のプランは年間 ₹15,000 で、適用される GST が別途かかります。Meta のメッセージ料金は別途、実費で請求されます。',
+      features: 'AtWassup は WhatsApp Business API の導入、AI を活用した返信、リード獲得、フォローアップ、一斉配信、チャットフォーム、カタログ、決済、分析をまとめて提供します。',
+      setup: 'チームが WhatsApp Business API の導入と Meta 認証をサポートします。最終的な認証判断は Meta が行います。',
+      integrations: 'AtWassup は CRM や既存ツールと連携できます。現在の環境に合う方法をチームが確認します。',
+      team: 'AtWassup チームからご連絡するよう依頼できます。連絡先とご相談内容をお知らせください。',
+      fallback: '確認済みの回答がまだありません。ご質問を AtWassup チームに引き継げます。',
+    },
+  },
+  'pt-BR': {
+    title: 'Assistente AtWassup',
+    status: 'Estamos aqui para ajudar',
+    disclaimer: 'As respostas usam informações verificadas do AtWassup. As demais perguntas são encaminhadas à equipe.',
+    greeting: 'Olá! Pergunte sobre preços, recursos, configuração do WhatsApp ou integrações. Posso responder dúvidas frequentes ou encaminhar sua pergunta para nossa equipe.',
+    suggestions: ['Preços e plano', 'Recursos', 'Configurar WhatsApp', 'Integrações'],
+    input: 'Digite sua pergunta…',
+    send: 'Enviar mensagem',
+    requestFollowup: 'Falar com a equipe AtWassup',
+    contactIntro: 'Compartilhe seus dados e sua pergunta. A equipe entrará em contato.',
+    name: 'Seu nome',
+    email: 'Endereço de e-mail',
+    whatsapp: 'Número do WhatsApp (opcional)',
+    consent: 'Concordo em ser contatado sobre esta solicitação.',
+    contactRequired: 'Informe um e-mail ou número do WhatsApp para a equipe entrar em contato.',
+    submit: 'Enviar solicitação',
+    sending: 'Enviando…',
+    success: 'Obrigado! Sua solicitação foi enviada para a equipe AtWassup.',
+    error: 'Não foi possível enviar sua solicitação agora. Tente novamente.',
+    typing: 'O assistente está respondendo',
+    close: 'Fechar assistente',
+    answers: {
+      pricing: 'O plano AtWassup custa ₹15.000 por ano, mais o GST aplicável. As tarifas de mensagens da Meta são cobradas separadamente, pelo custo real.',
+      features: 'O AtWassup reúne configuração da WhatsApp Business API, respostas com IA, captação de leads, acompanhamentos, transmissões, formulários no chat, catálogos, pagamentos e análises.',
+      setup: 'A equipe pode orientar você na configuração da WhatsApp Business API e na verificação da Meta. A decisão final de verificação é da Meta.',
+      integrations: 'O AtWassup pode se conectar ao seu CRM e às ferramentas atuais. A equipe pode confirmar o que funciona para sua configuração.',
+      team: 'Posso pedir para a equipe AtWassup entrar em contato. Compartilhe seus dados e o que precisa.',
+      fallback: 'Ainda não tenho uma resposta confirmada para isso. Posso encaminhar sua pergunta para a equipe AtWassup.',
+    },
+  },
+};
+
+const intentKeywords: Record<LanguageCode, Record<Exclude<AssistantIntent, 'fallback'>, string[]>> = {
+  en: {
+    pricing: ['price', 'pricing', 'cost', 'plan', 'fee', 'how much', '₹'],
+    features: ['feature', 'what can', 'chatbot', 'broadcast', 'catalog', 'payment', 'campaign', 'automation'],
+    setup: ['setup', 'onboard', 'verification', 'green tick', 'meta verified', 'business api'],
+    integrations: ['integrat', 'crm', 'connect', 'software', 'website'],
+    team: ['human', 'person', 'team', 'contact', 'talk to', 'call me', 'follow up'],
+  },
+  hi: {
+    pricing: ['कीमत', 'मूल्य', 'प्लान', 'शुल्क', 'खर्च', '₹'],
+    features: ['सुविधा', 'फीचर', 'चैटबॉट', 'ब्रॉडकास्ट', 'कैटलॉग', 'भुगतान', 'ऑटोमेशन'],
+    setup: ['सेटअप', 'सेट अप', 'ऑनबोर्ड', 'वेरिफिकेशन', 'ग्रीन टिक', 'मेटा'],
+    integrations: ['इंटीग्रेशन', 'सीआरएम', 'कनेक्ट', 'वेबसाइट', 'सॉफ्टवेयर'],
+    team: ['टीम', 'इंसान', 'संपर्क', 'बात करें', 'कॉल', 'फॉलो अप'],
+  },
+  ar: {
+    pricing: ['سعر', 'الأسعار', 'تكلفة', 'خطة', 'رسوم', 'روبية'],
+    features: ['ميزات', 'خصائص', 'روبوت', 'كتالوج', 'حملة', 'أتمتة', 'مدفوعات'],
+    setup: ['إعداد', 'تهيئة', 'التحقق', 'شارة', 'واتساب للأعمال'],
+    integrations: ['تكامل', 'crm', 'ربط', 'موقع', 'برنامج'],
+    team: ['فريق', 'شخص', 'تواصل', 'اتصل', 'تحدث'],
+  },
+  es: {
+    pricing: ['precio', 'precios', 'coste', 'costo', 'plan', 'tarifa', 'cuánto'],
+    features: ['función', 'funciones', 'característica', 'chatbot', 'difusión', 'catálogo', 'automatización'],
+    setup: ['configuración', 'configurar', 'incorporación', 'verificación', 'sello verde'],
+    integrations: ['integración', 'crm', 'conectar', 'software', 'sitio web'],
+    team: ['equipo', 'persona', 'contactar', 'hablar', 'llamar', 'seguimiento'],
+  },
+  fr: {
+    pricing: ['prix', 'coût', 'tarif', 'offre', 'combien'],
+    features: ['fonctionnalité', 'fonctionnalités', 'chatbot', 'diffusion', 'catalogue', 'automatisation'],
+    setup: ['configuration', 'configurer', 'intégration initiale', 'vérification', 'badge vert'],
+    integrations: ['intégration', 'crm', 'connecter', 'logiciel', 'site web'],
+    team: ['équipe', 'personne', 'contacter', 'parler', 'appeler', 'suivi'],
+  },
+  de: {
+    pricing: ['preis', 'kosten', 'tarif', 'plan', 'gebühr', 'wie viel'],
+    features: ['funktion', 'funktionen', 'chatbot', 'broadcast', 'katalog', 'automatisierung'],
+    setup: ['einrichtung', 'einrichten', 'onboarding', 'verifizierung', 'grüner haken'],
+    integrations: ['integration', 'crm', 'verbinden', 'software', 'website'],
+    team: ['team', 'person', 'kontakt', 'sprechen', 'anrufen', 'rückruf'],
+  },
+  'zh-CN': {
+    pricing: ['价格', '费用', '套餐', '多少钱'],
+    features: ['功能', '聊天机器人', '群发', '目录', '自动化', '支付'],
+    setup: ['设置', '接入', '验证', '绿勾', '商业平台'],
+    integrations: ['集成', 'crm', '连接', '软件', '网站'],
+    team: ['团队', '人工', '联系', '沟通', '回电'],
+  },
+  ja: {
+    pricing: ['料金', '価格', '費用', 'プラン', 'いくら'],
+    features: ['機能', 'チャットボット', '一斉配信', 'カタログ', '自動化', '決済'],
+    setup: ['設定', '導入', '認証', 'グリーンティック', 'ビジネス api'],
+    integrations: ['連携', 'crm', '接続', 'ソフトウェア', 'ウェブサイト'],
+    team: ['チーム', '担当者', '連絡', '相談', '電話'],
+  },
+  'pt-BR': {
+    pricing: ['preço', 'preços', 'custo', 'plano', 'tarifa', 'quanto'],
+    features: ['recurso', 'recursos', 'chatbot', 'transmissão', 'catálogo', 'automação'],
+    setup: ['configuração', 'configurar', 'integração inicial', 'verificação', 'selo verde'],
+    integrations: ['integração', 'crm', 'conectar', 'software', 'site'],
+    team: ['equipe', 'pessoa', 'contato', 'conversar', 'ligar', 'retorno'],
+  },
+};
+
+export function detectAssistantIntent(question: string, language: LanguageCode): AssistantIntent {
+  const normalized = question
+    .toLocaleLowerCase(language === 'zh-CN' ? 'zh-CN' : language)
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '');
+  const keywords = intentKeywords[language];
+  const intentOrder: Exclude<AssistantIntent, 'fallback'>[] = ['pricing', 'setup', 'integrations', 'team', 'features'];
+  for (const intent of intentOrder) {
+    if (keywords[intent].some((keyword) => normalized.includes(
+      keyword.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLocaleLowerCase(language),
+    ))) {
+      return intent;
+    }
+  }
+  return 'fallback';
+}

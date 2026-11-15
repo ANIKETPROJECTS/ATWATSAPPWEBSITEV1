@@ -1,0 +1,444 @@
+.atw-assistant {
+  position: fixed;
+  right: 18px;
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  z-index: 70;
+  font-family: 'Poppins', sans-serif;
+  color: #111;
+}
+
+.atw-assistant-trigger {
+  position: relative;
+  display: grid;
+  width: 68px;
+  height: 68px;
+  place-items: center;
+  border: 1px solid rgba(58, 205, 50, .24);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(22, 67, 18, .22), 0 2px 8px rgba(0, 0, 0, .08);
+  cursor: pointer;
+  transition: transform .25s cubic-bezier(.2, .75, .25, 1), box-shadow .25s ease;
+}
+
+.atw-assistant-trigger:hover {
+  transform: translateY(-3px) scale(1.035);
+  box-shadow: 0 15px 34px rgba(22, 67, 18, .26), 0 2px 8px rgba(0, 0, 0, .08);
+}
+
+.atw-assistant-trigger:focus-visible,
+.atw-assistant-close:focus-visible,
+.atw-assistant-composer button:focus-visible,
+.atw-assistant-suggestions button:focus-visible,
+.atw-assistant-contact-cta:focus-visible,
+.atw-assistant-contact-form button:focus-visible {
+  outline: 3px solid rgba(58, 205, 50, .65);
+  outline-offset: 3px;
+}
+
+.atw-assistant-trigger img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: scale(1.42);
+}
+
+.atw-assistant-panel {
+  position: absolute;
+  right: 0;
+  bottom: 82px;
+  display: flex;
+  width: min(390px, calc(100vw - 36px));
+  height: min(590px, calc(100dvh - 126px));
+  min-height: min(400px, calc(100dvh - 126px));
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(17, 24, 17, .08);
+  border-radius: 26px;
+  background: #fcfbf8;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, .23), 0 4px 16px rgba(0, 0, 0, .08);
+  transform-origin: bottom right;
+  animation: atw-assistant-enter .48s cubic-bezier(.18, .78, .22, 1) both;
+}
+
+.atw-assistant-header {
+  display: flex;
+  min-height: 82px;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 18px;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(58, 205, 50, .22), transparent 46%),
+    linear-gradient(130deg, #111712, #202c21);
+  color: #fff;
+}
+
+.atw-assistant-brand-icon {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, .18));
+}
+
+.atw-assistant-heading {
+  min-width: 0;
+  flex: 1;
+}
+
+.atw-assistant-heading h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.025em;
+}
+
+.atw-assistant-heading p {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 4px 0 0;
+  color: rgba(255, 255, 255, .68);
+  font-size: 11px;
+}
+
+.atw-assistant-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3acd32;
+  box-shadow: 0 0 0 4px rgba(58, 205, 50, .12);
+}
+
+.atw-assistant-close {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .08);
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.atw-assistant-close:hover {
+  transform: rotate(90deg);
+  background: rgba(255, 255, 255, .17);
+}
+
+.atw-assistant-messages {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 18px 16px 14px;
+  scrollbar-color: rgba(0, 0, 0, .18) transparent;
+  scrollbar-width: thin;
+}
+
+.atw-assistant-welcome,
+.atw-assistant-message {
+  max-width: 90%;
+  padding: 12px 14px;
+  border-radius: 17px;
+  font-size: 12px;
+  line-height: 1.65;
+  animation: atw-message-in .32s cubic-bezier(.2, .7, .2, 1) both;
+}
+
+.atw-assistant-welcome {
+  align-self: flex-start;
+  border: 1px solid rgba(0, 0, 0, .045);
+  border-bottom-left-radius: 5px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .035);
+}
+
+.atw-assistant-welcome p { margin: 6px 0 0; }
+
+.atw-assistant-welcome-icon {
+  display: inline-grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(58, 205, 50, .13);
+  color: #269a20;
+}
+
+.atw-assistant-message.from-visitor {
+  align-self: flex-end;
+  border-bottom-right-radius: 5px;
+  background: #daf8d6;
+  color: #142313;
+}
+
+.atw-assistant-message.from-assistant {
+  align-self: flex-start;
+  border-bottom-left-radius: 5px;
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .04);
+}
+
+.atw-assistant-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-self: flex-start;
+  animation: atw-message-in .42s .08s both;
+}
+
+.atw-assistant-suggestions button,
+.atw-assistant-contact-cta {
+  border: 1px solid rgba(35, 151, 29, .24);
+  border-radius: 999px;
+  background: #fff;
+  color: #22791d;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.atw-assistant-suggestions button {
+  padding: 8px 11px;
+}
+
+.atw-assistant-suggestions button:hover,
+.atw-assistant-contact-cta:hover {
+  transform: translateY(-1px);
+  border-color: #3acd32;
+  background: #f3fff1;
+}
+
+.atw-assistant-typing {
+  display: flex;
+  width: 58px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border-radius: 14px;
+  border-bottom-left-radius: 5px;
+  background: #fff;
+}
+
+.atw-assistant-typing span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #3acd32;
+  animation: atw-typing-bounce .9s ease-in-out infinite;
+}
+
+.atw-assistant-typing span:nth-child(2) { animation-delay: .14s; }
+.atw-assistant-typing span:nth-child(3) { animation-delay: .28s; }
+
+.atw-assistant-contact-cta {
+  align-self: flex-start;
+  padding: 9px 13px;
+}
+
+.atw-assistant-contact-form {
+  display: grid;
+  gap: 9px;
+  align-self: stretch;
+  padding: 14px;
+  border: 1px solid rgba(0, 0, 0, .07);
+  border-radius: 18px;
+  background: #fff;
+  animation: atw-message-in .3s ease both;
+}
+
+.atw-assistant-contact-form > p:first-child {
+  margin: 0 0 2px;
+  color: rgba(0, 0, 0, .66);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.atw-assistant-contact-form > input {
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid rgba(0, 0, 0, .11);
+  border-radius: 11px;
+  background: #fcfbf8;
+  padding: 0 11px;
+  color: #111;
+  font: inherit;
+  font-size: 11px;
+  outline: none;
+}
+
+.atw-assistant-contact-form > input:focus {
+  border-color: #3acd32;
+  box-shadow: 0 0 0 3px rgba(58, 205, 50, .13);
+}
+
+.atw-assistant-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: rgba(0, 0, 0, .66);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.atw-assistant-consent input {
+  margin: 2px 0 0;
+  accent-color: #3acd32;
+}
+
+.atw-assistant-contact-form .atw-assistant-form-error {
+  margin: 0;
+  color: #b42318;
+  font-size: 10px;
+}
+
+.atw-assistant-contact-form > button {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 12px;
+  background: #161b16;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  transition: background .2s ease, color .2s ease;
+}
+
+.atw-assistant-contact-form > button:hover:not(:disabled) {
+  background: #3acd32;
+  color: #101510;
+}
+
+.atw-assistant-contact-form > button:disabled { cursor: wait; opacity: .65; }
+
+.atw-assistant-success {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  border: 1px solid rgba(35, 151, 29, .18);
+  border-radius: 14px;
+  background: #efffed;
+  padding: 12px;
+  color: #226d1e;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.atw-assistant-success svg { flex: 0 0 auto; margin-top: 1px; }
+
+.atw-assistant-composer {
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  gap: 9px;
+  margin: 0 14px;
+  border: 1px solid rgba(0, 0, 0, .09);
+  border-radius: 999px;
+  background: #fff;
+  padding: 5px 6px 5px 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .04);
+}
+
+.atw-assistant-composer:focus-within {
+  border-color: rgba(58, 205, 50, .65);
+  box-shadow: 0 0 0 3px rgba(58, 205, 50, .12);
+}
+
+.atw-assistant-composer input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  background: transparent;
+  color: #111;
+  font: inherit;
+  font-size: 12px;
+  outline: none;
+}
+
+.atw-assistant-composer input::placeholder { color: rgba(0, 0, 0, .38); }
+
+.atw-assistant-composer button {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #3acd32;
+  color: #101510;
+  cursor: pointer;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+.atw-assistant-composer button:hover:not(:disabled) { transform: scale(1.05); }
+.atw-assistant-composer button:disabled { cursor: not-allowed; opacity: .42; }
+
+.atw-assistant-disclaimer {
+  margin: 9px 18px 12px;
+  color: rgba(0, 0, 0, .38);
+  font-size: 9px;
+  text-align: center;
+}
+
+@keyframes atw-assistant-enter {
+  from { opacity: 0; transform: translateY(18px) scale(.94); filter: blur(7px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+@keyframes atw-message-in {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes atw-typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: .55; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+@media (max-width: 480px) {
+  .atw-assistant {
+    right: 12px;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+  }
+
+  .atw-assistant-trigger { width: 62px; height: 62px; }
+
+  .atw-assistant-panel {
+    right: -4px;
+    bottom: 76px;
+    width: min(390px, calc(100vw - 24px));
+    height: min(590px, calc(100dvh - 108px));
+    min-height: min(390px, calc(100dvh - 108px));
+    border-radius: 22px;
+  }
+
+  .atw-assistant-messages { padding: 15px 13px 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atw-assistant *,
+  .atw-assistant *::before,
+  .atw-assistant *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
