@@ -22,6 +22,8 @@ import {
   Megaphone,
   Menu,
   Phone,
+  Pause,
+  Play,
   Send,
   ShoppingBag,
   Sparkles,
@@ -58,6 +60,10 @@ import socialInstagramPath from './assets/social-instagram.png';
 import socialLinkedinPath from './assets/social-linkedin.png';
 import socialYoutubePath from './assets/social-youtube.png';
 import processDashboardPreview from '@assets/Screenshot_2026-11-16_at_1.43.32_AM_1794773615246.png';
+import flowBuilderSoftwarePreview from '@assets/Screenshot_2026-11-16_at_1.51.03_AM_1794774066049.png';
+import chatbotSoftwarePreview from '@assets/Screenshot_2026-11-16_at_1.51.14_AM_1794774077005.png';
+import campaignReportSoftwarePreview from '@assets/Screenshot_2026-11-16_at_1.51.32_AM_1794774094999.png';
+import workspaceDashboardSoftwarePreview from '@assets/Screenshot_2026-11-16_at_1.51.42_AM_1794774105193.png';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
 const queryClient = new QueryClient();
@@ -84,6 +90,14 @@ const capabilityGroups = [
   { id: 'connect', label: '01 · CONNECT', title: 'Get everything connected', description: 'Start with the right setup, then bring your existing tools into the conversation.' },
   { id: 'automate', label: '02 · AUTOMATE', title: 'Make every message work harder', description: 'Turn common questions and customer journeys into repeatable experiences.' },
   { id: 'grow', label: '03 · SUPPORT & GROW', title: 'Keep improving the experience', description: 'Support people when they need you and learn from every interaction.' },
+];
+
+const softwarePreviewSlides = [
+  { src: processDashboardPreview, alt: 'AtWassup add-template dashboard with a WhatsApp phone preview' },
+  { src: flowBuilderSoftwarePreview, alt: 'AtWassup WhatsApp Flows booking form builder and mobile preview' },
+  { src: chatbotSoftwarePreview, alt: 'AtWassup chatbot builder with connected WhatsApp conversation nodes' },
+  { src: campaignReportSoftwarePreview, alt: 'AtWassup campaign report with WhatsApp delivery and read metrics' },
+  { src: workspaceDashboardSoftwarePreview, alt: 'AtWassup workspace dashboard with messaging and customer activity metrics' },
 ];
 
 const processSteps = [
@@ -192,11 +206,11 @@ function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capability
     <div className="feature-group" data-group-index={groupIndex} data-testid={`capability-group-${group.id}`}>
       <div className="feature-group-intro">
         <div className="feature-group-label-wrap" style={{ '--feature-label-delay': `${labelDelay}ms` } as CSSProperties}>
-          <p className="feature-group-label font-mono text-[10px] font-bold uppercase tracking-[.18em] text-[#3acd32]">{t(group.label)}</p>
+          <p className="feature-group-label">{t(group.label)}</p>
           <span className="feature-group-label-flash" aria-hidden="true" />
         </div>
-        <h3 className="mt-2 font-display text-xl font-bold leading-tight tracking-[-.04em]">{t(group.title)}</h3>
-        <p className="mt-1.5 text-xs leading-relaxed text-white/45">{t(group.description)}</p>
+        <h3 className="feature-group-title font-display font-bold">{t(group.title)}</h3>
+        <p className="feature-group-description">{t(group.description)}</p>
       </div>
       <div className="feature-list">
         {capabilities.filter((capability) => capability.group === group.id).map(({ icon: Icon, motion, title, text }, rowIndex) => {
@@ -212,11 +226,11 @@ function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capability
             >
               <div className="feature-row-title-line">
                 <span className="feature-row-icon" aria-hidden="true">
-                  <Icon size={14} className="feature-icon-underlay text-[#3acd32]" />
-                  <Icon size={14} className="feature-icon-draw text-[#3acd32]" />
+                  <Icon size={17} className="feature-icon-underlay text-[#3acd32]" />
+                  <Icon size={17} className="feature-icon-draw text-[#3acd32]" />
                 </span>
                 <span className="feature-row-title-wrap">
-                  <h4 className="feature-row-title text-xs font-bold leading-snug text-white/90">{t(title)}</h4>
+                  <h4 className="feature-row-title font-bold text-white/95">{t(title)}</h4>
                   <span className="feature-row-title-underline" aria-hidden="true" />
                 </span>
               </div>
@@ -224,6 +238,85 @@ function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capability
             </article>
           );
         })}
+      </div>
+    </div>
+  );
+}
+
+function SoftwarePreviewCarousel() {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isInView, setIsInView] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    const node = carouselRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(([entry]) => setIsInView(entry.isIntersecting), { threshold: 0.1 });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isInView || isPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const interval = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % softwarePreviewSlides.length);
+    }, 4800);
+    return () => window.clearInterval(interval);
+  }, [isInView, isPaused]);
+
+  const showPrevious = () => setActiveSlide((current) => (current - 1 + softwarePreviewSlides.length) % softwarePreviewSlides.length);
+  const showNext = () => setActiveSlide((current) => (current + 1) % softwarePreviewSlides.length);
+
+  return (
+    <div
+      ref={carouselRef}
+      className="feature-software-carousel"
+      role="group"
+      aria-roledescription="carousel"
+      aria-label="AtWassup software screenshots"
+    >
+      <figure className="feature-software-preview">
+        {softwarePreviewSlides.map((slide, index) => (
+          <img
+            key={slide.src}
+            src={slide.src}
+            alt={index === activeSlide ? slide.alt : ''}
+            aria-hidden={index !== activeSlide}
+            className={`feature-software-slide${index === activeSlide ? ' is-active' : ''}`}
+            loading="lazy"
+            decoding="async"
+          />
+        ))}
+      </figure>
+      <div className="feature-preview-controls">
+        <button type="button" className="feature-preview-control" onClick={showPrevious} aria-label="Previous screenshot">
+          <ChevronLeft size={18} />
+        </button>
+        <div className="feature-preview-indicators" role="group" aria-label="Choose a screenshot">
+          {softwarePreviewSlides.map((slide, index) => (
+            <button
+              key={slide.src}
+              type="button"
+              className={`feature-preview-indicator${index === activeSlide ? ' is-active' : ''}`}
+              onClick={() => setActiveSlide(index)}
+              aria-label={`Show screenshot ${index + 1}`}
+              aria-pressed={index === activeSlide}
+            />
+          ))}
+        </div>
+        <button
+          type="button"
+          className="feature-preview-control"
+          onClick={() => setIsPaused((paused) => !paused)}
+          aria-label={isPaused ? 'Resume automatic screenshots' : 'Pause automatic screenshots'}
+          aria-pressed={isPaused}
+        >
+          {isPaused ? <Play size={16} /> : <Pause size={16} />}
+        </button>
+        <button type="button" className="feature-preview-control" onClick={showNext} aria-label="Next screenshot">
+          <ChevronRight size={18} />
+        </button>
       </div>
     </div>
   );
@@ -483,8 +576,6 @@ function Nav({ onLead }: { onLead: () => void }) {
 
 function Home() {
   const { t, i18n } = useTranslation();
-  const localeBase = i18n.resolvedLanguage?.split('-')[0] ?? 'en';
-  const keepConnectedScriptTogether = localeBase === 'ar' || localeBase === 'hi';
   const [leadOpen, setLeadOpen] = useState(false);
   const [demoOpen, setDemoOpen] = useState(false);
   const [heroFeatureStage, setHeroFeatureStage] = useState<HeroFeatureStage>('broadcast');
@@ -633,40 +724,20 @@ function Home() {
       >
         <div ref={capabilitiesReveal} className="section-shell reveal relative">
           <div className="feature-heading-row">
-            <div className="max-w-[720px]">
-              <h2 className="font-display text-6xl font-bold leading-[.94] tracking-[-.06em] sm:text-7xl">
+            <div className="w-full">
+              <h2 className="feature-capabilities-heading font-display font-bold leading-[1.05] tracking-[-.05em]">
                 <span className="sr-only">{t('site.capabilitiesHeading')}</span>
                 <span className="feature-heading-visual" aria-hidden="true">
                   <span className="feature-heading-line">
-                    {keepConnectedScriptTogether
-                      ? t('site.capabilitiesHeadingFirst')
-                      : t('site.capabilitiesHeadingFirst').split('').map((character, index) => (
-                        <span key={`first-${index}`} className="feature-heading-character" style={{ animationDelay: `${index * 18}ms` }}>{character === ' ' ? '\u00a0' : character}</span>
-                      ))}
+                    <span>{t('site.capabilitiesHeadingFirst')}</span>{' '}
+                    <span className="text-[#3acd32]">{t('site.capabilitiesHeadingSecond')}</span>
                     <span className="feature-heading-cursor feature-heading-cursor-first" />
-                  </span>
-                  <br />
-                  <span className="feature-heading-line text-[#3acd32]">
-                    {keepConnectedScriptTogether
-                      ? t('site.capabilitiesHeadingSecond')
-                      : t('site.capabilitiesHeadingSecond').split('').map((character, index) => (
-                        <span key={`second-${index}`} className="feature-heading-character" style={{ animationDelay: `${340 + index * 18}ms` }}>{character === ' ' ? '\u00a0' : character}</span>
-                      ))}
-                    <span className="feature-heading-cursor feature-heading-cursor-second" />
                   </span>
                 </span>
               </h2>
-              <p className="mt-4 max-w-[720px] text-sm leading-relaxed text-white/55">{t('site.capabilitiesDescription')}</p>
             </div>
           </div>
-          <figure className="feature-software-preview">
-            <img
-              src={processDashboardPreview}
-              alt="AtWassup software dashboard showing WhatsApp template setup and phone preview"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
+          <SoftwarePreviewCarousel />
           <div className="feature-groups" aria-label="AtWassup capabilities">
             <svg className="feature-connector feature-connector-desktop" viewBox="0 0 1000 20" preserveAspectRatio="none" aria-hidden="true">
               <path className="feature-connector-main" d="M860 0H0" />
