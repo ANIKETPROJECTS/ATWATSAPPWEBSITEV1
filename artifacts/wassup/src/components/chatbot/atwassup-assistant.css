@@ -220,6 +220,13 @@
 }
 
 .atw-assistant-suggestions button:hover,
+.atw-assistant-suggestions button:focus-visible {
+  transform: translateY(-1px);
+  border-color: #3acd32;
+  background: #3acd32;
+  color: #fff;
+}
+
 .atw-assistant-contact-cta:hover {
   transform: translateY(-1px);
   border-color: #3acd32;
@@ -322,20 +329,15 @@
 .atw-assistant-contact-form > button:disabled { cursor: wait; opacity: .65; }
 
 .atw-assistant-success {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
   align-self: stretch;
-  border: 1px solid rgba(35, 151, 29, .18);
-  border-radius: 14px;
-  background: #efffed;
-  padding: 12px;
-  color: #226d1e;
-  font-size: 13px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  color: #171717;
+  font-size: 14px;
   line-height: 1.55;
 }
-
-.atw-assistant-success svg { flex: 0 0 auto; margin-top: 1px; }
 
 .atw-assistant-composer {
   display: flex;

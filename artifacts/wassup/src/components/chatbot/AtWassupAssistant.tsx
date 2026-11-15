@@ -1,7 +1,7 @@
 import { type FormEvent, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSubmitDemoRequest } from '@workspace/api-client-react';
-import { Check, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import assistantIcon from '@assets/AIRAVATA_TECHNOLOGIES_LOGO_(5)_1794762850056.svg';
 import whatsappIcon from '@assets/2111774_1794764261230.svg';
 import phoneIcon from '@assets/597177_(1)_1794766988189.svg';
@@ -17,30 +17,13 @@ type ChatMessage = {
   text: string;
 };
 
-const AUTO_OPEN_DELAY = 8_000;
-const AUTO_OPEN_KEY = 'atwassup-assistant-auto-opened';
+const AUTO_OPEN_DELAY = 5_000;
 
 function getActiveLanguage(resolved: string | undefined): LanguageCode {
   resolved = resolved ?? i18n.language ?? 'en';
   const exactMatch = languageOptions.find(({ code }) => code === resolved);
   if (exactMatch) return exactMatch.code;
   return languageOptions.find(({ code }) => code === resolved.split('-')[0])?.code ?? 'en';
-}
-
-function isAutoOpenHandled() {
-  try {
-    return window.sessionStorage.getItem(AUTO_OPEN_KEY) === 'true';
-  } catch {
-    return false;
-  }
-}
-
-function markAutoOpenHandled() {
-  try {
-    window.sessionStorage.setItem(AUTO_OPEN_KEY, 'true');
-  } catch {
-    // Session storage can be unavailable in private browsing; keep the widget usable.
-  }
 }
 
 export default function AtWassupAssistant() {
@@ -64,10 +47,8 @@ export default function AtWassupAssistant() {
   const lastQuestionRef = useRef('');
 
   useEffect(() => {
-    if (isAutoOpenHandled()) return;
     const timer = window.setTimeout(() => {
       if (interactionRef.current) return;
-      markAutoOpenHandled();
       setIsOpen(true);
     }, AUTO_OPEN_DELAY);
     return () => window.clearTimeout(timer);
@@ -122,13 +103,11 @@ export default function AtWassupAssistant() {
 
   const openAssistant = () => {
     interactionRef.current = true;
-    markAutoOpenHandled();
     setIsOpen(true);
   };
 
   const closeAssistant = () => {
     interactionRef.current = true;
-    markAutoOpenHandled();
     setIsOpen(false);
   };
 
@@ -200,7 +179,7 @@ export default function AtWassupAssistant() {
             <div className="atw-assistant-brand">
               <h2 id="atw-assistant-title" className="sr-only">{copy.title}</h2>
               <svg
-                aria-label="AtWassup"
+                aria-label="atWassup"
                 className="atw-assistant-header-logo"
                 role="img"
                 viewBox="0 155 375 80"
@@ -318,7 +297,6 @@ export default function AtWassupAssistant() {
             )}
             {requestSent && (
               <div className="atw-assistant-success" role="status" data-testid="assistant-contact-success">
-                <Check size={17} aria-hidden="true" />
                 <span>{copy.success}</span>
               </div>
             )}
