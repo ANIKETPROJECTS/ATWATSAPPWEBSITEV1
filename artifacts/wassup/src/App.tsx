@@ -22,8 +22,6 @@ import {
   Megaphone,
   Menu,
   Phone,
-  Pause,
-  Play,
   Send,
   ShoppingBag,
   Sparkles,
@@ -99,6 +97,7 @@ const softwarePreviewSlides = [
   { src: campaignReportSoftwarePreview, alt: 'AtWassup campaign report with WhatsApp delivery and read metrics' },
   { src: workspaceDashboardSoftwarePreview, alt: 'AtWassup workspace dashboard with messaging and customer activity metrics' },
 ];
+const softwarePreviewLoopSlides = [...softwarePreviewSlides, softwarePreviewSlides[0]];
 
 const processSteps = [
   { title: 'Onboard', text: 'Get help setting up your WhatsApp Business API and verification.' },
@@ -247,7 +246,7 @@ function SoftwarePreviewCarousel() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const [isInView, setIsInView] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+  const [isLoopResetting, setIsLoopResetting] = useState(false);
 
   useEffect(() => {
     const node = carouselRef.current;
@@ -258,15 +257,28 @@ function SoftwarePreviewCarousel() {
   }, []);
 
   useEffect(() => {
-    if (!isInView || isPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!isInView) return;
+    softwarePreviewSlides.forEach(({ src }) => {
+      const preload = new Image();
+      preload.decoding = 'async';
+      preload.src = src;
+    });
+  }, [isInView]);
+
+  useEffect(() => {
+    if (!isInView || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const interval = window.setInterval(() => {
-      setActiveSlide((current) => (current + 1) % softwarePreviewSlides.length);
+      setActiveSlide((current) => Math.min(current + 1, softwarePreviewSlides.length));
     }, 4800);
     return () => window.clearInterval(interval);
-  }, [isInView, isPaused]);
+  }, [isInView]);
 
-  const showPrevious = () => setActiveSlide((current) => (current - 1 + softwarePreviewSlides.length) % softwarePreviewSlides.length);
-  const showNext = () => setActiveSlide((current) => (current + 1) % softwarePreviewSlides.length);
+  const resetLoopToStart = () => {
+    if (activeSlide !== softwarePreviewSlides.length) return;
+    setIsLoopResetting(true);
+    setActiveSlide(0);
+    window.requestAnimationFrame(() => window.requestAnimationFrame(() => setIsLoopResetting(false)));
+  };
 
   return (
     <div
@@ -277,47 +289,24 @@ function SoftwarePreviewCarousel() {
       aria-label="AtWassup software screenshots"
     >
       <figure className="feature-software-preview">
-        {softwarePreviewSlides.map((slide, index) => (
-          <img
-            key={slide.src}
-            src={slide.src}
-            alt={index === activeSlide ? slide.alt : ''}
-            aria-hidden={index !== activeSlide}
-            className={`feature-software-slide${index === activeSlide ? ' is-active' : ''}`}
-            loading="lazy"
-            decoding="async"
-          />
-        ))}
-      </figure>
-      <div className="feature-preview-controls">
-        <button type="button" className="feature-preview-control" onClick={showPrevious} aria-label="Previous screenshot">
-          <ChevronLeft size={18} />
-        </button>
-        <div className="feature-preview-indicators" role="group" aria-label="Choose a screenshot">
-          {softwarePreviewSlides.map((slide, index) => (
-            <button
-              key={slide.src}
-              type="button"
-              className={`feature-preview-indicator${index === activeSlide ? ' is-active' : ''}`}
-              onClick={() => setActiveSlide(index)}
-              aria-label={`Show screenshot ${index + 1}`}
-              aria-pressed={index === activeSlide}
+        <div
+          className={`feature-software-track${isLoopResetting ? ' is-resetting' : ''}`}
+          style={{ transform: `translateX(-${activeSlide * 100}%)` }}
+          onTransitionEnd={resetLoopToStart}
+        >
+          {softwarePreviewLoopSlides.map((slide, index) => (
+            <img
+              key={`${slide.src}-${index}`}
+              src={slide.src}
+              alt={index === activeSlide ? slide.alt : ''}
+              aria-hidden={index !== activeSlide}
+              className="feature-software-slide"
+              loading="lazy"
+              decoding="async"
             />
           ))}
         </div>
-        <button
-          type="button"
-          className="feature-preview-control"
-          onClick={() => setIsPaused((paused) => !paused)}
-          aria-label={isPaused ? 'Resume automatic screenshots' : 'Pause automatic screenshots'}
-          aria-pressed={isPaused}
-        >
-          {isPaused ? <Play size={16} /> : <Pause size={16} />}
-        </button>
-        <button type="button" className="feature-preview-control" onClick={showNext} aria-label="Next screenshot">
-          <ChevronRight size={18} />
-        </button>
-      </div>
+      </figure>
     </div>
   );
 }
