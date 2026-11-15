@@ -26,7 +26,7 @@ export default function LanguageSelector({ mobile = false }: LanguageSelectorPro
         'language-selector relative inline-flex shrink-0 cursor-pointer items-center transition-colors focus-within:outline-none focus-within:ring-2 focus-within:ring-[#3acd32]/70',
         mobile
           ? 'h-11 w-full justify-start gap-3 rounded-xl border border-black/10 bg-white px-3 text-sm font-semibold text-black'
-          : 'h-10 min-w-[58px] justify-center gap-1.5 rounded-full border border-black/10 bg-white px-2 text-xs font-bold text-black hover:border-[#3acd32]',
+          : 'h-10 min-w-[44px] justify-center gap-1.5 border-0 bg-transparent px-1 text-xs font-bold text-black hover:text-[#3acd32]',
       ].join(' ')}
       data-testid={mobile ? 'mobile-language-selector' : 'language-selector'}
     >

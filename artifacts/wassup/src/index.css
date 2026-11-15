@@ -126,6 +126,13 @@
 }
 
 @layer components {
+  .site-header-shell {
+    width: min(1180px, calc(100% - 40px));
+    margin-inline: auto;
+  }
+  @media (min-width: 1024px) {
+    .site-header-shell { width: min(1600px, calc(100% - 48px)); }
+  }
   .site-nav-link {
     position: relative;
     display: inline-flex;
