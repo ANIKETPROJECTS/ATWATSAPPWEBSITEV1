@@ -85,20 +85,30 @@
 .atw-assistant-brand-row {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
 }
 
 .atw-assistant-brand-mark {
   display: block;
-  width: 34px;
-  height: 34px;
+  width: 50px;
+  height: 50px;
   flex: 0 0 auto;
   object-fit: contain;
 }
 
+.atw-assistant-brand-copy {
+  min-width: 0;
+}
+
+.atw-assistant-wordmark-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .atw-assistant-wordmark {
   display: block;
-  width: 120px;
+  width: 132px;
   height: 34px;
   flex: 0 1 auto;
   overflow: visible;
@@ -108,11 +118,13 @@
   width: 18px;
   height: 18px;
   flex: 0 0 auto;
+  align-self: center;
   object-fit: contain;
+  transform: translateY(2px);
 }
 
 .atw-assistant-subtitle {
-  margin: 0 0 0 2px;
+  margin: 2px 0 0 1px;
   color: rgba(0, 0, 0, .62);
   font-size: 12px;
   font-weight: 600;
@@ -153,17 +165,17 @@
   height: 36px;
   flex: 0 0 auto;
   place-items: center;
-  border: 1px solid rgba(0, 0, 0, .12);
+  border: 1px solid #3acd32;
   border-radius: 50%;
-  background: #fff;
-  color: #111;
+  background: #3acd32;
+  color: #fff;
   cursor: pointer;
   transition: background .2s ease, transform .2s ease;
 }
 
 .atw-assistant-close:hover {
   transform: rotate(90deg);
-  background: rgba(0, 0, 0, .06);
+  background: #2fb728;
 }
 
 .atw-assistant-messages {
@@ -408,19 +420,26 @@
   min-width: 0;
   flex: 1;
   border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .22);
   background: transparent;
   color: #111;
   font: inherit;
   font-size: 14px;
   outline: none;
+  padding: 0 2px 7px;
+  transition: border-color .2s ease;
+}
+
+.atw-assistant-composer input:focus {
+  border-bottom-color: #3acd32;
 }
 
 .atw-assistant-composer input::placeholder { color: rgba(0, 0, 0, .38); }
 
 .atw-assistant-composer button {
   display: grid;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   flex: 0 0 auto;
   place-items: center;
   border: 0;
@@ -432,13 +451,13 @@
 }
 
 .atw-assistant-composer button img {
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
   filter: brightness(0) invert(1);
 }
 
 .atw-assistant-composer button:hover:not(:disabled) { transform: scale(1.05); }
-.atw-assistant-composer button:disabled { cursor: not-allowed; opacity: .42; }
+.atw-assistant-composer button:disabled { cursor: not-allowed; opacity: .82; }
 
 @keyframes atw-assistant-enter {
   from { opacity: 0; transform: translateY(18px) scale(.94); filter: blur(7px); }
@@ -477,9 +496,10 @@
 
 @media (max-width: 360px) {
   .atw-assistant-header { gap: 8px; padding-inline: 10px; }
-  .atw-assistant-brand-mark { width: 26px; height: 26px; }
-  .atw-assistant-wordmark { width: 92px; height: 30px; }
-  .atw-assistant-verified { width: 15px; height: 15px; }
+  .atw-assistant-brand-row { gap: 6px; }
+  .atw-assistant-brand-mark { width: 38px; height: 38px; }
+  .atw-assistant-wordmark { width: 94px; height: 30px; }
+  .atw-assistant-verified { width: 14px; height: 14px; }
   .atw-assistant-header-actions { gap: 3px; }
   .atw-assistant-header-contact { width: 28px; height: 30px; }
   .atw-assistant-header-contact img { width: 18px; height: 18px; }

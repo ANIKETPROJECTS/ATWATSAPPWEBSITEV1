@@ -4,7 +4,7 @@ import { useSubmitDemoRequest } from '@workspace/api-client-react';
 import { Check, MessageCircle, X } from 'lucide-react';
 import assistantIcon from '@assets/AIRAVATA_TECHNOLOGIES_LOGO_(5)_1794762850056.svg';
 import whatsappIcon from '@assets/2111774_1794764261230.svg';
-import phoneIcon from '@assets/159832_(1)_1794765086474.svg';
+import phoneIcon from '@assets/icon.svg_(15)_1794765459652.svg';
 import sendIcon from '@assets/10322482_1794765030209.svg';
 import brandLogoPath from '../../assets/airavata-technologies-logo.svg';
 import verifiedBusinessBadge from '../../assets/verified-business.svg';
@@ -165,30 +165,34 @@ export default function AtWassupAssistant() {
               <h2 id="atw-assistant-title" className="sr-only">{copy.title}</h2>
               <div className="atw-assistant-brand-row">
                 <img src={assistantIcon} alt="" aria-hidden="true" className="atw-assistant-brand-mark" />
-                <svg
-                  aria-label="AtWassup"
-                  className="atw-assistant-wordmark"
-                  role="img"
-                  viewBox="98 160 268 64"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <defs>
-                    <clipPath id="atw-assistant-wordmark-clip" clipPathUnits="userSpaceOnUse">
-                      <path d="M98 160H323V205H98Z M323 160H366V224H323Z" />
-                    </clipPath>
-                  </defs>
-                  <image
-                    clipPath="url(#atw-assistant-wordmark-clip)"
-                    height="375"
-                    href={brandLogoPath}
-                    width="375"
-                    x="0"
-                    y="0"
-                  />
-                </svg>
-                <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="atw-assistant-verified" />
+                <div className="atw-assistant-brand-copy">
+                  <div className="atw-assistant-wordmark-row">
+                    <svg
+                      aria-label="AtWassup"
+                      className="atw-assistant-wordmark"
+                      role="img"
+                      viewBox="98 160 268 64"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <defs>
+                        <clipPath id="atw-assistant-wordmark-clip" clipPathUnits="userSpaceOnUse">
+                          <path d="M98 160H323V205H98Z M323 160H366V224H323Z" />
+                        </clipPath>
+                      </defs>
+                      <image
+                        clipPath="url(#atw-assistant-wordmark-clip)"
+                        height="375"
+                        href={brandLogoPath}
+                        width="375"
+                        x="0"
+                        y="0"
+                      />
+                    </svg>
+                    <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="atw-assistant-verified" />
+                  </div>
+                  <p className="atw-assistant-subtitle">{copy.subtitle}</p>
+                </div>
               </div>
-              <p className="atw-assistant-subtitle">{copy.subtitle}</p>
             </div>
             <div className="atw-assistant-header-actions">
               <a
