@@ -254,7 +254,7 @@ export default function AtWassupAssistant() {
                       key={action}
                       onClick={() => {
                         if (action === 'contact') {
-                          lastQuestionRef.current = suggestion;
+                          lastQuestionRef.current = copy.requestFollowup;
                           setShowContactForm(true);
                           setFormError('');
                         } else {

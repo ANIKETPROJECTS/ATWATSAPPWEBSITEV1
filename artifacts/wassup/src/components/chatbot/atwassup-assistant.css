@@ -86,10 +86,11 @@
 
 .atw-assistant-header-logo {
   display: block;
-  width: clamp(144px, 45vw, 190px);
+  width: clamp(150px, 49vw, 216px);
   max-width: 100%;
   height: auto;
   flex: 0 1 auto;
+  transform: translateY(2px);
 }
 
 .atw-assistant-header-actions {
@@ -101,8 +102,8 @@
 
 .atw-assistant-header-contact {
   display: grid;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   place-items: center;
   border-radius: 50%;
   transition: background .2s ease, transform .2s ease;
@@ -114,8 +115,8 @@
 }
 
 .atw-assistant-header-contact img {
-  width: 21px;
-  height: 21px;
+  width: 26px;
+  height: 26px;
   object-fit: contain;
 }
 
@@ -161,9 +162,9 @@
   max-width: 90%;
   padding: 13px 15px;
   border-radius: 17px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
-  line-height: 1.6;
+  line-height: 1.55;
   animation: atw-message-in .32s cubic-bezier(.2, .7, .2, 1) both;
 }
 
@@ -174,8 +175,8 @@
   border-bottom-left-radius: 5px;
   background: rgba(255, 255, 255, .92);
   box-shadow: 0 4px 12px rgba(0, 0, 0, .045);
-  padding: 9px 12px;
-  font-size: 13px;
+  padding: 10px 13px;
+  font-size: 15px;
 }
 
 .atw-assistant-welcome p { margin: 0; }
@@ -210,13 +211,14 @@
   color: #22791d;
   cursor: pointer;
   font: inherit;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
+  line-height: 1.35;
   transition: background .2s ease, border-color .2s ease, transform .2s ease;
 }
 
 .atw-assistant-suggestions button {
-  padding: 8px 11px;
+  padding: 9px 13px;
 }
 
 .atw-assistant-suggestions button:hover,
@@ -258,7 +260,7 @@
 
 .atw-assistant-contact-cta {
   align-self: flex-start;
-  padding: 9px 13px;
+  padding: 10px 14px;
 }
 
 .atw-assistant-contact-form {
@@ -275,7 +277,7 @@
 .atw-assistant-contact-form > p:first-child {
   margin: 0 0 2px;
   color: rgba(0, 0, 0, .66);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   line-height: 1.55;
 }
@@ -290,7 +292,7 @@
   padding: 7px 2px;
   color: #111;
   font: inherit;
-  font-size: 14px;
+  font-size: 15px;
   outline: none;
 }
 
@@ -301,7 +303,7 @@
 .atw-assistant-contact-form .atw-assistant-form-error {
   margin: 0;
   color: #b42318;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .atw-assistant-contact-form > button {
@@ -316,7 +318,7 @@
   color: #fff;
   cursor: pointer;
   font: inherit;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   transition: background .2s ease, color .2s ease;
 }
@@ -335,7 +337,7 @@
   background: transparent;
   padding: 0;
   color: #171717;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.55;
 }
 
@@ -365,7 +367,7 @@
   background: transparent;
   color: #111;
   font: inherit;
-  font-size: 14px;
+  font-size: 16px;
   outline: none;
   padding: 0 2px 7px;
   transition: border-color .2s ease;
@@ -437,10 +439,10 @@
 
 @media (max-width: 360px) {
   .atw-assistant-header { gap: 8px; padding-inline: 10px; }
-  .atw-assistant-header-logo { width: clamp(140px, 45vw, 160px); }
+  .atw-assistant-header-logo { width: clamp(154px, 52vw, 172px); }
   .atw-assistant-header-actions { gap: 3px; }
-  .atw-assistant-header-contact { width: 28px; height: 30px; }
-  .atw-assistant-header-contact img { width: 18px; height: 18px; }
+  .atw-assistant-header-contact { width: 30px; height: 32px; }
+  .atw-assistant-header-contact img { width: 22px; height: 22px; }
   .atw-assistant-close { width: 30px; height: 30px; }
 }
 
