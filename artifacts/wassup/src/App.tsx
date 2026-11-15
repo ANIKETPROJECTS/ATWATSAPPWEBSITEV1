@@ -72,22 +72,22 @@ const officeMapUrl =
 const officeMapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(officeAddress)}&output=embed`;
 
 const capabilities = [
-  { group: 'connect', icon: BadgeCheck, motion: 'badge', title: 'WhatsApp Business API onboarding', text: 'Get guided setup for Meta verification and Green Tick assistance.' },
-  { group: 'automate', icon: FileText, motion: 'document', title: 'Message templates', text: 'Send marketing, utility, and alert templates to your customers.' },
-  { group: 'automate', icon: Bot, motion: 'bot', title: 'Chatbot builder', text: 'Automate FAQs, capture leads, and share order status.' },
-  { group: 'automate', icon: Workflow, motion: 'flow', title: 'WhatsApp Flows', text: 'Create in-chat forms for bookings, applications, and surveys.' },
-  { group: 'connect', icon: Globe, motion: 'globe', title: 'Website integration', text: 'Add click-to-chat and start WhatsApp conversations from your website.' },
-  { group: 'connect', icon: Database, motion: 'database', title: 'CRM and software integration', text: 'Connect your tools to collect and sync leads and customer data.' },
-  { group: 'automate', icon: Megaphone, motion: 'megaphone', title: 'Campaigns', text: 'Broadcast approved templates to the customer segments you choose.' },
-  { group: 'grow', icon: Headphones, motion: 'headset', title: 'Live chat', text: 'Let an agent take over whenever a conversation needs a person.' },
-  { group: 'grow', icon: BarChart3, motion: 'chart', title: 'Analytics dashboard', text: 'Track delivery, read rates, conversations, and agent performance.' },
-  { group: 'grow', icon: ShoppingBag, motion: 'catalog', title: 'Product catalogs', text: 'Showcase products and help customers shop inside WhatsApp.' },
+  { group: 'connect', icon: BadgeCheck, motion: 'badge', title: 'WhatsApp Business API onboarding' },
+  { group: 'automate', icon: FileText, motion: 'document', title: 'Message templates' },
+  { group: 'automate', icon: Bot, motion: 'bot', title: 'Chatbot builder' },
+  { group: 'automate', icon: Workflow, motion: 'flow', title: 'WhatsApp Flows' },
+  { group: 'connect', icon: Globe, motion: 'globe', title: 'Website integration' },
+  { group: 'connect', icon: Database, motion: 'database', title: 'CRM and software integration' },
+  { group: 'automate', icon: Megaphone, motion: 'megaphone', title: 'Campaigns' },
+  { group: 'grow', icon: Headphones, motion: 'headset', title: 'Live chat' },
+  { group: 'grow', icon: BarChart3, motion: 'chart', title: 'Analytics dashboard' },
+  { group: 'grow', icon: ShoppingBag, motion: 'catalog', title: 'Product catalogs' },
 ];
 
 const capabilityGroups = [
-  { id: 'connect', label: '01 · CONNECT', title: 'Get everything connected', description: 'Start with the right setup, then bring your existing tools into the conversation.' },
-  { id: 'automate', label: '02 · AUTOMATE', title: 'Make every message work harder', description: 'Turn common questions and customer journeys into repeatable experiences.' },
-  { id: 'grow', label: '03 · SUPPORT & GROW', title: 'Keep improving the experience', description: 'Support people when they need you and learn from every interaction.' },
+  { id: 'connect', label: '01 · CONNECT', title: 'Get everything connected' },
+  { id: 'automate', label: '02 · AUTOMATE', title: 'Make messages smarter' },
+  { id: 'grow', label: '03 · SUPPORT & GROW', title: 'Improve customer experience' },
 ];
 
 const softwarePreviewSlides = [
@@ -97,8 +97,6 @@ const softwarePreviewSlides = [
   { src: campaignReportSoftwarePreview, alt: 'AtWassup campaign report with WhatsApp delivery and read metrics' },
   { src: workspaceDashboardSoftwarePreview, alt: 'AtWassup workspace dashboard with messaging and customer activity metrics' },
 ];
-const softwarePreviewLoopSlides = [...softwarePreviewSlides, softwarePreviewSlides[0]];
-
 const processSteps = [
   { title: 'Onboard', text: 'Get help setting up your WhatsApp Business API and verification.' },
   { title: 'Connect', text: 'Bring your website, CRM, or existing software into the workflow.' },
@@ -209,10 +207,9 @@ function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capability
           <span className="feature-group-label-flash" aria-hidden="true" />
         </div>
         <h3 className="feature-group-title font-display font-bold">{t(group.title)}</h3>
-        <p className="feature-group-description">{t(group.description)}</p>
       </div>
       <div className="feature-list">
-        {capabilities.filter((capability) => capability.group === group.id).map(({ icon: Icon, motion, title, text }, rowIndex) => {
+        {capabilities.filter((capability) => capability.group === group.id).map(({ icon: Icon, motion, title }, rowIndex) => {
           const rowDelay = 900 + groupIndex * 500 + rowIndex * 130;
 
           return (
@@ -233,7 +230,6 @@ function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capability
                   <span className="feature-row-title-underline" aria-hidden="true" />
                 </span>
               </div>
-              <p className="feature-row-description">{t(text)}</p>
             </article>
           );
         })}
@@ -246,7 +242,6 @@ function SoftwarePreviewCarousel() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const [isInView, setIsInView] = useState(false);
-  const [isLoopResetting, setIsLoopResetting] = useState(false);
 
   useEffect(() => {
     const node = carouselRef.current;
@@ -268,17 +263,10 @@ function SoftwarePreviewCarousel() {
   useEffect(() => {
     if (!isInView || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const interval = window.setInterval(() => {
-      setActiveSlide((current) => Math.min(current + 1, softwarePreviewSlides.length));
+      setActiveSlide((current) => (current + 1) % softwarePreviewSlides.length);
     }, 4800);
     return () => window.clearInterval(interval);
   }, [isInView]);
-
-  const resetLoopToStart = () => {
-    if (activeSlide !== softwarePreviewSlides.length) return;
-    setIsLoopResetting(true);
-    setActiveSlide(0);
-    window.requestAnimationFrame(() => window.requestAnimationFrame(() => setIsLoopResetting(false)));
-  };
 
   return (
     <div
@@ -289,23 +277,24 @@ function SoftwarePreviewCarousel() {
       aria-label="AtWassup software screenshots"
     >
       <figure className="feature-software-preview">
-        <div
-          className={`feature-software-track${isLoopResetting ? ' is-resetting' : ''}`}
-          style={{ transform: `translateX(-${activeSlide * 100}%)` }}
-          onTransitionEnd={resetLoopToStart}
-        >
-          {softwarePreviewLoopSlides.map((slide, index) => (
+        {softwarePreviewSlides.map((slide, index) => {
+          const cyclePosition = (index - activeSlide + softwarePreviewSlides.length) % softwarePreviewSlides.length;
+          const position = cyclePosition > Math.floor(softwarePreviewSlides.length / 2)
+            ? cyclePosition - softwarePreviewSlides.length
+            : cyclePosition;
+          return (
             <img
-              key={`${slide.src}-${index}`}
+              key={slide.src}
               src={slide.src}
-              alt={index === activeSlide ? slide.alt : ''}
-              aria-hidden={index !== activeSlide}
+              alt={position === 0 ? slide.alt : ''}
+              aria-hidden={position !== 0}
               className="feature-software-slide"
+              data-position={position}
               loading="lazy"
               decoding="async"
             />
-          ))}
-        </div>
+          );
+        })}
       </figure>
     </div>
   );
@@ -728,13 +717,6 @@ function Home() {
           </div>
           <SoftwarePreviewCarousel />
           <div className="feature-groups" aria-label="AtWassup capabilities">
-            <svg className="feature-connector feature-connector-desktop" viewBox="0 0 1000 20" preserveAspectRatio="none" aria-hidden="true">
-              <path className="feature-connector-main" d="M860 0H0" />
-              <path className="feature-connector-branch feature-connector-branch-1" d="M0 0V16" />
-              <path className="feature-connector-branch feature-connector-branch-2" d="M333 0V16" />
-              <path className="feature-connector-branch feature-connector-branch-3" d="M666 0V16" />
-            </svg>
-            <span className="feature-connector-dot" aria-hidden="true" />
             {capabilityGroups.map((group, groupIndex) => (
               <CapabilityGroupPanel key={group.id} group={group} groupIndex={groupIndex} />
             ))}
