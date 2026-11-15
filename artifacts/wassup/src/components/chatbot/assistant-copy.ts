@@ -4,8 +4,9 @@ export type AssistantIntent = 'pricing' | 'features' | 'setup' | 'integrations' 
 
 export type AssistantCopy = {
   title: string;
-  status: string;
-  disclaimer: string;
+  subtitle: string;
+  whatsappContact: string;
+  callContact: string;
   greeting: string;
   suggestions: [string, string, string, string];
   input: string;
@@ -29,8 +30,9 @@ export type AssistantCopy = {
 export const assistantCopy: Record<LanguageCode, AssistantCopy> = {
   en: {
     title: 'AtWassup Assistant',
-    status: 'Here to help',
-    disclaimer: 'Answers use verified AtWassup information. Unanswered questions go to the team.',
+    subtitle: 'AI Assistant',
+    whatsappContact: 'Chat on WhatsApp',
+    callContact: 'Call AtWassup',
     greeting: 'Hi! Ask me about pricing, features, WhatsApp setup, or integrations. I can answer common questions or pass your question to our team.',
     suggestions: ['Pricing & plan', 'Features', 'WhatsApp setup', 'Integrations'],
     input: 'Type your question…',
@@ -59,8 +61,9 @@ export const assistantCopy: Record<LanguageCode, AssistantCopy> = {
   },
   hi: {
     title: 'AtWassup सहायक',
-    status: 'मदद के लिए यहाँ',
-    disclaimer: 'जवाब AtWassup की सत्यापित जानकारी पर आधारित हैं। बाकी सवाल टीम तक पहुँचाए जाते हैं।',
+    subtitle: 'AI सहायक',
+    whatsappContact: 'WhatsApp पर चैट करें',
+    callContact: 'AtWassup को कॉल करें',
     greeting: 'नमस्ते! कीमत, सुविधाओं, WhatsApp सेटअप या इंटीग्रेशन के बारे में पूछें। मैं सामान्य सवालों के जवाब दे सकता हूँ या आपका सवाल टीम तक पहुँचा सकता हूँ।',
     suggestions: ['कीमत और प्लान', 'सुविधाएँ', 'WhatsApp सेटअप', 'इंटीग्रेशन'],
     input: 'अपना सवाल लिखें…',
@@ -89,8 +92,9 @@ export const assistantCopy: Record<LanguageCode, AssistantCopy> = {
   },
   ar: {
     title: 'مساعد AtWassup',
-    status: 'نحن هنا للمساعدة',
-    disclaimer: 'تعتمد الإجابات على معلومات AtWassup المؤكدة. تُحال الأسئلة الأخرى إلى الفريق.',
+    subtitle: 'مساعد الذكاء الاصطناعي',
+    whatsappContact: 'تواصل عبر WhatsApp',
+    callContact: 'اتصل بـ AtWassup',
     greeting: 'مرحبًا! اسألني عن الأسعار أو الميزات أو إعداد WhatsApp أو عمليات التكامل. أجيب عن الأسئلة الشائعة أو أحيل سؤالك إلى فريقنا.',
     suggestions: ['الأسعار والخطة', 'الميزات', 'إعداد WhatsApp', 'التكاملات'],
     input: 'اكتب سؤالك…',
@@ -119,8 +123,9 @@ export const assistantCopy: Record<LanguageCode, AssistantCopy> = {
   },
   es: {
     title: 'Asistente de AtWassup',
-    status: 'Aquí para ayudarte',
-    disclaimer: 'Las respuestas se basan en información verificada de AtWassup. Las demás consultas se envían al equipo.',
+    subtitle: 'Asistente de IA',
+    whatsappContact: 'Chatear por WhatsApp',
+    callContact: 'Llamar a AtWassup',
     greeting: '¡Hola! Pregúntame sobre precios, funciones, configuración de WhatsApp o integraciones. Puedo responder preguntas frecuentes o enviar tu consulta al equipo.',
     suggestions: ['Precios y plan', 'Funciones', 'Configurar WhatsApp', 'Integraciones'],
     input: 'Escribe tu pregunta…',
@@ -149,8 +154,9 @@ export const assistantCopy: Record<LanguageCode, AssistantCopy> = {
   },
   fr: {
     title: 'Assistant AtWassup',
-    status: 'À votre écoute',
-    disclaimer: 'Les réponses reposent sur des informations AtWassup vérifiées. Les autres questions sont transmises à l’équipe.',
+    subtitle: 'Assistant IA',
+    whatsappContact: 'Discuter sur WhatsApp',
+    callContact: 'Appeler AtWassup',
     greeting: 'Bonjour ! Posez vos questions sur les tarifs, les fonctionnalités, la configuration WhatsApp ou les intégrations. Je réponds aux questions fréquentes ou transmets votre demande à notre équipe.',
     suggestions: ['Tarifs et offre', 'Fonctionnalités', 'Configuration WhatsApp', 'Intégrations'],
     input: 'Écrivez votre question…',
@@ -179,8 +185,9 @@ export const assistantCopy: Record<LanguageCode, AssistantCopy> = {
   },
   de: {
     title: 'AtWassup-Assistent',
-    status: 'Wir helfen gern',
-    disclaimer: 'Die Antworten basieren auf geprüften AtWassup-Informationen. Andere Fragen leiten wir an das Team weiter.',
+    subtitle: 'KI-Assistent',
+    whatsappContact: 'Über WhatsApp chatten',
+    callContact: 'AtWassup anrufen',
     greeting: 'Hallo! Fragen Sie mich zu Preisen, Funktionen, WhatsApp-Einrichtung oder Integrationen. Ich beantworte häufige Fragen oder leite Ihre Anfrage an unser Team weiter.',
     suggestions: ['Preise und Tarif', 'Funktionen', 'WhatsApp einrichten', 'Integrationen'],
     input: 'Frage eingeben…',
@@ -209,8 +216,9 @@ export const assistantCopy: Record<LanguageCode, AssistantCopy> = {
   },
   'zh-CN': {
     title: 'AtWassup 助手',
-    status: '随时为您提供帮助',
-    disclaimer: '回答基于 AtWassup 已确认的信息。其他问题会转交给团队。',
+    subtitle: 'AI 助手',
+    whatsappContact: '通过 WhatsApp 联系',
+    callContact: '拨打 AtWassup 电话',
     greeting: '您好！您可以询问价格、功能、WhatsApp 设置或系统集成。我可以回答常见问题，也可以将您的问题转给我们的团队。',
     suggestions: ['价格与方案', '功能', 'WhatsApp 设置', '系统集成'],
     input: '输入您的问题…',
@@ -239,8 +247,9 @@ export const assistantCopy: Record<LanguageCode, AssistantCopy> = {
   },
   ja: {
     title: 'AtWassup アシスタント',
-    status: 'いつでもご相談ください',
-    disclaimer: '回答は確認済みの AtWassup 情報に基づいています。その他の質問はチームに引き継ぎます。',
+    subtitle: 'AI アシスタント',
+    whatsappContact: 'WhatsApp でチャット',
+    callContact: 'AtWassup に電話',
     greeting: 'こんにちは。料金、機能、WhatsApp の設定、連携についてお尋ねください。よくある質問に回答するか、チームにお問い合わせを引き継ぎます。',
     suggestions: ['料金プラン', '機能', 'WhatsApp の設定', '外部連携'],
     input: '質問を入力…',
@@ -269,8 +278,9 @@ export const assistantCopy: Record<LanguageCode, AssistantCopy> = {
   },
   'pt-BR': {
     title: 'Assistente AtWassup',
-    status: 'Estamos aqui para ajudar',
-    disclaimer: 'As respostas usam informações verificadas do AtWassup. As demais perguntas são encaminhadas à equipe.',
+    subtitle: 'Assistente de IA',
+    whatsappContact: 'Conversar pelo WhatsApp',
+    callContact: 'Ligar para AtWassup',
     greeting: 'Olá! Pergunte sobre preços, recursos, configuração do WhatsApp ou integrações. Posso responder dúvidas frequentes ou encaminhar sua pergunta para nossa equipe.',
     suggestions: ['Preços e plano', 'Recursos', 'Configurar WhatsApp', 'Integrações'],
     input: 'Digite sua pergunta…',

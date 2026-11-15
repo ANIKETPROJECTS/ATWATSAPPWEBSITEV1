@@ -3,6 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { useSubmitDemoRequest } from '@workspace/api-client-react';
 import { ArrowUp, Check, MessageCircle, X } from 'lucide-react';
 import assistantIcon from '@assets/AIRAVATA_TECHNOLOGIES_LOGO_(5)_1794762850056.svg';
+import whatsappIcon from '@assets/2111774_1794764261230.svg';
+import phoneIcon from '@assets/597177_1794764282373.svg';
+import brandLogoPath from '../../assets/airavata-technologies-logo.svg';
+import verifiedBusinessBadge from '../../assets/verified-business.svg';
 import i18n, { languageOptions, type LanguageCode } from '../../i18n';
 import { assistantCopy, detectAssistantIntent, type AssistantIntent } from './assistant-copy';
 import './atwassup-assistant.css';
@@ -156,20 +160,63 @@ export default function AtWassupAssistant() {
           data-testid="panel-site-assistant"
         >
           <header className="atw-assistant-header">
-            <img src={assistantIcon} alt="" aria-hidden="true" className="atw-assistant-brand-icon" />
-            <div className="atw-assistant-heading">
-              <h2 id="atw-assistant-title">{copy.title}</h2>
-              <p><span className="atw-assistant-live-dot" />{copy.status}</p>
+            <div className="atw-assistant-brand">
+              <h2 id="atw-assistant-title" className="sr-only">{copy.title}</h2>
+              <div className="atw-assistant-brand-row">
+                <svg
+                  aria-label="AtWassup"
+                  className="atw-assistant-wordmark"
+                  role="img"
+                  viewBox="98 160 268 64"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <clipPath id="atw-assistant-wordmark-clip" clipPathUnits="userSpaceOnUse">
+                      <path d="M98 160H323V205H98Z M323 160H366V224H323Z" />
+                    </clipPath>
+                  </defs>
+                  <image
+                    clipPath="url(#atw-assistant-wordmark-clip)"
+                    height="375"
+                    href={brandLogoPath}
+                    width="375"
+                    x="0"
+                    y="0"
+                  />
+                </svg>
+                <img src={verifiedBusinessBadge} alt="" aria-hidden="true" className="atw-assistant-verified" />
+              </div>
+              <p className="atw-assistant-subtitle">{copy.subtitle}</p>
             </div>
-            <button
-              type="button"
-              className="atw-assistant-close"
-              onClick={closeAssistant}
-              aria-label={copy.close}
-              data-testid="button-close-site-assistant"
-            >
-              <X size={18} />
-            </button>
+            <div className="atw-assistant-header-actions">
+              <a
+                href="https://wa.me/919167959756"
+                target="_blank"
+                rel="noreferrer"
+                className="atw-assistant-header-contact"
+                aria-label={copy.whatsappContact}
+                data-testid="assistant-header-whatsapp"
+              >
+                <img src={whatsappIcon} alt="" aria-hidden="true" />
+              </a>
+              <a
+                href="tel:+919167959756"
+                className="atw-assistant-header-contact"
+                aria-label={copy.callContact}
+                data-testid="assistant-header-call"
+              >
+                <img src={phoneIcon} alt="" aria-hidden="true" />
+              </a>
+              <button
+                type="button"
+                className="atw-assistant-close"
+                onClick={closeAssistant}
+                aria-label={copy.close}
+                data-testid="button-close-site-assistant"
+              >
+                <X size={18} />
+              </button>
+            </div>
           </header>
 
           <div className="atw-assistant-messages" ref={messageListRef} aria-live="polite">
@@ -261,7 +308,6 @@ export default function AtWassupAssistant() {
               </button>
             </form>
           )}
-          <p className="atw-assistant-disclaimer">{copy.disclaimer}</p>
         </section>
       )}
 
