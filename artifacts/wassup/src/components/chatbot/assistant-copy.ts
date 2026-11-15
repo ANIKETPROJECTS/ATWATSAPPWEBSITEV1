@@ -1,4 +1,5 @@
 import type { LanguageCode } from '../../i18n';
+import { additionalLocaleCopy } from '../../additional-locale-copy';
 
 export type AssistantIntent = 'pricing' | 'features' | 'setup' | 'integrations' | 'capture' | 'team' | 'fallback';
 
@@ -25,7 +26,7 @@ export type AssistantCopy = {
   answers: Record<AssistantIntent, string>;
 };
 
-export const assistantCopy: Record<LanguageCode, AssistantCopy> = {
+const baseAssistantCopy: Record<string, AssistantCopy> = {
   en: {
     title: 'atWassup Assistant',
     subtitle: 'AI Assistant',
@@ -298,7 +299,52 @@ export const assistantCopy: Record<LanguageCode, AssistantCopy> = {
   },
 };
 
-const intentKeywords: Record<LanguageCode, Record<Exclude<AssistantIntent, 'fallback'>, string[]>> = {
+function makeSupplementalAssistantCopy(copy: Record<string, string>): AssistantCopy {
+  return {
+    title: copy.title,
+    subtitle: copy.subtitle,
+    whatsappContact: copy.whatsappContact,
+    callContact: copy.callContact,
+    greeting: copy.greeting,
+    suggestions: [copy['suggestions.0'], copy['suggestions.1'], copy['suggestions.2']],
+    input: copy.input,
+    send: copy.send,
+    requestFollowup: copy.requestFollowup,
+    contactIntro: copy.contactIntro,
+    name: copy.name,
+    whatsapp: copy.whatsapp,
+    contactRequired: copy.contactRequired,
+    submit: copy.submit,
+    sending: copy.sending,
+    success: copy.success,
+    error: copy.error,
+    typing: copy.typing,
+    close: copy.close,
+    answers: {
+      pricing: copy['answers.pricing'],
+      features: copy['answers.features'],
+      setup: copy['answers.setup'],
+      integrations: copy['answers.integrations'],
+      capture: copy['answers.capture'],
+      team: copy['answers.team'],
+      fallback: copy['answers.fallback'],
+    },
+  };
+}
+
+export const assistantCopy = {
+  ...baseAssistantCopy,
+  ...Object.fromEntries(
+    Object.entries(additionalLocaleCopy).map(([code, locale]) => [
+      code,
+      makeSupplementalAssistantCopy(locale.assistant),
+    ]),
+  ),
+} as Record<LanguageCode, AssistantCopy>;
+
+const baseIntentKeywords: Partial<
+  Record<LanguageCode, Record<Exclude<AssistantIntent, 'fallback'>, string[]>>
+> = {
   en: {
     pricing: ['price', 'pricing', 'cost', 'plan', 'fee', 'how much', 'gst', 'message rate', '₹'],
     features: ['feature', 'what can', 'what does', 'what do you do', 'what is atwassup', 'about atwassup', 'how does', 'chatbot', 'broadcast', 'catalog', 'payment', 'campaign', 'automation', 'ai agent', 'ai assistant', 'form', 'analytics', 'follow up', 'follow-up'],
@@ -372,6 +418,13 @@ const intentKeywords: Record<LanguageCode, Record<Exclude<AssistantIntent, 'fall
     team: ['equipe', 'pessoa', 'contato', 'conversar', 'ligar', 'retorno'],
   },
 };
+
+const intentKeywords = {
+  ...baseIntentKeywords,
+  ...Object.fromEntries(
+    Object.entries(additionalLocaleCopy).map(([code, locale]) => [code, locale.keywords]),
+  ),
+} as Record<LanguageCode, Record<Exclude<AssistantIntent, 'fallback'>, string[]>>;
 
 export function detectAssistantIntent(question: string, language: LanguageCode): AssistantIntent {
   const normalized = question

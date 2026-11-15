@@ -1,24 +1,33 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { demoTranslations } from './demo-translations';
+import { additionalLocaleCopy } from './additional-locale-copy';
 
 export const LANGUAGE_STORAGE_KEY = 'atwassup-language';
 
 export const languageOptions = [
-  { code: 'en', label: 'English', short: 'EN' },
-  { code: 'hi', label: 'हिन्दी', short: 'HI' },
-  { code: 'ar', label: 'العربية', short: 'AR' },
-  { code: 'es', label: 'Español', short: 'ES' },
-  { code: 'fr', label: 'Français', short: 'FR' },
-  { code: 'de', label: 'Deutsch', short: 'DE' },
-  { code: 'zh-CN', label: '中文', short: 'ZH' },
-  { code: 'ja', label: '日本語', short: 'JA' },
-  { code: 'pt-BR', label: 'Português', short: 'PT' },
+  { code: 'en', label: 'English', englishLabel: 'English', short: 'EN' },
+  { code: 'hi', label: 'हिन्दी', englishLabel: 'Hindi', short: 'HI' },
+  { code: 'bn', label: 'বাংলা', englishLabel: 'Bengali', short: 'BN' },
+  { code: 'mr', label: 'मराठी', englishLabel: 'Marathi', short: 'MR' },
+  { code: 'te', label: 'తెలుగు', englishLabel: 'Telugu', short: 'TE' },
+  { code: 'ta', label: 'தமிழ்', englishLabel: 'Tamil', short: 'TA' },
+  { code: 'gu', label: 'ગુજરાતી', englishLabel: 'Gujarati', short: 'GU' },
+  { code: 'ur', label: 'اردو', englishLabel: 'Urdu', short: 'UR' },
+  { code: 'kn', label: 'ಕನ್ನಡ', englishLabel: 'Kannada', short: 'KN' },
+  { code: 'es', label: 'Español', englishLabel: 'Spanish', short: 'ES' },
+  { code: 'zh-CN', label: '简体中文', englishLabel: 'Mandarin Chinese (Simplified)', short: 'ZH' },
+  { code: 'ar', label: 'العربية', englishLabel: 'Arabic', short: 'AR' },
+  { code: 'fr', label: 'Français', englishLabel: 'French', short: 'FR' },
+  { code: 'de', label: 'Deutsch', englishLabel: 'German', short: 'DE' },
+  { code: 'pt-BR', label: 'Português (Brasil)', englishLabel: 'Portuguese (Brazil)', short: 'PT' },
+  { code: 'ja', label: '日本語', englishLabel: 'Japanese', short: 'JA' },
+  { code: 'ko', label: '한국어', englishLabel: 'Korean', short: 'KO' },
 ] as const;
 
 export type LanguageCode = (typeof languageOptions)[number]['code'];
 
-const translations: Record<LanguageCode, Record<string, string>> = {
+const translations: Partial<Record<LanguageCode, Record<string, string>>> = {
   en: {
     'nav.features': 'Features',
     'nav.howItWorks': 'How It Works',
@@ -28,6 +37,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     'nav.login': 'Login',
     'language.label': 'Language',
     'language.choose': 'Choose website language',
+    'language.search': 'Search languages',
+    'language.noResults': 'No languages found',
     'hero.heading': '<line1>Make your business</line1><line2>smarter with <brand>AtWassup</brand></line2>',
     'hero.rotator.leads': 'AI that drives leads & sales',
     'hero.rotator.marketing': 'AI for WhatsApp marketing',
@@ -124,6 +135,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     'nav.login': 'लॉग इन',
     'language.label': 'भाषा',
     'language.choose': 'वेबसाइट की भाषा चुनें',
+    'language.search': 'भाषाएँ खोजें',
+    'language.noResults': 'कोई भाषा नहीं मिली',
     'hero.heading': '<line1>अपने व्यवसाय को</line1><line2><brand>AtWassup</brand> के साथ आगे बढ़ाएँ</line2>',
     'hero.rotator.leads': 'लीड और बिक्री के लिए AI',
     'hero.rotator.marketing': 'WhatsApp मार्केटिंग AI',
@@ -157,6 +170,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     'nav.login': 'تسجيل الدخول',
     'language.label': 'اللغة',
     'language.choose': 'اختر لغة الموقع',
+    'language.search': 'ابحث عن لغة',
+    'language.noResults': 'لم يتم العثور على لغات',
     'hero.heading': '<line1>طوّر نشاطك التجاري</line1><line2>مع <brand>AtWassup</brand></line2>',
     'hero.rotator.leads': 'ذكاء اصطناعي لمزيد من المبيعات',
     'hero.rotator.marketing': 'تسويق WhatsApp بالذكاء الاصطناعي',
@@ -190,6 +205,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     'nav.login': 'Iniciar sesión',
     'language.label': 'Idioma',
     'language.choose': 'Elige el idioma del sitio',
+    'language.search': 'Buscar idiomas',
+    'language.noResults': 'No se encontraron idiomas',
     'hero.heading': '<line1>Haz crecer tu negocio</line1><line2>con <brand>AtWassup</brand></line2>',
     'hero.rotator.leads': 'IA para más leads y ventas',
     'hero.rotator.marketing': 'Marketing de WhatsApp con IA',
@@ -223,6 +240,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     'nav.login': 'Connexion',
     'language.label': 'Langue',
     'language.choose': 'Choisir la langue du site',
+    'language.search': 'Rechercher une langue',
+    'language.noResults': 'Aucune langue trouvée',
     'hero.heading': '<line1>Faites grandir votre activité</line1><line2>avec <brand>AtWassup</brand></line2>',
     'hero.rotator.leads': 'L’IA pour plus de prospects',
     'hero.rotator.marketing': 'Marketing WhatsApp par l’IA',
@@ -256,6 +275,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     'nav.login': 'Anmelden',
     'language.label': 'Sprache',
     'language.choose': 'Website-Sprache auswählen',
+    'language.search': 'Sprachen suchen',
+    'language.noResults': 'Keine Sprachen gefunden',
     'hero.heading': '<line1>Bringen Sie Ihr Business</line1><line2>mit <brand>AtWassup</brand> voran</line2>',
     'hero.rotator.leads': 'KI für mehr Leads und Umsatz',
     'hero.rotator.marketing': 'WhatsApp-Marketing mit KI',
@@ -289,6 +310,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     'nav.login': '登录',
     'language.label': '语言',
     'language.choose': '选择网站语言',
+    'language.search': '搜索语言',
+    'language.noResults': '未找到语言',
     'hero.heading': '<line1>让您的业务</line1><line2>借助 <brand>AtWassup</brand> 增长</line2>',
     'hero.rotator.leads': 'AI 助力获客与销售',
     'hero.rotator.marketing': 'WhatsApp 营销 AI',
@@ -322,6 +345,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     'nav.login': 'ログイン',
     'language.label': '言語',
     'language.choose': 'サイトの言語を選択',
+    'language.search': '言語を検索',
+    'language.noResults': '言語が見つかりません',
     'hero.heading': '<line1>ビジネスを</line1><line2><brand>AtWassup</brand>でもっとスマートに</line2>',
     'hero.rotator.leads': 'リードと売上を伸ばすAI',
     'hero.rotator.marketing': 'WhatsAppマーケティングのためのAI',
@@ -355,6 +380,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     'nav.login': 'Entrar',
     'language.label': 'Idioma',
     'language.choose': 'Escolha o idioma do site',
+    'language.search': 'Buscar idiomas',
+    'language.noResults': 'Nenhum idioma encontrado',
     'hero.heading': '<line1>Faça seu negócio crescer</line1><line2>com <brand>AtWassup</brand></line2>',
     'hero.rotator.leads': 'IA para mais leads e vendas',
     'hero.rotator.marketing': 'Marketing no WhatsApp com IA',
@@ -1363,7 +1390,16 @@ const pageCopy: Partial<Record<LanguageCode, Record<string, string>>> = {
 const resources = Object.fromEntries(
   languageOptions.map(({ code }) => [
     code,
-    { translation: { ...translations[code], ...pageCopy[code], ...demoTranslations[code] } },
+    {
+      translation: {
+        ...translations[code],
+        ...pageCopy[code],
+        ...demoTranslations[code],
+        ...additionalLocaleCopy[code]?.common,
+        ...additionalLocaleCopy[code]?.page,
+        ...additionalLocaleCopy[code]?.demo,
+      },
+    },
   ]),
 );
 
@@ -1388,7 +1424,7 @@ function syncDocumentLanguage(language: string) {
   if (typeof document === 'undefined') return;
   const normalizedLanguage = languageOptions.some(({ code }) => code === language) ? language : 'en';
   document.documentElement.lang = normalizedLanguage;
-  document.documentElement.dir = normalizedLanguage === 'ar' ? 'rtl' : 'ltr';
+  document.documentElement.dir = normalizedLanguage === 'ar' || normalizedLanguage === 'ur' ? 'rtl' : 'ltr';
 }
 
 void i18n.use(initReactI18next).init({

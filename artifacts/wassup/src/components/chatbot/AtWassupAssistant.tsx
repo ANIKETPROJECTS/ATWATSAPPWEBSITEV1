@@ -31,7 +31,7 @@ export default function AtWassupAssistant() {
   const { i18n: translationInstance } = useTranslation();
   const language = getActiveLanguage(translationInstance.resolvedLanguage);
   const copy = assistantCopy[language];
-  const isRtl = language === 'ar';
+  const isRtl = language === 'ar' || language === 'ur';
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [draft, setDraft] = useState('');

@@ -32,7 +32,7 @@ const LOOP_PAUSE = 5000;
 
 export default function ChatbotInquiryDemo() {
   const { t, i18n } = useTranslation();
-  const copyDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  const copyDirection = i18n.language === 'ar' || i18n.language === 'ur' ? 'rtl' : 'ltr';
   const sectionRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const chatRef = useRef<HTMLDivElement>(null);

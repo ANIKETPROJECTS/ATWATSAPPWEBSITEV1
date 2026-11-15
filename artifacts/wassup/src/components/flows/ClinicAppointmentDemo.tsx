@@ -38,7 +38,7 @@ const LAST = stages.length - 1;
 
 export default function ClinicAppointmentDemo() {
   const { t, i18n } = useTranslation();
-  const phoneTextDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  const phoneTextDirection = i18n.language === 'ar' || i18n.language === 'ur' ? 'rtl' : 'ltr';
   const sectionRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const chatRef = useRef<HTMLDivElement>(null);
