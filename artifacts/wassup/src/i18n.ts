@@ -1432,6 +1432,7 @@ void i18n.use(initReactI18next).init({
   lng: getInitialLanguage(),
   fallbackLng: 'en',
   supportedLngs: languageOptions.map(({ code }) => code),
+  nsSeparator: false,
   keySeparator: false,
   interpolation: { escapeValue: false },
   returnEmptyString: false,

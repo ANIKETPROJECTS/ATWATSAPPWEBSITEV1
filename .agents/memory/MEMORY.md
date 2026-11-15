@@ -8,3 +8,4 @@
 - [WhatsApp Flows showcase](whatsapp-flows-showcase.md) — clinic appointment forms, submission-to-platform sync, AI patient support; phone left with a light frame.
 - [VPS and package managers](vps-package-managers.md) — npm and pnpm use different release-age units; preserve both safeguards when supporting both.
 - [AtWassup social placeholders](atwassup-social-placeholders.md) — keep footer social icons unlinked until the user provides the real account URLs.
+- [AtWassup localization](atwassup-localization.md) — support 17 named locales; complete page and chatbot copy before exposing new choices.
