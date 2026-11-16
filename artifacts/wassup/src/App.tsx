@@ -4,30 +4,20 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   ArrowDownRight,
   ArrowRight,
-  BadgeCheck,
-  BarChart3,
   Bot,
   Check,
   ChevronLeft,
   ChevronRight,
-  Database,
-  FileText,
-  Globe,
-  Headphones,
   Instagram,
   Linkedin,
   Link2,
   Mail,
   MapPin,
-  MessageCircle,
-  Megaphone,
   Menu,
   Phone,
   Send,
-  ShoppingBag,
   Sparkles,
   Smartphone,
-  Workflow,
   Wifi,
   X,
 } from 'lucide-react';
@@ -73,23 +63,30 @@ const officeMapUrl =
 const officeMapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(officeAddress)}&output=embed`;
 
 const capabilities = [
-  { id: 'api-setup', group: 'connect', icon: BadgeCheck, motion: 'badge', titleKeys: ['WhatsApp Business API onboarding'] },
-  { id: 'website-integration', group: 'connect', icon: Globe, motion: 'globe', titleKeys: ['Website integration'] },
-  { id: 'crm-erp-integration', group: 'connect', icon: Database, motion: 'database', titleKeys: ['CRM, ERP & software integration'] },
-  { id: 'ai-assistant', group: 'automate', icon: Sparkles, motion: 'assistant', titleKeys: ['flow.assistant.title'] },
-  { id: 'ai-agents', group: 'automate', icon: Bot, motion: 'bot', titleKeys: ['flow.agents.title'] },
-  { id: 'ai-chatbot', group: 'automate', icon: MessageCircle, motion: 'chatbot', titleKeys: ['flow.chatbot.title'] },
-  { id: 'forms-flows', group: 'automate', icon: Workflow, motion: 'flow', titleKeys: ['flow.forms.title', 'WhatsApp Flows'] },
-  { id: 'campaign-broadcasts', group: 'automate', icon: Megaphone, motion: 'megaphone', titleKeys: ['Campaigns', 'flow.broadcast.title'] },
-  { id: 'live-chat', group: 'grow', icon: Headphones, motion: 'headset', titleKeys: ['Live chat'] },
-  { id: 'analytics', group: 'grow', icon: BarChart3, motion: 'chart', titleKeys: ['Analytics dashboard'] },
-  { id: 'commerce', group: 'grow', icon: ShoppingBag, motion: 'catalog', titleKeys: ['flow.catalog.title', 'flow.payments.title'] },
+  { id: 'api-setup', group: 'connect', titleKeys: ['WhatsApp Business API onboarding'] },
+  { id: 'website-integration', group: 'connect', titleKeys: ['Website integration'] },
+  { id: 'contacts-records', group: 'connect', titleKeys: ['capability.contacts'] },
+  { id: 'groups-audiences', group: 'connect', titleKeys: ['capability.groups'] },
+  { id: 'message-templates', group: 'connect', titleKeys: ['Message templates'] },
+  { id: 'crm-erp-integration', group: 'connect', titleKeys: ['capability.integrations'] },
+  { id: 'ai-assistant', group: 'automate', titleKeys: ['flow.assistant.title'] },
+  { id: 'ai-agents', group: 'automate', titleKeys: ['flow.agents.title'] },
+  { id: 'ai-chatbot', group: 'automate', titleKeys: ['flow.chatbot.title'] },
+  { id: 'forms-flows', group: 'automate', titleKeys: ['flow.forms.title', 'WhatsApp Flows'] },
+  { id: 'campaign-broadcasts', group: 'automate', titleKeys: ['Campaigns', 'flow.broadcast.title'] },
+  { id: 'triggered-drip-campaigns', group: 'automate', titleKeys: ['capability.triggers'] },
+  { id: 'live-chat', group: 'grow', titleKeys: ['Live chat'] },
+  { id: 'analytics', group: 'grow', titleKeys: ['Analytics dashboard'] },
+  { id: 'campaign-reports', group: 'grow', titleKeys: ['capability.reports'] },
+  { id: 'catalog', group: 'grow', titleKeys: ['flow.catalog.title'] },
+  { id: 'payments', group: 'grow', titleKeys: ['flow.payments.title'] },
+  { id: 'workspace-tools', group: 'grow', titleKeys: ['capability.workspace'] },
 ];
 
 const capabilityGroups = [
   { id: 'connect', label: '01 · CONNECT', title: 'Get everything connected' },
   { id: 'automate', label: '02 · AUTOMATE', title: 'Make messages smarter' },
-  { id: 'grow', label: '03 · SUPPORT & GROW', title: 'Improve customer experience' },
+  { id: 'grow', label: '03 · SUPPORT & GROW', title: 'capability.growTitle' },
 ];
 
 const softwarePreviewSlides = [
@@ -211,7 +208,7 @@ function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capability
         <h3 className="feature-group-title font-display font-bold">{t(group.title)}</h3>
       </div>
       <div className="feature-list">
-        {capabilities.filter((capability) => capability.group === group.id).map(({ id, icon: Icon, motion, titleKeys }, rowIndex) => {
+        {capabilities.filter((capability) => capability.group === group.id).map(({ id, titleKeys }, rowIndex) => {
           const rowDelay = 900 + groupIndex * 500 + rowIndex * 130;
           const title = titleKeys.map((key) => t(key)).join(' · ');
 
@@ -219,14 +216,12 @@ function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capability
             <article
               key={id}
               className="feature-row"
-              data-icon-motion={motion}
               data-testid={`feature-${group.id}-${id}`}
               style={{ '--feature-row-delay': `${rowDelay}ms` } as CSSProperties}
             >
               <div className="feature-row-title-line">
-                <span className="feature-row-icon" aria-hidden="true">
-                  <Icon size={17} className="feature-icon-underlay text-[#3acd32]" />
-                  <Icon size={17} className="feature-icon-draw text-[#3acd32]" />
+                <span className="feature-row-indicator" aria-hidden="true">
+                  <span className="feature-row-indicator-core" />
                 </span>
                 <span className="feature-row-title-wrap">
                   <h4 className="feature-row-title font-bold text-white/95">{t(title)}</h4>

@@ -410,10 +410,6 @@ h3.font-display {
 .feature-group + .feature-group { border-left: 1px solid rgba(255, 255, 255, .15); }
 .feature-group:last-child { padding-right: 0; }
 .feature-group-intro { min-height: 78px; }
-#features .feature-group-grow .feature-group-title {
-  font-size: clamp(.75rem, 4vw, 1.25rem);
-  white-space: nowrap;
-}
 .feature-list { display: grid; }
 .feature-row {
   min-width: 0;
@@ -492,25 +488,37 @@ h3.font-display {
   align-items: center;
   gap: 8px;
 }
-.feature-row-icon {
+.feature-row-indicator {
+  position: relative;
   display: grid;
   width: 18px;
   height: 18px;
   flex: 0 0 18px;
   place-items: center;
-  transform-origin: center;
-  transition: transform .24s ease;
+  border-radius: 50%;
+  background: #3acd32;
+  box-shadow: 0 0 0 1px rgba(58, 205, 50, .24);
 }
-.feature-row-icon svg {
-  grid-area: 1 / 1;
-  display: block;
-  overflow: visible;
+.feature-row-indicator::before {
+  position: absolute;
+  inset: -3px;
+  border: 1px solid rgba(58, 205, 50, .72);
+  border-radius: inherit;
+  content: '';
+  opacity: 0;
+  transform: scale(.72);
+  animation: feature-dot-pulse 2.4s ease-out var(--feature-row-delay) infinite;
+  animation-play-state: paused;
 }
-.feature-icon-underlay { opacity: .24; }
-.feature-icon-draw { opacity: 0; }
-.feature-icon-draw :is(path, line, polyline, circle, rect, polygon) {
-  stroke-dasharray: 48;
-  stroke-dashoffset: 48;
+.feature-row-indicator-core {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(255, 255, 255, .55);
+  animation: feature-dot-core 2.4s ease-in-out var(--feature-row-delay) infinite;
+  animation-play-state: paused;
 }
 .feature-row-title-wrap {
   position: relative;
@@ -534,16 +542,6 @@ h3.font-display {
   transition: transform .22s ease;
 }
 .feature-row:hover .feature-row-title-underline { transform: scaleX(1); }
-.feature-row[data-icon-motion="badge"]:hover .feature-row-icon { transform: rotate(8deg) scale(1.06); }
-.feature-row[data-icon-motion="document"]:hover .feature-row-icon { transform: perspective(40px) rotateY(14deg); }
-.feature-row[data-icon-motion="bot"]:hover .feature-row-icon { transform: translateY(-1px) scale(1.08); }
-.feature-row[data-icon-motion="flow"]:hover .feature-row-icon { transform: translateX(2px); }
-.feature-row[data-icon-motion="globe"]:hover .feature-row-icon { transform: rotate(14deg); }
-.feature-row[data-icon-motion="database"]:hover .feature-row-icon { transform: rotate(-7deg); }
-.feature-row[data-icon-motion="megaphone"]:hover .feature-row-icon { transform: rotate(-8deg); }
-.feature-row[data-icon-motion="headset"]:hover .feature-row-icon { transform: rotate(-9deg) translateY(-1px); }
-.feature-row[data-icon-motion="chart"]:hover .feature-row-icon { transform: translateY(-2px); }
-.feature-row[data-icon-motion="catalog"]:hover .feature-row-icon { transform: rotate(8deg) translateY(-1px); }
 .feature-motion-section .reveal.is-visible .feature-heading-character {
   animation: feature-heading-letter .14s cubic-bezier(.2, .72, .2, 1) both;
   animation-play-state: paused;
@@ -568,23 +566,21 @@ h3.font-display {
   animation: feature-divider-draw .28s ease-out var(--feature-row-delay) both;
   animation-play-state: paused;
 }
-.feature-motion-section .reveal.is-visible .feature-icon-draw {
-  animation: feature-icon-in .22s ease-out var(--feature-row-delay) both;
-  animation-play-state: paused;
-}
-.feature-motion-section .reveal.is-visible .feature-icon-draw :is(path, line, polyline, circle, rect, polygon) {
-  animation: feature-svg-draw .22s ease-out var(--feature-row-delay) both;
+.feature-motion-section .reveal.is-visible .feature-row-indicator::before,
+.feature-motion-section .reveal.is-visible .feature-row-indicator-core {
   animation-play-state: paused;
 }
 .feature-motion-section .reveal.is-visible .feature-groups::before {
   animation: feature-group-rule-draw .8s cubic-bezier(.2, .72, .2, 1) .3s both;
   animation-play-state: paused;
 }
-.feature-motion-section.is-in-view .reveal.is-visible :is(.feature-heading-character, .feature-heading-cursor, .feature-group-label-flash, .feature-row, .feature-icon-draw, .feature-icon-draw :is(path, line, polyline, circle, rect, polygon)) {
+.feature-motion-section.is-in-view .reveal.is-visible :is(.feature-heading-character, .feature-heading-cursor, .feature-group-label-flash, .feature-row) {
   animation-play-state: running;
 }
 .feature-motion-section.is-in-view .reveal.is-visible .feature-groups::before { animation-play-state: running; }
 .feature-motion-section.is-in-view .reveal.is-visible .feature-row::after { animation-play-state: running; }
+.feature-motion-section.is-in-view .reveal.is-visible .feature-row-indicator::before,
+.feature-motion-section.is-in-view .reveal.is-visible .feature-row-indicator-core { animation-play-state: running; }
 
 @media (max-width: 639px) {
   #features { padding-block: 24px; }
@@ -662,11 +658,14 @@ h3.font-display {
   75% { opacity: .65; transform: scaleX(1); }
   100% { opacity: 0; transform: scaleX(1); }
 }
-@keyframes feature-icon-in {
-  from { opacity: .12; }
-  to { opacity: 1; }
+@keyframes feature-dot-pulse {
+  0% { opacity: .78; transform: scale(.72); }
+  72%, 100% { opacity: 0; transform: scale(1.42); }
 }
-@keyframes feature-svg-draw { to { stroke-dashoffset: 0; } }
+@keyframes feature-dot-core {
+  0%, 100% { opacity: .82; transform: scale(.84); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
 @keyframes feature-group-rule-draw { to { transform: scaleX(1); } }
 @keyframes bubbleIn { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes nodeIn { from { opacity: 0; transform: scale(.75); } to { opacity: 1; transform: scale(1); } }
@@ -708,11 +707,8 @@ h3.font-display {
   .feature-motion-section .feature-group-label-flash { display: none !important; animation: none !important; }
   .feature-motion-section .feature-row { opacity: 1 !important; transform: none !important; animation: none !important; }
   .feature-motion-section .feature-row::after { display: none !important; animation: none !important; }
-  .feature-motion-section .feature-icon-underlay { opacity: .24; }
-  .feature-motion-section .feature-icon-draw { opacity: 1 !important; animation: none !important; }
-  .feature-motion-section .feature-icon-draw :is(path, line, polyline, circle, rect, polygon) { stroke-dashoffset: 0 !important; animation: none !important; }
-  .feature-motion-section .feature-row-icon,
-  .feature-motion-section .feature-row-icon svg,
+  .feature-motion-section .feature-row-indicator::before,
+  .feature-motion-section .feature-row-indicator-core,
   .feature-motion-section .feature-row-title-underline { transition: none !important; }
   .mobile-menu-shell,
   .mobile-menu-shell.is-open { transform: none; }
