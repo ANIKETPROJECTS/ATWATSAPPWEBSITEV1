@@ -56,7 +56,7 @@ export default function LanguageSelector({ mobile = false }: LanguageSelectorPro
 
   return (
     <div
-      className={`language-selector relative inline-flex shrink-0 ${mobile ? 'w-full' : ''}`}
+      className={`language-selector relative ${mobile ? 'flex w-full flex-col items-stretch' : 'inline-flex shrink-0'}`}
       data-testid={mobile ? 'mobile-language-selector' : 'language-selector'}
       ref={selectorRef}
     >
@@ -70,7 +70,7 @@ export default function LanguageSelector({ mobile = false }: LanguageSelectorPro
         className={[
           'inline-flex items-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3acd32]/70',
           mobile
-            ? 'h-11 w-full justify-start gap-3 rounded-xl border border-black/10 bg-white px-3 text-sm font-semibold text-black'
+            ? 'h-11 w-full justify-start gap-3 rounded-xl border-0 bg-transparent px-3 text-sm font-semibold text-black'
             : 'h-10 min-w-[72px] justify-center gap-1.5 rounded-md px-2 text-[#111] hover:bg-black/5',
         ].join(' ')}
         data-testid={mobile ? 'button-mobile-language-selector' : 'button-language-selector'}
@@ -90,11 +90,13 @@ export default function LanguageSelector({ mobile = false }: LanguageSelectorPro
       {isOpen && (
         <div
           className={[
-            'z-[80] overflow-hidden rounded-xl border border-black/10 bg-white shadow-[0_16px_45px_rgba(20,30,20,.18)]',
-            mobile ? 'relative mt-2 w-full' : 'absolute right-0 top-full mt-2 w-[280px]',
+            'z-[80] overflow-hidden',
+            mobile
+              ? 'relative mt-1 w-full border-t border-black/10 pt-2'
+              : 'absolute right-0 top-full mt-2 w-[280px] rounded-xl border border-black/10 bg-white shadow-[0_16px_45px_rgba(20,30,20,.18)]',
           ].join(' ')}
         >
-          <div className="relative border-b border-black/10 p-2.5">
+          <div className={`relative p-2.5 ${mobile ? '' : 'border-b border-black/10'}`}>
             <Search aria-hidden="true" className="absolute left-5 top-1/2 h-4 w-4 -translate-y-1/2 text-black/45" />
             <input
               type="search"
@@ -102,7 +104,7 @@ export default function LanguageSelector({ mobile = false }: LanguageSelectorPro
               onChange={(event) => setSearch(event.currentTarget.value)}
               placeholder={t('language.search', 'Search languages')}
               aria-label={t('language.search', 'Search languages')}
-              className="h-9 w-full rounded-lg border border-black/10 bg-white pl-9 pr-3 text-sm text-black outline-none transition focus:border-[#3acd32] focus:ring-2 focus:ring-[#3acd32]/15"
+              className={`h-9 w-full rounded-lg border border-black/10 pl-9 pr-3 text-sm text-black outline-none transition focus:border-[#3acd32] focus:ring-2 focus:ring-[#3acd32]/15 ${mobile ? 'bg-[#f6f8f5]' : 'bg-white'}`}
               data-testid={mobile ? 'input-mobile-language-search' : 'input-language-search'}
             />
           </div>
