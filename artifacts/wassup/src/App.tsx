@@ -19,6 +19,7 @@ import {
   Link2,
   Mail,
   MapPin,
+  MessageCircle,
   Megaphone,
   Menu,
   Phone,
@@ -72,16 +73,17 @@ const officeMapUrl =
 const officeMapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(officeAddress)}&output=embed`;
 
 const capabilities = [
-  { group: 'connect', icon: BadgeCheck, motion: 'badge', title: 'WhatsApp Business API onboarding' },
-  { group: 'automate', icon: FileText, motion: 'document', title: 'Message templates' },
-  { group: 'automate', icon: Bot, motion: 'bot', title: 'Chatbot builder' },
-  { group: 'automate', icon: Workflow, motion: 'flow', title: 'WhatsApp Flows' },
-  { group: 'connect', icon: Globe, motion: 'globe', title: 'Website integration' },
-  { group: 'connect', icon: Database, motion: 'database', title: 'CRM and software integration' },
-  { group: 'automate', icon: Megaphone, motion: 'megaphone', title: 'Campaigns' },
-  { group: 'grow', icon: Headphones, motion: 'headset', title: 'Live chat' },
-  { group: 'grow', icon: BarChart3, motion: 'chart', title: 'Analytics dashboard' },
-  { group: 'grow', icon: ShoppingBag, motion: 'catalog', title: 'Product catalogs' },
+  { id: 'api-setup', group: 'connect', icon: BadgeCheck, motion: 'badge', titleKeys: ['WhatsApp Business API onboarding'] },
+  { id: 'website-integration', group: 'connect', icon: Globe, motion: 'globe', titleKeys: ['Website integration'] },
+  { id: 'crm-erp-integration', group: 'connect', icon: Database, motion: 'database', titleKeys: ['CRM, ERP & software integration'] },
+  { id: 'ai-assistant', group: 'automate', icon: Sparkles, motion: 'assistant', titleKeys: ['flow.assistant.title'] },
+  { id: 'ai-agents', group: 'automate', icon: Bot, motion: 'bot', titleKeys: ['flow.agents.title'] },
+  { id: 'ai-chatbot', group: 'automate', icon: MessageCircle, motion: 'chatbot', titleKeys: ['flow.chatbot.title'] },
+  { id: 'forms-flows', group: 'automate', icon: Workflow, motion: 'flow', titleKeys: ['flow.forms.title', 'WhatsApp Flows'] },
+  { id: 'campaign-broadcasts', group: 'automate', icon: Megaphone, motion: 'megaphone', titleKeys: ['Campaigns', 'flow.broadcast.title'] },
+  { id: 'live-chat', group: 'grow', icon: Headphones, motion: 'headset', titleKeys: ['Live chat'] },
+  { id: 'analytics', group: 'grow', icon: BarChart3, motion: 'chart', titleKeys: ['Analytics dashboard'] },
+  { id: 'commerce', group: 'grow', icon: ShoppingBag, motion: 'catalog', titleKeys: ['flow.catalog.title', 'flow.payments.title'] },
 ];
 
 const capabilityGroups = [
@@ -209,15 +211,16 @@ function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capability
         <h3 className="feature-group-title font-display font-bold">{t(group.title)}</h3>
       </div>
       <div className="feature-list">
-        {capabilities.filter((capability) => capability.group === group.id).map(({ icon: Icon, motion, title }, rowIndex) => {
+        {capabilities.filter((capability) => capability.group === group.id).map(({ id, icon: Icon, motion, titleKeys }, rowIndex) => {
           const rowDelay = 900 + groupIndex * 500 + rowIndex * 130;
+          const title = titleKeys.map((key) => t(key)).join(' · ');
 
           return (
             <article
-              key={title}
+              key={id}
               className="feature-row"
               data-icon-motion={motion}
-              data-testid={`feature-${group.id}-${title.toLowerCase().replaceAll(' ', '-')}`}
+              data-testid={`feature-${group.id}-${id}`}
               style={{ '--feature-row-delay': `${rowDelay}ms` } as CSSProperties}
             >
               <div className="feature-row-title-line">
