@@ -196,20 +196,26 @@ function SectionLabel({ children, tone = 'green' }: { children: ReactNode; tone?
 
 function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capabilityGroups)[number]; groupIndex: number }) {
   const { t } = useTranslation();
-  const labelDelay = 920 + groupIndex * 480;
+  const { ref: groupRef, isInView } = useSectionInView<HTMLDivElement>();
+  const labelDelay = 80;
 
   return (
-    <div className={`feature-group feature-group-${group.id}`} data-group-index={groupIndex} data-testid={`capability-group-${group.id}`}>
+    <div
+      ref={groupRef}
+      className={`feature-group feature-group-${group.id}${isInView ? ' is-in-view' : ''}`}
+      data-group-index={groupIndex}
+      data-testid={`capability-group-${group.id}`}
+    >
       <div className="feature-group-intro">
         <div className="feature-group-label-wrap" style={{ '--feature-label-delay': `${labelDelay}ms` } as CSSProperties}>
           <p className="feature-group-label">{t(group.label)}</p>
           <span className="feature-group-label-flash" aria-hidden="true" />
         </div>
-        <h3 className="feature-group-title font-display font-bold">{t(group.title)}</h3>
+        <h3 className="feature-group-title font-display">{t(group.title)}</h3>
       </div>
       <div className="feature-list">
         {capabilities.filter((capability) => capability.group === group.id).map(({ id, titleKeys }, rowIndex) => {
-          const rowDelay = 900 + groupIndex * 500 + rowIndex * 130;
+          const rowDelay = 140 + rowIndex * 110;
           const title = titleKeys.map((key) => t(key)).join(' · ');
 
           return (
@@ -224,7 +230,7 @@ function CapabilityGroupPanel({ group, groupIndex }: { group: (typeof capability
                   <span className="feature-row-indicator-core" />
                 </span>
                 <span className="feature-row-title-wrap">
-                  <h4 className="feature-row-title font-bold text-white/95">{t(title)}</h4>
+                  <h4 className="feature-row-title text-white/95">{t(title)}</h4>
                   <span className="feature-row-title-underline" aria-hidden="true" />
                 </span>
               </div>

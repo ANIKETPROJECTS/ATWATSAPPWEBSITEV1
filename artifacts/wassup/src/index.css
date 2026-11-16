@@ -450,6 +450,8 @@ h3.font-display {
 .feature-group-title {
   margin: 9px 0 0;
   font-size: clamp(1.35rem, 2vw, 1.7rem);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
   line-height: 1.12;
   letter-spacing: -.04em;
 }
@@ -528,7 +530,14 @@ h3.font-display {
   min-width: 0;
   flex: 0 1 auto;
 }
-.feature-row-title { max-width: 100%; font-size: 15px; line-height: 1.4; }
+.feature-row-title {
+  max-width: 100%;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1rem, 1.15vw, 1.08rem);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -.012em;
+}
 .feature-row-title-underline {
   position: absolute;
   right: 0;
@@ -574,13 +583,17 @@ h3.font-display {
   animation: feature-group-rule-draw .8s cubic-bezier(.2, .72, .2, 1) .3s both;
   animation-play-state: paused;
 }
-.feature-motion-section.is-in-view .reveal.is-visible :is(.feature-heading-character, .feature-heading-cursor, .feature-group-label-flash, .feature-row) {
+.feature-motion-section.is-in-view .reveal.is-visible :is(.feature-heading-character, .feature-heading-cursor) {
   animation-play-state: running;
 }
 .feature-motion-section.is-in-view .reveal.is-visible .feature-groups::before { animation-play-state: running; }
-.feature-motion-section.is-in-view .reveal.is-visible .feature-row::after { animation-play-state: running; }
-.feature-motion-section.is-in-view .reveal.is-visible .feature-row-indicator::before,
-.feature-motion-section.is-in-view .reveal.is-visible .feature-row-indicator-core { animation-play-state: running; }
+.feature-motion-section .reveal.is-visible .feature-group.is-in-view .feature-group-label-flash,
+.feature-motion-section .reveal.is-visible .feature-group.is-in-view .feature-row {
+  animation-play-state: running;
+}
+.feature-motion-section .reveal.is-visible .feature-group.is-in-view .feature-row::after { animation-play-state: running; }
+.feature-motion-section .reveal.is-visible .feature-group.is-in-view .feature-row-indicator::before,
+.feature-motion-section .reveal.is-visible .feature-group.is-in-view .feature-row-indicator-core { animation-play-state: running; }
 
 @media (max-width: 639px) {
   #features { padding-block: 24px; }
@@ -600,7 +613,7 @@ h3.font-display {
   #features .feature-group-intro { min-height: 0; padding-bottom: 10px; }
   #features .feature-group-title { font-size: 1.55rem; }
   #features .feature-row { padding: 8px 0; }
-  #features .feature-row-title { font-size: 15px; }
+  #features .feature-row-title { font-size: 16.5px; }
   .steps-page.is-visible { animation-delay: 0ms !important; }
 }
 @media (min-width: 640px) and (max-width: 1023px) {
