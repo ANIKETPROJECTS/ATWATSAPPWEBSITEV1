@@ -9,6 +9,7 @@
 
 .atw-assistant-trigger {
   position: relative;
+  top: 8px;
   display: grid;
   width: 68px;
   height: 68px;
@@ -423,7 +424,7 @@
     bottom: calc(14px + env(safe-area-inset-bottom));
   }
 
-  .atw-assistant-trigger { width: 62px; height: 62px; }
+  .atw-assistant-trigger { top: 6px; width: 62px; height: 62px; }
 
   .atw-assistant-panel {
     right: -4px;
