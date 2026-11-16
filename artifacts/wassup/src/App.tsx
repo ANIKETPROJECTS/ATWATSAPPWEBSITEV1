@@ -537,7 +537,7 @@ function Nav({ onLead }: { onLead: () => void }) {
         inert={!open}
         className={`section-shell mobile-menu-shell lg:hidden${open ? ' is-open' : ''}`}
       >
-          <nav aria-label="Mobile navigation" className="mobile-menu-panel mb-3 rounded-2xl border border-black/10 bg-white p-3 shadow-xl">
+          <nav aria-label="Mobile navigation" className="mobile-menu-panel mb-3 rounded-2xl border border-[#3acd32]/25 p-3 shadow-xl">
             <a data-testid="mobile-link-ai-features" href="#features" onClick={closeMenu} className="site-nav-link">{t('nav.features')}</a>
             <a data-testid="mobile-link-how-it-works" href="#how-it-works" onClick={closeMenu} className="site-nav-link">{t('nav.howItWorks')}</a>
             <a data-testid="mobile-link-pricing" href="#pricing" onClick={closeMenu} className="site-nav-link">{t('nav.pricing')}</a>

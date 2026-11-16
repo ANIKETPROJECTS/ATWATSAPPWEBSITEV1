@@ -90,8 +90,8 @@ export default function LanguageSelector({ mobile = false }: LanguageSelectorPro
       {isOpen && (
         <div
           className={[
-            'absolute z-[80] mt-2 overflow-hidden rounded-xl border border-black/10 bg-white shadow-[0_16px_45px_rgba(20,30,20,.18)]',
-            mobile ? 'left-0 right-0 top-full w-full' : 'right-0 top-full w-[280px]',
+            'z-[80] overflow-hidden rounded-xl border border-black/10 bg-white shadow-[0_16px_45px_rgba(20,30,20,.18)]',
+            mobile ? 'relative mt-2 w-full' : 'absolute right-0 top-full mt-2 w-[280px]',
           ].join(' ')}
         >
           <div className="relative border-b border-black/10 p-2.5">
@@ -110,7 +110,9 @@ export default function LanguageSelector({ mobile = false }: LanguageSelectorPro
             id={mobile ? 'mobile-language-options' : 'desktop-language-options'}
             role="listbox"
             aria-label={t('language.choose')}
-            className="max-h-[min(360px,calc(100dvh-150px))] overflow-y-auto p-1.5"
+            className={mobile
+              ? 'max-h-[min(240px,calc(100dvh-360px))] overflow-y-auto overscroll-contain p-1.5'
+              : 'max-h-[min(360px,calc(100dvh-150px))] overflow-y-auto p-1.5'}
           >
             {filteredLanguages.map(({ code, label, englishLabel }) => {
               const isSelected = code === activeLanguage.code;
