@@ -647,7 +647,7 @@ function Home() {
           </div>
           <div className="hero-showcase-column relative flex justify-center lg:translate-y-6 lg:justify-end">
             <div className="hero-showcase-layout relative z-10">
-              <div className="hero-airavata-demo relative z-10 w-full" dir="ltr">
+              <div className="hero-airavata-demo mobile-scroll-through-device relative z-10 w-full" dir="ltr">
                 <CommerceDemo onFeatureStageChange={setHeroFeatureStage} />
               </div>
               <HeroFeatureFlow stage={heroFeatureStage} />

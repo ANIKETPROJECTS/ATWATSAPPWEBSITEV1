@@ -190,7 +190,7 @@ export default function ClinicAppointmentDemo() {
     >
       <div className="section-shell caf-grid" dir="ltr">
         <div className="caf-stage" ref={stageRef} dir="ltr">
-          <div className="caf-phone">
+          <div className="caf-phone mobile-scroll-through-device">
             <DevicePreviewFrame
               screenWidth={screenWidth}
               hideStatusBar

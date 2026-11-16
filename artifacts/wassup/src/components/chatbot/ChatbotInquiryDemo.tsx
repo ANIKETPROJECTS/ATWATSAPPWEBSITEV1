@@ -204,7 +204,7 @@ export default function ChatbotInquiryDemo() {
         </div>
 
         <div className="cid-stage" ref={stageRef} dir="ltr">
-          <div className="cid-phone">
+          <div className="cid-phone mobile-scroll-through-device">
             <DevicePreviewFrame screenWidth={screenWidth} hideStatusBar>
               <div className="demo-phone-screen" style={{ height: screenHeight }}>
                 <div className="demo-screen-content" dir="ltr" style={{ transform: `scale(${screenScale})` }}>

@@ -190,7 +190,7 @@ export default function ContactWhatsAppForm() {
 
   return (
     <div className="contact-wa-stage" ref={stageRef} data-testid="contact-whatsapp-preview">
-      <div className="contact-wa-device">
+      <div className="contact-wa-device mobile-scroll-through-device">
         <DevicePreviewFrame screenWidth={screenWidth} hideStatusBar>
           <div className="demo-phone-screen" style={{ height: screenHeight }}>
             <div className="demo-screen-content" dir={submitted ? 'ltr' : undefined} style={{ transform: `scale(${screenScale})` }}>

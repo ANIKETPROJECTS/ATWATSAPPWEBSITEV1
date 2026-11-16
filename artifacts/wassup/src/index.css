@@ -87,6 +87,13 @@
   ::selection { background: #3acd32; color: #050505; }
 }
 
+@media (max-width: 1023px), (hover: none) and (pointer: coarse) {
+  .mobile-scroll-through-device {
+    pointer-events: none;
+    touch-action: pan-y;
+  }
+}
+
 @layer utilities {
   .font-display { font-family: var(--app-font-display); }
   .font-mono { font-family: var(--app-font-mono); }
